@@ -250,6 +250,7 @@ ehthumbs_vista.db
 # Folders 
 static/draco/
 static/models/
+static/textures/
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
