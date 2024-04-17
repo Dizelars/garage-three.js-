@@ -1,11 +1,15 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
+import Stats from 'stats.js'
 import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
-import { GroundProjectedSkybox } from 'three/addons/objects/GroundProjectedSkybox.js'
+// import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
+// import { GroundProjectedSkybox } from 'three/addons/objects/GroundProjectedSkybox.js'
+import { HDRJPGLoader } from '@monogrid/gainmap-js'
+import { GroundedSkybox } from 'three/addons/objects/GroundedSkybox.js'
+
 
 /**
  * Base
@@ -16,12 +20,16 @@ const gui = new GUI({
     width: 350,
     closeFolders: true
 })
-
 gui.close()
+gui.hide();
+
+window.addEventListener('keypress', (event) => {
+    if(event.key == 'h') {
+        gui.show(gui._hidden)
+    }
+})
 
 // Создаем папки дебагера
-// const sceneFolder = gui.addFolder('Сцена');
-
 const lightsFolder = gui.addFolder('Свет');
 const Ambient = lightsFolder.addFolder('AmbientLight')
 const Hemisphere = lightsFolder.addFolder('HemisphereLight')
@@ -30,11 +38,6 @@ const Pointer = lightsFolder.addFolder('PointerLight')
 const RectArea = lightsFolder.addFolder('RectAreaLight')
 const Spot = lightsFolder.addFolder('SpotLight')
 
-const shadowFolder = gui.addFolder('Тени');
-const DirectionalShadow = shadowFolder.addFolder('DirectionalShadow')
-const PointerShadow = shadowFolder.addFolder('PointerShadow')
-const SpotShadow = shadowFolder.addFolder('SpotShadow')
-
 // const PointFolder = gui.addFolder('Типоны');
 // const One = PointFolder.addFolder('Типон 1');
 // const Two = PointFolder.addFolder('Типон 2');
@@ -42,6 +45,11 @@ const SpotShadow = shadowFolder.addFolder('SpotShadow')
 
 const hdriFolder = gui.addFolder('Карта окружения');
 const toneMapping = gui.addFolder('Тоновое отображение')
+
+//! Monitor FPS
+const stats = new Stats()
+stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild(stats.dom)
 
 
 /**
@@ -57,11 +65,10 @@ const updateAllMaterials = () =>
         if(child.isMesh && child.material.isMeshStandardMaterial)
         {
             child.material.envMapIntensity = global.envMapIntensity
+            child.material.side = THREE.FrontSide
         }
     })
 }
-
-// let sceneReady = false
 
 const dracoLoader = new DRACOLoader()
 dracoLoader.setDecoderPath('/draco/')
@@ -70,20 +77,15 @@ const gltfLoader = new GLTFLoader()
 gltfLoader.setDRACOLoader(dracoLoader)
 
 // let mixer = null
+// let sceneReady = false
 
 gltfLoader.load(
-    '/models/Porsche/scene.gltf',
-    // '/models/AmarokAnimated/amarok.gltf',
-    // '/models/DroneAnimated/scene.gltf',
-    // '/models/FoxAnimated/glTF/Fox.gltf',
+    '/models/MuslCarLowPoly_mintexture/untitled.gltf',
     (gltf) =>
     {
-        console.log(gltf)
-        // console.log(gltf.animations)
-        //* Уменьшаем модель
-        // gltf.scene.scale.set(0.025, 0.025, 0.025)
-        // gltf.scene.rotation.set(0, Math.PI / 2, 0)
-        gltf.scene.position.set(0, -0.08, 0)
+        gltf.scene.position.x = 0
+        gltf.scene.position.y = Math.PI * 0.42
+        gltf.scene.position.z = 0
 
         //* Анимация модели
         // mixer = new THREE.AnimationMixer(gltf.scene)
@@ -91,14 +93,13 @@ gltfLoader.load(
         // action.play()
 
         scene.add(gltf.scene)
-        updateAllMaterials()
+        // updateAllMaterials()
         // window.setTimeout(() =>
         // {
         //     sceneReady = true
         // }, 500)
     },
 )
-
 
 /**
  * Pounts on model
@@ -130,7 +131,6 @@ gltfLoader.load(
 // Three.add(points[2].position,'y',-9,9,0.01)
 // Three.add(points[2].position,'z',-9,9,0.01)
 
-
 /**
  * Raycaster
  */
@@ -140,64 +140,64 @@ gltfLoader.load(
 /**
  * Textures
  */
-const textureLoader = new THREE.TextureLoader()
-const colorTextureAsphalt = textureLoader.load('/textures/asphalt_2/ALBEDO.jpg')
-const heightTextureAsphalt = textureLoader.load('/textures/asphalt_2/DISPLACEMENT.jpg')
-const normalTextureAsphalt = textureLoader.load('/textures/asphalt_2/NORMAL.jpg')
-const ambientOcclusionTextureAsphalt = textureLoader.load('/textures/asphalt_2/AMBIENT_OCCLUSION.jpg')
-const roughnessTextureAsphalt = textureLoader.load('/textures/asphalt_2/GLOSS.jpg')
+// const textureLoader = new THREE.TextureLoader()
+// const colorTextureAsphalt = textureLoader.load('/textures/asphalt_2/ALBEDO.jpg')
+// const heightTextureAsphalt = textureLoader.load('/textures/asphalt_2/DISPLACEMENT.jpg')
+// const normalTextureAsphalt = textureLoader.load('/textures/asphalt_2/NORMAL.jpg')
+// const ambientOcclusionTextureAsphalt = textureLoader.load('/textures/asphalt_2/AMBIENT_OCCLUSION.jpg')
+// const roughnessTextureAsphalt = textureLoader.load('/textures/asphalt_2/GLOSS.jpg')
 
-colorTextureAsphalt.colorSpace = THREE.SRGBColorSpace
-colorTextureAsphalt.generateMipmaps = false
-colorTextureAsphalt.minFilter = THREE.NearestFilter
+// colorTextureAsphalt.colorSpace = THREE.SRGBColorSpace
+// colorTextureAsphalt.generateMipmaps = false
+// colorTextureAsphalt.minFilter = THREE.NearestFilter
 
-//* Текстура слишком велика. Чтобы исправить это, мы можем просто повторить каждую текстуру травы с помощью свойства repeat:
-colorTextureAsphalt.repeat.set(4, 4)
-ambientOcclusionTextureAsphalt.repeat.set(4, 4)
-normalTextureAsphalt.repeat.set(4, 4)
-roughnessTextureAsphalt.repeat.set(4, 4)
-heightTextureAsphalt.repeat.set(4, 4)
+// //* Текстура слишком велика. Чтобы исправить это, мы можем просто повторить каждую текстуру травы с помощью свойства repeat:
+// colorTextureAsphalt.repeat.set(4, 4)
+// ambientOcclusionTextureAsphalt.repeat.set(4, 4)
+// normalTextureAsphalt.repeat.set(4, 4)
+// roughnessTextureAsphalt.repeat.set(4, 4)
+// heightTextureAsphalt.repeat.set(4, 4)
 
-//! И не забудьте изменить свойства wrapS и wrapT, чтобы активировать повтор:
-colorTextureAsphalt.wrapS = THREE.RepeatWrapping
-ambientOcclusionTextureAsphalt.wrapS = THREE.RepeatWrapping
-normalTextureAsphalt.wrapS = THREE.RepeatWrapping
-roughnessTextureAsphalt.wrapS = THREE.RepeatWrapping
-heightTextureAsphalt.wrapS = THREE.RepeatWrapping
+// //! И не забудьте изменить свойства wrapS и wrapT, чтобы активировать повтор:
+// colorTextureAsphalt.wrapS = THREE.RepeatWrapping
+// ambientOcclusionTextureAsphalt.wrapS = THREE.RepeatWrapping
+// normalTextureAsphalt.wrapS = THREE.RepeatWrapping
+// roughnessTextureAsphalt.wrapS = THREE.RepeatWrapping
+// heightTextureAsphalt.wrapS = THREE.RepeatWrapping
 
-colorTextureAsphalt.wrapT = THREE.RepeatWrapping
-ambientOcclusionTextureAsphalt.wrapT = THREE.RepeatWrapping
-normalTextureAsphalt.wrapT = THREE.RepeatWrapping
-roughnessTextureAsphalt.wrapT = THREE.RepeatWrapping
-heightTextureAsphalt.wrapT = THREE.RepeatWrapping
+// colorTextureAsphalt.wrapT = THREE.RepeatWrapping
+// ambientOcclusionTextureAsphalt.wrapT = THREE.RepeatWrapping
+// normalTextureAsphalt.wrapT = THREE.RepeatWrapping
+// roughnessTextureAsphalt.wrapT = THREE.RepeatWrapping
+// heightTextureAsphalt.wrapT = THREE.RepeatWrapping
 
 /**
  * Environment map
  */
 //! Global intensity
-global.envMapIntensity = 1.2
+global.envMapIntensity = 1
 hdriFolder.add(global, 'envMapIntensity').min(0).max(10).step(0.001).onChange(() => {
     updateAllMaterials()
 })
 
-const rgbeLoader = new RGBELoader()
-//! Карта окружающей среды с наземной проекцией при помощи GroundProjectedSkybox
-rgbeLoader.load('/environmentMaps/skylit_garage_2k.hdr', (environmentMap) =>
-{
-    environmentMap.mapping = THREE.EquirectangularReflectionMapping
-    scene.environment = environmentMap
+// const rgbeLoader = new RGBELoader()
+// //! Карта окружающей среды с наземной проекцией при помощи GroundProjectedSkybox
+// rgbeLoader.load('/environmentMaps/skylit_garage_2k.hdr', (environmentMap) =>
+// {
+//     environmentMap.mapping = THREE.EquirectangularReflectionMapping
+//     scene.environment = environmentMap
 
-    const skybox = new GroundProjectedSkybox(environmentMap)
-    skybox.radius = 7.2
-    skybox.height = 2.2
-    //* Появляется сфера с картой окружения которую нужно растянуть с помощью метода setScalar:
-    skybox.scale.setScalar(50)
-    // scene.add(skybox)
+//     const skybox = new GroundProjectedSkybox(environmentMap)
+//     skybox.radius = 7.2
+//     skybox.height = 2.2
+//     //* Появляется сфера с картой окружения которую нужно растянуть с помощью метода setScalar:
+//     skybox.scale.setScalar(50)
+//     scene.add(skybox)
 
-    //* Мы можем управлять проекцией скайбокса с помощью радиуса и высоты, но так как результат непредсказуем, лучше добавить эти значения в lil-gui:
-    // hdriFolder.add(skybox, 'radius', 1, 200, 0.1).name('skyboxRadius')
-    // hdriFolder.add(skybox, 'height', 1, 100, 0.1).name('skyboxHeight')
-})
+//     //* Мы можем управлять проекцией скайбокса с помощью радиуса и высоты, но так как результат непредсказуем, лучше добавить эти значения в lil-gui:
+//     hdriFolder.add(skybox, 'radius', 1, 200, 0.1).name('skyboxRadius')
+//     hdriFolder.add(skybox, 'height', 1, 100, 0.1).name('skyboxHeight')
+// })
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -205,7 +205,7 @@ const canvas = document.querySelector('canvas.webgl')
 // Обьект параметров
 let constants = {
     // colorScene: '#000000',
-    colorFloor: '#a1a1a1',
+    // colorFloor: '#a1a1a1',
     AmbientLightColor: 0xffffff,
     HemisphereLightColorTop: 0xffffff,
     HemisphereLightColorBottom: 0x00ff00,
@@ -213,7 +213,10 @@ let constants = {
     PointerLightColor: 0xffffff,
     RectAreaLightColor: 0xffffff,
     SpotLightColor: 0xffffff,
-    SpotLightAngle: 0.2
+    SpotLightAngle: 0.2,
+    height: 1.8,
+	radius: 7.5,
+    resolution: 16
 }
 
 // Scene
@@ -230,22 +233,22 @@ const scene = new THREE.Scene()
 /**
  * Fog
  */
-const fog = new THREE.Fog('#262837', 1, 12)
-scene.fog = fog
+// const fog = new THREE.Fog('#262837', 1, 12)
+// scene.fog = fog
 
 /**
  * Floor
  */
-const floorMaterial = new THREE.MeshPhysicalMaterial({
-    color: constants.colorFloor,
-    map: colorTextureAsphalt,
-    aoMap: ambientOcclusionTextureAsphalt,
-    aoMapIntensity: 1,
-    displacementMap: heightTextureAsphalt,
-    displacementScale: 0.05,
-    normalMap: normalTextureAsphalt,
-    roughnessMap: roughnessTextureAsphalt
-})
+// const floorMaterial = new THREE.MeshPhysicalMaterial({
+//     color: constants.colorFloor,
+//     map: colorTextureAsphalt,
+//     aoMap: ambientOcclusionTextureAsphalt,
+//     aoMapIntensity: 1,
+//     displacementMap: heightTextureAsphalt,
+//     displacementScale: 0.05,
+//     normalMap: normalTextureAsphalt,
+//     roughnessMap: roughnessTextureAsphalt
+// })
 
 // sceneFolder
 //     .addColor(constants, 'colorFloor')
@@ -254,13 +257,12 @@ const floorMaterial = new THREE.MeshPhysicalMaterial({
 //         floorMaterial.color.set(constants.colorFloor)
 //     })
 
-const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(20, 20, 100, 100),
-    floorMaterial
-)
-// floor.receiveShadow = true
-floor.rotation.x = - Math.PI * 0.5
-scene.add(floor)
+// const floor = new THREE.Mesh(
+//     new THREE.PlaneGeometry(20, 20, 100, 100),
+//     floorMaterial
+// )
+// floor.rotation.x = - Math.PI * 0.5
+// scene.add(floor)
 
 /**
  * Lights
@@ -293,15 +295,6 @@ Hemisphere.add(hemisphereLight, 'intensity').min(0).max(3).step(0.001).name('и�
 //! Directional Light
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.15)
 
-// directionalLight.castShadow = true
-// directionalLight.shadow.mapSize.set(1024, 1024)
-// directionalLight.shadow.camera.far = 15
-// // directionalLight.shadow.camera.far = constants.DirectionalLightShadowCameraFar
-// directionalLight.shadow.camera.left = - 7
-// directionalLight.shadow.camera.top = 7
-// directionalLight.shadow.camera.right = 7
-// directionalLight.shadow.camera.bottom = - 7
-
 directionalLight.position.set(-5.7, 5.5, -5.3)
 directionalLight.rotation.set(0, 3.2, 0)
 // scene.add(directionalLight)
@@ -321,13 +314,6 @@ Directional.add(directionalLight.rotation, 'z').min(- 10).max(10).step(0.1).name
 
 //! Pointer Light
 const pointLight = new THREE.PointLight(constants.PointerLightColor, 3, 10, 2)
-
-// pointLight.castShadow = true
-// pointLight.shadow.mapSize.width = 1024
-// pointLight.shadow.mapSize.height = 1024
-// pointLight.shadow.camera.near = 0.1
-// pointLight.shadow.camera.far = 5
-
 pointLight.position.set(-0.4, 0.2, -2.4)
 // scene.add(pointLight)
 
@@ -370,12 +356,6 @@ RectArea.add(rectAreaLight.rotation, 'z').min(- 10).max(10).step(0.1).name('rota
 
 // //! Spot Light
 const spotLight = new THREE.SpotLight(constants.SpotLightColor, 6, 12, Math.PI * constants.SpotLightAngle, 0.2, 0.2)
-
-// spotLight.castShadow = true
-// spotLight.shadow.mapSize.width = 1024
-// spotLight.shadow.mapSize.height = 1024
-// spotLight.shadow.camera.near = 1
-// spotLight.shadow.camera.far = 6
 
 spotLight.position.set(-2.6, 3, 4.7)
 // scene.add(spotLight)
@@ -438,23 +418,6 @@ spotLightHelper.visible = false
 // scene.add(spotLightHelper)
 Spot.add(spotLightHelper, 'visible').name('помошник')
 
-// //! Тени
-// const directionalLightCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
-// directionalLightCameraHelper.visible = false
-// scene.add(directionalLightCameraHelper)
-// DirectionalShadow.add(directionalLightCameraHelper, 'visible').name('помошник')
-
-// const pointLightCameraHelper = new THREE.CameraHelper(pointLight.shadow.camera)
-// pointLightCameraHelper.visible = false
-// scene.add(pointLightCameraHelper)
-// PointerShadow.add(pointLightCameraHelper, 'visible').name('помошник')
-
-// const spotLightCameraHelper = new THREE.CameraHelper(spotLight.shadow.camera)
-// spotLightCameraHelper.visible = false
-// scene.add(spotLightCameraHelper)
-// SpotShadow.add(spotLightCameraHelper, 'visible').name('помошник')
-
-
 
 /**
  * Sizes
@@ -503,13 +466,44 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     antialias: true
 })
-// renderer.shadowMap.enabled = true
-// renderer.shadowMap.type = THREE.PCFSoftShadowMap
+//! 1. Информация о рендере
+console.log(renderer.info)
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+let hdrJpgEquirectangularMap
+let hdrJpg = new HDRJPGLoader(renderer).load( '/environmentMaps/jpg/skylit_garage_4k.jpg', () => {
+
+    hdrJpgEquirectangularMap = hdrJpg.renderTarget.texture;
+
+    hdrJpgEquirectangularMap.mapping = THREE.EquirectangularReflectionMapping;
+    hdrJpgEquirectangularMap.needsUpdate = true;
+
+    scene.environment = hdrJpgEquirectangularMap;
+
+    let skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution);
+    skybox.position.y = constants.height  - 0.01;
+    scene.add(skybox)
+
+    //* Мы можем управлять проекцией скайбокса с помощью радиуса и высоты, но так как результат непредсказуем, лучше добавить эти значения в lil-gui:
+    hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onFinishChange(() => {
+        skybox.radius = constants.radius;
+        scene.remove(skybox); // Удаление старого skybox
+        skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius); // Создание нового skybox с обновленными параметрами
+        skybox.position.y = constants.height - 0.01;
+        scene.add(skybox); // Добавление нового skybox на сцену
+    });
+    hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onFinishChange(() => {
+        skybox.height = constants.height;
+        scene.remove(skybox); // Удаление старого skybox
+        skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius); // Создание нового skybox с обновленными параметрами
+        skybox.position.y = constants.height - 0.01;
+        scene.add(skybox); // Добавление нового skybox на сцену
+    });
+});
+
 //* Делаем фон рендера таким же как и туман
-renderer.setClearColor('#262837')
+// renderer.setClearColor('#262837')
 
 //! Tone mapping
 renderer.toneMapping = THREE.ACESFilmicToneMapping
@@ -533,6 +527,7 @@ toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
 
 const tick = () =>
 {
+    stats.begin()
     // const elapsedTime = clock.getElapsedTime()
     // const deltaTime = elapsedTime - previousTime
     // previousTime = elapsedTime
@@ -585,6 +580,8 @@ const tick = () =>
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
+
+    stats.end()
 }
 
 tick()
