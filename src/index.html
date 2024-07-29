@@ -8,6 +8,20 @@
 </head>
 <body>
     <canvas class="webgl"></canvas>
+    <div class="loading-bar"></div>
+
+    <!-- <div id="mySidenav" class="sidenav">
+        <a class="closebtn">&times;</a>
+        <a class="model" data-folder="MuslCarLowPoly_mintexture_transform" data-model="untitled">Muslcar</a>
+        <a class="model" data-folder="Police_car_transform" data-model="scene">Police</a>
+        <a class="model" data-folder="Bank_truck_transform" data-model="scene">Bank_truck</a>
+        <a class="model" data-folder="Japanese_transform" data-model="scene">Japanese_sedan</a>
+        <a class="model" data-folder="Pickup_transform" data-model="scene">Pickup</a>
+        <a class="model" data-folder="Wagon_transform" data-model="scene">Wagon</a>
+        <a class="model" data-folder="bridge" data-model="untitled">Bridge</a>
+    </div>
+        
+    <span class="openbtn">&#9776; open</span> -->
 
     <div class="point point-0">
         <div class="label"></div>
@@ -22,6 +36,21 @@
         <div class="text">Модный спойлер из&nbsp;70&ndash;х</div>
     </div>
 
+    <div class="model_wrapper">
+        <model-viewer class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf" alt="A 3D model of muslCar">
+            <button id="ar-button" slot="ar-button">
+                <div class="pulse_wrapper">
+                    <div class="pulse_media">
+                        <img class="pulse_img" src="https://coddmac.store/THREE/AR-cube.svg" alt="AR">
+                        <img class="pulse_img" src="https://coddmac.store/THREE/AR.svg" alt="AR">
+                    </div>
+                    <div class="pulse"></div>
+                </div>
+            </button>
+        </model-viewer>
+    </div>
+
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
     <script type="module" src="./script.js"></script>
 </body>
 </html>
