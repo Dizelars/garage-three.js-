@@ -70,9 +70,6 @@
     </script>
 </head>
 <body>
-    <!-- <canvas class="webgl"></canvas> -->
-    <!-- <div class="loading-bar"></div> -->
-
     <div class="progress-bar">
         <div class="progress-bar-container">
             <div class="image">
@@ -312,13 +309,20 @@
         </div>
     </div>
     
-    <!-- <div class="VectaryIframe" id="Canvas_wrapper"></div> -->
     <canvas class="threeJSScene" id="webgl"></canvas>
     <div id="overlay"></div>
 
+    <div class="pulse_wrapper">
+        <div class="pulse_media">
+            <img class="pulse_img" src="images/modelPage/AR/AR-cube.svg" alt="AR">
+            <img class="pulse_img" src="images/modelPage/AR/AR.svg" alt="AR">
+        </div>
+        <div class="pulse"></div>
+    </div>
+
     <div class="model_wrapper">
         <model-viewer class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf" alt="A 3D model of muslCar">
-            <button id="ar-button" slot="ar-button">
+            <!-- <button id="ar-button" slot="ar-button">
                 <div class="pulse_wrapper">
                     <div class="pulse_media">
                         <img class="pulse_img" src="images/modelPage/AR/AR-cube.svg" alt="AR">
@@ -326,7 +330,7 @@
                     </div>
                     <div class="pulse"></div>
                 </div>
-            </button>
+            </button> -->
         </model-viewer>
     </div>
 
