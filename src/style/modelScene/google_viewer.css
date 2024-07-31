@@ -1,4 +1,8 @@
-.model_wrapper {
+.google_viewer {
+    display: none;
+}
+
+/* .model_wrapper {
     position: absolute;
     width: 70px;
     height: 34px;
@@ -71,4 +75,4 @@
         transform: scale(1.2);
         opacity: 0;
     }
-}
+} */
