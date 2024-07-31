@@ -6,9 +6,11 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { HDRJPGLoader } from '@monogrid/gainmap-js'
 import { GroundedSkybox } from 'three/addons/objects/GroundedSkybox.js'
+import {InteriorTransitionHelper} from "../helpers/interiorTransitionHelper.js";
 // import { gsap } from 'gsap'
 
 // Менеджер загрузки
+// Переключение между сценами
 
 /**
  * Base
@@ -365,3 +367,39 @@ const tick = () =>
 tick()
 //! 1. Информация о рендере
 console.log(renderer.info)
+
+// Переключение между сценами при клике на кнопку с классом ".tech_spec__interior"
+let activeScene = 1;
+const interiorButton = document.querySelector('.tech_spec__interior');
+const aFrameScene = document.querySelector('a-scene');
+
+const transitionHelper = new InteriorTransitionHelper(interiorButton);
+interiorButton.addEventListener('click', () => {
+    if (transitionHelper.isTransition()) {
+        return;
+    }
+
+    transitionHelper.startTransition();
+
+    if (activeScene === 1) {
+        setTimeout(() => {
+            activeScene = 2;
+            aFrameScene.style.opacity = '1';
+            aFrameScene.style.height = 'auto';
+            aFrameScene.style.pointerEvents = 'auto';
+            aFrameScene.play();
+            controls.enabled = false;
+            transitionHelper.endTransition();
+        }, 1500);
+    } else {
+        setTimeout(() => {
+            activeScene = 1;
+            aFrameScene.style.opacity = '0';
+            aFrameScene.style.height = '0';
+            aFrameScene.style.pointerEvents = 'none';
+            aFrameScene.pause();
+            controls.enabled = true;
+            transitionHelper.endTransition();
+        }, 1500);
+    }
+});

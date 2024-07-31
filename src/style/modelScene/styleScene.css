@@ -156,12 +156,12 @@ a-scene {
     display: none !important;
 }
 
-.VectaryIframe {
+.threeJSScene {
     transform: scale(1);
     transition: transform 1.5s;
 }
 
-.VectaryIframe.active {
+.threeJSScene.active {
     transform: scale(1.2);
 }
 
@@ -428,6 +428,7 @@ a-scene {
     font-weight: 800;
     font-size: 18px;
     text-align: center;
+    pointer-events: none;
 }
 
 .tech_spec__text-descr {

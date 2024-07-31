@@ -71,16 +71,16 @@
 </head>
 <body>
     <!-- <canvas class="webgl"></canvas> -->
-    <div class="loading-bar"></div>
+    <!-- <div class="loading-bar"></div> -->
 
     <div class="progress-bar">
         <div class="progress-bar-container">
             <div class="image">
-            <img class="no_animated" src="images/modelPage/loader/logo.gif" alt="цодд">
+                <img class="no_animated" src="images/modelPage/loader/logo.gif" alt="цодд">
             </div>
             <span id="progress-label">0%</span>
             <div id="hellopreloader_barWrapper">
-            <progress id="progress-bar" value="0" max="100"></progress>
+                <progress id="progress-bar" value="0" max="100"></progress>
             </div>
             <label for="progress-bar" id="progress_text">Загружаем модель в высоком разрешении.<br>Пожалуйста, дождитесь завершения</label>
         </div>
@@ -129,15 +129,21 @@
                         </div>
                     </div>
                     <div class="tech_spec__mission-panel hidden">
+                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
                         <p class="tech_spec__text">Задача</p>
-                        <div class="tech_spec__mission-panel-background"></div>
                     </div>
                     <div class="tech_spec__mission hidden">
                         <p class="tech_spec__text-descr">Регулировать движение на&nbsp;сложных участках, помогать водителям при поломке или аварии.</p>
                     </div>
                     <div class="tech_spec__outfit-panel hidden">
+                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
                         <p class="tech_spec__text">Экипировка</p>
-                        <div class="tech_spec__outfit-panel-background"></div>
                     </div>
                     <div class="tech_spec__outfit hidden">
                         <ul class="tech_spec__outfit-list">
@@ -245,49 +251,49 @@
                             <div class="gallery_item active swiper-slide">
                             <a class="gallery_item_link" href="#">
                                 <picture>
-                                <img class="gallery_item-img" src="images/modelPage/slider/amarok.png" alt="amarok" fetchpriority="high">
+                                    <img class="gallery_item-img" src="images/modelPage/slider/amarok.png" alt="amarok" fetchpriority="high">
                                 </picture>
                             </a>
                             </div>
                             <div class="gallery_item swiper-slide">
                             <a class="gallery_item_link" href="ford.html">
                                 <picture>
-                                <img class="gallery_item-img" src="images/modelPage/slider/ford.png" alt="ford" fetchpriority="high">
+                                    <img class="gallery_item-img" src="images/modelPage/slider/ford.png" alt="ford" fetchpriority="high">
                                 </picture>
                             </a>
                             </div>
                             <div class="gallery_item swiper-slide">
                             <a class="gallery_item_link" href="bus.html">
                                 <picture>
-                                <img class="gallery_item-img" src="images/modelPage/slider/bus.png" alt="bus" fetchpriority="high">
+                                    <img class="gallery_item-img" src="images/modelPage/slider/bus.png" alt="bus" fetchpriority="high">
                                 </picture>
                             </a>
                             </div>
                             <div class="gallery_item swiper-slide">
                             <a class="gallery_item_link" href="kater.html">
                                 <picture>
-                                <img class="gallery_item-img" src="images/modelPage/slider/kater.png" alt="kater" fetchpriority="high">
+                                    <img class="gallery_item-img" src="images/modelPage/slider/kater.png" alt="kater" fetchpriority="high">
                                 </picture>
                             </a>
                             </div>
                             <div class="gallery_item swiper-slide">
                             <a class="gallery_item_link" href="velo.html">
                                 <picture>
-                                <img class="gallery_item-img" src="images/modelPage/slider/velo.png" alt="velo" fetchpriority="high">
+                                    <img class="gallery_item-img" src="images/modelPage/slider/velo.png" alt="velo" fetchpriority="high">
                                 </picture>
                             </a>
                             </div>
                             <div class="gallery_item swiper-slide">
                             <a class="gallery_item_link" href="moskvich.html">
                                 <picture>
-                                <img class="gallery_item-img" src="images/modelPage/slider/moskvich.png" alt="moskvich" fetchpriority="high">
+                                    <img class="gallery_item-img" src="images/modelPage/slider/moskvich.png" alt="moskvich" fetchpriority="high">
                                 </picture>
                             </a>
                             </div>
                             <div class="gallery_item swiper-slide">
                             <a class="gallery_item_link" href="solaris.html">
                                 <picture>
-                                <img class="gallery_item-img" src="images/modelPage/slider/solaris_gray.png" alt="solaris" fetchpriority="high">
+                                    <img class="gallery_item-img" src="images/modelPage/slider/solaris_gray.png" alt="solaris" fetchpriority="high">
                                 </picture>
                             </a>
                             </div>
@@ -307,7 +313,7 @@
     </div>
     
     <!-- <div class="VectaryIframe" id="Canvas_wrapper"></div> -->
-    <canvas class="VectaryIframe" id="webgl"></canvas>
+    <canvas class="threeJSScene" id="webgl"></canvas>
     <div id="overlay"></div>
 
     <div class="model_wrapper">
@@ -326,120 +332,49 @@
 
     <a-scene loading-screen="enabled: true, dotsColor: #62A744, backgroundColor: #090909" vr-mode-ui="enabled: false" ar-mode-ui="enabled: false" xr-mode-ui="enabled: false"
          device-orientation-permission-ui="
- denyButtonText: Отказаться;
- allowButtonText: Разрешить;
- cancelButtonText: Закрыть;
- deviceMotionMessage: Разрешите этому сайту использовать гироскопы вашего устройства для ориентации в&nbsp;пространстве. Так экскурсия станет гораздо интерактивней и&nbsp;увлекательней.;
- mobileDesktopMessage: Разрешите этому сайту использовать гироскопы вашего устройства для ориентации в&nbsp;пространстве. Так экскурсия станет гораздо интерактивней и&nbsp;увлекательней.;
- httpsMessage: Зайдите на&nbsp;этот сайт по&nbsp;протоколу HTTPS, чтобы войти в&nbsp;режим&nbsp;VR и&nbsp;предоставить доступ к&nbsp;датчикам устройства.;">
-  <a-assets>
-    <script id="flatShader" type="x-shader/x-fragment">
-          varying vec2 vUv;
-          void main() {
-            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-          }
-        </script>
-    <img
-            id="room1"
-            src="images/modelPage/aframe_360/amarok/amarok.jpg"
-            crossorigin="anonymous"
-            importance="high"
-    />
-    <a-mixin
-            id="info-sphere"
-            geometry="primitive: sphere; radius: 0.4;"
-            material="color: #ff0000;"
-    ></a-mixin>
-  </a-assets>
-  <a-entity
-          id="cam"
-          camera="fov:80"
-          position="0 1.6 0"
-          look-controls
-          cursor="rayOrigin: mouse"
-          animation__zoomin="property:camera.fov;dur:2000;to:50;startEvents:zoomin;"
-          animation__zoomout="property:camera.fov;dur:1000;to:80;startEvents:zoomout;"
-  >
-    <a-plane
-            id="camfadeplane"
-            rotation="10 0.5 0"
-            position="0 0 -0.5"
-            material="color:#000000;transparent:true;opacity:0"
-            width="0"
-            height="0"
-            animation__fadein="property:material.opacity;to:1;dur:2000;startEvents:camFadeIn"
-            animation__fadeout="property:material.opacity;to:0;dur:1000;startEvents:camFadeOut"
-    ></a-plane>
-  </a-entity>
-  <a-sky id="skybox" src="#room1" rotation="0 0 0" phi-start="175"></a-sky>
+        denyButtonText: Отказаться;
+        allowButtonText: Разрешить;
+        cancelButtonText: Закрыть;
+        deviceMotionMessage: Разрешите этому сайту использовать гироскопы вашего устройства для ориентации в&nbsp;пространстве. Так экскурсия станет гораздо интерактивней и&nbsp;увлекательней.;
+        mobileDesktopMessage: Разрешите этому сайту использовать гироскопы вашего устройства для ориентации в&nbsp;пространстве. Так экскурсия станет гораздо интерактивней и&nbsp;увлекательней.;
+        httpsMessage: Зайдите на&nbsp;этот сайт по&nbsp;протоколу HTTPS, чтобы войти в&nbsp;режим&nbsp;VR и&nbsp;предоставить доступ к&nbsp;датчикам устройства.;">
+        <a-assets>
+            <img
+                id="room1"
+                src="images/modelPage/aframe_360/amarok/amarok.jpg"
+                crossorigin="anonymous"
+                importance="high"
+            />
+            <a-mixin
+                    id="info-sphere"
+                    geometry="primitive: sphere; radius: 0.4;"
+                    material="color: #ff0000;"
+            ></a-mixin>
+        </a-assets>
+        <a-entity
+            id="cam"
+            camera="fov:80"
+            position="0 1.6 0"
+            look-controls
+            cursor="rayOrigin: mouse"
+            animation__zoomin="property:camera.fov;dur:2000;to:50;startEvents:zoomin;"
+            animation__zoomout="property:camera.fov;dur:1000;to:80;startEvents:zoomout;"
+        >
+            <a-plane
+                    id="camfadeplane"
+                    rotation="10 0.5 0"
+                    position="0 0 -0.5"
+                    material="color:#000000;transparent:true;opacity:0"
+                    width="0"
+                    height="0"
+                    animation__fadein="property:material.opacity;to:1;dur:2000;startEvents:camFadeIn"
+                    animation__fadeout="property:material.opacity;to:0;dur:1000;startEvents:camFadeOut"
+            ></a-plane>
+        </a-entity>
+        <a-sky id="skybox" src="#room1" rotation="0 0 0" phi-start="175"></a-sky>
     </a-scene>
 
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-    <script>
-        let currentInfoPanel = null;
-        // Open the panel
-        document.querySelectorAll('[mixin="info-sphere"]').forEach(function (sphere) {
-            sphere.addEventListener("click", function () {
-            console.log("Info sphere clicked: " + this.id);
-
-            const currentSphereIdNumber = this.id.replace("sphere", "");
-
-            // Get the template for this info sphere
-            const template = document.querySelector(
-                    "#infoPanel" + currentSphereIdNumber
-            );
-
-            // Get the info panel entity
-            const infoPanel = document.querySelector(
-                    "#infoPanelContainer" + currentSphereIdNumber
-            );
-
-            console.log("Current info panel: ", infoPanel);
-
-            // Instantiate the new info panel from the template
-            infoPanel.appendChild(document.importNode(template.content, true));
-
-            const allInfoPanelContainerElements = document.querySelectorAll(
-                    "[id^=infoPanelContainer]"
-            );
-
-            document
-                    .querySelectorAll('[src="#crossIcon"]')
-                    .forEach(function (cross) {
-                        cross.addEventListener("click", function () {
-                        allInfoPanelContainerElements.forEach((container) => {
-                            if (container.id === infoPanel.id) {
-                            container.innerHTML = "";
-                            document
-                                    .querySelector("#sphere" + currentInfoPanel)
-                                    .setAttribute("visible", true);
-                            }
-                        });
-                        });
-                    });
-
-            allInfoPanelContainerElements.forEach((container) => {
-                if (container.id !== infoPanel.id) {
-                container.innerHTML = "";
-                }
-                this.setAttribute("visible", true);
-            });
-
-            // console.log("Current info panel insides: ", infoPanel.innerHTML);
-
-            const idNumber = currentSphereIdNumber;
-            if (currentInfoPanel) {
-                document
-                        .querySelector("#sphere" + currentInfoPanel)
-                        .setAttribute("visible", true);
-            }
-            // document.querySelector("#info" + idNumber).style.display = "block";
-            this.setAttribute("visible", false);
-            currentInfoPanel = idNumber;
-            console.log("Current info panel id: " + currentInfoPanel);
-            });
-        });
-    </script>
     <script type="module" src="./script.js"></script>
 </body>
 </html>
