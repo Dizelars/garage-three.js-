@@ -1,0 +1,863 @@
+/*control*/
+/*header*/
+/*tech_spec*/
+/*auto_park*/
+
+/* #Canvas_wrapper {
+    width: 100%;
+    height: 100%;
+} */
+
+#webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+.pulse_wrapper {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 20px;
+    top: 20px;
+    z-index: 1;
+    background-color: black;
+    width: 68px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid white;
+    pointer-events: none;
+}
+
+.pulse_wrapper.hidden {
+    display: none;
+    visibility: hidden !important;
+}
+
+.pulse_wrapper.hidden .pulse {
+    animation: none;
+}
+
+.pulse_media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pulse_media .pulse_img:first-child {
+    margin-right: 4px;
+}
+
+.pulse {
+    position: absolute;
+    text-align: center;
+    border-radius: 8px;
+    background-color: white;
+    width: 88px;
+    height: 42px;
+    animation: move 1.5s linear infinite;
+}
+
+/*Типон*/
+
+[class^="Myhotspot"] {
+    pointer-events: all;
+}
+
+.hotspot_wrapper {
+    background: rgba(9, 9, 9, 0.50);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.hotspot_wrapper [class^="hotspot"] {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border: 1px solid white;
+    box-shadow: 0 0 0 rgba(255,255,255, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.hotspot_wrapper [class^="hotspot"].clicked,
+.hotspot_wrapper [class^="hotspot"]:hover {
+    animation: none;
+}
+
+/*Текст описания маркера*/
+.Mytext {
+    display: none;
+    max-width: 280px;
+    height: auto;
+}
+
+.tooltip_wrapper {
+    display: flex;
+    background: rgba(9, 9, 9, 0.50);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 16px;
+    padding: 20px;
+    gap: 16px;
+}
+
+.tooltip {
+    font-family: 'MoscowSans', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: white;
+}
+
+.tooltip_wrapper svg {
+    min-width: min-content;
+}
+
+.Mytext.show {
+    display: block;
+}
+
+.Mytext.hide {
+    display: none;
+}
+
+html.a-fullscreen {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+html.a-fullscreen body {
+    height: 100%;
+    margin: 0;
+    background-color: #000000;
+    overflow: hidden;
+    padding: 0;
+    width: 100%;
+}
+
+a-scene {
+    opacity: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.a-enter-vr.fullscreen .a-enter-vr-button {
+    display: none !important;
+}
+
+.VectaryIframe {
+    transform: scale(1);
+    transition: transform 1.5s;
+}
+
+.VectaryIframe.active {
+    transform: scale(1.2);
+}
+
+#overlay {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 4;
+    transition: background 1.5s;
+}
+
+#overlay.active {
+    pointer-events: all;
+    background: rgba(0, 0, 0, 1);
+}
+
+/*control*/
+.control_wrapper {
+    width: 100%;
+    background-color: #000000;
+}
+
+.control_buttons {
+    width: 600px;
+    height: 70px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.go_to, .interior {
+    padding: 20px 20px;
+    color: black;
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.go_to {
+    background-color: #62a744;
+}
+
+.interior {
+    background-color: #FF69B4;
+}
+
+/*header*/
+/*прозрачный фон*/
+.header {
+    position: absolute;
+    top: 28px;
+    left: 50px;
+    pointer-events: none;
+    z-index: 5;
+    background-color: transparent;
+}
+
+.header .header__logo {
+    max-width: 170px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    pointer-events: all;
+}
+
+.header .header__logo-text {
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    margin-left: 12px;
+}
+
+.header .header__logo-text {
+    color: white;
+}
+
+.tech_spec__mission-panel,
+.tech_spec__outfit-panel {
+    position: relative;
+    background: rgba(255, 255, 255, 0.10);
+}
+
+.tech_spec__mission-panel img.corner,
+.tech_spec__outfit-panel img.corner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 0;
+    left: 0;
+}
+
+.tech_spec__mission-panel img.corner-2,
+.tech_spec__outfit-panel img.corner-2 {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 0;
+    right: 0;
+    transform: rotate(90deg);
+}
+
+.tech_spec__mission-panel img.corner-3,
+.tech_spec__outfit-panel img.corner-3 {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    bottom: 0;
+    left: 0;
+    transform: rotate(270deg);
+}
+
+.tech_spec__mission-panel img.corner-4,
+.tech_spec__outfit-panel img.corner-4 {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    bottom: 0;
+    right: 0;
+    transform: rotate(180deg);
+}
+
+
+/*tech_spec*/
+.tech_spec {
+    position: absolute;
+    top: 84px;
+    left: 20px;
+    z-index: 2;
+    width: 100%;
+}
+
+.tech_spec.hidden {
+    display: none;
+    visibility: hidden !important;
+}
+
+.tech_spec .container {
+    position: relative;
+}
+
+.tech_spec__wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: absolute;
+    max-width: unset;
+}
+
+.tech_spec__description {
+    padding: 20px 30px;
+    background: rgba(9, 9, 9, 0.50);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 30px;
+    transition: all .8s ease;
+}
+
+.tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, max-content);
+    gap: 24px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "tech_spec__titles"
+    "tech_spec__mission-panel"
+    "tech_spec__mission"
+    "tech_spec__outfit-panel"
+    "tech_spec__outfit"
+    "tech_spec__button";
+    max-width: 350px;
+    transition: all .8s ease;
+}
+
+.tech_spec .tech_spec__description .tech_spec__description-grid_wrapper.hidden {
+    gap: unset;
+}
+
+.tech_spec__titles {
+    grid-area: tech_spec__titles;
+}
+
+.tech_spec__mission {
+    grid-area: tech_spec__mission;
+}
+
+.tech_spec__outfit {
+    grid-area: tech_spec__outfit;
+}
+
+.tech_spec__button {
+    grid-area: tech_spec__button;
+}
+
+.tech_spec__mission-panel {
+    grid-area: tech_spec__mission-panel;
+}
+
+.tech_spec__outfit-panel {
+    grid-area: tech_spec__outfit-panel;
+}
+
+.tech_spec__button .tech_spec__btn {
+    max-width: max-content;
+}
+
+/* CSS стили для анимации */
+.tech_spec__mission,
+.tech_spec__outfit {
+    opacity: 1;
+    height: auto;
+    pointer-events: auto;
+    overflow: hidden;
+    max-height: 1000px;
+    transition: all .8s ease;
+}
+
+.tech_spec__mission.hidden,
+.tech_spec__outfit.hidden,
+.tech_spec__mission-panel.hidden,
+.tech_spec__outfit-panel.hidden {
+    opacity: 0;
+    padding: 0;
+    max-height: 0;
+    transition: all .8s ease;
+}
+
+.tech_spec__titles.hidden {
+    margin-bottom: 20px;
+}
+
+.tech_spec__titles .text_spec__texts, .tech_spec__mission {
+    margin: 0;
+}
+
+.tech_spec__title {
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+}
+
+.tech_spec__subtitle {
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    opacity: 0.4;
+    margin-top: 5px;
+}
+
+.tech_spec__mission-panel {
+    padding: 10px 0;
+}
+
+.tech_spec__text {
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    text-align: center;
+}
+
+.tech_spec__text-descr {
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.tech_spec__outfit {
+    margin: 0;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, max-content);
+    gap: 5px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "outfit_1 outfit_2 outfit_3 outfit_4"
+    "outfit_5 outfit_6 outfit_7 outfit_8"
+    "outfit_9 outfit_10 outfit_11 outfit_12";
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(1) {
+    grid-area: outfit_1;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(2) {
+    grid-area: outfit_2;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(3) {
+    grid-area: outfit_3;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(4) {
+    grid-area: outfit_4;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(5) {
+    grid-area: outfit_5;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(6) {
+    grid-area: outfit_6;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(7) {
+    grid-area: outfit_7;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(8) {
+    grid-area: outfit_8;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(9) {
+    grid-area: outfit_9;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(10) {
+    grid-area: outfit_10;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(11) {
+    grid-area: outfit_11;
+}
+
+.tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item:nth-child(12) {
+    grid-area: outfit_12;
+}
+
+.tech_spec__outfit-panel {
+    padding: 10px 0;
+}
+
+.tech_spec__outfit-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.tech_spec__outfit-item {
+    width: 100%;
+    text-align: center;
+}
+
+.tech_spec__outfit-img {
+    position: relative;
+    width: 80px;
+    height: 65px;
+    border: 1px solid #FFFFFF;
+    border-radius: 6px;
+}
+
+.tech_spec__outfit-img img {
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tech_spec__outfit-text {
+    display: inline-block;
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 12px;
+    margin-top: 4px;
+}
+
+.tech_spec__btn {
+    padding: 14px 12px;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    color: white;
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.tech_spec__btn span {
+    color: white;
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 12px;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+}
+
+.tech_spec__btn img {
+    transition: transform 0.3s ease;
+    transform: rotate(180deg);
+    pointer-events: none;
+}
+
+.tech_spec__btn img.rotate {
+    transform: rotate(0) scale(1);
+}
+
+.tech_spec__interior {
+    position: absolute;
+    top: 84px;
+    right: 20px;
+    max-width: 200px;
+    width: 100%;
+    height: 174px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    background: rgba(9, 9, 9, 0.50);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding-top: 16px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.tech_spec__interior .tech_spec__interior-title {
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.tech_spec__interior .tech_spec__interior-wrapper {
+    position: relative;
+    height: 124px;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.tech_spec__interior#amarok .tech_spec__interior-wrapper {
+    background: url("../img/layout/interior_prew/amarok_prew.png") no-repeat center/cover;
+}
+
+.tech_spec__interior#amarok.garage_amarok .tech_spec__interior-wrapper {
+    background-image: url("../img/layout/pages/main/slider/amarok.png");
+}
+
+.tech_spec__interior#ford .tech_spec__interior-wrapper {
+    background: url("../img/layout/interior_prew/ford_prew.png") no-repeat center/cover;
+}
+
+.tech_spec__interior#ford.garage_ford .tech_spec__interior-wrapper {
+    background-image: url("../img/layout/pages/main/slider/ford.png");
+}
+
+.tech_spec__interior#solaris_gray .tech_spec__interior-wrapper {
+    background: url("../img/layout/interior_prew/solaris_gray_prew.png") no-repeat center/cover;
+}
+
+.tech_spec__interior#solaris_gray.garage_solaris_gray .tech_spec__interior-wrapper {
+    background-image: url("../img/layout/pages/main/slider/solaris_gray.png");
+}
+
+.tech_spec__interior#bus .tech_spec__interior-wrapper {
+    background: url("../img/layout/interior_prew/bus_prew.png") no-repeat center/cover;
+}
+
+.tech_spec__interior#bus.garage_bus .tech_spec__interior-wrapper {
+    background-image: url("../img/layout/pages/main/slider/bus.png");
+}
+
+.tech_spec__interior#kater .tech_spec__interior-wrapper {
+    background: url("../img/layout/interior_prew/kater_prew.png") no-repeat center/cover;
+}
+
+.tech_spec__interior#kater.garage_kater .tech_spec__interior-wrapper {
+    background-image: url("../img/layout/pages/main/slider/kater.png");
+}
+
+.tech_spec__interior#moskvich .tech_spec__interior-wrapper {
+    background: url("../img/layout/interior_prew/moskvich_prew.png") no-repeat center/cover;
+}
+
+.tech_spec__interior#moskvich.garage_moskvich .tech_spec__interior-wrapper {
+    background-image: url("../img/layout/pages/main/slider/moskvich.png");
+}
+
+.tech_spec__interior#kamaz .tech_spec__interior-wrapper {
+    background: url("../img/layout/interior_prew/kamaz_prew.png") no-repeat center/cover;
+}
+
+.tech_spec__interior#kamaz.garage_kamaz .tech_spec__interior-wrapper {
+    background-image: url("../img/layout/pages/main/slider/kamaz.png");
+}
+
+.tech_spec__interior#velo {
+    display: none;
+}
+
+.tech_spec__interior-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 80px;
+    width: 100%;
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+}
+
+.tech_spec__interior#kater .tech_spec__interior-btn {
+    max-width: fit-content;
+}
+
+.tech_spec__interior-text {
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+.tech_spec__interior#kater .tech_spec__interior-btn .tech_spec__interior-text {
+    margin-left: auto;
+}
+
+.tech_spec__interior-before {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.arrow-wrapper {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background: #090909;
+    border-radius: 8px;
+}
+
+.arrow-wrapper > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+/*auto_park*/
+.auto_park {
+    position: fixed;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    transition: transform 0.3s ease;
+    transform: translateY(74%);
+    pointer-events: none;
+}
+
+.auto_park.hidden {
+    display: none;
+    visibility: hidden !important;
+}
+
+.auto_park .container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.auto_park_wrapper {
+    background-color: #090909;
+    border: 1px solid #FFFFFF;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 12px;
+    height: 224px;
+    width: 100%;
+    padding: 19px 47px;
+    max-width: 902px;
+    pointer-events: all;
+}
+
+.auto_park__control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.auto_park__control img {
+    transition: transform 0.3s ease;
+    transform: rotate(180deg);
+}
+
+.auto_park__control img.rotate {
+    transform: rotate(0);
+}
+
+.auto_park__title {
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.auto_park_slider {
+    position: relative;
+}
+
+.auto_park_slider-overflow{
+    overflow: hidden;
+}
+
+.auto_park_slider-wrapper {
+    display: flex;
+    transition: transform 0.3s ease;
+    width: 5000px;
+}
+
+.gallery_item {
+    cursor: pointer;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #090909;
+    transition: transform 0.3s ease;
+    max-height: 140px;
+}
+
+.gallery_item picture {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+}
+
+.gallery_item .gallery_item_link {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.gallery_item img {
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    max-height: 140px;
+    border-radius: 10px;
+}
+
+.auto_park_slider-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.auto_park_slider-button button {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    border: 1px solid #FFFFFF;
+    background: #090909;
+    cursor: pointer;
+    position: relative;
+}
+
+.auto_park_slider-button button img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.auto_park_slider-button button.prev_button {
+    position: absolute;
+    left: -36px;
+}
+
+.auto_park_slider-button button.next_button {
+    transform: rotate(180deg);
+    position: absolute;
+    right: -36px;
+}

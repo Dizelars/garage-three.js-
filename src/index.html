@@ -3,12 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>garage (three.js)</title>
+    <title>Гараж ЦОДД (three.js)</title>
     <link rel="stylesheet" href="./style/style.css">
+
+    <script defer src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script>
+    AFRAME.registerComponent("hotspots", {
+      init: function () {
+        this.el.addEventListener("reloadspots", function (evt) {
+          //get the entire current spot group and scale it to 0
+          let currspotgroup = document.getElementById(evt.detail.currspots);
+          currspotgroup.setAttribute("scale", "0 0 0");
+
+          //get the entire new spot group and scale it to 1
+          let newspotgroup = document.getElementById(evt.detail.newspots);
+          newspotgroup.setAttribute("scale", "1 1 1");
+        });
+      }
+    });
+
+    AFRAME.registerComponent("spot", {
+      schema: {
+        linkto: { type: "string", default: "" },
+        spotgroup: { type: "string", default: "" },
+        phiStart: { type: "string", default: "" }
+      },
+      init: function () {
+        this.el.addEventListener("click", () => {
+          let cam = document.getElementById("cam");
+          cam.emit("zoomin");
+
+          let fp = document.getElementById("camfadeplane");
+          fp.setAttribute("width", "2");
+          fp.setAttribute("height", "2");
+          fp.emit("camFadeIn");
+
+          const reloadSpot = () => {
+            //set the skybox source to the new image as per the spot
+            let sky = document.getElementById("skybox");
+            sky.setAttribute("src", this.data.linkto);
+            sky.setAttribute("phi-start", this.data.phiStart);
+
+            let spotcomp = document.getElementById("spots");
+            let currspots = this.el.parentElement.getAttribute("id");
+            //create event for spots component to change the spots data
+            spotcomp.emit("reloadspots", {
+              newspots: this.data.spotgroup,
+              currspots: currspots
+            });
+
+            cam.emit("zoomout");
+
+            let fp = document.getElementById("camfadeplane");
+            fp.emit("camFadeOut");
+
+            setTimeout(() => {
+              fp.setAttribute("width", "0");
+              fp.setAttribute("height", "0");
+            }, 1000);
+          };
+          setTimeout(reloadSpot, 2000);
+        });
+      }
+    });
+    </script>
 </head>
 <body>
-    <canvas class="webgl"></canvas>
+    <!-- <canvas class="webgl"></canvas> -->
     <div class="loading-bar"></div>
+
+    <div class="progress-bar">
+        <div class="progress-bar-container">
+            <div class="image">
+            <img class="no_animated" src="/src/img/layout/loader/logo.gif" alt="цодд">
+            </div>
+            <span id="progress-label">0%</span>
+            <div id="hellopreloader_barWrapper">
+            <progress id="progress-bar" value="0" max="100"></progress>
+            </div>
+            <label for="progress-bar" id="progress_text">Загружаем модель в высоком разрешении.<br>Пожалуйста, дождитесь завершения</label>
+        </div>
+    </div>
 
     <!-- <div id="mySidenav" class="sidenav">
         <a class="closebtn">&times;</a>
@@ -36,6 +112,204 @@
         <div class="text">Модный спойлер из&nbsp;70&ndash;х</div>
     </div>
 
+    <div class="header">
+        <a class="header__logo" href="../index.html#traffic_patrol">
+            <img class="header__logo-img" src="../img/layout/header_logo.svg" alt="logo">
+            <p class="header__logo-text">Гараж ЦОДД</p>
+        </a>
+    </div>
+    
+    <div class="tech_spec active">
+        <div class="tech_spec__wrapper hidden">
+            <div class="tech_spec__description hidden">
+                <div class="tech_spec__description-grid_wrapper hidden">
+                    <div class="tech_spec__titles hidden">
+                        <div class="text_spec__texts">
+                            <p class="tech_spec__title">Дорожный патруль</p>
+                        </div>
+                    </div>
+                    <div class="tech_spec__mission-panel hidden">
+                        <p class="tech_spec__text">Задача</p>
+                        <div class="tech_spec__mission-panel-background"></div>
+                    </div>
+                    <div class="tech_spec__mission hidden">
+                        <p class="tech_spec__text-descr">Регулировать движение на&nbsp;сложных участках, помогать водителям при поломке или аварии.</p>
+                    </div>
+                    <div class="tech_spec__outfit-panel hidden">
+                        <p class="tech_spec__text">Экипировка</p>
+                        <div class="tech_spec__outfit-panel-background"></div>
+                    </div>
+                    <div class="tech_spec__outfit hidden">
+                        <ul class="tech_spec__outfit-list">
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="../img/layout/outfit/amarok/outfit_1.svg" alt="Огнетушитель" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Огнетушитель</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="../img/layout/outfit/amarok/outfit_2.svg" alt="Аптечка" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Аптечка</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="../img/layout/outfit/amarok/outfit_3.svg" alt="Инструменты" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Инструменты</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="../img/layout/outfit/amarok/outfit_4.svg" alt="Трос" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Трос</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img fetchpriority="high" src="../img/layout/outfit/ford/outfit_1.svg" alt="Противооткатные упоры">
+                                </div>
+                                <span class="tech_spec__outfit-text">Колодки</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="../img/layout/outfit/amarok/outfit_6.svg" alt="Пусковое устройство" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Пусковое устройство</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="../img/layout/outfit/amarok/outfit_7.svg" alt="Бланки европротокола" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Бланки европротокола</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="../img/layout/outfit/amarok/outfit_8.svg" alt="Телескопическая лестница" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Cкладная лестница</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="../img/layout/outfit/amarok/outfit_9.svg" alt="Домкрат" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Домкрат</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="../img/layout/outfit/amarok/outfit_10.svg" alt="Дорожные конусы" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Дорожные конусы</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="../img/layout/outfit/amarok/outfit_11.svg" alt="Гайковерт" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Гайковерт</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tech_spec__button">
+                        <a class="tech_spec__btn">
+                            <span>Подробнее</span>
+                            <img src="../img/layout/icon-arrow.svg" alt="icon-arrow" fetchpriority="high">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tech_spec__interior" id="amarok">
+        <p class="tech_spec__interior-title">Volkswagen Amarok</p>
+        <div class="tech_spec__interior-wrapper">
+            <div class="tech_spec__interior-btn">
+                <span class="tech_spec__interior-text">В салон</span>
+                <div class="arrow-wrapper">
+                    <img src="../img/layout/interior_arrow.svg" alt="interior_arrow">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="auto_park">
+        <div class="container">
+            <div class="auto_park_wrapper">
+                <div class="auto_park__control">
+                    <p class="auto_park__title">Транспорт ЦОДД</p>
+                    <img class="rotate" src="../img/layout/auto_park_arrow.svg" alt="auto_park_btn">
+                </div>
+                <div class="auto_park_slider">
+                    <div class="auto_park_slider-overflow swiper_model">
+                        <div class="auto_park_slider-wrapper swiper-wrapper">
+                            <div class="gallery_item active swiper-slide">
+                            <a class="gallery_item_link" href="#">
+                                <picture>
+                                <img class="gallery_item-img" src="../img/layout/pages/main/slider/amarok.png" alt="amarok" fetchpriority="high">
+                                </picture>
+                            </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                            <a class="gallery_item_link" href="ford.html">
+                                <picture>
+                                <img class="gallery_item-img" src="../img/layout/pages/main/slider/ford.png" alt="ford" fetchpriority="high">
+                                </picture>
+                            </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                            <a class="gallery_item_link" href="bus.html">
+                                <picture>
+                                <img class="gallery_item-img" src="../img/layout/pages/main/slider/bus.png" alt="bus" fetchpriority="high">
+                                </picture>
+                            </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                            <a class="gallery_item_link" href="kater.html">
+                                <picture>
+                                <img class="gallery_item-img" src="../img/layout/pages/main/slider/kater.png" alt="kater" fetchpriority="high">
+                                </picture>
+                            </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                            <a class="gallery_item_link" href="velo.html">
+                                <picture>
+                                <img class="gallery_item-img" src="../img/layout/pages/main/slider/velo.png" alt="velo" fetchpriority="high">
+                                </picture>
+                            </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                            <a class="gallery_item_link" href="moskvich.html">
+                                <picture>
+                                <img class="gallery_item-img" src="../img/layout/pages/main/slider/moskvich.png" alt="moskvich" fetchpriority="high">
+                                </picture>
+                            </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                            <a class="gallery_item_link" href="solaris.html">
+                                <picture>
+                                <img class="gallery_item-img" src="../img/layout/pages/main/slider/solaris_gray.png" alt="solaris" fetchpriority="high">
+                                </picture>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="auto_park_slider-button">
+                        <button class="prev_button">
+                            <img src="../img/layout/slider/icon-arrow.png" alt="arrow_prev" fetchpriority="high">
+                        </button>
+                        <button class="next_button">
+                            <img src="../img/layout/slider/icon-arrow.png" alt="arrow_next" fetchpriority="high">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <div class="VectaryIframe" id="Canvas_wrapper"></div> -->
+    <canvas class="VectaryIframe" id="webgl"></canvas>
+    <div id="overlay"></div>
+
     <div class="model_wrapper">
         <model-viewer class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf" alt="A 3D model of muslCar">
             <button id="ar-button" slot="ar-button">
@@ -51,6 +325,71 @@
     </div>
 
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <script>
+        let currentInfoPanel = null;
+        // Open the panel
+        document.querySelectorAll('[mixin="info-sphere"]').forEach(function (sphere) {
+            sphere.addEventListener("click", function () {
+            console.log("Info sphere clicked: " + this.id);
+
+            const currentSphereIdNumber = this.id.replace("sphere", "");
+
+            // Get the template for this info sphere
+            const template = document.querySelector(
+                    "#infoPanel" + currentSphereIdNumber
+            );
+
+            // Get the info panel entity
+            const infoPanel = document.querySelector(
+                    "#infoPanelContainer" + currentSphereIdNumber
+            );
+
+            console.log("Current info panel: ", infoPanel);
+
+            // Instantiate the new info panel from the template
+            infoPanel.appendChild(document.importNode(template.content, true));
+
+            const allInfoPanelContainerElements = document.querySelectorAll(
+                    "[id^=infoPanelContainer]"
+            );
+
+            document
+                    .querySelectorAll('[src="#crossIcon"]')
+                    .forEach(function (cross) {
+                        cross.addEventListener("click", function () {
+                        allInfoPanelContainerElements.forEach((container) => {
+                            if (container.id === infoPanel.id) {
+                            container.innerHTML = "";
+                            document
+                                    .querySelector("#sphere" + currentInfoPanel)
+                                    .setAttribute("visible", true);
+                            }
+                        });
+                        });
+                    });
+
+            allInfoPanelContainerElements.forEach((container) => {
+                if (container.id !== infoPanel.id) {
+                container.innerHTML = "";
+                }
+                this.setAttribute("visible", true);
+            });
+
+            // console.log("Current info panel insides: ", infoPanel.innerHTML);
+
+            const idNumber = currentSphereIdNumber;
+            if (currentInfoPanel) {
+                document
+                        .querySelector("#sphere" + currentInfoPanel)
+                        .setAttribute("visible", true);
+            }
+            // document.querySelector("#info" + idNumber).style.display = "block";
+            this.setAttribute("visible", false);
+            currentInfoPanel = idNumber;
+            console.log("Current info panel id: " + currentInfoPanel);
+            });
+        });
+    </script>
     <script type="module" src="./script.js"></script>
 </body>
 </html>

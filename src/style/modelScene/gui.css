@@ -1,0 +1,12 @@
+.lil-gui .lil-gui .controller {
+	border-left: 3px solid #2FA1D6;
+}
+
+.lil-gui .controller.boolean {
+    border-left: 3px solid #806787;
+}
+
+.lil-gui .controller.number .fill {
+    background: #2FA1D6;
+    max-width: 100%;
+}

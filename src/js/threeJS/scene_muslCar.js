@@ -8,6 +8,8 @@ import { HDRJPGLoader } from '@monogrid/gainmap-js'
 import { GroundedSkybox } from 'three/addons/objects/GroundedSkybox.js'
 // import { gsap } from 'gsap'
 
+// Менеджер загрузки
+
 /**
  * Base
  */
@@ -44,33 +46,71 @@ let constants = {
 }
 
 /**
- * Loading
+ * Loading Менеджер загрузки
  */
-const loadingBarElement = document.querySelector('.loading-bar')
-const loadingManager = new THREE.LoadingManager(
-    // Loaded
-    () =>
-    {
-        window.setTimeout(() =>
-        {
-            loadingBarElement.classList.add('ended')
-            loadingBarElement.style.transform = ''
+const loadingManager = new THREE.LoadingManager();
 
-            window.setTimeout(() => {
-                overlayMaterial.uniforms.uAlpha.value = 0
-                scene.remove(overlay)
-            }, 1500)
+const progressBar = document.getElementById('progress-bar');
+const progressLabel = document.getElementById('progress-label');
+loadingManager.onProgress = function(url, loaded, total) {
+    const progressPercent = Math.round((loaded / total) * 100);
+    progressBar.style.width = `${progressPercent}%`;
+    progressLabel.textContent = `${progressPercent}%`;
+}
+
+// 3) onLoad - Запись по завершению загрузки.
+const progressBarContainer = document.querySelector('.progress-bar');
+loadingManager.onLoad = function() {
+    setTimeout( () => {
+        progressBarContainer.style.display = 'none';
+        const hotspotsAll = document.querySelectorAll('.hotspot');
+        let activeHotspot = null;
+        hotspotsAll.forEach((hotspot) => {
+            hotspot.addEventListener('mousedown', (event) => {
+                event.stopPropagation();
+
+                if (activeHotspot) {
+                    activeHotspot.classList.remove('clicked');
+                }
+
+                hotspot.classList.add('clicked');
+                activeHotspot = hotspot;
+            });
+        });
+        document.body.addEventListener('mousedown', () => {
+            if (activeHotspot) {
+                activeHotspot.classList.remove('clicked');
+                activeHotspot = null;
+            }
+        });
+    }, 0);
+}
+
+// const loadingBarElement = document.querySelector('.loading-bar')
+// const loadingManager = new THREE.LoadingManager(
+//     // Loaded
+//     () =>
+//     {
+//         window.setTimeout(() =>
+//         {
+//             loadingBarElement.classList.add('ended')
+//             loadingBarElement.style.transform = ''
+
+//             window.setTimeout(() => {
+//                 overlayMaterial.uniforms.uAlpha.value = 0
+//                 scene.remove(overlay)
+//             }, 1500)
             
-        }, 500)
-    },
+//         }, 500)
+//     },
 
-    // Progress
-    (itemUrl, itemsLoaded, itemsTotal) =>
-    {
-        const progressRatio = itemsLoaded / itemsTotal
-        loadingBarElement.style.transform = `scaleX(${progressRatio})`
-    }
-)
+//     // Progress
+//     (itemUrl, itemsLoaded, itemsTotal) =>
+//     {
+//         const progressRatio = itemsLoaded / itemsTotal
+//         loadingBarElement.style.transform = `scaleX(${progressRatio})`
+//     }
+// )
 
 /**
  * Change models
@@ -176,7 +216,7 @@ gltfLoader.load("models/MuslCarLowPoly_mintexture_transform/untitled.gltf", (glt
 
 
 // Canvas
-const canvas = document.querySelector('canvas.webgl')
+const canvas = document.querySelector('canvas#webgl')
 
 // Scene
 const scene = new THREE.Scene()

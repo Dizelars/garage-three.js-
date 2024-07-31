@@ -1,0 +1,766 @@
+@media (hover: hover) {
+    /* Ваши стили для hover */
+    .tech_spec__btn:hover {
+        background-color: #313131;
+    }
+
+    .tech_spec__btn:hover img {
+        transform: rotate(180deg) scale(1.2) translateY(-2px);
+    }
+
+    .tech_spec__btn:hover img.rotate {
+        transform: rotate(0) scale(1.2) translateY(-2px);
+    }
+
+    .tech_spec__interior:hover .arrow-wrapper img {
+        margin-left: 3px;
+    }
+
+    .auto_park__control:hover img {
+        transform: rotate(180deg) scale(1.2) translateY(-4px);
+    }
+
+    .auto_park__control:hover img.rotate  {
+        transform: rotate(0) scale(1.2) translateY(-4px);
+    }
+
+    .gallery_item:hover, .gallery_item.active {
+        border: 1px solid #62A744;
+    }
+
+    .gallery_item:hover img, .gallery_item.active img {
+        filter: grayscale(0);
+    }
+}
+
+@media (hover: none) {
+    /* Ваши стили для hover */
+    .tech_spec__btn:active {
+        background-color: #313131;
+    }
+
+    .tech_spec__btn:active img {
+        transform: rotate(180deg) scale(1.2) translateY(-2px);
+    }
+
+    .tech_spec__btn:active img.rotate {
+        transform: rotate(0) scale(1.2) translateY(-2px);
+    }
+
+    .tech_spec__interior:active .arrow-wrapper img {
+        margin-left: 3px;
+    }
+
+    .auto_park__control:active img {
+        transform: rotate(180deg) scale(1.2) translateY(-4px);
+    }
+
+    .auto_park__control:active img.rotate  {
+        transform: rotate(0) scale(1.2) translateY(-4px);
+    }
+
+    .gallery_item:active, .gallery_item.active {
+        border: 1px solid #62A744;
+    }
+
+    .gallery_item:active img, .gallery_item.active img {
+        filter: grayscale(0);
+    }
+}
+
+@media (hover: hover) and (max-width: 576px), (hover: hover) and (min-width:320px) and (max-width:900px) and (orientation:landscape) {
+    .tech_spec__interior-btn:hover {
+        background-color: #313131;
+    }
+}
+
+@media (hover: none) and (max-width: 576px), (hover: none) and (min-width:320px) and (max-width:915px) and (orientation:landscape) {
+    .tech_spec__interior-btn:active {
+        background-color: #313131;
+    }
+}
+
+@media (max-width: 1200px) {
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item .tech_spec__outfit-img {
+        margin: 0 auto;
+        height: 60px;
+        width: 70px;
+    }
+
+    /*aframe code style*/
+    .a-dialog {
+        border: 1px solid #ffffff;
+        border-radius: 12px;
+        background: #090909;
+        padding: 18px;
+        max-width: 350px;
+        width: 100%;
+        max-height: 320px;
+        height: 100%;
+    }
+
+    .a-dialog-allow-button,
+    .a-dialog-deny-button,
+    .a-dialog-ok-button {
+        border: 1px solid #ffffff;
+        border-radius: 10px;
+        padding: 16px 20px;
+    }
+
+    .a-dialog-allow-button,
+    .a-dialog-deny-button,
+    .a-dialog-ok-button,
+    .a-dialog-text,
+    .a-https-text {
+        font-family: "MoscowSans", sans-serif;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .a-dialog-deny-button,
+    .a-dialog-ok-button,
+    .a-dialog-text,
+    .a-https-text {
+        color: #ffffff;
+    }
+
+    .a-dialog-text {
+        margin-bottom: 20px;
+    }
+
+    .a-dialog-allow-button {
+        background-color: #ffffff;
+        color: #090909;
+    }
+
+    .a-dialog-deny-button {
+        background-color: #090909;
+    }
+
+    .a-dialog-ok-button {
+        background-color: #090909;
+    }
+}
+
+@media (max-width: 835px) {
+    .container {
+        margin: 0 40px;
+    }
+
+    .container__content {
+        margin: 0 10px;
+    }
+
+    .tech_spec .tech_spec__description {
+        max-width: 500px;
+    }
+
+    .tech_spec__interior {
+        max-width: 130px;
+        height: 167px;
+        justify-content: unset;
+    }
+
+    .tech_spec__interior .tech_spec__interior-title {
+        margin-bottom: 10px;
+    }
+
+    .tech_spec__interior .tech_spec__interior-wrapper {
+        height: 70px;
+    }
+
+    .tech_spec__interior-btn {
+        right: unset;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -35px;
+    }
+
+    .tech_spec__interior .tech_spec__interior-btn .arrow-wrapper {
+        background: transparent;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        margin: 0 20px;
+        padding: 0;
+    }
+
+    .container__content {
+        margin: 0;
+        padding: 0;
+    }
+
+    .header {
+        top: 14px;
+        left: 20px;
+    }
+
+    .tech_spec {
+        left: 0;
+        height: 100vh;
+        top: unset;
+        pointer-events: all;
+    }
+
+    .tech_spec.active {
+        height: unset;
+        pointer-events: none;
+    }
+
+    .tech_spec .tech_spec__wrapper {
+        margin-top: 0;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .tech_spec .tech_spec__wrapper.hidden {
+        height: 0;
+    }
+
+    .tech_spec__description,
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper,
+    .tech_spec__mission,
+    .tech_spec__outfit,
+    .tech_spec__mission.hidden,
+    .tech_spec__outfit.hidden,
+    .tech_spec__mission-panel.hidden,
+    .tech_spec__outfit-panel.hidden {
+        transition: all .3s ease;
+    }
+
+    .tech_spec .tech_spec__description {
+        width: 100%;
+        max-width: unset;
+        border-radius: 0 0 30px 30px;
+        height: 100%;
+        padding: 68px 20px 20px 20px;
+    }
+
+    .tech_spec .tech_spec__description.hidden {
+        height: inherit;
+        background: none;
+        backdrop-filter: none;
+        padding: 68px 20px 20px 20px;
+    }
+
+    .tech_spec .tech_spec__description.hidden .tech_spec__button .tech_spec__btn {
+        background: rgba(9, 9, 9, 0.50);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+    }
+
+    .tech_spec__button .tech_spec__btn {
+        pointer-events: all;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__titles .tech_spec__title {
+        font-size: 24px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__titles .tech_spec__subtitle {
+        font-size: 16px;
+    }
+
+    .tech_spec__interior {
+        height: fit-content;
+        left: 20px;
+        bottom: 84px;
+        top: unset;
+        background: none;
+        backdrop-filter: none;
+        pointer-events: none;
+    }
+
+    .tech_spec__interior .tech_spec__interior-wrapper {
+        background: none !important;
+    }
+
+    .tech_spec__interior .tech_spec__interior-title {
+        display: none;
+    }
+
+    .tech_spec__interior .tech_spec__interior-btn {
+        position: absolute;
+        width: 100%;
+        max-width: fit-content;
+        left: 0;
+        bottom: 0;
+        transform: unset;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border: 1px solid white;
+        padding: 10px 12px;
+        border-radius: 10px;
+        pointer-events: all;
+    }
+
+    .tech_spec__interior .tech_spec__interior-btn .tech_spec__interior-text {
+        margin-right: 8px;
+    }
+
+    .tech_spec__interior .tech_spec__interior-btn .arrow-wrapper {
+        border: none;
+        background: none;
+    }
+
+    .auto_park .container {
+        margin: 0 !important;
+    }
+
+    .auto_park .auto_park_wrapper {
+        height: auto;
+        padding: 20px 20px 40px 20px;
+    }
+
+    .auto_park_slider-button button.prev_button {
+        left: -16px;
+    }
+
+    .auto_park_slider-button button.next_button {
+        right: -16px;
+    }
+}
+
+@media (max-width: 440px) {
+    .tech_spec {
+        width: 100%;
+    }
+
+    .tech_spec.active {
+        width: fit-content;
+    }
+
+    .tech_spec .tech_spec__wrapper {
+        display: block;
+        position: static;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__titles.hidden {
+        margin-bottom: 14px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        max-width: unset;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper .tech_spec__outfit-panel .tech_spec__text,
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper .tech_spec__mission-panel .tech_spec__text {
+        font-size: 16px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__titles .tech_spec__title {
+        font-size: 22px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__titles .tech_spec__subtitle,
+    .tech_spec .tech_spec__description .tech_spec__mission .tech_spec__text-descr {
+        font-size: 16px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__btn {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .header .header__logo {
+        max-width: 138px;
+    }
+
+    .header .header__logo .header__logo-text {
+        font-size: 15px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        gap: 10px;
+    }
+
+    .tech_spec__mission-panel,
+    .tech_spec__outfit-panel {
+        padding: 6px 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .tech_spec .tech_spec__description .tech_spec__titles .tech_spec__subtitle,
+    .tech_spec .tech_spec__description .tech_spec__mission .tech_spec__text-descr {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-height: 784px) {
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        gap: 14px;
+    }
+}
+
+@media screen and (max-width: 400px) and (max-height: 680px) {
+    .tech_spec .tech_spec__description {
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        gap: 14px;
+    }
+
+    .tech_spec .tech_spec__mission .tech_spec__text {
+        font-size: 18px;
+    }
+
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list {
+        gap: 8px 2px;
+    }
+
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item .tech_spec__outfit-img {
+        height: 54px;
+        width: 64px;
+    }
+
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item .tech_spec__outfit-img img {
+        width: 44px;
+    }
+
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item .tech_spec__outfit-text {
+        font-size: 10px;
+    }
+
+    .auto_park .auto_park_wrapper {
+        padding: 14px 20px 34px 20px;
+    }
+}
+
+@media screen and (max-width: 400px) and (max-height: 660px) {
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        gap: 10px;
+    }
+
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list {
+        gap: 6px 2px;
+    }
+
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item .tech_spec__outfit-img {
+        height: 44px;
+        width: 54px;
+    }
+
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item .tech_spec__outfit-img img {
+        width: 30px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__btn {
+        padding: 10px;
+    }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1200px) and (orientation: landscape)  {
+    .header {
+        top: 20px;
+    }
+
+    .tech_spec, .tech_spec__interior {
+        top: 70px;
+    }
+
+    .tech_spec .tech_spec__description {
+        padding: 18px 30px 20px 30px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        gap: 14px;
+    }
+
+    .tech_spec__titles.hidden {
+        margin-bottom: 14px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 945px) and (orientation: landscape) {
+    .container {
+        margin: 0 15px;
+    }
+
+    .container__content {
+        margin: 0;
+        padding: 0;
+    }
+
+    .header {
+        left: 20px;
+    }
+
+    .tech_spec {
+        width: 100%;
+
+        top: unset;
+        left: unset;
+    }
+
+    .tech_spec.active {
+        width: fit-content;
+        pointer-events: none;
+    }
+
+    .tech_spec .tech_spec__wrapper {
+        display: block;
+        position: static;
+    }
+
+    .tech_spec  .tech_spec__description .tech_spec__description-grid_wrapper {
+        grid-template-columns: 270px 1fr;
+        grid-template-rows: repeat(4, min-content);
+        gap: 16px 20px;
+        grid-template-areas:
+    "tech_spec__titles tech_spec__outfit-panel"
+    "tech_spec__mission-panel tech_spec__outfit"
+    "tech_spec__mission tech_spec__outfit"
+    "tech_spec__button tech_spec__outfit";
+        max-width: unset;
+
+        height: 220px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(2, max-content);
+        gap: 5px;
+        grid-auto-flow: row;
+        grid-template-areas:
+        "outfit_1 outfit_2 outfit_3 outfit_4 outfit_5 outfit_6"
+        "outfit_7 outfit_8 outfit_9 outfit_10 outfit_11 outfit_12";
+    }
+
+    .tech_spec .tech_spec__outfit-panel-background {
+        width: 100%;
+        left: 0;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper.hidden {
+        max-width: 340px;
+    }
+
+    .tech_spec .tech_spec__description {
+        padding: 80px 10px 100% 20px;
+        max-width: unset;
+    }
+
+    .tech_spec .tech_spec__description.hidden {
+        padding: 80px 10px 10px 20px;
+        background: none;
+        backdrop-filter: none;
+    }
+
+    .tech_spec__btn {
+        pointer-events: all;
+    }
+
+    .tech_spec .tech_spec__description.hidden .tech_spec__btn {
+        background: rgba(9, 9, 9, 0.50);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+    }
+
+
+    .tech_spec .tech_spec__description .tech_spec__titles .tech_spec__subtitle {
+        font-size: 16px;
+        max-width: 315px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__titles .tech_spec__title {
+        font-size: 24px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__mission {
+        max-width: 315px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__mission .tech_spec__text {
+        font-size: 16px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__mission-panel {
+        height: fit-content;
+        align-self: center;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__mission-panel .tech_spec__text-descr {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__outfit .tech_spec__outfit-text {
+        font-size: 10px;
+    }
+
+    .tech_spec__interior {
+        width: fit-content;
+        padding: 0;
+        top: 80px;
+        bottom: unset;
+        right: 20px;
+        left: unset;
+        height: fit-content;
+        background: none !important;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .tech_spec__interior .tech_spec__interior-btn {
+        position: relative;
+        bottom: unset;
+        width: 100%;
+        max-width: max-content;
+        background: rgba(9, 9, 9, 0.50);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border: 1px solid white;
+        padding: 10px 12px;
+        border-radius: 10px;
+        pointer-events: all;
+    }
+
+    .tech_spec__interior .tech_spec__interior-title {
+        display: none;
+    }
+
+    .tech_spec__interior .tech_spec__interior-wrapper {
+        background: none !important;
+        height: fit-content;
+    }
+
+    .tech_spec__interior .tech_spec__interior-btn .tech_spec__interior-text {
+        margin-right: 8px;
+    }
+
+    .tech_spec__interior .tech_spec__interior-btn .arrow-wrapper {
+        border: none;
+        background: none;
+    }
+
+    .auto_park .auto_park_wrapper {
+        height: auto;
+        padding: 20px 20px 30px 20px;
+    }
+}
+
+@media screen and (min-height: 523px) and (max-height: 528px) and (min-width: 829px) and (max-width: 834px)  {
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        height: unset;
+    }
+}
+
+@media screen and (min-height: 655px) and (max-height: 660px) and (min-width: 691px) and (max-width: 696px) {
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        height: unset;
+    }
+
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, max-content);
+        gap: 5px;
+        grid-auto-flow: row;
+        grid-template-areas:
+        "outfit_1 outfit_2 outfit_3 outfit_4"
+        "outfit_5 outfit_6 outfit_7 outfit_8"
+        "outfit_9 outfit_10 outfit_11 outfit_12";
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-height: 750px) {
+    .tech_spec,
+    .tech_spec__interior {
+        top: 64px;
+    }
+
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        gap: 10px;
+    }
+
+    .tech_spec__button .tech_spec__btn {
+        padding: 12px;
+    }
+}
+
+@media screen and (max-height: 741px) and (max-width: 361px) {
+    .tech_spec .tech_spec__description-grid_wrapper {
+        max-height: 550px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (max-height: 668px) and (max-width: 440px) {
+    .tech_spec .tech_spec__description-grid_wrapper {
+        max-height: 482px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (max-height: 570px) and (max-width: 440px) {
+    .tech_spec .tech_spec__description-grid_wrapper {
+        max-height: 418px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (max-height: 490px) and (max-width: 440px) {
+    .tech_spec .tech_spec__description-grid_wrapper {
+        max-height: 340px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (max-width: 820px) and (orientation:landscape) {
+    .tech_spec .tech_spec__outfit-list {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+}
+
+@media screen and (max-height: 420px) and (orientation:landscape) {
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        height: 250px;
+    }
+}
+
+@media screen and (max-height: 400px) and (orientation:landscape) {
+    .tech_spec .tech_spec__titles.hidden {
+        margin-bottom: 18px;
+    }
+}
+
+@media screen and (max-height: 370px) and (orientation:landscape) {
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        gap: 10px;
+    }
+
+    .auto_park {
+        bottom: -12px;
+    }
+
+    .auto_park .auto_park_wrapper {
+        padding: 10px 20px 30px 20px;
+    }
+
+    .auto_park .auto_park__control {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-height: 320px) and (orientation:landscape) {
+    .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
+        grid-template-columns: 240px 1fr;
+        gap: 10px;
+        height: 180px;
+    }
+}

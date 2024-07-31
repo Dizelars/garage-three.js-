@@ -1,0 +1,29 @@
+@keyframes movingTopBottomLoader {
+    0%, 100% {
+        transform: translateY(100%);
+    }
+    50% {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes movingBottomTopLoader {
+    0%, 100% {
+        transform: translateY(-100%);
+    }
+    50% {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes rotate-scale-translate {
+    0% {
+        transform: scale(1) rotateY(0deg);
+    }
+    50% {
+        transform: scale(0.5) rotateY(180deg);
+    }
+    100% {
+        transform: scale(1) rotateY(0deg);
+    }
+}

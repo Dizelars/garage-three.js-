@@ -1,0 +1,120 @@
+.progress-bar {
+    font-family: 'MoscowSans', sans-serif;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0);
+
+    /* display: none; */
+}
+
+/*ЗАРЕШАЛО ПО АНИМАЦИИ*/
+/*Для плавной анимации на загрузочном экране, нужно вешать анимируемые элементы на псевдоэлементы соответствующего блока*/
+
+.progress-bar-container {
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 20px;
+    overflow: hidden;
+    background-origin: border-box;
+}
+
+.progress-bar-container::before,
+.progress-bar-container::after {
+    content: ' ';
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 100%;
+    opacity: 0.3;
+    pointer-events: none;
+    transition: all 4s ease;
+}
+
+.progress-bar-container::before {
+    background: radial-gradient(50% 50.00% at 50% 50.00%, #FC762B 0%, rgba(9, 9, 9, 0.00) 100%);
+    right: -15%;
+    animation: movingTopBottomLoader 3s linear infinite;
+}
+.progress-bar-container::after {
+    background: radial-gradient(50% 50.00% at 50% 50.00%, #2BFC7F 0%, rgba(9, 9, 9, 0.00) 100%);
+    left: -15%;
+    animation: movingBottomTopLoader 3s linear infinite;
+}
+
+.progress-bar-container .image {
+    position: relative;
+    overflow: hidden;
+    width: 260px;
+}
+
+.progress-bar-container .image img.no_animated {
+    object-fit: cover;
+    width: 100%;
+}
+
+.progress-bar-container .image-text {
+    color: #FFFFFF;
+    margin-top: 10px;
+}
+
+#progress-label {
+    color: #ffffff;
+    font-family: 'MoscowSans', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+#hellopreloader_barWrapper,
+#progress-bar {
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 400px;
+    margin-bottom: 18px;
+    height: 6px;
+}
+
+#progress-bar {
+    width: 0;
+}
+
+#hellopreloader_barWrapper {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.50);
+}
+
+#progress-bar::-webkit-progress-bar  {
+    background-color: #62a744;
+    box-shadow: 0 0 5px 1px rgba(98, 167, 68, 0.50);
+}
+
+#progress_text {
+    text-align: center;
+    font-family: 'MoscowSans', sans-serif;
+    font-size: 1rem;
+    font-weight: lighter;
+    line-height: 22px;
+}
+
+label {
+    color: #ffffff;
+    font-family: 'MoscowSans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}

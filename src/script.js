@@ -1,2 +1,2 @@
 // import './js/menu_model.js';
-import './js/model_scene.js';
+import './js/threeJS/scene_muslCar.js';

@@ -1,0 +1,56 @@
+@media (max-width: 1444px) {
+    .progress-bar-container::before {
+        right: -30%;
+    }
+
+    .progress-bar-container::after {
+        left: -30%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .progress-bar-container::before {
+        right: -50%;
+    }
+
+    .progress-bar-container::after {
+        left: -50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .progress-bar-container::before {
+        right: -75%;
+    }
+
+    .progress-bar-container::after {
+        left: -75%;
+    }
+}
+
+@media (max-width: 440px) {
+    .progress-bar-container::before {
+        right: -130%;
+    }
+
+    .progress-bar-container::after {
+        left: -130%;
+    }
+}
+
+@media (max-width: 375px) {
+    .progress-bar-container::before {
+        right: -145%;
+    }
+
+    .progress-bar-container::after {
+        left: -145%;
+    }
+}
+
+@media (max-width: 364px) {
+    #progress_text {
+        font-size: 0.8rem;
+        line-height: 20px;
+    }
+}

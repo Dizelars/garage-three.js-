@@ -1,0 +1,27 @@
+@import '../../../node_modules/reset-css/reset.css';
+@import './fonts.css';
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    font-family: 'MoscowSans', sans-serif;
+    color: white;
+}
+
+.container {
+    padding: 0 5px;
+    margin: 0 60px;
+}
+
+.container__content {
+    padding: 0 5px;
+    margin: 0 30px;
+}
+
+.my-stats canvas {
+    width: 100px !important;
+    height: 50px !important;
+}
