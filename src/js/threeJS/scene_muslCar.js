@@ -13,6 +13,7 @@ import {InteriorTransitionHelper} from "../helpers/interiorTransitionHelper.js";
 
 // Менеджер загрузки
 // Переключение между сценами
+// Логика типонов
 
 /**
  * Base
@@ -35,6 +36,10 @@ window.addEventListener('keypress', (event) => {
 // Создаем папки дебагера
 const hdriFolder = gui.addFolder('Карта окружения');
 const toneMapping = gui.addFolder('Тоновое отображение')
+const PointFolder = gui.addFolder('Типоны');
+const One = PointFolder.addFolder('Типон 1');
+const Two = PointFolder.addFolder('Типон 2');
+const Three = PointFolder.addFolder('Типон 3');
 
 //! Monitor FPS
 const stats = new Stats()
@@ -52,6 +57,8 @@ let constants = {
 /**
  * Loading Менеджер загрузки
  */
+let sceneReady = false
+
 const loadingManager = new THREE.LoadingManager();
 
 const progressBar = document.getElementById('progress-bar');
@@ -65,56 +72,11 @@ loadingManager.onProgress = function(url, loaded, total) {
 // 3) onLoad - Запись по завершению загрузки.
 const progressBarContainer = document.querySelector('.progress-bar');
 loadingManager.onLoad = function() {
-    setTimeout( () => {
-        progressBarContainer.style.display = 'none';
-        const hotspotsAll = document.querySelectorAll('.hotspot');
-        let activeHotspot = null;
-        hotspotsAll.forEach((hotspot) => {
-            hotspot.addEventListener('mousedown', (event) => {
-                event.stopPropagation();
-
-                if (activeHotspot) {
-                    activeHotspot.classList.remove('clicked');
-                }
-
-                hotspot.classList.add('clicked');
-                activeHotspot = hotspot;
-            });
-        });
-        document.body.addEventListener('mousedown', () => {
-            if (activeHotspot) {
-                activeHotspot.classList.remove('clicked');
-                activeHotspot = null;
-            }
-        });
-    }, 0);
+    progressBarContainer.style.display = 'none';
+    sceneReady = true;
+    raycasterTipons()
+    positionTipons()
 }
-
-// const loadingBarElement = document.querySelector('.loading-bar')
-// const loadingManager = new THREE.LoadingManager(
-//     // Loaded
-//     () =>
-//     {
-//         window.setTimeout(() =>
-//         {
-//             loadingBarElement.classList.add('ended')
-//             loadingBarElement.style.transform = ''
-
-//             window.setTimeout(() => {
-//                 overlayMaterial.uniforms.uAlpha.value = 0
-//                 scene.remove(overlay)
-//             }, 1500)
-            
-//         }, 500)
-//     },
-
-//     // Progress
-//     (itemUrl, itemsLoaded, itemsTotal) =>
-//     {
-//         const progressRatio = itemsLoaded / itemsTotal
-//         loadingBarElement.style.transform = `scaleX(${progressRatio})`
-//     }
-// )
 
 /**
  * Change models
@@ -151,9 +113,6 @@ const updateAllMaterials = () =>
         {
             child.material.envMapIntensity = global.envMapIntensity
             child.material.side = THREE.FrontSide
-            // if (child.name.toLowerCase().includes('glass')) {
-
-            // }
         }
     })
 }
@@ -163,6 +122,8 @@ let dracoLoader = new DRACOLoader(loadingManager)
 dracoLoader.setDecoderPath('/draco/')
 let gltfLoader = new GLTFLoader(loadingManager)
 gltfLoader.setDRACOLoader(dracoLoader)
+
+// let sceneReady = false
 
 gltfLoader.load("models/MuslCarLowPoly_mintexture_transform/untitled.gltf", (gltf) => {
     console.log(gltf);
@@ -177,6 +138,10 @@ gltfLoader.load("models/MuslCarLowPoly_mintexture_transform/untitled.gltf", (glt
     // controls.update()
     updateAllMaterials()
     console.log(renderer.info)
+
+    // window.setTimeout(() => {
+    //     sceneReady = true
+    // }, 500)
 });
 
 // function loadModel(name, folder, model) {
@@ -218,39 +183,46 @@ gltfLoader.load("models/MuslCarLowPoly_mintexture_transform/untitled.gltf", (glt
 //     });
 // }
 
+/**
+ * Pounts on model
+ */
+const points = [
+    {
+        position: new THREE.Vector3(0.96, 0.8, - 0.58),
+        element: document.querySelector('.point-0')
+    },
+    {
+        position: new THREE.Vector3(0.04, 0.76, 2.4),
+        element: document.querySelector('.point-1')
+    },
+    {
+        position: new THREE.Vector3(0, 0.86, - 2.26),
+        element: document.querySelector('.point-2')
+    }
+]
+
+One.add(points[0].position,'x',-9,9,0.01)
+One.add(points[0].position,'y',-9,9,0.01)
+One.add(points[0].position,'z',-9,9,0.01)
+
+Two.add(points[1].position,'x',-9,9,0.01)
+Two.add(points[1].position,'y',-9,9,0.01)
+Two.add(points[1].position,'z',-9,9,0.01)
+
+Three.add(points[2].position,'x',-9,9,0.01)
+Three.add(points[2].position,'y',-9,9,0.01)
+Three.add(points[2].position,'z',-9,9,0.01)
+
+/**
+ * Raycaster
+ */
+const raycaster = new THREE.Raycaster()
 
 // Canvas
 const canvas = document.querySelector('canvas#webgl')
 
 // Scene
 const scene = new THREE.Scene()
-
-/**
- * Overlay
- */
-const overlayGeometry = new THREE.PlaneGeometry(2, 2, 1, 1)
-const overlayMaterial = new THREE.ShaderMaterial({
-    transparent: true,
-    uniforms:
-    {
-        uAlpha: { value: 1 }
-    },
-    vertexShader: `
-        void main()
-        {
-            gl_Position = vec4(position, 1.0);
-        }
-    `,
-    fragmentShader: `
-        uniform float uAlpha;
-
-        void main()
-        {
-            gl_FragColor = vec4(0.0, 0.0, 0.0, uAlpha);
-        }
-    `
-})
-const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial)
 
 /**
  * Sizes
@@ -292,6 +264,55 @@ controls.minDistance = 3.5;
 controls.enableDamping = true
 //* Отключение перетаскивания
 controls.enablePan = false
+
+// Логика типонов
+controls.addEventListener('change', () => {
+    positionTipons();
+});
+
+controls.addEventListener('end', () => {
+    raycasterTipons();
+});
+
+function raycasterTipons() {
+    if (sceneReady) {
+        for(const point of points) {
+            const screenPosition = point.position.clone()
+            screenPosition.project(camera)
+
+            raycaster.setFromCamera(screenPosition, camera)
+            const intersects = raycaster.intersectObjects(scene.children, true)
+
+            if (intersects.length === 0) {
+                point.element.classList.add('visible')
+            }
+            else {
+                const intersectionDistance = intersects[0].distance
+                const pointDistance = point.position.distanceTo(camera.position)
+                if (intersectionDistance < pointDistance) {
+                    point.element.classList.remove('visible')
+                }
+                else {
+                    point.element.classList.add('visible')
+                }
+            }
+        }
+    }
+}
+
+function positionTipons() {
+    if (sceneReady) {
+        for(const point of points) {
+            const screenPosition = point.position.clone()
+            screenPosition.project(camera)
+
+            const translateX = screenPosition.x * sizes.width * 0.5
+            const translateY = - screenPosition.y * sizes.height * 0.5
+            point.element.style.transform = `translate(${translateX}px, ${translateY}px)`
+        }
+    }
+}
+
 controls.update();
 
 /**
@@ -374,6 +395,7 @@ console.log(renderer.info)
 let activeScene = 1;
 const interiorButton = document.querySelector('.tech_spec__interior');
 const aFrameScene = document.querySelector('a-scene');
+const tiponsOnModel = document.querySelectorAll('.point');
 
 const transitionHelper = new InteriorTransitionHelper(interiorButton);
 interiorButton.addEventListener('click', () => {
@@ -392,6 +414,9 @@ interiorButton.addEventListener('click', () => {
             aFrameScene.play();
             controls.enabled = false;
             transitionHelper.endTransition();
+            tiponsOnModel.forEach((e) => {
+                e.style.zIndex = "0";
+            })
         }, 1500);
     } else {
         setTimeout(() => {
@@ -402,6 +427,9 @@ interiorButton.addEventListener('click', () => {
             aFrameScene.pause();
             controls.enabled = true;
             transitionHelper.endTransition();
+            tiponsOnModel.forEach((e) => {
+                e.style.zIndex = "1";
+            })
         }, 1500);
     }
 });
