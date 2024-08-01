@@ -34,12 +34,13 @@
     cursor: pointer;
 }
 
-.pulse_wrapper.hidden {
+/* .pulse_wrapper.hidden {
     display: none;
     visibility: hidden !important;
-}
+} */
 
 .pulse_wrapper.hidden .pulse {
+    display: none;
     animation: none;
 }
 

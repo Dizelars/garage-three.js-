@@ -288,7 +288,7 @@
                             </a>
                             </div>
                             <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="#">
+                            <a class="gallery_item_link" href="solaris.html">
                                 <picture>
                                     <img class="gallery_item-img" src="images/modelPage/slider/solaris_gray.png" alt="solaris" fetchpriority="high">
                                 </picture>
@@ -320,10 +320,26 @@
         <div class="pulse"></div>
     </div>
 
+    <div class="qrCode-popup">
+        <div class="qrCode-popup_wrapper">
+            <p class="title">Дополненная реальность</p>
+            <img class="qr_code" src="images\modelPage\AR\qr-code.svg" alt="QR-код">
+            <p class="description">
+                Наведите камеру на&nbsp;QR-код, затем нажмите на&nbsp;появившееся сообщение.
+            </p>
+            <div class="closeButton">
+                Закрыть
+            </div>
+        </div>
+    </div>
+
     <!-- <div class="model_wrapper"> -->
-    <model-viewer class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="../static/models/MuslCarLowPoly_mintexture_transform/untitled.gltf" alt="A 3D model of muslCar">
-    </model-viewer>
+    <!-- <model-viewer class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="../static/models/MuslCarLowPoly_mintexture_transform/untitled.gltf" alt="A 3D model of muslCar">
+    </model-viewer> -->
     <!-- </div> -->
+
+    <model-viewer id="pageWithModel" class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf" alt="A 3D model of muslCar">
+    </model-viewer>
 
     <a-scene loading-screen="enabled: true, dotsColor: #62A744, backgroundColor: #090909" vr-mode-ui="enabled: false" ar-mode-ui="enabled: false" xr-mode-ui="enabled: false"
          device-orientation-permission-ui="
@@ -369,8 +385,8 @@
         <a-sky id="skybox" src="#room1" rotation="0 0 0" phi-start="175"></a-sky>
     </a-scene>
 
-    <!-- <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script> -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer-module.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer-module.min.js"></script> -->
     <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js"></script> -->
     <script type="module" src="./script.js"></script>
 </body>
