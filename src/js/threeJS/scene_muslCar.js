@@ -126,12 +126,19 @@ gltfLoader.setDRACOLoader(dracoLoader)
 // let sceneReady = false
 
 gltfLoader.load("models/MuslCarLowPoly_mintexture_transform/untitled.gltf", (gltf) => {
+    // gltfLoader.load("models/moto/untitled.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
     current_object.position.x = 0
     current_object.position.y = Math.PI * 0.42
     current_object.position.z = 0
+
+    // current_object.position.x = 0
+    // current_object.position.y = Math.PI * 0.4
+    // current_object.position.z = 0
+
+    // current_object.scale.set(0.1,0.1,0.1);
 
     scene.add(current_object);
 
@@ -314,6 +321,27 @@ function positionTipons() {
 }
 
 controls.update();
+
+/**
+ * Point click
+ */
+const pointsOnModel = document.querySelectorAll('.point')
+
+pointsOnModel.forEach((point) => {
+    point.addEventListener('click', () => {
+        point.classList.toggle('show')
+
+        // Проверка наличия класса 'show' у остальных точек
+        pointsOnModel.forEach((otherPoint) => {
+            if (otherPoint !== point) {
+                if (otherPoint.classList.contains('show')) {
+                    otherPoint.classList.remove('show')
+                }
+            }
+        })
+    })
+})
+
 
 /**
  * Renderer

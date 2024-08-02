@@ -26,7 +26,10 @@
     overflow: auto;
     padding: 0 20px;
 
-    background: transparent;
+    /* background: transparent; */
+    background: rgba(255,255,255,0.10);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
 }
 
 .qrCode-popup.active {
