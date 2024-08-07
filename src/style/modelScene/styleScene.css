@@ -613,59 +613,59 @@ a-scene {
 }
 
 .tech_spec__interior#amarok .tech_spec__interior-wrapper {
-    background: url("../../../static/images/modelPage/interior_prew/amarok_prew.png") no-repeat center/cover;
+    background: url("../../../static/media/images/modelPage/interior_prew/amarok_prew.png") no-repeat center/cover;
 }
 
 .tech_spec__interior#amarok.garage_amarok .tech_spec__interior-wrapper {
-    background-image: url("../../../static/images/modelPage/slider/amarok.png");
+    background-image: url("../../../static/media/images/modelPage/slider/amarok.png");
 }
 
 .tech_spec__interior#ford .tech_spec__interior-wrapper {
-    background: url("../../../static/images/modelPage/interior_prew/ford_prew.png") no-repeat center/cover;
+    background: url("../../../static/media/images/modelPage/interior_prew/ford_prew.png") no-repeat center/cover;
 }
 
 .tech_spec__interior#ford.garage_ford .tech_spec__interior-wrapper {
-    background-image: url("../../../static/images/modelPage/slider/ford.png");
+    background-image: url("../../../static/media/images/modelPage/slider/ford.png");
 }
 
 .tech_spec__interior#solaris_gray .tech_spec__interior-wrapper {
-    background: url("../../../static/images/modelPage/interior_prew/solaris_gray_prew.png") no-repeat center/cover;
+    background: url("../../../static/media/images/modelPage/interior_prew/solaris_gray_prew.png") no-repeat center/cover;
 }
 
 .tech_spec__interior#solaris_gray.garage_solaris_gray .tech_spec__interior-wrapper {
-    background-image: url("../../../static/images/modelPage/slider/solaris_gray.png");
+    background-image: url("../../../static/media/images/modelPage/slider/solaris_gray.png");
 }
 
 .tech_spec__interior#bus .tech_spec__interior-wrapper {
-    background: url("../../../static/images/modelPage/interior_prew/bus_prew.png") no-repeat center/cover;
+    background: url("../../../static/media/images/modelPage/interior_prew/bus_prew.png") no-repeat center/cover;
 }
 
 .tech_spec__interior#bus.garage_bus .tech_spec__interior-wrapper {
-    background-image: url("../../../static/images/modelPage/slider/bus.png");
+    background-image: url("../../../static/media/images/modelPage/slider/bus.png");
 }
 
 .tech_spec__interior#kater .tech_spec__interior-wrapper {
-    background: url("../../../static/images/modelPage/interior_prew/kater_prew.png") no-repeat center/cover;
+    background: url("../../../static/media/images/modelPage/interior_prew/kater_prew.png") no-repeat center/cover;
 }
 
 .tech_spec__interior#kater.garage_kater .tech_spec__interior-wrapper {
-    background-image: url("../../../static/images/modelPage/slider/kater.png");
+    background-image: url("../../../static/media/images/modelPage/slider/kater.png");
 }
 
 .tech_spec__interior#moskvich .tech_spec__interior-wrapper {
-    background: url("../../../static/images/modelPage/interior_prew/moskvich_prew.png") no-repeat center/cover;
+    background: url("../../../static/media/images/modelPage/interior_prew/moskvich_prew.png") no-repeat center/cover;
 }
 
 .tech_spec__interior#moskvich.garage_moskvich .tech_spec__interior-wrapper {
-    background-image: url("../../../static/images/modelPage/slider/moskvich.png");
+    background-image: url("../../../static/media/images/modelPage/slider/moskvich.png");
 }
 
 .tech_spec__interior#kamaz .tech_spec__interior-wrapper {
-    background: url("../../../static/images/modelPage/interior_prew/kamaz_prew.png") no-repeat center/cover;
+    background: url("../../../static/media/images/modelPage/interior_prew/kamaz_prew.png") no-repeat center/cover;
 }
 
 .tech_spec__interior#kamaz.garage_kamaz .tech_spec__interior-wrapper {
-    background-image: url("../../../static/images/modelPage/slider/kamaz.png");
+    background-image: url("../../../static/media/images/modelPage/slider/kamaz.png");
 }
 
 .tech_spec__interior#velo {

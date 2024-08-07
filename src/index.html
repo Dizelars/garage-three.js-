@@ -1,396 +1,856 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru" class="main">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Гараж ЦОДД (three.js)</title>
-    <link rel="stylesheet" href="./style/style.css">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="yandex" content="noindex,nofollow,noarchive">
+    <meta name="googlebot" content="noindex,nofollow,noarchive">
 
-    <script defer src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script>
-    AFRAME.registerComponent("hotspots", {
-      init: function () {
-        this.el.addEventListener("reloadspots", function (evt) {
-          //get the entire current spot group and scale it to 0
-          let currspotgroup = document.getElementById(evt.detail.currspots);
-          currspotgroup.setAttribute("scale", "0 0 0");
+    <!-- <meta name="yandex-verification" content="c74167eb0fd8f8fe" />
 
-          //get the entire new spot group and scale it to 1
-          let newspotgroup = document.getElementById(evt.detail.newspots);
-          newspotgroup.setAttribute("scale", "1 1 1");
+    <link rel="apple-touch-icon" sizes="180x180" href="https://garage-codd.ru/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://garage-codd.ru/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://garage-codd.ru/favicons/favicon-16x16.png">
+    <link rel="manifest" href="https://garage-codd.ru/favicons/site.webmanifest">
+    <link rel="mask-icon" href="https://garage-codd.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#090909"/> -->
+    <!--Primary Meta Tags-->
+    <!-- <meta name="title" content="Гараж ЦОДД"/>
+    <meta name="description" content="Гараж ЦОДД"/>
+    <meta name="keywords" content="Гараж ЦОДД"/> -->
+
+    <!--Open Graph / Facebook-->
+    <!-- <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://garage-codd.ru/"/>
+    <meta property="og:title" content="Гараж ЦОДД"/>
+    <meta property="og:description" content="Гараж ЦОДД"/>
+    <meta property="og:image" content="https://garage-codd.ru/seo.png"/> -->
+
+    <!--Twitter-->
+    <!-- <meta property="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:url" content="https://garage-codd.ru/"/>
+    <meta property="twitter:title" content="Гараж ЦОДД"/>
+    <meta property="twitter:description" content="Гараж ЦОДД"/>
+    <meta property="twitter:image" content="https://garage-codd.ru/seo.png"/> -->
+
+    <!-- Yandex.Metrika counter -->
+    <!-- <script async src="https://mc.yandex.ru/metrika/tag.js"></script>
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym(95985378, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
         });
-      }
-    });
-
-    AFRAME.registerComponent("spot", {
-      schema: {
-        linkto: { type: "string", default: "" },
-        spotgroup: { type: "string", default: "" },
-        phiStart: { type: "string", default: "" }
-      },
-      init: function () {
-        this.el.addEventListener("click", () => {
-          let cam = document.getElementById("cam");
-          cam.emit("zoomin");
-
-          let fp = document.getElementById("camfadeplane");
-          fp.setAttribute("width", "2");
-          fp.setAttribute("height", "2");
-          fp.emit("camFadeIn");
-
-          const reloadSpot = () => {
-            //set the skybox source to the new image as per the spot
-            let sky = document.getElementById("skybox");
-            sky.setAttribute("src", this.data.linkto);
-            sky.setAttribute("phi-start", this.data.phiStart);
-
-            let spotcomp = document.getElementById("spots");
-            let currspots = this.el.parentElement.getAttribute("id");
-            //create event for spots component to change the spots data
-            spotcomp.emit("reloadspots", {
-              newspots: this.data.spotgroup,
-              currspots: currspots
-            });
-
-            cam.emit("zoomout");
-
-            let fp = document.getElementById("camfadeplane");
-            fp.emit("camFadeOut");
-
-            setTimeout(() => {
-              fp.setAttribute("width", "0");
-              fp.setAttribute("height", "0");
-            }, 1000);
-          };
-          setTimeout(reloadSpot, 2000);
-        });
-      }
-    });
     </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/95985378" style="position:absolute; left:-9999px;" alt="" /></div></noscript> -->
+    <!-- /Yandex.Metrika counter -->
+
+    <title>Гараж ЦОДД</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="./style/mainPage/index.css">
+    <!-- <script defer src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script> -->
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 </head>
-<body>
-    <div class="progress-bar">
-        <div class="progress-bar-container">
-            <div class="image">
-                <img class="no_animated" src="images/modelPage/loader/logo.gif" alt="цодд">
+<body class="main">
+
+    <header class="header_main">
+        <div class="container_main">
+            <div class="header__wrapper">
+                <div class="header__logo">
+                    <img class="header__logo-img" src="media/images/logo/header_logo.svg" alt="logo">
+                    <p class="header__logo-text">Гараж ЦОДД</p>
+                </div>
+                <div class="header__menu">
+                    <div class="burger-menu burger-menu--closed">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                </div>
             </div>
-            <span id="progress-label">0%</span>
-            <div id="hellopreloader_barWrapper">
-                <progress id="progress-bar" value="0" max="100"></progress>
+        </div>
+    </header>
+
+    <div class="menu">
+        <div class="container_main">
+            <div class="menu__logo">
+                <img class="menu__logo-img" src="media/images/logo/header_logo.svg" alt="logo">
+                <p class="menu__logo-text">Гараж ЦОДД</p>
             </div>
-            <label for="progress-bar" id="progress_text">Загружаем модель в высоком разрешении.<br>Пожалуйста, дождитесь завершения</label>
+            <nav class="menu_navigation">
+                <ul class="menu_navigation-list">
+                    <li class="menu_navigation-item">
+                        <div class="menu_wrapper_img">
+                            <img src="media/images/mainPage/menu_icon/police.svg" alt="дорожный патруль ЦОДД" class="menu_nav-img">
+                        </div>
+                        <a class="menu_navigation-link" href="#traffic_patrol">дорожный патруль ЦОДД</a>
+                        <div class="menu_preview-block">
+                            <div class="block-wrapper-video">
+                                <video class="menu_preview-video" src="media/video/trafifk_menu.mp4" muted loop playsinline>
+                                </video>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="menu_navigation-item">
+                        <div class="menu_wrapper_img">
+                            <img src="media/images/mainPage/menu_icon/bus.svg" alt="Мобильный ситуационный центр ЦОДД" class="menu_nav-img">
+                        </div>
+                        <a class="menu_navigation-link" href="#situation_centre">Мобильный ситуационный центр</a>
+                        <div class="menu_preview-block">
+                            <div class="block-wrapper-video">
+                                <video class="menu_preview-video" src="media/video/bus.mp4" muted loop playsinline></video>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="menu_navigation-item">
+                        <div class="menu_wrapper_img">
+                            <img src="media/images/mainPage/menu_icon/boat.svg" alt="водный патруль ЦОДД" class="menu_nav-img">
+                        </div>
+                        <a class="menu_navigation-link" href="#water_patrol">водный патруль</a>
+                        <div class="menu_preview-block">
+                            <div class="block-wrapper-video">
+                                <video class="menu_preview-video" src="media/video/kater.mp4" muted loop playsinline></video>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="menu_navigation-item">
+                        <div class="menu_wrapper_img">
+                            <img src="media/images/mainPage/menu_icon/bicycle.svg" alt="велопатруль" class="menu_nav-img">
+                        </div>
+                        <a class="menu_navigation-link" href="#velo_patrol">велопатруль</a>
+                        <div class="menu_preview-block">
+                            <div class="block-wrapper-video">
+                                <video class="menu_preview-video" src="media/video/velo.mp4" muted loop playsinline></video>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="menu_navigation-item">
+                        <div class="menu_wrapper_img">
+                            <img src="media/images/mainPage/menu_icon/firstaid.svg" alt="Служба помощи ЦОДД" class="menu_nav-img">
+                        </div>
+                        <a class="menu_navigation-link" href="#help_desk">Служба помощи</a>
+                        <div class="menu_preview-block">
+                            <div class="block-wrapper-video">
+                                <video class="menu_preview-video" src="media/video/help_menu.mp4" muted loop playsinline></video>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="flex-filler"></div>
+            <div class="menu-media">
+                <a class="media-wrapper" href="https://gucodd.ru/?utm-source=garage_codd" target="_blank" rel="noopener">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                    <img class="media-img" src="media/images/mainPage/footer/contact_internet.svg" alt="gucodd">
+                </a>
+                <a class="media-wrapper" href="https://vk.com/mosroad/?utm-source=garage_codd" target="_blank" rel="noopener">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                    <img class="media-img" src="media/images/mainPage/footer/media_vk.svg" alt="vk">
+                </a>
+                <a class="media-wrapper" href="https://t.me/DtRoad/?utm-source=garage_codd" target="_blank" rel="noopener">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                    <img class="media-img" src="media/images/mainPage/footer/media_telegram.svg" alt="telegram">
+                </a>
+                <a class="media-wrapper" href="tel:3210">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                    <img class="media-img" src="media/images/mainPage/footer/media_tel.svg" alt="Телефон">
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- <div id="mySidenav" class="sidenav">
-        <a class="closebtn">&times;</a>
-        <a class="model" data-folder="MuslCarLowPoly_mintexture_transform" data-model="untitled">Muslcar</a>
-        <a class="model" data-folder="Police_car_transform" data-model="scene">Police</a>
-        <a class="model" data-folder="Bank_truck_transform" data-model="scene">Bank_truck</a>
-        <a class="model" data-folder="Japanese_transform" data-model="scene">Japanese_sedan</a>
-        <a class="model" data-folder="Pickup_transform" data-model="scene">Pickup</a>
-        <a class="model" data-folder="Wagon_transform" data-model="scene">Wagon</a>
-        <a class="model" data-folder="bridge" data-model="untitled">Bridge</a>
-    </div>
-        
-    <span class="openbtn">&#9776; open</span> -->
+    <div class="block_blur"></div>
 
-    <div class="point point-0">
-        <div class="label"></div>
-        <div class="pulseTipon"></div>
-        <div class="text">Олдскульная дверь</div>
-    </div>
-    <div class="point point-1">
-        <div class="label"></div>
-        <div class="pulseTipon"></div>
-        <div class="text">Мощьный V8&nbsp;под капотом</div>
-    </div>
-    <div class="point point-2">
-        <div class="label"></div>
-        <div class="pulseTipon"></div>
-        <div class="text">Аэродинамический спойлер</div>
-    </div>
-
-    <div class="header">
-        <a class="header__logo" href="#">
-            <img class="header__logo-img" src="images/logo/header_logo.svg" alt="logo">
-            <p class="header__logo-text">Гараж ЦОДД</p>
-        </a>
-    </div>
-    
-    <div class="tech_spec active">
-        <div class="tech_spec__wrapper hidden">
-            <div class="tech_spec__description hidden">
-                <div class="tech_spec__description-grid_wrapper hidden">
-                    <div class="tech_spec__titles hidden">
-                        <div class="text_spec__texts">
-                            <p class="tech_spec__title">Дорожный патруль</p>
+    <main class="gradient_move">
+        <section class="main">
+            <div class="main_intro_media">
+                <video class="preview_video" preload playsinline muted loop></video>
+            </div>
+            <div class="main_intro_content">
+                <div class="container_main">
+                    <div class="main_bg">
+                        <h1 class="main_title">
+                            <span class="main_title-animation-1">Более 20&nbsp;лет ЦОДД</span> <span class="main_title-animation-2">делает дор<span class="large_letter"></span>ги Москвы</span><span class="main_title-animation-3">безопасными и&nbsp;удобными</span>
+                        </h1>
+                        <div class="main_grid-wrapper">
+                            <div class="main_text-1">
+                                <p class="main_info-text">
+                                    Сегодня здесь находится одна из&nbsp;самых современных в&nbsp;мире систем управления дорожным движением с&nbsp;крупными инфраструктурными и&nbsp;ИТ&#8209;проектами
+                                </p>
+                            </div>
+                            <div class="main_text-2">
+                                <p class="main_info-text">
+                                    Для эффективного выполнения задач в&nbsp;ЦОДД создан уникальный транспортный парк: от&nbsp;брутальных пикапов до&nbsp;электровелосипедов, от&nbsp;мобильного центра управления городом до&nbsp;речного катера
+                                </p>
+                            </div>
+                            <div class="main_text-mobile">
+                                <p class="main_info-text">
+                                    Сегодня здесь находится одна из&nbsp;самых современных в&nbsp;мире систем управления дорожным движением с&nbsp;крупными инфраструктурными и&nbsp;ИТ&#8209;проектами
+                                </p>
+                                <p class="main_info-text">
+                                    Для эффективного выполнения задач в&nbsp;ЦОДД создан уникальный транспортный парк: от&nbsp;брутальных пикапов до&nbsp;электровелосипедов, от&nbsp;мобильного центра управления городом до&nbsp;речного катера
+                                </p>
+                            </div>
+                            <div class="main_button-3">
+                                <a class="main_info-link" href="muslCar.html">в&nbsp;виртуальный гараж</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="tech_spec__mission-panel hidden">
-                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
-                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
-                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
-                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
-                        <p class="tech_spec__text">Задача</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="traffic_patrol" id="traffic_patrol">
+            <div class="container_main">
+                <div class="traffic_patrol_grid-wrapper">
+                    <div class="traffic_patrol-1">
+                        <h1 class="traffic_patrol-title title"><span class="traffic_patrol-animation-1">дорожный</span> <span class="traffic_patrol-animation-2">патруль</span> <span class="traffic_patrol-animation-3">ЦОДД</span></h1>
                     </div>
-                    <div class="tech_spec__mission hidden">
-                        <p class="tech_spec__text-descr">Регулировать движение на&nbsp;сложных участках, помогать водителям при поломке или аварии.</p>
+                    <div class="traffic_patrol-text-2">
+                        <p class="traffic_patrol-text">
+                            Ежедневно 30&nbsp;экипажей Дорожного патруля ЦОДД курсируют по&nbsp;Москве.<br>Задача&nbsp;&mdash; регулировать движение на&nbsp;сложных участках, помогать водителям при&nbsp;поломке или&nbsp;аварии
+                        </p>
                     </div>
-                    <div class="tech_spec__outfit-panel hidden">
-                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
-                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
-                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
-                        <img src="images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
-                        <p class="tech_spec__text">Экипировка</p>
+                    <div class="traffic_patrol-text-4">
+                        <p class="traffic_patrol-text">
+                            В&nbsp;гараже Дорожного патруля 57&nbsp;автомобилей: грузовик, пикап, фургон, легковая машина. Все&nbsp;автомобили ярко&#8209;зеленого цвета с&nbsp;проблесковыми маячками на&nbsp;крыше и&nbsp;логотипом&nbsp;ЦОДД
+                        </p>
                     </div>
-                    <div class="tech_spec__outfit hidden">
-                        <ul class="tech_spec__outfit-list">
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img src="images/modelPage/outfit/amarok/outfit_1.svg" alt="Огнетушитель" fetchpriority="high">
-                                </div>
-                                <span class="tech_spec__outfit-text">Огнетушитель</span>
-                            </li>
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img src="images/modelPage/outfit/amarok/outfit_2.svg" alt="Аптечка" fetchpriority="high">
-                                </div>
-                                <span class="tech_spec__outfit-text">Аптечка</span>
-                            </li>
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img src="images/modelPage/outfit/amarok/outfit_3.svg" alt="Инструменты" fetchpriority="high">
-                                </div>
-                                <span class="tech_spec__outfit-text">Инструменты</span>
-                            </li>
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img src="images/modelPage/outfit/amarok/outfit_4.svg" alt="Трос" fetchpriority="high">
-                                </div>
-                                <span class="tech_spec__outfit-text">Трос</span>
-                            </li>
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img fetchpriority="high" src="images/modelPage/outfit/ford/outfit_1.svg" alt="Противооткатные упоры">
-                                </div>
-                                <span class="tech_spec__outfit-text">Колодки</span>
-                            </li>
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img src="images/modelPage/outfit/amarok/outfit_6.svg" alt="Пусковое устройство" fetchpriority="high">
-                                </div>
-                                <span class="tech_spec__outfit-text">Пусковое устройство</span>
-                            </li>
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img src="images/modelPage/outfit/amarok/outfit_7.svg" alt="Бланки европротокола" fetchpriority="high">
-                                </div>
-                                <span class="tech_spec__outfit-text">Бланки европротокола</span>
-                            </li>
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img src="images/modelPage/outfit/amarok/outfit_8.svg" alt="Телескопическая лестница" fetchpriority="high">
-                                </div>
-                                <span class="tech_spec__outfit-text">Cкладная лестница</span>
-                            </li>
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img src="images/modelPage/outfit/amarok/outfit_9.svg" alt="Домкрат" fetchpriority="high">
-                                </div>
-                                <span class="tech_spec__outfit-text">Домкрат</span>
-                            </li>
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img src="images/modelPage/outfit/amarok/outfit_10.svg" alt="Дорожные конусы" fetchpriority="high">
-                                </div>
-                                <span class="tech_spec__outfit-text">Дорожные конусы</span>
-                            </li>
-                            <li class="tech_spec__outfit-item">
-                                <div class="tech_spec__outfit-img">
-                                    <img src="images/modelPage/outfit/amarok/outfit_11.svg" alt="Гайковерт" fetchpriority="high">
-                                </div>
-                                <span class="tech_spec__outfit-text">Гайковерт</span>
-                            </li>
-                        </ul>
+                    <div class="traffic_patrol-text-5">
+                        <p class="traffic_patrol-text">
+                            Дорожный патруль нельзя вызвать. Задания экипажи получают от&nbsp;дежурных Ситуационного центра ЦОДД
+                        </p>
                     </div>
-                    <div class="tech_spec__button">
-                        <a class="tech_spec__btn">
-                            <span>Подробнее</span>
-                            <img src="images/modelPage/arrows/icon-arrow.svg" alt="icon-arrow" fetchpriority="high">
+                    <div class="traffic_patrol-slide-kamaz_NOSLIDER">
+                        <a class="garage_model_card swiper-slide parentCardForLargeMonitor model_1" href="#">
+                            <div class="slid_img">
+                                <picture>
+                                    <img class="menu_preview-img" src="media/images/modelPage/slider/kamaz.png" alt="Грузовик" fetchpriority="high">
+                                </picture>
+                                <video class="menu_preview-video" src="media/video/kamaz.mp4" muted loop playsinline></video>
+                            </div>
+                            <div class="slid_info">
+                                <div class="slid_info-desc">
+                                    <p class="slid_info-title">Дорожный патруль</p>
+                                    <p class="slid_info-text">Грузовик</p>
+                                </div>
+                                <div class="slid_info-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                            <rect width="18" height="18" fill="#D9D9D9"/>
+                                        </mask>
+                                        <g mask="url(#mask0_1137_313)">
+                                            <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="garage_model_card swiper-slide parentCardForLargeMonitor model_2" href="#">
+                            <div class="slid_img">
+                                <picture>
+                                    <img class="menu_preview-img" src="media/images/modelPage/slider/amarok.png" alt="Патрульный пикап" fetchpriority="high">
+                                </picture>
+                                <video class="menu_preview-video" src="media/video/amarok.mp4" muted loop playsinline></video>
+                            </div>
+                            <div class="slid_info">
+                                <div class="slid_info-desc">
+                                    <p class="slid_info-title">Дорожный патруль</p>
+                                    <p class="slid_info-text">Пикап</p>
+                                </div>
+                                <div class="slid_info-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                            <rect width="18" height="18" fill="#D9D9D9"/>
+                                        </mask>
+                                        <g mask="url(#mask0_1137_313)">
+                                            <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="garage_model_card swiper-slide parentCardForLargeMonitor model_3" href="#">
+                            <div class="slid_img">
+                                <picture>
+                                    <img class="menu_preview-img" src="media/images/modelPage/slider/ford.png" alt="Патрульный фургон" fetchpriority="high">
+                                </picture>
+                                <video class="menu_preview-video" src="media/video/ford.mp4" muted loop playsinline></video>
+                            </div>
+                            <div class="slid_info">
+                                <div class="slid_info-desc">
+                                    <p class="slid_info-title">Дорожный патруль</p>
+                                    <p class="slid_info-text">Фургон</p>
+                                </div>
+                                <div class="slid_info-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                            <rect width="18" height="18" fill="#D9D9D9"/>
+                                        </mask>
+                                        <g mask="url(#mask0_1137_313)">
+                                            <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="traffic_patrol-slide-kamaz">
+                        <div class="traffic_patrol_slider-wrapper swiper1">
+                            <div class="traffic_patrol_slider swiper-wrapper">
+                                 <a class="garage_model_card swiper-slide parentCardForLargeMonitor" href="#">
+                                    <div class="slid_img">
+                                        <picture>
+                                            <img class="menu_preview-img" src="media/images/modelPage/slider/kamaz.png" alt="Грузовик" fetchpriority="high">
+                                        </picture>
+                                        <video class="menu_preview-video" src="media/video/kamaz.mp4" muted loop playsinline></video>
+                                    </div>
+                                    <div class="slid_info">
+                                        <div class="slid_info-desc">
+                                            <p class="slid_info-title">Дорожный патруль</p>
+                                            <p class="slid_info-text">Грузовик</p>
+                                        </div>
+                                        <div class="slid_info-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                                    <rect width="18" height="18" fill="#D9D9D9"/>
+                                                </mask>
+                                                <g mask="url(#mask0_1137_313)">
+                                                    <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="garage_model_card swiper-slide parentCardForLargeMonitor" href="#">
+                                    <div class="slid_img">
+                                        <picture>
+                                            <img class="menu_preview-img" src="media/images/modelPage/slider/amarok.png" alt="Патрульный пикап" fetchpriority="high">
+                                        </picture>
+                                        <video class="menu_preview-video" src="media/video/amarok.mp4" muted loop playsinline></video>
+                                    </div>
+                                    <div class="slid_info">
+                                        <div class="slid_info-desc">
+                                            <p class="slid_info-title">Дорожный патруль</p>
+                                            <p class="slid_info-text">Пикап</p>
+                                        </div>
+                                        <div class="slid_info-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                                    <rect width="18" height="18" fill="#D9D9D9"/>
+                                                </mask>
+                                                <g mask="url(#mask0_1137_313)">
+                                                    <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="garage_model_card swiper-slide parentCardForLargeMonitor" href="#">
+                                    <div class="slid_img">
+                                        <picture>
+                                            <img class="menu_preview-img" src="media/images/modelPage/slider/ford.png" alt="Патрульный фургон" fetchpriority="high">
+                                        </picture>
+                                        <video class="menu_preview-video" src="media/video/ford.mp4" muted loop playsinline></video>
+                                    </div>
+                                    <div class="slid_info">
+                                        <div class="slid_info-desc">
+                                            <p class="slid_info-title">Дорожный патруль</p>
+                                            <p class="slid_info-text">Фургон</p>
+                                        </div>
+                                        <div class="slid_info-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                                    <rect width="18" height="18" fill="#D9D9D9"/>
+                                                </mask>
+                                                <g mask="url(#mask0_1137_313)">
+                                                    <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="swiper-pagination1"></div>
+                            <div class="traffic_patrol-slider-buttons">
+                                <div class="btn_prev">
+                                    <img class="prev_img" src="media/images/modelPage/slider/arrow_green.svg" alt="btn_prev">
+                                </div>
+                                <div class="btn_next">
+                                    <img class="next_img" src="media/images/modelPage/slider/arrow_green.svg" alt="btn_next">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="traffic_patrol-text-mobile-1">
+                        <p class="traffic_patrol-text">
+                            Ежедневно 30&nbsp;экипажей Дорожного патруля ЦОДД курсируют по&nbsp;Москве. Задача&nbsp;&mdash; регулировать движение на&nbsp;сложных участках, помогать водителям при&nbsp;поломке или&nbsp;аварии
+                        </p>
+                        <p class="traffic_patrol-text">
+                            В&nbsp;гараже Дорожного патруля 57&nbsp;автомобилей: грузовик, пикап, фургон, легковая машина. Все&nbsp;автомобили ярко&#8209;зеленого цвета с&nbsp;проблесковыми маячками на&nbsp;крыше и&nbsp;логотипом&nbsp;ЦОДД
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="situation_centre" id="situation_centre">
+            <div class="container_main">
+                <div class="situation_centre_grid-wrapper">
+                    <div class="situation-1">
+                        <h1 class="situation_centre-title title"><span class="situation_centre-animation-1">мобильный</span> <span class="situation_centre-animation-2">ситуационный</span> <span class="situation_centre-animation-3">центр</span></h1>
+                    </div>
+                    <div class="brain_heart-2">
+                        <p class="brain_heart-title">Ситуационный центр ЦОДД&nbsp;&mdash; &laquo;мозг&nbsp;и&nbsp;сердце&raquo; Интеллектуальной транспортной системы Москвы</p>
+                        <p class="brain_heart-text">Отсюда 24/7 следят за&nbsp;движением на&nbsp;дорогах, управляют светофорами, координируют работу Дорожного патруля, собирают данные о&nbsp;трафике и&nbsp;заторах, выводят информацию на&nbsp;электронные табло, координируют разные службы при&nbsp;крупных ДТП и&nbsp;ЧП</p>
+                        <img src="media\images\mainPage\situationCenter\bus_vector.svg" alt="Ситуационный центр рама">
+                    </div>
+                    <div class="major_events-3">
+                        <p class="major_events-text">Когда в&nbsp;городе проходят крупные мероприятия, и&nbsp;нужна максимальная оперативность, на&nbsp;месте работает мобильный Ситуационный центр. Полный аналог стационарного&nbsp;&mdash; только на&nbsp;колесах</p>
+                    </div>
+                    <div class="employ-4">
+                        <picture>
+                            <img src="media\images\mainPage\situationCenter\BusRight_skale.png" alt="Работник Мобильного Ситуационного центра" fetchpriority="high" class="employ">
+                        </picture>
+                    </div>
+                    <div class="slider-5">
+                        <a class="garage_model_card" href="bus.html">
+                            <div class="slid_img">
+                                <picture>
+                                    <img class="menu_preview-img" src="media/images/modelPage/slider/bus.png" alt="Ситуационный центр" fetchpriority="high">
+                                </picture>
+                                <video class="menu_preview-video" src="media/video/bus.mp4" muted loop playsinline></video>
+                            </div>
+                            <div class="slid_info">
+                                <div class="slid_info-desc">
+                                    <p class="slid_info-title">Ситуационный центр</p>
+                                    <p class="slid_info-text">Автобус</p>
+                                </div>
+                                <div class="slid_info-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                            <rect width="18" height="18" fill="#D9D9D9"/>
+                                        </mask>
+                                        <g mask="url(#mask0_1137_313)">
+                                            <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="bus-6">
+                        <picture>
+                            <img src="media\images\mainPage\situationCenter\BusLeft_skale.png" alt="Ситуационный центр" fetchpriority="high" class="bus">
+                        </picture>
+                    </div>
+                    <div class="man_text-7">
+                        <p class="man_text-text">Мобильный Ситцентр построен на&nbsp;базе автобуса MAN. В&nbsp;его салоне размещены рабочие места для специалистов, зал совещаний, системы связи и&nbsp;проч. Он&nbsp;полностью автономен и&nbsp;может работать как во&nbsp;время стоянки, так&nbsp;и&nbsp;в&nbsp;движении</p>
+                    </div>
+                    <div class="man_plus_major_events-8">
+                        <p class="man_plus_major_events-text">Мобильный Ситцентр построен на&nbsp;базе автобуса MAN. В&nbsp;его салоне размещены рабочие места для специалистов, зал совещаний, системы связи и&nbsp;проч. Он&nbsp;полностью автономен и&nbsp;может работать как во&nbsp;время стоянки, так&nbsp;и&nbsp;в&nbsp;движении</p>
+                        <p class="man_plus_major_events-text">Когда в&nbsp;городе проходят крупные мероприятия, и&nbsp;нужна максимальная оперативность, на&nbsp;месте работает мобильный Ситуационный центр. Полный аналог стационарного&nbsp;&mdash; только на&nbsp;колесах</p>
+                    </div>
+                    <div class="employ_text">
+                        <div class="employ_text-wrapper">
+                            <div class="employ_text_img">
+                                <picture>
+                                    <img src="media\images\mainPage\situationCenter\BusRight_skale.png" alt="Работник Мобильного Ситуационного центра" loading="lazy" decoding="async" class="employ">
+                                </picture>
+                            </div>
+                            <div class="employ_text_info">
+                                <p class="employ_descr">
+                                    Когда в&nbsp;городе проходят крупные мероприятия, и&nbsp;нужна максимальная оперативность, на&nbsp;месте работает мобильный Ситуационный центр. Полный аналог стационарного&nbsp;&mdash; только на&nbsp;колесах
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bus_text">
+                        <div class="bus_text-wrapper">
+                            <div class="bus_text_img">
+                                <picture>
+                                    <img src="media\images\mainPage\situationCenter\BusLeft_skale.png" alt="Ситуационный центр" loading="lazy" decoding="async" class="bus">
+                                </picture>
+                            </div>
+                            <div class="bus_text_info">
+                                <p class="bus_descr">
+                                    Мобильный Ситцентр построен на&nbsp;базе автобуса MAN. В&nbsp;его салоне размещены рабочие места для&nbsp;специалистов, зал совещаний, системы связи и&nbsp;проч. Он&nbsp;полностью автономен
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="employ_plus_bus_slider">
+                        <div class="situation_centre_slider-wrapper swiper2">
+                            <div class="situation_centre_slider swiper-wrapper">
+                                <div class="situation_centre-card swiper-slide">
+                                    <div class="slid_img">
+                                        <picture>
+                                            <img src="media\images\mainPage\situationCenter\BusRight_skale.png" alt="Работник Мобильного Ситуационного центра" fetchpriority="high" class="employ">
+                                        </picture>
+                                    </div>
+                                    <div class="slid_info">
+                                        <p class="slider-text">
+                                            Когда в&nbsp;городе проходят крупные мероприятия, и&nbsp;нужна максимальная оперативность, на&nbsp;месте работает мобильный Ситуационный центр. Полный аналог стационарного&nbsp;&mdash; только на&nbsp;колесах
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="situation_centre-card swiper-slide">
+                                    <div class="slid_img">
+                                        <picture>
+                                            <img src="media\images\mainPage\situationCenter\BusLeft_skale.png" alt="Ситуационный центр" fetchpriority="high" class="bus">
+                                        </picture>
+                                    </div>
+                                    <div class="slid_info">
+                                        <p class="slider-text">
+                                            Мобильный Ситцентр построен на&nbsp;базе автобуса MAN. В&nbsp;его салоне размещены рабочие места для&nbsp;специалистов, зал совещаний, системы связи и&nbsp;проч. Он&nbsp;полностью автономен
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="water_patrol" id="water_patrol">
+            <div class="container_main">
+                <div class="water_patrol_grid-wrapper">
+                    <div class="water_patrol_title">
+                        <h1 class="water_patrol-title title"><span class="water_patrol-animation-1">водный</span> <span class="water_patrol-animation-2">патруль</span></h1>
+                    </div>
+                    <div class="water_patrol_card parentCardForLargeMonitor">
+                        <a class="garage_model_card" href="kater.html">
+                            <div class="slid_img">
+                                <picture>
+                                    <img class="menu_preview-img" src="media/images/modelPage/slider/kater.png" alt="Катер" fetchpriority="high">
+                                </picture>
+                                <video class="menu_preview-video" src="media/video/kater.mp4" muted loop playsinline></video>
+                            </div>
+                            <div class="slid_info">
+                                <div class="slid_info-desc">
+                                    <p class="slid_info-title">Водный патруль</p>
+                                    <p class="slid_info-text">Катер</p>
+                                </div>
+                                <div class="slid_info-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                            <rect width="18" height="18" fill="#D9D9D9"/>
+                                        </mask>
+                                        <g mask="url(#mask0_1137_313)">
+                                            <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="water_patrol_history">
+                        <div class="water_patrol_history_top">
+                            <p class="water_patrol_history-title">Водный патруль ЦОДД начал свою работу весной 2022&nbsp;года</p>
+                            <p class="water_patrol_history-text">Зеленый катер ежедневно патрулирует акваторию города</p>
+                        </div>
+                        <p class="water_patrol_history-text">В&nbsp;его задачи входит фиксация нарушений движения и&nbsp;стоянки в&nbsp;акватории, оперативное взаимодействие с&nbsp;контрольно-надзорными и&nbsp;правоохранительными органами, проведение профилактических бесед о&nbsp;правилах поведения на&nbsp;воде</p>
+                    </div>
+                    <div class="water_patrol_text_1">
+                        <p class="water_patrol-text">У&nbsp;каждого члена экипажа есть жилет, а&nbsp;на&nbsp;катере&nbsp;&mdash; все&nbsp;необходимое для связи между судоводителями и&nbsp;Речным ситуационном центром ЦОДД, а&nbsp;также для&nbsp;навигации. Еще&nbsp;на&nbsp;катере есть спасательный круг, аптечка, багор и&nbsp;линь</p>
+                    </div>
+                    <div class="water_patrol_text_2">
+                        <p class="water_patrol-text">За&nbsp;прошлый летний сезон Водный патруль прошел 18&nbsp;тысяч километров. Совместно с&nbsp;Речным ситуационном центром выявлено свыше 100&nbsp;нарушений</p>
+                    </div>
+                    <div class="water_patrol_text_mobile">
+                        <p class="water_patrol-text">У&nbsp;каждого члена экипажа есть жилет, а&nbsp;на&nbsp;катере&nbsp;&mdash; все&nbsp;необходимое для связи между судоводителями и&nbsp;Речным ситуационном центром ЦОДД, а&nbsp;также для&nbsp;навигации. Еще на&nbsp;катере есть спасательный круг, аптечка, багор и&nbsp;линь</p>
+                        <p class="water_patrol-text">За&nbsp;прошлый летний сезон Водный патруль прошел 18&nbsp;тысяч километров. Совместно с&nbsp;Речным ситуационном центром выявлено свыше 100&nbsp;нарушений</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="velo_patrol" id="velo_patrol">
+            <div class="container_main">
+                <div class="velo_patrol_grid-wrapper">
+                    <div class="velo_patrol_title">
+                        <h1 class="velo_patrol-title title"><span class="velo_patrol-animation-1">велопатруль</span></h1>
+                    </div>
+                    <div class="velo_patrol_about">
+                        <p class="velo_patrol_about-subtitle">Когда наступает теплый сезон, в&nbsp;Москве начинает работать велопатруль</p>
+                        <div class="velo_patrol_about-descr">
+                            <div class="velo_patrol_about-text">Это сотрудники ЦОДД на&nbsp;велосипедах, которые ездят по&nbsp;улицам столицы и&nbsp;помогают всем участникам дорожного движения</div>
+                            <div class="velo_patrol_about-text">Патрульные объезжают всю территорию Москвы в&nbsp;пределах МКАД. Суммарный дневной пробег всех патрульных&nbsp;&mdash; порядка 350&nbsp;км</div>
+                        </div>
+                    </div>
+                    <div class="velo_patrol_text_1">
+                        <p>Велопатруль оборудован всем необходимым для&nbsp;оперативной помощи на&nbsp;дороге: аптечкой и&nbsp;водой, ремонтным комплектом для велосипеда, огнетушителем, бланками европротокола. Сотрудники знают, как помочь в&nbsp;экстренной ситуации и&nbsp;оказать доврачебную помощь</p>
+                    </div>
+                    <div class="velo_patrol_text_2">
+                        <p>Патруль следит за&nbsp;дорожной инфраструктурой: состоянием знаков, светофоров, навигационных стел, велопарковок и&nbsp;проч. Кроме того, в&nbsp;обязанности велопатруля входит освобождать велополосы, тротуары и&nbsp;пешеходные переходы от&nbsp;припаркованных автомобилей</p>
+                    </div>
+                    <div class="velo_patrol_text_mobile">
+                        <p>Велопатруль оборудован всем необходимым для&nbsp;оперативной помощи на&nbsp;дороге: аптечкой и&nbsp;водой, ремонтным комплектом для велосипеда, огнетушителем, бланками европротокола. Сотрудники знают, как помочь в&nbsp;экстренной ситуации и&nbsp;оказать доврачебную помощь</p>
+                        <p>Патруль следит за&nbsp;дорожной инфраструктурой: состоянием знаков, светофоров, навигационных стел, велопарковок и&nbsp;проч. Кроме того, в&nbsp;обязанности велопатруля входит освобождать велополосы, тротуары и&nbsp;пешеходные переходы от&nbsp;припаркованных автомобилей</p>
+                    </div>
+                    <div class="velo_patrol_card parentCardForLargeMonitor">
+                        <a class="garage_model_card" href="velo.html">
+                            <div class="slid_img">
+                                <picture>
+                                    <img class="menu_preview-img" src="media/images/modelPage/slider/velo.png" alt="Патрульный пикап" fetchpriority="high">
+                                </picture>
+                                <video class="menu_preview-video" src="media/video/velo.mp4" muted loop playsinline></video>
+                            </div>
+                            <div class="slid_info">
+                                <div class="slid_info-desc">
+                                    <p class="slid_info-title">Велопатруль</p>
+                                    <p class="slid_info-text">Велосипед</p>
+                                </div>
+                                <div class="slid_info-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                            <rect width="18" height="18" fill="#D9D9D9"/>
+                                        </mask>
+                                        <g mask="url(#mask0_1137_313)">
+                                            <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <div class="tech_spec__interior" id="amarok">
-        <p class="tech_spec__interior-title">Volkswagen Amarok</p>
-        <div class="tech_spec__interior-wrapper">
-            <div class="tech_spec__interior-btn">
-                <span class="tech_spec__interior-text">В салон</span>
-                <div class="arrow-wrapper">
-                    <img src="images/modelPage/arrows/interior_arrow.svg" alt="interior_arrow">
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="auto_park">
-        <div class="container">
-            <div class="auto_park_wrapper">
-                <div class="auto_park__control">
-                    <p class="auto_park__title">Транспорт ЦОДД</p>
-                    <img class="rotate" src="images/modelPage/arrows/auto_park_arrow.svg" alt="auto_park_btn">
-                </div>
-                <div class="auto_park_slider">
-                    <div class="auto_park_slider-overflow swiper_model">
-                        <div class="auto_park_slider-wrapper swiper-wrapper">
-                            <div class="gallery_item active swiper-slide">
-                            <a class="gallery_item_link" href="#">
-                                <picture>
-                                    <img class="gallery_item-img" src="images/modelPage/slider/amarok.png" alt="amarok" fetchpriority="high">
-                                </picture>
-                            </a>
-                            </div>
-                            <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="#">
-                                <picture>
-                                    <img class="gallery_item-img" src="images/modelPage/slider/ford.png" alt="ford" fetchpriority="high">
-                                </picture>
-                            </a>
-                            </div>
-                            <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="#">
-                                <picture>
-                                    <img class="gallery_item-img" src="images/modelPage/slider/bus.png" alt="bus" fetchpriority="high">
-                                </picture>
-                            </a>
-                            </div>
-                            <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="#">
-                                <picture>
-                                    <img class="gallery_item-img" src="images/modelPage/slider/kater.png" alt="kater" fetchpriority="high">
-                                </picture>
-                            </a>
-                            </div>
-                            <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="#">
-                                <picture>
-                                    <img class="gallery_item-img" src="images/modelPage/slider/velo.png" alt="velo" fetchpriority="high">
-                                </picture>
-                            </a>
-                            </div>
-                            <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="#">
-                                <picture>
-                                    <img class="gallery_item-img" src="images/modelPage/slider/moskvich.png" alt="moskvich" fetchpriority="high">
-                                </picture>
-                            </a>
-                            </div>
-                            <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="#">
-                                <picture>
-                                    <img class="gallery_item-img" src="images/modelPage/slider/solaris_gray.png" alt="solaris" fetchpriority="high">
-                                </picture>
-                            </a>
-                            </div>
+        </section>
+
+        <section class="help_desk" id="help_desk">
+            <div class="container_main">
+                <div class="help_desk_grid-wrapper">
+                    <div class="help_desk-1">
+                        <h1 class="help_desk-title title"><span class="help_desk-animation-1">служба</span> <span class="help_desk-animation-2">помощи</span></h1>
+                    </div>
+                    <div class="parkon-2">
+                        <p class="parkon_title">Создана на&nbsp;базе мобильных комплексов фотовидеофиксации</p>
+                        <div class="parkon_descr">
+                            <p class="parkon_text">110 автомобилей патрулируют город 24/7 и&nbsp;приезжаютк&nbsp;водителям, которые попалив&nbsp;ДТП или&nbsp;столкнулисьсо&nbsp;сложностями на&nbsp;дороге</p>
+                            <p class="parkon_text">На&nbsp;машинах установлены камеры, которые автоматически следят за&nbsp;соблюдением ПДД, а&nbsp;также распознают транспорт, который находится в&nbsp;розыске</p>
                         </div>
                     </div>
-                    <div class="auto_park_slider-button">
-                        <button class="prev_button">
-                            <img src="images/modelPage/arrows/icon-arrow.png" alt="arrow_prev" fetchpriority="high">
-                        </button>
-                        <button class="next_button">
-                            <img src="images/modelPage/arrows/icon-arrow.png" alt="arrow_next" fetchpriority="high">
-                        </button>
+                    <div class="driver-3">
+                        <p class="driver_text">Мониторит состояние дорожной инфраструктуры. Следит за&nbsp;знаками, светофорами и&nbsp;прочими объектами</p>
+                        <p class="driver_text">С&nbsp;2023 года автопарк Службы помощи пополнился электрическими кроссоверами Москвич&nbsp;3е</p>
+                    </div>
+                    <div class="mobile_text_combo">
+                        <p class="mobile_text_combo-text">Мониторит состояние дорожной инфраструктуры. Следит за&nbsp;знаками, светофорами и&nbsp;прочими объектами</p>
+                        <p class="mobile_text_combo-text">С&nbsp;2023 года автопарк Службы помощи пополнился электрическими кроссоверами Москвич&nbsp;3е</p>
+                    </div>
+                    <div class="slide-5 parentCardForLargeMonitor">
+                        <a class="garage_model_card" href="solaris.html">
+                            <div class="slid_img">
+                                <picture>
+                                    <img class="menu_preview-img" src="media/images/modelPage/slider/solaris_gray.png" alt="Служба помощи ЦОДД" fetchpriority="high">
+                                </picture>
+                                <video class="menu_preview-video" src="media/video/salaris_gray.mp4" muted loop playsinline></video>
+                            </div>
+                            <div class="slid_info">
+                                <div class="slid_info-desc">
+                                    <p class="slid_info-title">Служба помощи</p>
+                                    <p class="slid_info-text">Легковая</p>
+                                </div>
+                                <div class="slid_info-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                            <rect width="18" height="18" fill="#D9D9D9"/>
+                                        </mask>
+                                        <g mask="url(#mask0_1137_313)">
+                                            <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="slide-moskvich parentCardForLargeMonitor">
+                        <a class="garage_model_card" href="moskvich.html">
+                            <div class="slid_img">
+                                <picture>
+                                    <img class="menu_preview-img" src="media/images/modelPage/slider/moskvich.png" alt="Служба помощи ЦОДД" fetchpriority="high">
+                                </picture>
+                                <video class="menu_preview-video" src="media/video/moskvich.mp4" muted loop playsinline></video>
+                            </div>
+                            <div class="slid_info">
+                                <div class="slid_info-desc">
+                                    <p class="slid_info-title">Служба помощи</p>
+                                    <p class="slid_info-text">Кроссовер</p>
+                                </div>
+                                <div class="slid_info-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                            <rect width="18" height="18" fill="#D9D9D9"/>
+                                        </mask>
+                                        <g mask="url(#mask0_1137_313)">
+                                            <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="equipment_mobile-slide">
+                        <div class="traffic_patrol_slider-wrapper swiper3">
+                            <div class="traffic_patrol_slider swiper-wrapper">
+                                <a class="garage_model_card swiper-slide" href="moskvich.html">
+                                    <div class="slid_img">
+                                        <picture>
+                                            <img class="menu_preview-img" src="media/images/modelPage/slider/moskvich.png" alt="Служба помощи ЦОДД" fetchpriority="high">
+                                        </picture>
+                                        <video class="menu_preview-video" src="media/video/moskvich.mp4" muted loop playsinline></video>
+                                    </div>
+                                    <div class="slid_info">
+                                        <div class="slid_info-desc">
+                                            <p class="slid_info-title">Служба помощи</p>
+                                            <p class="slid_info-text">Кроссовер</p>
+                                        </div>
+                                        <div class="slid_info-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                                    <rect width="18" height="18" fill="#D9D9D9"/>
+                                                </mask>
+                                                <g mask="url(#mask0_1137_313)">
+                                                    <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="garage_model_card swiper-slide" href="solaris.html">
+                                    <div class="slid_img">
+                                        <picture>
+                                            <img class="menu_preview-img" src="media/images/modelPage/slider/solaris_gray.png" alt="Служба помощи ЦОДД" fetchpriority="high">
+                                        </picture>
+                                        <video class="menu_preview-video" src="media/video/salaris_gray.mp4" muted loop playsinline></video>
+                                    </div>
+                                    <div class="slid_info">
+                                        <div class="slid_info-desc">
+                                            <p class="slid_info-title">Служба помощи</p>
+                                            <p class="slid_info-text">Легковая</p>
+                                        </div>
+                                        <div class="slid_info-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <mask id="mask0_1137_313" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                                                    <rect width="18" height="18" fill="#D9D9D9"/>
+                                                </mask>
+                                                <g mask="url(#mask0_1137_313)">
+                                                    <path d="M4.80049 13.5L3.75049 12.45L10.9505 5.25H4.50049V3.75H13.5005V12.75H12.0005V6.3L4.80049 13.5Z" fill="#090909"/>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="swiper-pagination3"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <canvas class="threeJSScene" id="webgl"></canvas>
-    <div id="overlay"></div>
+        </section>
+    </main>
 
-    <div class="pulse_wrapper">
-        <div class="pulse_media">
-            <img class="pulse_img" src="images/modelPage/AR/AR-cube.svg" alt="AR">
-            <img class="pulse_img" src="images/modelPage/AR/AR.svg" alt="AR">
-        </div>
-        <div class="pulse"></div>
-    </div>
-
-    <div class="qrCode-popup">
-        <div class="qrCode-popup_wrapper">
-            <p class="title">Дополненная реальность</p>
-            <img class="qr_code" src="images\modelPage\AR\qr-code.svg" alt="QR-код">
-            <p class="description">
-                Наведите камеру на&nbsp;QR-код, затем нажмите на&nbsp;появившееся сообщение.
-            </p>
-            <div class="closeButton">
-                Закрыть
+    <footer class="footer_main">
+        <div class="container_main">
+            <div class="footer_main_grid-wrapper">
+                <div class="footer-title-1">
+                    <div class="header__logo">
+                        <img class="header__logo-img" src="media/images/logo/header_logo.svg" alt="logo">
+                        <p class="header__logo-text">Гараж ЦОДД</p>
+                    </div>
+                </div>
+                <div class="footer-menu-2">
+                    <div class="footer-menu-wrapper">
+                        <div class="footer-menu-links">
+                            <a href="#traffic_patrol" class="footer-menu-link">Дорожный патруль</a>
+                            <a href="#situation_centre" class="footer-menu-link">Мобильный ситуационный центр</a>
+                            <a href="#water_patrol" class="footer-menu-link">Водный патруль</a>
+                            <a href="#velo_patrol" class="footer-menu-link">Велопатруль</a>
+                            <a href="#help_desk" class="footer-menu-link">Служба помощи</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-contacts-3">
+                    <a class="contacts-1" href="https://gucodd.ru/?utm-source=garage_codd" target="_blank" rel="noopener">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                        <p class="contact-link">Сайт ЦОДД</p>
+                    </a>
+                    <a class="contacts-2" href="tel:74955395454">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                        <p class="contact-link">+7 (495) 539-54-54</p>
+                    </a>
+                    <a class="contacts-3" href="mailto:codd@transport.mos.ru">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                        <p class="contact-link">codd@transport.mos.ru</p>
+                    </a>
+                </div>
+                <div class="footer-media-4">
+                    <a class="media-wrapper" href="https://vk.com/mosroad/?utm-source=garage_codd" target="_blank" rel="noopener">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                        <img class="media-img" src="media/images/mainPage/footer/media_vk.svg" alt="vk">
+                    </a>
+                    <a class="media-wrapper" href="https://t.me/DtRoad/?utm-source=garage_codd" target="_blank" rel="noopener">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                        <img class="media-img" src="media/images/mainPage/footer/media_telegram.svg" alt="telegram">
+                    </a>
+                    <a class="media-wrapper" href="tel:3210">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                        <img class="media-img" src="media/images/mainPage/footer/media_tel.svg" alt="Телефон">
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+        <a class="secure_transportation" href="https://ictransport.ru/?utm-source=garage_codd" target="_blank" rel="noopener">
+            <div class="secure_transportation__logo">
+                <img src="media\images\logo\save_logo.svg" alt="Безопасный транспорт">
+            </div>
+            <p class="secure_transportation__text">Сайт разработан Инновационным центром «Безопасный транспорт»</p>
+        </a>
+    </footer>
 
-    <!-- <div class="model_wrapper"> -->
-    <!-- <model-viewer class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="../static/models/MuslCarLowPoly_mintexture_transform/untitled.gltf" alt="A 3D model of muslCar">
-    </model-viewer> -->
-    <!-- </div> -->
-
-    <model-viewer id="pageWithModel" class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf" alt="A 3D model of muslCar">
-    </model-viewer>
-
-    <a-scene loading-screen="enabled: true, dotsColor: #62A744, backgroundColor: #090909" vr-mode-ui="enabled: false" ar-mode-ui="enabled: false" xr-mode-ui="enabled: false"
-         device-orientation-permission-ui="
-        denyButtonText: Отказаться;
-        allowButtonText: Разрешить;
-        cancelButtonText: Закрыть;
-        deviceMotionMessage: Разрешите этому сайту использовать гироскопы вашего устройства для ориентации в&nbsp;пространстве. Так экскурсия станет гораздо интерактивней и&nbsp;увлекательней.;
-        mobileDesktopMessage: Разрешите этому сайту использовать гироскопы вашего устройства для ориентации в&nbsp;пространстве. Так экскурсия станет гораздо интерактивней и&nbsp;увлекательней.;
-        httpsMessage: Зайдите на&nbsp;этот сайт по&nbsp;протоколу HTTPS, чтобы войти в&nbsp;режим&nbsp;VR и&nbsp;предоставить доступ к&nbsp;датчикам устройства.;">
-        <a-assets>
-            <img
-                id="room1"
-                src="images/modelPage/aframe_360/amarok/amarok.jpg"
-                crossorigin="anonymous"
-                importance="high"
-            />
-            <a-mixin
-                    id="info-sphere"
-                    geometry="primitive: sphere; radius: 0.4;"
-                    material="color: #ff0000;"
-            ></a-mixin>
-        </a-assets>
-        <a-entity
-            id="cam"
-            camera="fov:80"
-            position="0 1.6 0"
-            look-controls
-            cursor="rayOrigin: mouse"
-            animation__zoomin="property:camera.fov;dur:2000;to:50;startEvents:zoomin;"
-            animation__zoomout="property:camera.fov;dur:1000;to:80;startEvents:zoomout;"
-        >
-            <a-plane
-                    id="camfadeplane"
-                    rotation="10 0.5 0"
-                    position="0 0 -0.5"
-                    material="color:#000000;transparent:true;opacity:0"
-                    width="0"
-                    height="0"
-                    animation__fadein="property:material.opacity;to:1;dur:2000;startEvents:camFadeIn"
-                    animation__fadeout="property:material.opacity;to:0;dur:1000;startEvents:camFadeOut"
-            ></a-plane>
-        </a-entity>
-        <a-sky id="skybox" src="#room1" rotation="0 0 0" phi-start="175"></a-sky>
-    </a-scene>
-
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-    <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer-module.min.js"></script> -->
-    <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js"></script> -->
-    <script type="module" src="./script.js"></script>
+    <script type="module" src="./js/mainPage/index.js"></script>
 </body>
 </html>

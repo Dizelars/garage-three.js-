@@ -1,0 +1,133 @@
+/*Анимация в CSS*/
+/*Поднимает кнопку снизу вверх на 50px или 5rem*/
+
+@keyframes BtnToUp {
+    0% {
+        opacity: 0;
+        transform: translateY(5rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+/*Появление слева направо*/
+@keyframes LeftToRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-10rem);
+    }
+    80% {
+        transform: translateX(1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/*Появление справа налево*/
+@keyframes RightToLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(10rem);
+    }
+    80% {
+        transform: translateX(-1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/*Появление сверху вниз*/
+@keyframes TopToBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(-10rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*Появление снизу вверх*/
+@keyframes BottomToTop {
+    0% {
+        opacity: 0;
+        transform: translateY(10rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*Растягиваем букву*/
+@keyframes LargeLetter {
+    0% {
+        width: 3%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes movingTopBottom {
+    0%, 100% {
+        transform: translateY(100%);
+    }
+    50% {
+        transform: translateY(-50%);
+    }
+}
+
+@keyframes movingBottomTop {
+    0%, 100% {
+        transform: translateY(-100%);
+    }
+    50% {
+        transform: translateY(50%);
+    }
+}
+
+@keyframes footerMovingTopBottom {
+    0%, 100% {
+        transform: translateY(-125%);
+    }
+    50% {
+        transform: translateY(-25%);
+    }
+}
+
+@keyframes footerMovingBottomTop {
+    0%, 100% {
+        transform: translateY(25%);
+    }
+    50% {
+        transform: translateY(-75%);
+    }
+}
+
+@media (max-width: 578px)  {
+    @keyframes footerMovingTopBottom {
+        0%, 100% {
+            transform: translateY(-175%);
+        }
+        50% {
+            transform: translateY(-25%);
+        }
+    }
+
+    @keyframes footerMovingBottomTop {
+        0%, 100% {
+            transform: translateY(100%);
+        }
+        50% {
+            transform: translateY(-75%);
+        }
+    }
+}
