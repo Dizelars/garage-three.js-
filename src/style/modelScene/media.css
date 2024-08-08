@@ -312,16 +312,25 @@
 
     .auto_park .auto_park_wrapper {
         height: auto;
-        padding: 20px 20px 40px 20px;
+        /* padding: 20px 20px 40px 20px; */
+        padding-bottom: 40px;
     }
 
-    .auto_park_slider-button button.prev_button {
+    .auto_park__control {
+        padding: 20px 20px 0 20px;
+    }
+
+    .auto_park_slider {
+        padding: 0 20px 0 20px;
+    }
+
+    /* .auto_park_slider-button button.prev_button {
         left: -16px;
     }
 
     .auto_park_slider-button button.next_button {
         right: -16px;
-    }
+    } */
 }
 
 @media (max-width: 440px) {
@@ -391,6 +400,17 @@
     }
 }
 
+@media (max-width: 344px) {
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item .tech_spec__outfit-img {
+        height: 50px;
+        width: 56px;
+    }
+
+    .tech_spec .tech_spec__outfit .tech_spec__outfit-list .tech_spec__outfit-item .tech_spec__outfit-img img {
+        width: 38px;
+    }
+}
+
 @media screen and (max-height: 784px) {
     .tech_spec .tech_spec__description .tech_spec__description-grid_wrapper {
         gap: 14px;
@@ -429,7 +449,16 @@
     }
 
     .auto_park .auto_park_wrapper {
-        padding: 14px 20px 34px 20px;
+        /* padding: 14px 20px 34px 20px; */
+        padding-bottom: 34px;
+    }
+
+    .auto_park__control {
+        padding: 14px 20px 0 20px;
+    }
+
+    .auto_park_slider {
+        padding: 0 20px 0 20px;
     }
 }
 
@@ -645,7 +674,16 @@
 
     .auto_park .auto_park_wrapper {
         height: auto;
-        padding: 20px 20px 30px 20px;
+        /* padding: 20px 20px 30px 20px; */
+        padding-bottom: 30px;
+    }
+
+    .auto_park__control {
+        padding: 20px 20px 0 20px;
+    }
+
+    .auto_park_slider {
+        padding: 0 20px 0 20px;
     }
 }
 
@@ -749,12 +787,20 @@
     }
 
     .auto_park .auto_park_wrapper {
-        padding: 10px 20px 30px 20px;
+        /* padding: 10px 20px 30px 20px; */
+        padding-bottom: 30px;
+    }
+    .auto_park__control {
+        padding: 10px 20px 10px 0;
+    }
+    
+    .auto_park_slider {
+        padding: 0 20px 0 20px;
     }
 
-    .auto_park .auto_park__control {
+    /* .auto_park .auto_park__control {
         margin-bottom: 10px;
-    }
+    } */
 }
 
 @media screen and (max-height: 320px) and (orientation:landscape) {

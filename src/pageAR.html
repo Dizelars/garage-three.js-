@@ -5,43 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Model Viewer Example">
     <link rel="stylesheet" href="./style/pageAR.css">
-    <!-- <style>
-        .google_viewer {
-            display: none;
-        }
-    </style> -->
     <!-- Example usage of Google's Model Viewer element: https://github.com/google/model-viewer -->
     <title>AR</title>
   </head>
   <body>
 
-    <model-viewer id="pageAR" class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf" alt="A 3D model of muslCar">
+    <model-viewer id="pageAR" class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate alt="AR 3D-model">
     </model-viewer>
     
     <!-- https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf -->
+    <!-- src="https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf" -->
 
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-    <script src="./js/pageAR.js"></script>
-    <!-- <script>
-        addEventListener("DOMContentLoaded", (event) => {
-            const modelViewer = document.querySelector('#pageAR');
-            console.log(modelViewer);
-
-            console.log(modelViewer.canActivateAR);
-
-            setTimeout(() => {
-                modelViewer.activateAR();
-            }, 100);
-
-            // if (modelViewer.canActivateAR) {
-            //     console.log('AR on');
-            //     setTimeout(() => {
-            //         modelViewer.activateAR();
-            //     }, 500);
-            // } else {
-            //     console.log('AR off');
-            // }
-        });
-    </script> -->
+    <script type="module" src="./js/pageAR.js"></script>
   </body>
 </html>
