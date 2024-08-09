@@ -16,7 +16,6 @@
     <title>AR</title>
   </head>
   <body>
-
     <div id="div_mv"></div>
     
     <!-- https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf -->
@@ -43,10 +42,6 @@
           }
 
           document.getElementById('div_mv').appendChild(m_viewer);
-          console.log(m_viewer.canActivateAR)
-          // if (m_viewer.canActivateAR) {
-          //     m_viewer.activateAR();
-          // }
           setTimeout(() => {
               m_viewer.activateAR();
           }, 100);

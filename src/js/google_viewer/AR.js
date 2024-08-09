@@ -1,12 +1,13 @@
 document.querySelector('.pulse_wrapper').addEventListener('click', () => {
 	const modelViewer = document.querySelector('#pageWithModel');
 
+	console.log("Доступность AR: " + modelViewer.canActivateAR)
+	
 	if (modelViewer.canActivateAR) {
 		modelViewer.activateAR();
 	} else {
 		console.log('Открываем QR с ссылкой на AR');
 		openErrorStatus()
-		// window.open("./pageAR.html");
 	}
 });
 

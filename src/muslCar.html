@@ -12,64 +12,64 @@
     <script defer src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script>
-    AFRAME.registerComponent("hotspots", {
-      init: function () {
-        this.el.addEventListener("reloadspots", function (evt) {
-          //get the entire current spot group and scale it to 0
-          let currspotgroup = document.getElementById(evt.detail.currspots);
-          currspotgroup.setAttribute("scale", "0 0 0");
+        AFRAME.registerComponent("hotspots", {
+        init: function () {
+            this.el.addEventListener("reloadspots", function (evt) {
+            //get the entire current spot group and scale it to 0
+            let currspotgroup = document.getElementById(evt.detail.currspots);
+            currspotgroup.setAttribute("scale", "0 0 0");
 
-          //get the entire new spot group and scale it to 1
-          let newspotgroup = document.getElementById(evt.detail.newspots);
-          newspotgroup.setAttribute("scale", "1 1 1");
-        });
-      }
-    });
-
-    AFRAME.registerComponent("spot", {
-      schema: {
-        linkto: { type: "string", default: "" },
-        spotgroup: { type: "string", default: "" },
-        phiStart: { type: "string", default: "" }
-      },
-      init: function () {
-        this.el.addEventListener("click", () => {
-          let cam = document.getElementById("cam");
-          cam.emit("zoomin");
-
-          let fp = document.getElementById("camfadeplane");
-          fp.setAttribute("width", "2");
-          fp.setAttribute("height", "2");
-          fp.emit("camFadeIn");
-
-          const reloadSpot = () => {
-            //set the skybox source to the new image as per the spot
-            let sky = document.getElementById("skybox");
-            sky.setAttribute("src", this.data.linkto);
-            sky.setAttribute("phi-start", this.data.phiStart);
-
-            let spotcomp = document.getElementById("spots");
-            let currspots = this.el.parentElement.getAttribute("id");
-            //create event for spots component to change the spots data
-            spotcomp.emit("reloadspots", {
-              newspots: this.data.spotgroup,
-              currspots: currspots
+            //get the entire new spot group and scale it to 1
+            let newspotgroup = document.getElementById(evt.detail.newspots);
+            newspotgroup.setAttribute("scale", "1 1 1");
             });
+        }
+        });
 
-            cam.emit("zoomout");
+        AFRAME.registerComponent("spot", {
+        schema: {
+            linkto: { type: "string", default: "" },
+            spotgroup: { type: "string", default: "" },
+            phiStart: { type: "string", default: "" }
+        },
+        init: function () {
+            this.el.addEventListener("click", () => {
+            let cam = document.getElementById("cam");
+            cam.emit("zoomin");
 
             let fp = document.getElementById("camfadeplane");
-            fp.emit("camFadeOut");
+            fp.setAttribute("width", "2");
+            fp.setAttribute("height", "2");
+            fp.emit("camFadeIn");
 
-            setTimeout(() => {
-              fp.setAttribute("width", "0");
-              fp.setAttribute("height", "0");
-            }, 1000);
-          };
-          setTimeout(reloadSpot, 2000);
+            const reloadSpot = () => {
+                //set the skybox source to the new image as per the spot
+                let sky = document.getElementById("skybox");
+                sky.setAttribute("src", this.data.linkto);
+                sky.setAttribute("phi-start", this.data.phiStart);
+
+                let spotcomp = document.getElementById("spots");
+                let currspots = this.el.parentElement.getAttribute("id");
+                //create event for spots component to change the spots data
+                spotcomp.emit("reloadspots", {
+                newspots: this.data.spotgroup,
+                currspots: currspots
+                });
+
+                cam.emit("zoomout");
+
+                let fp = document.getElementById("camfadeplane");
+                fp.emit("camFadeOut");
+
+                setTimeout(() => {
+                fp.setAttribute("width", "0");
+                fp.setAttribute("height", "0");
+                }, 1000);
+            };
+            setTimeout(reloadSpot, 2000);
+            });
+        }
         });
-      }
-    });
     </script>
 </head>
 <body>
@@ -338,11 +338,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="model_wrapper"> -->
-    <!-- <model-viewer class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="../static/models/MuslCarLowPoly_mintexture_transform/untitled.gltf" alt="A 3D model of muslCar">
-    </model-viewer> -->
-    <!-- </div> -->
 
     <model-viewer id="pageWithModel" class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf" alt="AR 3D-model">
     </model-viewer>

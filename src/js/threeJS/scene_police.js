@@ -124,15 +124,15 @@ gltfLoader.load("models/Police_car_transform/scene.gltf", (gltf) => {
  */
 const points = [
     {
-        position: new THREE.Vector3(0.96, 0.8, - 0.58),
+        position: new THREE.Vector3(0, 1.55, - 0.2),
         element: document.querySelector('.point-0')
     },
     {
-        position: new THREE.Vector3(0.04, 0.76, 2.4),
+        position: new THREE.Vector3(0, 0.8, 2.38),
         element: document.querySelector('.point-1')
     },
     {
-        position: new THREE.Vector3(0, 0.86, - 2.26),
+        position: new THREE.Vector3(0, 0.86, - 2.34),
         element: document.querySelector('.point-2')
     }
 ]

@@ -1,6 +1,5 @@
 import * as THREE from 'three'
-// import {defineCustomElements, THREE} from '@google/model-viewer/dist/model-viewer';
-//   defineCustomElements();
+// import {THREE} from '@google/model-viewer/dist/model-viewer';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 import Stats from 'stats.js'
