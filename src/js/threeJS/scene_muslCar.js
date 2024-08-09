@@ -39,6 +39,11 @@ const PointFolder = gui.addFolder('Типоны');
 const One = PointFolder.addFolder('Типон 1');
 const Two = PointFolder.addFolder('Типон 2');
 const Three = PointFolder.addFolder('Типон 3');
+const ModelFolder = gui.addFolder('Модель');
+const modelPosition = ModelFolder.addFolder('Позиция');
+const positionFolder = modelPosition.addFolder('position');
+const rotationFolder = modelPosition.addFolder('rotation');
+const scaleFolder = modelPosition.addFolder('scale');
 
 //! Monitor FPS
 const stats = new Stats()
@@ -123,15 +128,31 @@ let gltfLoader = new GLTFLoader(loadingManager)
 gltfLoader.setDRACOLoader(dracoLoader)
 
 // let sceneReady = false
+// models/MuslCarLowPoly_mintexture_transform/untitled.gltf
+// models/moto/09.08.2024.gltf
 
 gltfLoader.load("models/MuslCarLowPoly_mintexture_transform/untitled.gltf", (gltf) => {
-    // gltfLoader.load("models/moto/untitled.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
     current_object.position.x = 0
     current_object.position.y = Math.PI * 0.42
     current_object.position.z = 0
+    current_object.scale.set(1,1,1)
+
+    // current_object.position.x = 0
+    // current_object.position.y = Math.PI * 0.4
+    // current_object.position.z = 0
+    // current_object.scale.set(0.1, 0.1, 0.1)
+
+    positionFolder.add(current_object.position, 'x', -9, 9, 0.1).name('position X')
+    positionFolder.add(current_object.position, 'y', -9, 9, 0.1).name('position Y')
+    positionFolder.add(current_object.position, 'z', -9, 9, 0.1).name('position Z')
+    rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.1).name('rotation X')
+    rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.1).name('rotation Y')
+    rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.1).name('rotation Z')
+    // scaleFolder.add(current_object.scale, 'set', 0, 9, 0.1).name('scale')
+
 
     // current_object.position.x = 0
     // current_object.position.y = Math.PI * 0.4

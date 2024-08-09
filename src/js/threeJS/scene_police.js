@@ -40,6 +40,10 @@ const PointFolder = gui.addFolder('Типоны');
 const One = PointFolder.addFolder('Типон 1');
 const Two = PointFolder.addFolder('Типон 2');
 const Three = PointFolder.addFolder('Типон 3');
+const ModelFolder = gui.addFolder('Модель');
+const modelPosition = ModelFolder.addFolder('Позиция');
+const positionFolder = modelPosition.addFolder('position');
+const rotationFolder = modelPosition.addFolder('rotation');
 
 //! Monitor FPS
 const stats = new Stats()
@@ -111,6 +115,13 @@ gltfLoader.load("models/Police_car_transform/scene.gltf", (gltf) => {
     current_object.position.y = Math.PI * 0.48
     current_object.position.z = 0
     current_object.rotation.y = Math.PI * 0.5
+
+    positionFolder.add(current_object.position, 'x', -9, 9, 0.1).name('position X')
+    positionFolder.add(current_object.position, 'y', -9, 9, 0.1).name('position Y')
+    positionFolder.add(current_object.position, 'z', -9, 9, 0.1).name('position Z')
+    rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.1).name('rotation X')
+    rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.1).name('rotation Y')
+    rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.1).name('rotation Z')
 
     scene.add(current_object);
 
