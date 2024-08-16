@@ -13,20 +13,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://garagetest.ru/favicons/favicon-16x16.png">
     <link rel="manifest" href="https://garagetest.ru/favicons/site.webmanifest">
     <link rel="mask-icon" href="https://garagetest.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
-
      <style>
         .google_viewer {
             display: none;
         }
      </style>
-    <!-- Example usage of Google's Model Viewer element: https://github.com/google/model-viewer -->
     <title>AR</title>
   </head>
   <body>
     <div id="div_mv"></div>
-    
-    <!-- https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf -->
-    <!-- src="https://coddmac.store/THREE/3Dmodels/muslCar/untitled.gltf" -->
 
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
      <script type="module">
@@ -35,7 +30,8 @@
 
       const arModelUrls = {
           muslcar: 'muslCar/untitled.gltf',
-          police: 'police/scene.gltf'
+          police: 'police/scene.gltf',
+          moto: 'moto/MOTO_16.08.gltf',
       };
 
       let arModelUrl = arModelUrls[newsId];

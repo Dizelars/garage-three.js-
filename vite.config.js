@@ -35,6 +35,7 @@ export default defineConfig({
         main: 'src/index.html',
         police: 'src/police.html',
         muslCar: 'src/muslCar.html',
+        moto: 'src/moto.html',
         // pageAR: 'src/pageAR.html'
       },
       output: {

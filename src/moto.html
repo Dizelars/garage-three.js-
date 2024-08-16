@@ -13,70 +13,70 @@
     <link rel="manifest" href="https://garagetest.ru/favicons/site.webmanifest">
     <link rel="mask-icon" href="https://garagetest.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
 
-    <title>Гараж ЦОДД (police)</title>
-    <link rel="stylesheet" href="./style/styleForModels/police.css">
+    <title>Гараж ЦОДД (muslCar)</title>
+    <link rel="stylesheet" href="./style/styleForModels/muslCar.css">
 
     <script defer src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script>
-    AFRAME.registerComponent("hotspots", {
-      init: function () {
-        this.el.addEventListener("reloadspots", function (evt) {
-          //get the entire current spot group and scale it to 0
-          let currspotgroup = document.getElementById(evt.detail.currspots);
-          currspotgroup.setAttribute("scale", "0 0 0");
+        AFRAME.registerComponent("hotspots", {
+        init: function () {
+            this.el.addEventListener("reloadspots", function (evt) {
+            //get the entire current spot group and scale it to 0
+            let currspotgroup = document.getElementById(evt.detail.currspots);
+            currspotgroup.setAttribute("scale", "0 0 0");
 
-          //get the entire new spot group and scale it to 1
-          let newspotgroup = document.getElementById(evt.detail.newspots);
-          newspotgroup.setAttribute("scale", "1 1 1");
-        });
-      }
-    });
-
-    AFRAME.registerComponent("spot", {
-      schema: {
-        linkto: { type: "string", default: "" },
-        spotgroup: { type: "string", default: "" },
-        phiStart: { type: "string", default: "" }
-      },
-      init: function () {
-        this.el.addEventListener("click", () => {
-          let cam = document.getElementById("cam");
-          cam.emit("zoomin");
-
-          let fp = document.getElementById("camfadeplane");
-          fp.setAttribute("width", "2");
-          fp.setAttribute("height", "2");
-          fp.emit("camFadeIn");
-
-          const reloadSpot = () => {
-            //set the skybox source to the new image as per the spot
-            let sky = document.getElementById("skybox");
-            sky.setAttribute("src", this.data.linkto);
-            sky.setAttribute("phi-start", this.data.phiStart);
-
-            let spotcomp = document.getElementById("spots");
-            let currspots = this.el.parentElement.getAttribute("id");
-            //create event for spots component to change the spots data
-            spotcomp.emit("reloadspots", {
-              newspots: this.data.spotgroup,
-              currspots: currspots
+            //get the entire new spot group and scale it to 1
+            let newspotgroup = document.getElementById(evt.detail.newspots);
+            newspotgroup.setAttribute("scale", "1 1 1");
             });
+        }
+        });
 
-            cam.emit("zoomout");
+        AFRAME.registerComponent("spot", {
+        schema: {
+            linkto: { type: "string", default: "" },
+            spotgroup: { type: "string", default: "" },
+            phiStart: { type: "string", default: "" }
+        },
+        init: function () {
+            this.el.addEventListener("click", () => {
+            let cam = document.getElementById("cam");
+            cam.emit("zoomin");
 
             let fp = document.getElementById("camfadeplane");
-            fp.emit("camFadeOut");
+            fp.setAttribute("width", "2");
+            fp.setAttribute("height", "2");
+            fp.emit("camFadeIn");
 
-            setTimeout(() => {
-              fp.setAttribute("width", "0");
-              fp.setAttribute("height", "0");
-            }, 1000);
-          };
-          setTimeout(reloadSpot, 2000);
+            const reloadSpot = () => {
+                //set the skybox source to the new image as per the spot
+                let sky = document.getElementById("skybox");
+                sky.setAttribute("src", this.data.linkto);
+                sky.setAttribute("phi-start", this.data.phiStart);
+
+                let spotcomp = document.getElementById("spots");
+                let currspots = this.el.parentElement.getAttribute("id");
+                //create event for spots component to change the spots data
+                spotcomp.emit("reloadspots", {
+                newspots: this.data.spotgroup,
+                currspots: currspots
+                });
+
+                cam.emit("zoomout");
+
+                let fp = document.getElementById("camfadeplane");
+                fp.emit("camFadeOut");
+
+                setTimeout(() => {
+                fp.setAttribute("width", "0");
+                fp.setAttribute("height", "0");
+                }, 1000);
+            };
+            setTimeout(reloadSpot, 2000);
+            });
+        }
         });
-      }
-    });
     </script>
 </head>
 <body>
@@ -109,7 +109,7 @@
     <div class="point point-0">
         <div class="label"></div>
         <div class="pulseTipon"></div>
-        <div class="text">Проблесковый маячок</div>
+        <div class="text">Олдскульная дверь</div>
     </div>
     <div class="point point-1">
         <div class="label"></div>
@@ -119,7 +119,7 @@
     <div class="point point-2">
         <div class="label"></div>
         <div class="pulseTipon"></div>
-        <div class="text">Вместительный багажник</div>
+        <div class="text">Аэродинамический спойлер</div>
     </div>
 
     <div class="header">
@@ -258,22 +258,22 @@
                 <div class="auto_park_slider">
                     <div class="auto_park_slider-overflow swiper_model">
                         <div class="auto_park_slider-wrapper swiper-wrapper">
-                            <div class="gallery_item swiper-slide">
+                            <div class="gallery_item active swiper-slide">
                             <a class="gallery_item_link" href="./muslCar.html">
                                 <picture>
                                     <img class="gallery_item-img" src="media/images/modelPage/slider/amarok.png" alt="amarok" fetchpriority="high">
                                 </picture>
                             </a>
                             </div>
-                            <div class="gallery_item active swiper-slide">
-                            <a class="gallery_item_link" href="#">
+                            <div class="gallery_item swiper-slide">
+                            <a class="gallery_item_link" href="./police.html">
                                 <picture>
                                     <img class="gallery_item-img" src="media/images/modelPage/slider/ford.png" alt="ford" fetchpriority="high">
                                 </picture>
                             </a>
                             </div>
                             <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="./moto.html">
+                            <a class="gallery_item_link" href="#">
                                 <picture>
                                     <img class="gallery_item-img" src="media/images/modelPage/slider/bus.png" alt="bus" fetchpriority="high">
                                 </picture>
@@ -336,7 +336,7 @@
     <div class="qrCode-popup">
         <div class="qrCode-popup_wrapper">
             <p class="title">Дополненная реальность</p>
-            <img class="qr_code" src="media/images\modelPage\AR\qr-police.svg" alt="QR-код">
+            <img class="qr_code" src="media/images\modelPage\AR\qr-moto.svg" alt="QR-код">
             <p class="description">
                 Наведите камеру на&nbsp;QR-код, затем нажмите на&nbsp;появившееся сообщение.
             </p>
@@ -346,7 +346,7 @@
         </div>
     </div>
 
-    <model-viewer id="pageWithModel" class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="https://coddmac.store/THREE/3Dmodels/police/scene.gltf" alt="AR 3D-model">
+    <model-viewer id="pageWithModel" class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="https://coddmac.store/THREE/3Dmodels/moto/MOTO_16.08.gltf" alt="AR 3D-model">
     </model-viewer>
 
     <a-scene loading-screen="enabled: true, dotsColor: #62A744, backgroundColor: #090909" vr-mode-ui="enabled: false" ar-mode-ui="enabled: false" xr-mode-ui="enabled: false"
@@ -396,6 +396,6 @@
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
     <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer-module.min.js"></script> -->
     <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js"></script> -->
-    <script type="module" src="./js/fullModelScripts/police.js"></script>
+    <script type="module" src="./js/fullModelScripts/moto.js"></script>
 </body>
 </html>

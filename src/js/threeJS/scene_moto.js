@@ -82,26 +82,6 @@ loadingManager.onLoad = function() {
     positionTipons()
 }
 
-/**
- * Change models
- */
-// let current_object = null;
-// let name_model = null;
-// const models = document.querySelectorAll('.sidenav .model');
-// models.forEach((model) => {
-//     model.addEventListener('click', () => {
-//         if (current_object !== null && name_model != model.textContent) {
-//             scene.remove(current_object);
-//         }
-//         if (name_model != model.textContent) {
-//             overlayMaterial.uniforms.uAlpha.value = 1
-//             loadingBarElement.classList.remove('ended')
-//             loadingBarElement.style.transform = 'scaleX(0)';
-//             scene.add(overlay)
-//             loadModel(model.textContent, model.getAttribute("data-folder"), model.getAttribute("data-model"));
-//         }
-//     })
-// })
 
 /**
  * Models
@@ -127,16 +107,15 @@ dracoLoader.setDecoderPath('/draco/')
 let gltfLoader = new GLTFLoader(loadingManager)
 gltfLoader.setDRACOLoader(dracoLoader)
 
-// let sceneReady = false
-
-gltfLoader.load("models/MuslCarLowPoly_mintexture_transform/untitled.gltf", (gltf) => {
+gltfLoader.load("models/moto_transform/MOTO_16.08.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
-    current_object.position.x = 0
-    current_object.position.y = Math.PI * 0.42
-    current_object.position.z = 0
-    current_object.scale.set(1,1,1)
+    current_object.position.x = 0;
+    current_object.position.y = Math.PI * 0.18;
+    current_object.position.z = 0;
+    current_object.rotation.y = -3.08;
+    current_object.scale.set(0.1, 0.1, 0.1);
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
     positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
@@ -144,57 +123,13 @@ gltfLoader.load("models/MuslCarLowPoly_mintexture_transform/untitled.gltf", (glt
     rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
     rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
     rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
-    // scaleFolder.add(current_object.scale, 'set', 0, 9, 0.1).name('scale')
 
     scene.add(current_object);
 
-    // controls.update()
     updateAllMaterials()
     console.log(renderer.info)
-
-    // window.setTimeout(() => {
-    //     sceneReady = true
-    // }, 500)
 });
 
-// function loadModel(name, folder, model) {
-//     gltfLoader.setPath(`models/${folder}/`);
-//     gltfLoader.load(model + ".gltf", function(gltf) {
-//         console.log(gltf);
-//         current_object = gltf.scene;
-//         name_model = name;
-//         if (name == 'Muslcar') {
-//             current_object.position.x = 0
-//             current_object.position.y = Math.PI * 0.42
-//             current_object.position.z = 0
-//         } else if (name == 'Police') {
-//             current_object.position.x = 0
-//             current_object.position.y = Math.PI * 0.48
-//             current_object.position.z = 0
-//             current_object.rotation.y = Math.PI * 0.5
-//         } else if (name == 'Bank_truck') {
-//             current_object.scale.set(0.01, 0.01, 0.01)
-//             current_object.rotation.y = - (Math.PI * 0.5)
-//         } else if (name == 'Japanese_sedan') {
-//             current_object.scale.set(0.03, 0.03, 0.03)
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.48
-//         } else if (name == 'Pickup') {
-//             current_object.scale.set(0.03, 0.03, 0.03)
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.72
-//         } else if (name == 'Wagon') {
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.45
-//         }
-    
-//         scene.add(current_object);
-
-//         // controls.update()
-//         updateAllMaterials()
-//         console.log(renderer.info)
-//     });
-// }
 
 /**
  * Pounts on model
