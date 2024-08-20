@@ -107,7 +107,10 @@ dracoLoader.setDecoderPath('/draco/')
 let gltfLoader = new GLTFLoader(loadingManager)
 gltfLoader.setDRACOLoader(dracoLoader)
 
-gltfLoader.load("models/moto_transform/MOTO_16.08.gltf", (gltf) => {
+// models/moto_transform/MOTO_16.08.gltf
+// models/moto/MOTO_16.08.gltf
+
+gltfLoader.load("models/moto/MOTO_16.08.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 

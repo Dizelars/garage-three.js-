@@ -28,10 +28,16 @@
       const urlParams = new URLSearchParams(window.location.search);
       const newsId = urlParams.get("armodel");
 
+      // const arModelUrls = {
+      //     muslcar: 'muslCar/untitled.gltf',
+      //     police: 'police/scene.gltf',
+      //     moto: 'moto/MOTO_16.08.gltf',
+      // };
+
       const arModelUrls = {
-          muslcar: 'muslCar/untitled.gltf',
-          police: 'police/scene.gltf',
-          moto: 'moto/MOTO_16.08.gltf',
+          muslcar: 'MuslCarLowPoly_mintexture_transform/untitled.gltf',
+          police: 'Police_car_transform/scene.gltf',
+          moto: 'moto_transform/MOTO_16.08.gltf',
       };
 
       let arModelUrl = arModelUrls[newsId];
@@ -41,7 +47,8 @@
           m_viewer.setAttribute('class', 'google_viewer');
           m_viewer.setAttribute('ar', 'true');
           if (arModelUrl) {
-              m_viewer.setAttribute('src', `https://coddmac.store/THREE/3Dmodels/${arModelUrl}`);
+              // m_viewer.setAttribute('src', `https://coddmac.store/THREE/3Dmodels/${arModelUrl}`);
+              m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);
           }
 
           document.getElementById('div_mv').appendChild(m_viewer);
