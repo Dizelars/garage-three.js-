@@ -39,6 +39,9 @@ export default defineConfig({
         amarok: 'src/amarok.html',
         bus: 'src/bus.html',
         ford: 'src/ford.html',
+        kamaz: 'src/kamaz.html',
+        kater: 'src/kater.html',
+        moskvich: 'src/moskvich.html',
         // pageAR: 'src/pageAR.html'
       },
       output: {
