@@ -36,6 +36,9 @@ export default defineConfig({
         police: 'src/police.html',
         muslCar: 'src/muslCar.html',
         moto: 'src/moto.html',
+        amarok: 'src/amarok.html',
+        bus: 'src/bus.html',
+        ford: 'src/ford.html',
         // pageAR: 'src/pageAR.html'
       },
       output: {
