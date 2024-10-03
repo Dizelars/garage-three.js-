@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const supportsWebRTC = !!window.RTCPeerConnection;
+        if (supportsWebRTC) {
+            // Likely a regular browser
+            alert('NO telegram RTC');
+        } else {
+            // May be Telegram web app
+            alert('Telegram! RTC');
+        }
+    </script>
+</body>
+</html>

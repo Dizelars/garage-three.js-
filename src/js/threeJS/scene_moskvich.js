@@ -129,7 +129,16 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // let sceneReady = false
 
-gltfLoader.load("models/model_vectary/moskvich/No_fix/moskvich.gltf", (gltf) => {
+// Москвич
+// Без фикса андроида
+// models/model_vectary/moskvich/No_fix/moskvich.gltf
+// С фиксом андроида
+// models/model_vectary/moskvich/ar_android_fix/moskvich.gltf
+
+// Без фикса андроида новый
+// models/model_vectary/moskvich/New_No_fix/untitled.gltf
+
+gltfLoader.load("models/model_vectary/moskvich/New_No_fix/untitled.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 

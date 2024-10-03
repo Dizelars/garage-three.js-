@@ -129,7 +129,15 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // let sceneReady = false
 
-gltfLoader.load("models/model_vectary/amarok/No_fix_plus_animation/amarok.gltf", (gltf) => {
+// Амарок
+// Без фикса андроида с анимацией
+// amarok: 'models/model_vectary/amarok/No_fix_plus_animation/amarok.gltf',
+// Без анимаций и с фиксом андроида
+// amarok: 'models/model_vectary/amarok/noAnimation/ar_android_fix/amarok_no_animation.gltf',
+// Без анимаций и с фиксом андроида новый
+// amarok: 'models/model_vectary/amarok/noAnimation/ar_android_fix_new/untitled.gltf',
+
+gltfLoader.load("models/model_vectary/amarok/noAnimation/ar_android_fix_new/untitled.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 

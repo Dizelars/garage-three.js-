@@ -129,7 +129,13 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // let sceneReady = false
 
-gltfLoader.load("models/model_vectary/kater/No_fix/kater.gltf", (gltf) => {
+// Катер
+// Без фикса андроида
+// models/model_vectary/kater/No_fix/kater.gltf
+// С фиксом андроида
+// models/model_vectary/kater/ar_android_fix/kater.gltf
+
+gltfLoader.load("models/model_vectary/kater/ar_android_fix/kater.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 

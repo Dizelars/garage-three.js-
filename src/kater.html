@@ -355,7 +355,11 @@
     </div>
 </div>
 
-<model-viewer id="pageWithModel" class="google_viewer" ar reveal="manual" camera-controls touch-action="pan-y" auto-rotate src="https://garagetest.ru/models/model_vectary/kater/No_fix/kater.gltf" alt="AR 3D-model"></model-viewer>
+<!-- Без фикса андроида -->
+<!-- https://garagetest.ru/models/model_vectary/kater/No_fix/kater.gltf -->
+<!-- С фиксом андроида -->
+<!-- https://garagetest.ru/models/model_vectary/kater/ar_android_fix/kater.gltf -->
+<model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garagetest.ru/models/model_vectary/kater/ar_android_fix/kater.gltf" alt="AR 3D-model"></model-viewer>
 </model-viewer>
 
 <a-scene loading-screen="enabled: true, dotsColor: #62A744, backgroundColor: #090909" vr-mode-ui="enabled: false" ar-mode-ui="enabled: false" xr-mode-ui="enabled: false"

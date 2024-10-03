@@ -129,7 +129,13 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // let sceneReady = false
 
-gltfLoader.load("models/model_vectary/velo/No_fix/velo.gltf", (gltf) => {
+// Велосипед
+// Без фикса андроида
+// models/model_vectary/velo/No_fix/velo.gltf
+// С фиксом андроида
+// models/model_vectary/velo/ar_android_fix/velo.gltf
+
+gltfLoader.load("models/model_vectary/velo/ar_android_fix/velo.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 

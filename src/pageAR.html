@@ -28,18 +28,71 @@
       const urlParams = new URLSearchParams(window.location.search);
       const newsId = urlParams.get("armodel");
 
+      // muslcar: 'MuslCarLowPoly_mintexture_transform/untitled.gltf',
+      // police: 'Police_car_transform/scene.gltf',
+
+      // Амарок
+      // Без фикса андроида с анимацией
+      // model_vectary/amarok/No_fix_plus_animation/amarok.gltf
+      // Без анимаций и с фиксом андроида
+      // model_vectary/amarok/noAnimation/ar_android_fix/amarok_no_animation.gltf
+      // Без анимаций и с фиксом андроида новый
+      // model_vectary/amarok/noAnimation/ar_android_fix_new/untitled.gltf
+
+      // Автобус
+      // Без фикса андроида с анимацией
+      // model_vectary/bus/No_fix_plus_animation/bus.gltf
+      // Без анимаций и с фиксом андроида
+      // model_vectary/bus/noAnimation/ar_android_fix/bus_no_animation.gltf
+
+      // Форд
+      // Без фикса андроида
+      // model_vectary/ford/No_fix/ford.gltf"
+      // С фиксом андроида
+      // model_vectary/ford/ar_android_fix/ford.gltf
+
+      // Камаз
+      // Без фикса андроида с анимацией
+      // model_vectary/kamaz/full_animation/kamaz.gltf
+      // Без анимаций и с фиксом андроида
+      // model_vectary/kamaz/noAnimation/ar_android_fix/kamaz_no_animation.gltf
+
+      // Катер
+      // Без фикса андроида с анимацией
+      // model_vectary/kater/No_fix/kater.gltf
+      // Без анимаций и с фиксом андроида
+      // model_vectary/kater/ar_android_fix/kater.gltf
+
+      // Москвич
+      // Без фикса андроида
+      // model_vectary/moskvich/No_fix/moskvich.gltf
+      // С фиксом андроида
+      // model_vectary/moskvich/ar_android_fix/moskvich.gltf
+      // Без фикса андроида новый
+      // model_vectary/moskvich/New_No_fix/untitled.gltf
+
+      // Солярис
+      // Без фикса андроида
+      // model_vectary/solaris/No_fix/solaris.gltf
+      // С фиксом андроида
+      // model_vectary/solaris/ar_android_fix/solaris.gltf
+
+      // Велосипед
+      // Без фикса андроида
+      // model_vectary/velo/No_fix/velo.gltf
+      // С фиксом андроида
+      // model_vectary/velo/ar_android_fix/velo.gltf
+
       const arModelUrls = {
-          muslcar: 'MuslCarLowPoly_mintexture_transform/untitled.gltf',
-          police: 'Police_car_transform/scene.gltf',
           moto: 'moto/SF_MOTO_CODD_30_09.gltf',
-          amarok: 'model_vectary/amarok/No_fix_plus_animation/amarok.gltf',
-          bus: 'model_vectary/bus/No_fix_plus_animation/bus.gltf',
-          ford: 'model_vectary/ford/No_fix/ford.gltf',
-          kamaz: 'model_vectary/kamaz/full_animation/kamaz.gltf',
-          kater: 'model_vectary/kater/No_fix/kater.gltf',
-          moskvich: 'model_vectary/moskvich/No_fix/moskvich.gltf',
-          solaris: 'model_vectary/solaris/No_fix/solaris.gltf',
-          velo: 'model_vectary/velo/No_fix/velo.gltf',
+          amarok: 'model_vectary/amarok/noAnimation/ar_android_fix_new/untitled.gltf',
+          bus: 'model_vectary/bus/noAnimation/ar_android_fix/bus_no_animation.gltf',
+          ford: 'model_vectary/ford/ar_android_fix/ford.gltf',
+          kamaz: 'model_vectary/kamaz/noAnimation/ar_android_fix/kamaz_no_animation.gltf',
+          kater: 'model_vectary/kater/ar_android_fix/kater.gltf',
+          moskvich: 'model_vectary/moskvich/New_No_fix/untitled.gltf',
+          solaris: 'model_vectary/solaris/ar_android_fix/solaris.gltf',
+          velo: 'model_vectary/velo/ar_android_fix/velo.gltf',
       };
 
       let arModelUrl = arModelUrls[newsId];
@@ -48,6 +101,8 @@
           const m_viewer = document.createElement('model-viewer');
           m_viewer.setAttribute('class', 'google_viewer');
           m_viewer.setAttribute('ar', 'true');
+          m_viewer.setAttribute('ar-modes', 'scene-viewer webxr quick-look');
+          m_viewer.setAttribute('camera-controls', '');
           if (arModelUrl) {
               // m_viewer.setAttribute('src', `https://coddmac.store/THREE/3Dmodels/${arModelUrl}`);
               m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);

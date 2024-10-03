@@ -129,7 +129,13 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // let sceneReady = false
 
-gltfLoader.load("models/model_vectary/kamaz/full_animation/kamaz.gltf", (gltf) => {
+// Автобус
+// Без фикса андроида с анимацией
+// amarok: 'models/model_vectary/kamaz/full_animation/kamaz.gltf',
+// Без анимаций и с фиксом андроида
+// amarok: 'models/model_vectary/kamaz/noAnimation/ar_android_fix/kamaz_no_animation.gltf',
+
+gltfLoader.load("models/model_vectary/kamaz/noAnimation/ar_android_fix/kamaz_no_animation.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 

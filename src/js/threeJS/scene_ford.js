@@ -129,7 +129,13 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // let sceneReady = false
 
-gltfLoader.load("models/model_vectary/ford/No_fix/ford.gltf", (gltf) => {
+// Форд
+// Без фикса андроида
+// amarok: 'models/model_vectary/ford/No_fix/ford.gltf"',
+// С фиксом андроида
+// amarok: 'models/model_vectary/ford/ar_android_fix/ford.gltf'
+
+gltfLoader.load("models/model_vectary/ford/ar_android_fix/ford.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
