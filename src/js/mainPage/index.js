@@ -276,6 +276,10 @@ document.addEventListener("DOMContentLoaded", function() {
             440: {
                 slidesPerView: 2,
                 spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 20,
             }
         }
     });

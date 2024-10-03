@@ -697,7 +697,8 @@ section.traffic_patrol .traffic_patrol_grid-wrapper {
         "slider_button-wrapper . traffic_patrol-text-4 traffic_patrol-text-5 ."
         ". . . . ."
         /* ". traffic_patrol-no-slide-7 traffic_patrol-no-slide-7 traffic_patrol-no-slide-8 traffic_patrol-no-slide-8" */
-        "traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER";
+        /* "traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER"; */
+        "traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz";
 }
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 {
@@ -727,10 +728,15 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-5 {
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz {
     grid-area: traffic_patrol-slide-kamaz;
     position: relative;
-    display: none;
+    /* display: none; */
+    display: block;
 }
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
+    display: none;
+}
+
+/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
     grid-area: traffic_patrol-slide-kamaz_NOSLIDER;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -751,13 +757,14 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER .model_3 {
     grid-area: model_3;
-}
+} */
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz .traffic_patrol-slider-buttons {
     position: absolute;
     top: -60px;
     right: 0;
-    display: none;
+    /* display: none; */
+    display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;

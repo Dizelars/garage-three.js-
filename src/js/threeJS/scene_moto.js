@@ -35,15 +35,15 @@ window.addEventListener('keypress', (event) => {
 // Создаем папки дебагера
 const hdriFolder = gui.addFolder('Карта окружения');
 const toneMapping = gui.addFolder('Тоновое отображение')
-const PointFolder = gui.addFolder('Типоны');
-const One = PointFolder.addFolder('Типон 1');
-const Two = PointFolder.addFolder('Типон 2');
-const Three = PointFolder.addFolder('Типон 3');
+// const PointFolder = gui.addFolder('Типоны');
+// const One = PointFolder.addFolder('Типон 1');
+// const Two = PointFolder.addFolder('Типон 2');
+// const Three = PointFolder.addFolder('Типон 3');
 const ModelFolder = gui.addFolder('Модель');
 const modelPosition = ModelFolder.addFolder('Позиция');
 const positionFolder = modelPosition.addFolder('position');
 const rotationFolder = modelPosition.addFolder('rotation');
-const scaleFolder = modelPosition.addFolder('scale');
+// const scaleFolder = modelPosition.addFolder('scale');
 
 //! Monitor FPS
 const stats = new Stats()
@@ -61,7 +61,7 @@ let constants = {
 /**
  * Loading Менеджер загрузки
  */
-let sceneReady = false
+// let sceneReady = false
 
 const loadingManager = new THREE.LoadingManager();
 
@@ -77,9 +77,9 @@ loadingManager.onProgress = function(url, loaded, total) {
 const progressBarContainer = document.querySelector('.progress-bar');
 loadingManager.onLoad = function() {
     progressBarContainer.style.display = 'none';
-    sceneReady = true;
-    raycasterTipons()
-    positionTipons()
+    // sceneReady = true;
+    // raycasterTipons()
+    // positionTipons()
 }
 
 
@@ -110,15 +110,15 @@ gltfLoader.setDRACOLoader(dracoLoader)
 // models/moto_transform/MOTO_16.08.gltf
 // models/moto/MOTO_16.08.gltf
 
-gltfLoader.load("models/moto/MOTO_16.08.gltf", (gltf) => {
+gltfLoader.load("models/moto/SF_MOTO_CODD_30_09.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
     current_object.position.x = 0;
-    current_object.position.y = Math.PI * 0.18;
+    current_object.position.y = Math.PI * 0.22;
     current_object.position.z = 0;
     current_object.rotation.y = -3.08;
-    current_object.scale.set(0.1, 0.1, 0.1);
+    current_object.scale.set(0.12, 0.12, 0.12);
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
     positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
@@ -137,37 +137,37 @@ gltfLoader.load("models/moto/MOTO_16.08.gltf", (gltf) => {
 /**
  * Pounts on model
  */
-const points = [
-    {
-        position: new THREE.Vector3(0.96, 0.8, - 0.58),
-        element: document.querySelector('.point-0')
-    },
-    {
-        position: new THREE.Vector3(0.04, 0.76, 2.4),
-        element: document.querySelector('.point-1')
-    },
-    {
-        position: new THREE.Vector3(0, 0.86, - 2.26),
-        element: document.querySelector('.point-2')
-    }
-]
+// const points = [
+//     {
+//         position: new THREE.Vector3(0.96, 0.8, - 0.58),
+//         element: document.querySelector('.point-0')
+//     },
+//     {
+//         position: new THREE.Vector3(0.04, 0.76, 2.4),
+//         element: document.querySelector('.point-1')
+//     },
+//     {
+//         position: new THREE.Vector3(0, 0.86, - 2.26),
+//         element: document.querySelector('.point-2')
+//     }
+// ]
 
-One.add(points[0].position,'x',-9,9,0.01)
-One.add(points[0].position,'y',-9,9,0.01)
-One.add(points[0].position,'z',-9,9,0.01)
+// One.add(points[0].position,'x',-9,9,0.01)
+// One.add(points[0].position,'y',-9,9,0.01)
+// One.add(points[0].position,'z',-9,9,0.01)
 
-Two.add(points[1].position,'x',-9,9,0.01)
-Two.add(points[1].position,'y',-9,9,0.01)
-Two.add(points[1].position,'z',-9,9,0.01)
+// Two.add(points[1].position,'x',-9,9,0.01)
+// Two.add(points[1].position,'y',-9,9,0.01)
+// Two.add(points[1].position,'z',-9,9,0.01)
 
-Three.add(points[2].position,'x',-9,9,0.01)
-Three.add(points[2].position,'y',-9,9,0.01)
-Three.add(points[2].position,'z',-9,9,0.01)
+// Three.add(points[2].position,'x',-9,9,0.01)
+// Three.add(points[2].position,'y',-9,9,0.01)
+// Three.add(points[2].position,'z',-9,9,0.01)
 
 /**
  * Raycaster
  */
-const raycaster = new THREE.Raycaster()
+// const raycaster = new THREE.Raycaster()
 
 // Canvas
 const canvas = document.querySelector('canvas#webgl')
@@ -217,74 +217,74 @@ controls.enableDamping = true
 controls.enablePan = false
 
 // Логика типонов
-controls.addEventListener('change', () => {
-    positionTipons();
-});
+// controls.addEventListener('change', () => {
+//     positionTipons();
+// });
 
-controls.addEventListener('end', () => {
-    raycasterTipons();
-});
+// controls.addEventListener('end', () => {
+//     raycasterTipons();
+// });
 
-function raycasterTipons() {
-    if (sceneReady) {
-        for(const point of points) {
-            const screenPosition = point.position.clone()
-            screenPosition.project(camera)
+// function raycasterTipons() {
+//     if (sceneReady) {
+//         for(const point of points) {
+//             const screenPosition = point.position.clone()
+//             screenPosition.project(camera)
 
-            raycaster.setFromCamera(screenPosition, camera)
-            const intersects = raycaster.intersectObjects(scene.children, true)
+//             raycaster.setFromCamera(screenPosition, camera)
+//             const intersects = raycaster.intersectObjects(scene.children, true)
 
-            if (intersects.length === 0) {
-                point.element.classList.add('visible')
-            }
-            else {
-                const intersectionDistance = intersects[0].distance
-                const pointDistance = point.position.distanceTo(camera.position)
-                if (intersectionDistance < pointDistance) {
-                    point.element.classList.remove('visible')
-                }
-                else {
-                    point.element.classList.add('visible')
-                }
-            }
-        }
-    }
-}
+//             if (intersects.length === 0) {
+//                 point.element.classList.add('visible')
+//             }
+//             else {
+//                 const intersectionDistance = intersects[0].distance
+//                 const pointDistance = point.position.distanceTo(camera.position)
+//                 if (intersectionDistance < pointDistance) {
+//                     point.element.classList.remove('visible')
+//                 }
+//                 else {
+//                     point.element.classList.add('visible')
+//                 }
+//             }
+//         }
+//     }
+// }
 
-function positionTipons() {
-    if (sceneReady) {
-        for(const point of points) {
-            const screenPosition = point.position.clone()
-            screenPosition.project(camera)
+// function positionTipons() {
+//     if (sceneReady) {
+//         for(const point of points) {
+//             const screenPosition = point.position.clone()
+//             screenPosition.project(camera)
 
-            const translateX = screenPosition.x * sizes.width * 0.5
-            const translateY = - screenPosition.y * sizes.height * 0.5
-            point.element.style.transform = `translate(${translateX}px, ${translateY}px)`
-        }
-    }
-}
+//             const translateX = screenPosition.x * sizes.width * 0.5
+//             const translateY = - screenPosition.y * sizes.height * 0.5
+//             point.element.style.transform = `translate(${translateX}px, ${translateY}px)`
+//         }
+//     }
+// }
 
-controls.update();
+// controls.update();
 
 /**
  * Point click
  */
-const pointsOnModel = document.querySelectorAll('.point')
+// const pointsOnModel = document.querySelectorAll('.point')
 
-pointsOnModel.forEach((point) => {
-    point.addEventListener('click', () => {
-        point.classList.toggle('show')
+// pointsOnModel.forEach((point) => {
+//     point.addEventListener('click', () => {
+//         point.classList.toggle('show')
 
-        // Проверка наличия класса 'show' у остальных точек
-        pointsOnModel.forEach((otherPoint) => {
-            if (otherPoint !== point) {
-                if (otherPoint.classList.contains('show')) {
-                    otherPoint.classList.remove('show')
-                }
-            }
-        })
-    })
-})
+//         // Проверка наличия класса 'show' у остальных точек
+//         pointsOnModel.forEach((otherPoint) => {
+//             if (otherPoint !== point) {
+//                 if (otherPoint.classList.contains('show')) {
+//                     otherPoint.classList.remove('show')
+//                 }
+//             }
+//         })
+//     })
+// })
 
 
 /**
@@ -362,46 +362,3 @@ const tick = () =>
 tick()
 //! 1. Информация о рендере
 console.log(renderer.info)
-
-// Переключение между сценами при клике на кнопку с классом ".tech_spec__interior"
-let activeScene = 1;
-const interiorButton = document.querySelector('.tech_spec__interior');
-const aFrameScene = document.querySelector('a-scene');
-const tiponsOnModel = document.querySelectorAll('.point');
-
-const transitionHelper = new InteriorTransitionHelper(interiorButton);
-interiorButton.addEventListener('click', () => {
-    if (transitionHelper.isTransition()) {
-        return;
-    }
-
-    transitionHelper.startTransition();
-
-    if (activeScene === 1) {
-        setTimeout(() => {
-            activeScene = 2;
-            aFrameScene.style.opacity = '1';
-            aFrameScene.style.height = 'auto';
-            aFrameScene.style.pointerEvents = 'auto';
-            aFrameScene.play();
-            controls.enabled = false;
-            transitionHelper.endTransition();
-            tiponsOnModel.forEach((e) => {
-                e.style.zIndex = "0";
-            })
-        }, 1500);
-    } else {
-        setTimeout(() => {
-            activeScene = 1;
-            aFrameScene.style.opacity = '0';
-            aFrameScene.style.height = '0';
-            aFrameScene.style.pointerEvents = 'none';
-            aFrameScene.pause();
-            controls.enabled = true;
-            transitionHelper.endTransition();
-            tiponsOnModel.forEach((e) => {
-                e.style.zIndex = "1";
-            })
-        }, 1500);
-    }
-});
