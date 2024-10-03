@@ -42,6 +42,8 @@ export default defineConfig({
         kamaz: 'src/kamaz.html',
         kater: 'src/kater.html',
         moskvich: 'src/moskvich.html',
+        solaris: 'src/solaris.html',
+        velo: 'src/velo.html',
         // pageAR: 'src/pageAR.html'
       },
       output: {

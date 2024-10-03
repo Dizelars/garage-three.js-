@@ -126,7 +126,9 @@ autoParkControl.addEventListener('click', () => {
     } else if (visibleBlockMission.classList.contains('hidden') && window.matchMedia("(orientation: landscape)").matches) {
         techSpecWrapperText.style.height = 'auto';
         buttontech.style.display = 'block';
-        interior.style.zIndex = 'none';
+        if (interior) {
+            interior.style.zIndex = 'none';
+        }
     }
 
     toggleAutoParkSection();
@@ -163,43 +165,45 @@ const idToClassMap = {
     'kamaz': 'garage_kamaz',
 };
 
-interior.addEventListener('click', () => {
-    if (transitionHelper.isTextChangedOnTransition()) {
-        return;
-    }
-
-    threeJSScene.classList.toggle('active');
-    overlay.classList.toggle('active');
-    setTimeout(() => {
-        techSection.classList.toggle('hidden');
-        autoSection.classList.toggle('hidden');
+if (interior) {
+    interior.addEventListener('click', () => {
+        if (transitionHelper.isTextChangedOnTransition()) {
+            return;
+        }
+    
         threeJSScene.classList.toggle('active');
         overlay.classList.toggle('active');
-        sliderButton.forEach(e => {
-            e.classList.toggle('hidden');
-        });
-    }, 1500);
-
-    const idValue = interior.getAttribute('id');
-    const interiorTextContent = interiorText.textContent;
-    const classToAdd = idToClassMap[idValue];
-
-    if (interiorTextContent === 'В салон') {
-        interiorText.textContent = 'В гараж';
-    } else if (interiorTextContent === 'В рубку') {
-        interiorText.textContent = 'На причал';
-    } else if (interiorTextContent === 'На причал') {
-        interiorText.textContent = 'В рубку';
-    } else {
-        interiorText.textContent = 'В салон';
-    }
-
-    if (classToAdd) {
-        interior.classList.toggle(classToAdd);
-    }
-
-    transitionHelper.onTextChange();
-});
+        setTimeout(() => {
+            techSection.classList.toggle('hidden');
+            autoSection.classList.toggle('hidden');
+            threeJSScene.classList.toggle('active');
+            overlay.classList.toggle('active');
+            sliderButton.forEach(e => {
+                e.classList.toggle('hidden');
+            });
+        }, 1500);
+    
+        const idValue = interior.getAttribute('id');
+        const interiorTextContent = interiorText.textContent;
+        const classToAdd = idToClassMap[idValue];
+    
+        if (interiorTextContent === 'В салон') {
+            interiorText.textContent = 'В гараж';
+        } else if (interiorTextContent === 'В рубку') {
+            interiorText.textContent = 'На причал';
+        } else if (interiorTextContent === 'На причал') {
+            interiorText.textContent = 'В рубку';
+        } else {
+            interiorText.textContent = 'В салон';
+        }
+    
+        if (classToAdd) {
+            interior.classList.toggle(classToAdd);
+        }
+    
+        transitionHelper.onTextChange();
+    });
+}
 
 gallery_toggle.forEach((e) => {
     e.addEventListener('click', () => {
