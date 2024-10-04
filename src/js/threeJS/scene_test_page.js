@@ -129,24 +129,21 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // let sceneReady = false
 
-// Амарок
-// Без фикса андроида с анимацией
-// amarok: 'models/model_vectary/amarok/No_fix_plus_animation/amarok.gltf',
-// Без анимаций и с фиксом андроида
-// amarok: 'models/model_vectary/amarok/noAnimation/ar_android_fix_03.10/untitled.gltf',
+// Солярис
+// Без фикса андроида
+// models/model_vectary/solaris/No_fix/solaris.gltf
+// С фиксом андроида
+// models/model_vectary/solaris/ar_android_fix/solaris.gltf
 
-// Без анимаций и с фиксом андроида 04.10
-// amarok: 'models/model_vectary/amarok/noAnimation/ar_android_fix/untitled.gltf',
-
-gltfLoader.load("models/model_vectary/amarok/noAnimation/ar_android_fix/untitled.gltf", (gltf) => {
+gltfLoader.load("models/sinichka/S2.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
     current_object.position.x = 0;
-    current_object.position.y = 0;
+    current_object.position.y = -0.2;
     current_object.position.z = 0;
-    current_object.rotation.y = -1.5;
-    current_object.scale.set(2,2,2);
+    current_object.rotation.y = -1.55;
+    current_object.scale.set(3,3,3);
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
     positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')

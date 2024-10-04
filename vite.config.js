@@ -44,6 +44,7 @@ export default defineConfig({
         moskvich: 'src/moskvich.html',
         solaris: 'src/solaris.html',
         velo: 'src/velo.html',
+        test_page: 'src/test_page.html',
         // pageAR: 'src/pageAR.html'
       },
       output: {

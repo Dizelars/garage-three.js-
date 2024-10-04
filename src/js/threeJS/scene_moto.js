@@ -110,7 +110,7 @@ gltfLoader.setDRACOLoader(dracoLoader)
 // models/moto_transform/MOTO_16.08.gltf
 // models/moto/MOTO_16.08.gltf
 
-gltfLoader.load("models/moto/SF_MOTO_CODD_30_09.gltf", (gltf) => {
+gltfLoader.load("models/moto/moto.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
@@ -118,7 +118,8 @@ gltfLoader.load("models/moto/SF_MOTO_CODD_30_09.gltf", (gltf) => {
     current_object.position.y = Math.PI * 0.22;
     current_object.position.z = 0;
     current_object.rotation.y = -3.08;
-    current_object.scale.set(0.12, 0.12, 0.12);
+    // current_object.scale.set(0.12, 0.12, 0.12);
+    current_object.scale.set(0.7, 0.7, 0.7);
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
     positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')

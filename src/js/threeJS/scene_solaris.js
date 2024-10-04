@@ -135,7 +135,7 @@ gltfLoader.setDRACOLoader(dracoLoader)
 // С фиксом андроида
 // models/model_vectary/solaris/ar_android_fix/solaris.gltf
 
-gltfLoader.load("models/model_vectary/solaris/No_fix/solaris.gltf", (gltf) => {
+gltfLoader.load("models/model_vectary/solaris/ar_android_fix/solaris.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 

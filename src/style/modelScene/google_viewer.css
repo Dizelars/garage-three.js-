@@ -2,7 +2,8 @@
     display: none;
 }
 
-.qrCode-popup {
+/* .qrCode-popup, */
+.popup_design {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -32,12 +33,14 @@
         backdrop-filter: blur(10px);
 }
 
-.qrCode-popup.active {
+/* .qrCode-popup.active, */
+.popup_design.active {
     pointer-events: all;
     z-index: 99999;
 }
 
-.qrCode-popup.active .qrCode-popup_wrapper {
+/* .qrCode-popup.active .qrCode-popup_wrapper, */
+.popup_design.active .popup_wrapper {
     -webkit-transform: translateY(0);
         -ms-transform: translateY(0);
             transform: translateY(0);
@@ -64,15 +67,21 @@
     gap: 14px;
 }
 
-.qrCode-popup .closeIcon {
+.popup_design.arSupport-popup.active .popup_wrapper {
+    max-width: 350px;
+}
+
+/* .qrCode-popup .closeIcon, */
+/* .qrCode-popup .closeIcon {
     position: absolute;
     top: 0;
     right: 0;
     padding: 16px;
     cursor: pointer;
-}
+} */
 
-.qrCode-popup .title {
+/* .qrCode-popup .title, */
+.popup_design .title {
     font-family: 'MoscowSans', sans-serif;
     font-size: 20px;
     font-weight: 700;
@@ -80,12 +89,18 @@
     color: #252525;
 }
 
+.popup_design.arSupport-popup .title {
+	text-align: unset;
+    width: 100%;
+}
+
 .qrCode-popup .qr_code {
     max-width: 184px;
     width: 100%;
 }
 
-.qrCode-popup .description {
+/* .qrCode-popup .description, */
+.popup_design .description {
     font-family: 'MoscowSans', sans-serif;
     font-size: 13px;
     line-height: 15px;
@@ -94,7 +109,15 @@
     color: #6d6d6d;
 }
 
-.qrCode-popup .closeButton {
+.popup_design.arSupport-popup .description {
+	font-size: 16px;
+    line-height: 18px;
+    font-weight: 500;
+    text-align: unset;
+}
+
+/* .qrCode-popup .closeButton, */
+.popup_design .closeButton {
     text-align: center;
     width: 100%;
     color: #252525;
@@ -108,6 +131,7 @@
     transition: all .5s;
 }
 
-.qrCode-popup .closeButton:hover {
+/* .qrCode-popup .closeButton:hover, */
+.popup_design .closeButton:hover {
     background-color: #fcfcfc;
 }

@@ -357,12 +357,24 @@
     <div class="pulse"></div>
 </div>
 
-<div class="qrCode-popup">
-    <div class="qrCode-popup_wrapper">
+<div class="qrCode-popup popup_design">
+    <div class="qrCode-popup_wrapper popup_wrapper">
         <p class="title">Дополненная реальность</p>
         <img class="qr_code" src="media/images\modelPage\AR\qr-amarok.svg" alt="QR-код">
         <p class="description">
             Наведите камеру на&nbsp;QR-код, затем нажмите на&nbsp;появившееся сообщение.
+        </p>
+        <div class="closeButton">
+            Закрыть
+        </div>
+    </div>
+</div>
+
+<div class="arSupport-popup popup_design">
+    <div class="arSupport-popup_wrapper popup_wrapper">
+        <p class="title">Откройте страницу в&nbsp;браузере</p>
+        <p class="description">
+            В&nbsp;данный момент Telegram не&nbsp;поддерживает дополненную реальность. Откройте сайт в&nbsp;вашем браузере по&nbsp;умолчанию, чтобы перейти к&nbsp;просмотру модели в&nbsp;AR
         </p>
         <div class="closeButton">
             Закрыть
@@ -376,12 +388,9 @@
 <!-- Без фикса андроида но с анимацией -->
 <!-- https://garagetest.ru/models/model_vectary/amarok/No_fix_plus_animation/amarok.gltf -->
 <!-- Без анимаций и с фиксом андроида -->
-<!-- https://garagetest.ru/models/model_vectary/amarok/noAnimation/ar_android_fix/amarok_no_animation.gltf -->
+<!-- https://garagetest.ru/models/model_vectary/amarok/noAnimation/ar_android_fix/untitled.gltf -->
 
-<!-- Без анимаций и с фиксом андроида новый -->
-<!-- https://garagetest.ru/models/model_vectary/amarok/noAnimation/ar_android_fix_new/untitled.gltf -->
-
-<model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garagetest.ru/models/model_vectary/amarok/noAnimation/ar_android_fix_new/untitled.gltf" alt="AR 3D-model"></model-viewer>
+<model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garagetest.ru/models/model_vectary/amarok/noAnimation/ar_android_fix/untitled.gltf" alt="AR 3D-model"></model-viewer>
 </model-viewer>
 
 <a-scene loading-screen="enabled: true, dotsColor: #62A744, backgroundColor: #090909" vr-mode-ui="enabled: false" ar-mode-ui="enabled: false" xr-mode-ui="enabled: false"

@@ -1,19 +1,27 @@
 document.querySelector('.pulse_wrapper').addEventListener('click', () => {
 	const modelViewer = document.querySelector('#pageWithModel');
 
-	console.log("Доступность AR: " + modelViewer.canActivateAR)
+	// console.log("Доступность AR: " + modelViewer.canActivateAR)
 	
 	if (modelViewer.canActivateAR) {
 		modelViewer.activateAR();
 	} else {
-		console.log('Открываем QR с ссылкой на AR');
-		openErrorStatus()
+		if (window.innerWidth < 1200) {
+			console.log('No AR on this device');
+			openPopupARSupport()
+		} else {
+			console.log('Открываем QR с ссылкой на AR');
+			openPopupQR()
+		}
 	}
 });
 
-// Popip с QR-кодом
-const statusError = document.querySelector('.qrCode-popup');
+// Popap с QR-кодом
+const qrCodePopup = document.querySelector('.qrCode-popup');
 const arButton = document.querySelector('.pulse_wrapper');
+
+// Popap с Предупреждением
+const arSupportPopup = document.querySelector('.arSupport-popup');
 
 // Для отключения скролла
 let bodyOverflow = document.querySelector('body');
@@ -35,18 +43,34 @@ function openPopup() {
 	bodyOverflow.style.width = "100%";
 }
 
-function openErrorStatus() {
-	statusError.classList.add('active');
-	statusError.style.visibility = 'visible';
+function openPopupQR() {
+	qrCodePopup.classList.add('active');
+	qrCodePopup.style.visibility = 'visible';
 	arButton.classList.add('hidden');
 	openPopup();
 }
 
-function closeErrorStatus() {
-	statusError.classList.remove('active');
+function closePopupQR() {
+	qrCodePopup.classList.remove('active');
 	arButton.classList.remove('hidden');
 	setTimeout(() => {
-		statusError.style.visibility = 'hidden';
+		qrCodePopup.style.visibility = 'hidden';
+	}, 450);
+	closePopup();
+}
+
+function openPopupARSupport() {
+	arSupportPopup.classList.add('active');
+	arSupportPopup.style.visibility = 'visible';
+	arButton.classList.add('hidden');
+	openPopup();
+}
+
+function closePopupARSupport() {
+	arSupportPopup.classList.remove('active');
+	arButton.classList.remove('hidden');
+	setTimeout(() => {
+		arSupportPopup.style.visibility = 'hidden';
 	}, 450);
 	closePopup();
 }
@@ -61,7 +85,7 @@ function closeErrorStatus() {
 // 	});
 // }
 
-// clickOutOfPopup(statusError, closeErrorStatus);
+// clickOutOfPopup(qrCodePopup, closePopupQR);
 
 function clickButtonClose(clickedElem, closeFunc) {
 	clickedElem.addEventListener('click', () => {
@@ -69,5 +93,8 @@ function clickButtonClose(clickedElem, closeFunc) {
 	});
 }
 
-const statusErrorCloseIcon = document.querySelector('.qrCode-popup .closeButton');
-clickButtonClose(statusErrorCloseIcon, closeErrorStatus);
+const qrCodePopupCloseIcon = document.querySelector('.qrCode-popup .closeButton');
+clickButtonClose(qrCodePopupCloseIcon, closePopupQR);
+
+const arSupportPopupCloseIcon = document.querySelector('.arSupport-popup .closeButton');
+clickButtonClose(arSupportPopupCloseIcon, closePopupARSupport);
