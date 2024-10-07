@@ -83,157 +83,6 @@ loadingManager.onLoad = function() {
 }
 
 /**
- * Change models
- */
-// let current_object = null;
-// let name_model = null;
-// const models = document.querySelectorAll('.sidenav .model');
-// models.forEach((model) => {
-//     model.addEventListener('click', () => {
-//         if (current_object !== null && name_model != model.textContent) {
-//             scene.remove(current_object);
-//         }
-//         if (name_model != model.textContent) {
-//             overlayMaterial.uniforms.uAlpha.value = 1
-//             loadingBarElement.classList.remove('ended')
-//             loadingBarElement.style.transform = 'scaleX(0)';
-//             scene.add(overlay)
-//             loadModel(model.textContent, model.getAttribute("data-folder"), model.getAttribute("data-model"));
-//         }
-//     })
-// })
-
-/**
- * Models
- */
-//* Обьект для хранения параметров мешей модели
-const global = {}
-//* Update all materials
-const updateAllMaterials = () =>
-{
-    scene.traverse((child) =>
-    {
-        if(child.isMesh && child.material.isMeshStandardMaterial)
-        {
-            child.material.envMapIntensity = global.envMapIntensity
-            child.material.side = THREE.FrontSide
-        }
-    })
-}
-
-
-let dracoLoader = new DRACOLoader(loadingManager)
-dracoLoader.setDecoderPath('/draco/')
-let gltfLoader = new GLTFLoader(loadingManager)
-gltfLoader.setDRACOLoader(dracoLoader)
-
-// let sceneReady = false
-
-// Форд
-// Без фикса андроида
-// amarok: 'models/model_vectary/ford/No_fix/ford.gltf"',
-// С фиксом андроида
-// amarok: 'models/model_vectary/ford/ar_android_fix/ford.gltf'
-
-gltfLoader.load("models/model_vectary/ford/ar_android_fix/ford.gltf", (gltf) => {
-    console.log(gltf);
-    let current_object = gltf.scene;
-
-    current_object.position.x = 0;
-    current_object.position.y = 0.04;
-    current_object.position.z = 0;
-    current_object.rotation.y = -1.5;
-    current_object.scale.set(3,3,3);
-
-    positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
-    positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
-    positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
-    rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
-    rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
-    rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
-    // scaleFolder.add(current_object.scale, 'set', 0, 9, 0.1).name('scale')
-
-    scene.add(current_object);
-
-    // controls.update()
-    updateAllMaterials()
-    console.log(renderer.info)
-
-    // window.setTimeout(() => {
-    //     sceneReady = true
-    // }, 500)
-});
-
-// function loadModel(name, folder, model) {
-//     gltfLoader.setPath(`models/${folder}/`);
-//     gltfLoader.load(model + ".gltf", function(gltf) {
-//         console.log(gltf);
-//         current_object = gltf.scene;
-//         name_model = name;
-//         if (name == 'Muslcar') {
-//             current_object.position.x = 0
-//             current_object.position.y = Math.PI * 0.42
-//             current_object.position.z = 0
-//         } else if (name == 'Police') {
-//             current_object.position.x = 0
-//             current_object.position.y = Math.PI * 0.48
-//             current_object.position.z = 0
-//             current_object.rotation.y = Math.PI * 0.5
-//         } else if (name == 'Bank_truck') {
-//             current_object.scale.set(0.01, 0.01, 0.01)
-//             current_object.rotation.y = - (Math.PI * 0.5)
-//         } else if (name == 'Japanese_sedan') {
-//             current_object.scale.set(0.03, 0.03, 0.03)
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.48
-//         } else if (name == 'Pickup') {
-//             current_object.scale.set(0.03, 0.03, 0.03)
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.72
-//         } else if (name == 'Wagon') {
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.45
-//         }
-    
-//         scene.add(current_object);
-
-//         // controls.update()
-//         updateAllMaterials()
-//         console.log(renderer.info)
-//     });
-// }
-
-/**
- * Pounts on model
- */
-// const points = [
-//     {
-//         position: new THREE.Vector3(0.96, 0.8, - 0.58),
-//         element: document.querySelector('.point-0')
-//     },
-//     {
-//         position: new THREE.Vector3(0.04, 0.76, 2.4),
-//         element: document.querySelector('.point-1')
-//     },
-//     {
-//         position: new THREE.Vector3(0, 0.86, - 2.26),
-//         element: document.querySelector('.point-2')
-//     }
-// ]
-
-// One.add(points[0].position,'x',-9,9,0.01)
-// One.add(points[0].position,'y',-9,9,0.01)
-// One.add(points[0].position,'z',-9,9,0.01)
-
-// Two.add(points[1].position,'x',-9,9,0.01)
-// Two.add(points[1].position,'y',-9,9,0.01)
-// Two.add(points[1].position,'z',-9,9,0.01)
-
-// Three.add(points[2].position,'x',-9,9,0.01)
-// Three.add(points[2].position,'y',-9,9,0.01)
-// Three.add(points[2].position,'z',-9,9,0.01)
-
-/**
  * Raycaster
  */
 // const raycaster = new THREE.Raycaster()
@@ -242,7 +91,7 @@ gltfLoader.load("models/model_vectary/ford/ar_android_fix/ford.gltf", (gltf) => 
 const canvas = document.querySelector('canvas#webgl')
 
 // Scene
-const scene = new THREE.Scene()
+const scene = new THREE.Scene(loadingManager)
 
 /**
  * Sizes
@@ -284,6 +133,102 @@ controls.minDistance = 3.5;
 controls.enableDamping = true
 //* Отключение перетаскивания
 controls.enablePan = false
+
+/**
+ * Models
+ */
+//* Обьект для хранения параметров мешей модели
+const global = {}
+//* Update all materials
+const updateAllMaterials = () =>
+{
+    scene.traverse((child) =>
+    {
+        if(child.isMesh && child.material.isMeshStandardMaterial)
+        {
+            // child.material.envMapIntensity = global.envMapIntensity
+            child.material.side = THREE.DoubleSide;
+            child.material.depthWrite = true;
+        }
+    })
+}
+
+
+let dracoLoader = new DRACOLoader(loadingManager)
+dracoLoader.setDecoderPath('/draco/')
+let gltfLoader = new GLTFLoader(loadingManager)
+gltfLoader.setDRACOLoader(dracoLoader)
+
+// let sceneReady = false
+
+// Форд
+// Без фикса андроида
+// amarok: 'models/model_vectary/ford/No_fix/ford.gltf"',
+// С фиксом андроида
+// amarok: 'models/model_vectary/ford/ar_android_fix/ford.gltf'
+
+gltfLoader.load("models/model_vectary/ford/ar_android_fix/ford.gltf", (gltf) => {
+    console.log(gltf);
+    let current_object = gltf.scene;
+
+    current_object.position.x = 0.04;
+    current_object.position.y = 0.04;
+    current_object.position.z = -0.15;
+    current_object.rotation.y = -1.58;
+    current_object.scale.set(3,3,3);
+
+    positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
+    positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
+    positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
+    rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
+    rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
+    rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
+    // scaleFolder.add(current_object.scale, 'set', 0, 9, 0.1).name('scale')
+
+    scene.add(current_object);
+
+    // controls.update()
+    // updateAllMaterials()
+    console.log(renderer.info)
+
+    // window.setTimeout(() => {
+    //     sceneReady = true
+    // }, 500)
+});
+
+const axesHelper = new THREE.AxesHelper(5);
+scene.add(axesHelper);
+
+/**
+ * Pounts on model
+ */
+// const points = [
+//     {
+//         position: new THREE.Vector3(0.96, 0.8, - 0.58),
+//         element: document.querySelector('.point-0')
+//     },
+//     {
+//         position: new THREE.Vector3(0.04, 0.76, 2.4),
+//         element: document.querySelector('.point-1')
+//     },
+//     {
+//         position: new THREE.Vector3(0, 0.86, - 2.26),
+//         element: document.querySelector('.point-2')
+//     }
+// ]
+
+// One.add(points[0].position,'x',-9,9,0.01)
+// One.add(points[0].position,'y',-9,9,0.01)
+// One.add(points[0].position,'z',-9,9,0.01)
+
+// Two.add(points[1].position,'x',-9,9,0.01)
+// Two.add(points[1].position,'y',-9,9,0.01)
+// Two.add(points[1].position,'z',-9,9,0.01)
+
+// Three.add(points[2].position,'x',-9,9,0.01)
+// Three.add(points[2].position,'y',-9,9,0.01)
+// Three.add(points[2].position,'z',-9,9,0.01)
+
 
 // Логика типонов
 // controls.addEventListener('change', () => {
@@ -368,7 +313,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 
 let hdrJpgEquirectangularMap
-let hdrJpg = new HDRJPGLoader(renderer).load( '/environmentMaps/jpg/skylit_garage_4k.jpg', () => {
+let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/skylit_garage_4k.jpg', () => {
 
     hdrJpgEquirectangularMap = hdrJpg.renderTarget.texture;
 

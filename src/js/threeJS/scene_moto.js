@@ -115,11 +115,11 @@ gltfLoader.load("models/moto/moto.gltf", (gltf) => {
     let current_object = gltf.scene;
 
     current_object.position.x = 0;
-    current_object.position.y = Math.PI * 0.22;
+    current_object.position.y = Math.PI * 0.33;
     current_object.position.z = 0;
     current_object.rotation.y = -3.08;
     // current_object.scale.set(0.12, 0.12, 0.12);
-    current_object.scale.set(0.7, 0.7, 0.7);
+    current_object.scale.set(0.6, 0.6, 0.6);
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
     positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')

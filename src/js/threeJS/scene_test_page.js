@@ -116,7 +116,8 @@ const updateAllMaterials = () =>
         if(child.isMesh && child.material.isMeshStandardMaterial)
         {
             child.material.envMapIntensity = global.envMapIntensity
-            child.material.side = THREE.FrontSide
+            // child.material.side = THREE.FrontSide
+            child.material.side = THREE.DoubleSide
         }
     })
 }
@@ -135,12 +136,24 @@ gltfLoader.setDRACOLoader(dracoLoader)
 // С фиксом андроида
 // models/model_vectary/solaris/ar_android_fix/solaris.gltf
 
-gltfLoader.load("models/sinichka/S2.gltf", (gltf) => {
+// Синичка
+// models/sinichka/S2.gltf
+
+// Молоко
+// models/milk/BHSAD.gltf
+
+gltfLoader.load("models/milk/BHSAD.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
+    // current_object.position.x = 0;
+    // current_object.position.y = -0.2;
+    // current_object.position.z = 0;
+    // current_object.rotation.y = -1.55;
+    // current_object.scale.set(3,3,3);
+
     current_object.position.x = 0;
-    current_object.position.y = -0.2;
+    current_object.position.y = 1;
     current_object.position.z = 0;
     current_object.rotation.y = -1.55;
     current_object.scale.set(3,3,3);

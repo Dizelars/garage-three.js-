@@ -82,26 +82,59 @@ loadingManager.onLoad = function() {
     // positionTipons()
 }
 
+
 /**
- * Change models
+ * Raycaster
  */
-// let current_object = null;
-// let name_model = null;
-// const models = document.querySelectorAll('.sidenav .model');
-// models.forEach((model) => {
-//     model.addEventListener('click', () => {
-//         if (current_object !== null && name_model != model.textContent) {
-//             scene.remove(current_object);
-//         }
-//         if (name_model != model.textContent) {
-//             overlayMaterial.uniforms.uAlpha.value = 1
-//             loadingBarElement.classList.remove('ended')
-//             loadingBarElement.style.transform = 'scaleX(0)';
-//             scene.add(overlay)
-//             loadModel(model.textContent, model.getAttribute("data-folder"), model.getAttribute("data-model"));
-//         }
-//     })
-// })
+// const raycaster = new THREE.Raycaster()
+
+// Canvas
+const canvas = document.querySelector('canvas#webgl')
+
+// Scene
+const scene = new THREE.Scene(loadingManager)
+
+/**
+ * Sizes
+ */
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+}
+
+window.addEventListener('resize', () =>
+{
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+/**
+ * Camera
+ */
+// Base camera
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+camera.position.set(2.5, 2, 4.5)
+scene.add(camera)
+
+// Controls
+const controls = new OrbitControls(camera, canvas)
+controls.target.set(0, 0.75, 0)
+controls.maxPolarAngle = Math.PI * 0.5;
+controls.maxDistance = 5.5;
+// controls.minDistance = 3.5;
+controls.minDistance = 4;
+controls.enableDamping = true
+//* Отключение перетаскивания
+controls.enablePan = false
 
 /**
  * Models
@@ -144,8 +177,8 @@ gltfLoader.load("models/model_vectary/amarok/noAnimation/ar_android_fix/untitled
 
     current_object.position.x = 0;
     current_object.position.y = 0;
-    current_object.position.z = 0;
-    current_object.rotation.y = -1.5;
+    current_object.position.z = Math.PI * 0.25;
+    current_object.rotation.y = -1.57;
     current_object.scale.set(2,2,2);
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
@@ -159,7 +192,7 @@ gltfLoader.load("models/model_vectary/amarok/noAnimation/ar_android_fix/untitled
     scene.add(current_object);
 
     // controls.update()
-    updateAllMaterials()
+    // updateAllMaterials()
     console.log(renderer.info)
 
     // window.setTimeout(() => {
@@ -167,44 +200,9 @@ gltfLoader.load("models/model_vectary/amarok/noAnimation/ar_android_fix/untitled
     // }, 500)
 });
 
-// function loadModel(name, folder, model) {
-//     gltfLoader.setPath(`models/${folder}/`);
-//     gltfLoader.load(model + ".gltf", function(gltf) {
-//         console.log(gltf);
-//         current_object = gltf.scene;
-//         name_model = name;
-//         if (name == 'Muslcar') {
-//             current_object.position.x = 0
-//             current_object.position.y = Math.PI * 0.42
-//             current_object.position.z = 0
-//         } else if (name == 'Police') {
-//             current_object.position.x = 0
-//             current_object.position.y = Math.PI * 0.48
-//             current_object.position.z = 0
-//             current_object.rotation.y = Math.PI * 0.5
-//         } else if (name == 'Bank_truck') {
-//             current_object.scale.set(0.01, 0.01, 0.01)
-//             current_object.rotation.y = - (Math.PI * 0.5)
-//         } else if (name == 'Japanese_sedan') {
-//             current_object.scale.set(0.03, 0.03, 0.03)
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.48
-//         } else if (name == 'Pickup') {
-//             current_object.scale.set(0.03, 0.03, 0.03)
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.72
-//         } else if (name == 'Wagon') {
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.45
-//         }
-    
-//         scene.add(current_object);
+const axesHelper = new THREE.AxesHelper(5);
+scene.add(axesHelper);
 
-//         // controls.update()
-//         updateAllMaterials()
-//         console.log(renderer.info)
-//     });
-// }
 
 /**
  * Pounts on model
@@ -235,58 +233,6 @@ gltfLoader.load("models/model_vectary/amarok/noAnimation/ar_android_fix/untitled
 // Three.add(points[2].position,'x',-9,9,0.01)
 // Three.add(points[2].position,'y',-9,9,0.01)
 // Three.add(points[2].position,'z',-9,9,0.01)
-
-/**
- * Raycaster
- */
-// const raycaster = new THREE.Raycaster()
-
-// Canvas
-const canvas = document.querySelector('canvas#webgl')
-
-// Scene
-const scene = new THREE.Scene()
-
-/**
- * Sizes
- */
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
-}
-
-window.addEventListener('resize', () =>
-{
-    // Update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
-
-    // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
-
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
-
-/**
- * Camera
- */
-// Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(2.5, 2, 4.5)
-scene.add(camera)
-
-// Controls
-const controls = new OrbitControls(camera, canvas)
-controls.target.set(0, 0.75, 0)
-controls.maxPolarAngle = Math.PI * 0.5;
-controls.maxDistance = 5.5;
-controls.minDistance = 3.5;
-controls.enableDamping = true
-//* Отключение перетаскивания
-controls.enablePan = false
 
 // Логика типонов
 // controls.addEventListener('change', () => {
@@ -370,8 +316,10 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 
+// let hdrJpgLoader = new HDRJPGLoader(loadingManager);
+
 let hdrJpgEquirectangularMap
-let hdrJpg = new HDRJPGLoader(renderer).load( '/environmentMaps/jpg/skylit_garage_4k.jpg', () => {
+let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/skylit_garage_4k.jpg', () => {
 
     hdrJpgEquirectangularMap = hdrJpg.renderTarget.texture;
 
@@ -411,7 +359,7 @@ toneMapping.add(renderer, 'toneMapping', {
     ACESFilmic: THREE.ACESFilmicToneMapping
 })
 
-renderer.toneMappingExposure = 2
+renderer.toneMappingExposure = 1.6;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
 
 
