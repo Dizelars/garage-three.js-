@@ -102,34 +102,30 @@ const sizes = {
     height: window.innerHeight
 }
 
-window.addEventListener('resize', () =>
-{
-    // Update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
+//? lower offset, closer to obj
+const offset = 1;
 
-    // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
+let current_object;
 
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
+
 
 /**
  * Camera
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(2.5, 2, 4.5)
+let cameraPosX = 2.5;
+let cameraPosY = 2;
+let cameraPosZ = 4.5;
+// camera.position.set(2.5, 2, 4.5)
+camera.position.set(cameraPosX, cameraPosY, cameraPosZ)
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.target.set(0, 0.75, 0)
 controls.maxPolarAngle = Math.PI * 0.5;
-controls.maxDistance = 5.5;
+// controls.maxDistance = 5.5;
 // controls.minDistance = 3.5;
 controls.minDistance = 4;
 controls.enableDamping = true
@@ -173,7 +169,7 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 gltfLoader.load("models/model_vectary/amarok/noAnimation/ar_android_fix/untitled.gltf", (gltf) => {
     console.log(gltf);
-    let current_object = gltf.scene;
+    current_object = gltf.scene;
 
     current_object.position.x = 0;
     current_object.position.y = 0;
@@ -318,8 +314,11 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 // let hdrJpgLoader = new HDRJPGLoader(loadingManager);
 
+// /environmentMaps/jpg/garage.jpg
+// /environmentMaps/jpg/skylit_garage_4k.jpg
+
 let hdrJpgEquirectangularMap
-let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/skylit_garage_4k.jpg', () => {
+let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/garage.jpg', () => {
 
     hdrJpgEquirectangularMap = hdrJpg.renderTarget.texture;
 
@@ -359,8 +358,27 @@ toneMapping.add(renderer, 'toneMapping', {
     ACESFilmic: THREE.ACESFilmicToneMapping
 })
 
-renderer.toneMappingExposure = 1.6;
+// renderer.toneMappingExposure = 1.6;
+renderer.toneMappingExposure = 0.6;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
+
+
+window.addEventListener('resize', () =>
+{
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+    fitCameraToCenteredObject(camera, current_object, offset, controls);
+})
 
 
 const tick = () =>
@@ -425,3 +443,49 @@ interiorButton.addEventListener('click', () => {
         }, 1500);
     }
 });
+
+
+const fitCameraToCenteredObject = function (
+    camera,
+    current_object,
+    offset,
+    orbitControls
+  ) {
+    const boundingBox = new THREE.Box3();
+    boundingBox.setFromObject(current_object);
+  
+    var size = new THREE.Vector3();
+    boundingBox.getSize(size);
+  
+    const fov = camera.fov * (Math.PI / 180);
+    const fovh = 2 * Math.atan(Math.tan(fov / 2) * camera.aspect);
+    let dx = size.z / 2 + Math.abs(size.x / 2 / Math.tan(fovh / 2));
+    let dy = size.z / 2 + Math.abs(size.y / 2 / Math.tan(fov / 2));
+    let cameraX = Math.max(dx, dy);
+  
+    // offset the camera, if desired (to avoid filling the whole canvas)
+    if (offset !== undefined && offset !== 0) cameraX *= offset;
+  
+    //! change varibale name to cameraX
+    // camera.position.x = cameraX;
+    camera.position.set(cameraX, cameraPosY, cameraPosZ);
+  
+    // set the far plane of the camera so that it easily encompasses the whole current_object
+    const minZ = boundingBox.min.z;
+    const cameraToFarEdge = minZ < 0 ? -minZ + cameraX : cameraX - minZ;
+  
+    camera.far = cameraToFarEdge * 3;
+    camera.updateProjectionMatrix();
+  
+    if (orbitControls !== undefined) {
+      // set camera to rotate around the center
+      orbitControls.target = new THREE.Vector3(0, 0, 0);
+  
+      // prevent camera from zooming out far enough to create far plane cutoff
+      orbitControls.maxDistance = cameraToFarEdge * 2;
+      orbitControls.minDistance = cameraToFarEdge / 2;
+    }
+  
+    // controls.minDistance = 1.65;
+    // controls.maxDistance = 2;
+  };

@@ -148,8 +148,8 @@ const updateAllMaterials = () =>
     {
         if(child.isMesh && child.material.isMeshStandardMaterial)
         {
-            child.material.envMapIntensity = global.envMapIntensity
-            child.material.side = THREE.FrontSide
+            // child.material.envMapIntensity = global.envMapIntensity
+            child.material.side = THREE.DoubleSide
         }
     })
 }
