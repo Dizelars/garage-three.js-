@@ -14,6 +14,13 @@ document.querySelector('.pulse_wrapper').addEventListener('click', () => {
 			openPopupQR()
 		}
 	}
+	// if (window.innerWidth < 1200) {
+	// 	console.log('No AR on this device');
+	// 	openPopupARSupport()
+	// } else {
+	// 	console.log('Открываем QR с ссылкой на AR');
+	// 	openPopupQR()
+	// }
 });
 
 // Popap с QR-кодом

@@ -53,9 +53,9 @@ document.body.appendChild(stats.dom)
 // Обьект параметров
 let constants = {
     colorFloor: '#a1a1a1',
-    height: 1.8,
-	radius: 7.5,
-    resolution: 16
+    height: 2.5,
+	radius: 12,
+    resolution: 64
 }
 
 /**
@@ -299,35 +299,38 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 
-let hdrJpgEquirectangularMap
-let hdrJpg = new HDRJPGLoader(renderer).load( '/environmentMaps/jpg/skylit_garage_4k.jpg', () => {
+let hdrJpgEquirectangularMap;
+let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/garage.jpg', () => {
 
     hdrJpgEquirectangularMap = hdrJpg.renderTarget.texture;
-
     hdrJpgEquirectangularMap.mapping = THREE.EquirectangularReflectionMapping;
     hdrJpgEquirectangularMap.needsUpdate = true;
 
     scene.environment = hdrJpgEquirectangularMap;
 
     let skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution);
-    skybox.position.y = constants.height  - 0.01;
-    scene.add(skybox)
+    skybox.position.y = constants.height - 0.01;
+    scene.add(skybox);
 
-    //* Мы можем управлять проекцией скайбокса с помощью радиуса и высоты, но так как результат непредсказуем, лучше добавить эти значения в lil-gui:
-    hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onFinishChange(() => {
-        skybox.radius = constants.radius;
+    //* Управление параметрами skybox через GUI:
+    hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
+        updateSkybox();
+    });
+
+    hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onChange(() => {
+        updateSkybox();
+    });
+
+    hdriFolder.add(constants, 'resolution', 1, 64, 1).name('skyboxResolution').onChange(() => {
+        updateSkybox();
+    });
+
+    function updateSkybox() {
         scene.remove(skybox); // Удаление старого skybox
-        skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius); // Создание нового skybox с обновленными параметрами
+        skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution); // Создание нового skybox с обновленными параметрами
         skybox.position.y = constants.height - 0.01;
         scene.add(skybox); // Добавление нового skybox на сцену
-    });
-    hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onFinishChange(() => {
-        skybox.height = constants.height;
-        scene.remove(skybox); // Удаление старого skybox
-        skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius); // Создание нового skybox с обновленными параметрами
-        skybox.position.y = constants.height - 0.01;
-        scene.add(skybox); // Добавление нового skybox на сцену
-    });
+    }
 });
 
 //! Tone mapping
@@ -340,7 +343,8 @@ toneMapping.add(renderer, 'toneMapping', {
     ACESFilmic: THREE.ACESFilmicToneMapping
 })
 
-renderer.toneMappingExposure = 2
+// renderer.toneMappingExposure = 2;
+renderer.toneMappingExposure = 0.6;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
 
 

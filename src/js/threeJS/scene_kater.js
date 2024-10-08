@@ -53,9 +53,9 @@ document.body.appendChild(stats.dom)
 // Обьект параметров
 let constants = {
     colorFloor: '#a1a1a1',
-    height: 1.8,
-	radius: 7.5,
-    resolution: 16
+    height: 2.5,
+	radius: 12,
+    resolution: 64
 }
 
 /**
@@ -317,7 +317,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 
 let hdrJpgEquirectangularMap;
-let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/skylit_garage_4k.jpg', () => {
+let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/garage.jpg', () => {
 
     hdrJpgEquirectangularMap = hdrJpg.renderTarget.texture;
 
@@ -357,7 +357,8 @@ toneMapping.add(renderer, 'toneMapping', {
     ACESFilmic: THREE.ACESFilmicToneMapping
 })
 
-renderer.toneMappingExposure = 1.2;
+// renderer.toneMappingExposure = 1.2;
+renderer.toneMappingExposure = 0.6;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
 
 
