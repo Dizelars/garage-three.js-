@@ -13,15 +13,79 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://garagetest.ru/favicons/favicon-16x16.png">
     <link rel="manifest" href="https://garagetest.ru/favicons/site.webmanifest">
     <link rel="mask-icon" href="https://garagetest.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="stylesheet" href="./style/default/fonts.css">
      <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+          overflow: hidden;
+          color: white;
+          background-color: black;
+        }
+
         .google_viewer {
             display: none;
+        }
+
+        .link_to_page {
+          width: fit-content;
+          position: absolute;
+          left: 50%;
+          top: 20px;
+          transform: translateX(-50%);
+        }
+
+        .link_to_page a {
+          padding: 14px 12px;
+          width: max-content;
+          border: 1px solid #FFFFFF;
+          color: #FFFFFF;
+          border-radius: 10px;
+          font-family: 'MoscowSans', sans-serif;
+          font-weight: 300;
+          font-size: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        .link_to_page a:hover {
+            background-color: #313131;
+        }
+
+        .video_container {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          max-width: max-content;
+        }
+
+        video {
+          width: 100%;
+          height: 100%;
+          -o-object-fit: cover;
+          object-fit: cover;
         }
      </style>
     <title>AR</title>
   </head>
   <body>
     <div id="div_mv"></div>
+
+    <div class="link_to_page">
+      <a>На страницу с моделью</a>
+    </div>
+
+    <div class="video_container">
+      <video playsinline preload muted loop autoplay></video>
+    </div>
 
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
      <script type="module">
@@ -102,18 +166,70 @@
           velo: 'model_vectary/velo/ar_android_fix/velo.gltf',
           test: 'milk/BHSAD.gltf',
       };
+      
+      const pageModelUrls = {
+          moto: 'moto.html',
+          amarok: 'amarok.html',
+          bus: 'bus.html',
+          ford: 'ford.html',
+          kamaz: 'kamaz.html',
+          kater: 'kater.html',
+          moskvich: 'moskvich.html',
+          solaris: 'solaris.html',
+          velo: 'velo.html'
+      };
+
+      const videoModelUrls = {
+          moto: 'media/video/moto.mp4',
+          amarok: 'media/video/amarok.mp4',
+          bus: 'media/video/bus.mp4',
+          ford: 'media/video/ford.mp4',
+          kamaz: 'media/video/kamaz.mp4',
+          kater: 'media/video/kater.mp4',
+          moskvich: 'media/video/moskvich.mp4',
+          solaris: 'media/video/salaris_gray.mp4',
+          velo: 'media/video/velo.mp4'
+      };
 
       let arModelUrl = arModelUrls[newsId];
+      let pageModelUrl = pageModelUrls[newsId];
+      let videoModelUrl = videoModelUrls[newsId];
 
       document.addEventListener("DOMContentLoaded", () => {
+          const linkToPage = document.querySelector('.link_to_page a');
+
+          const videoElement = document.querySelector('video');
+
           const m_viewer = document.createElement('model-viewer');
           m_viewer.setAttribute('class', 'google_viewer');
           m_viewer.setAttribute('ar', 'true');
           m_viewer.setAttribute('ar-modes', 'scene-viewer webxr quick-look');
           m_viewer.setAttribute('camera-controls', '');
           if (arModelUrl) {
-              // m_viewer.setAttribute('src', `https://coddmac.store/THREE/3Dmodels/${arModelUrl}`);
               m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);
+
+              linkToPage.setAttribute('href', `${pageModelUrl}`);
+
+              // Создаем элемент source и добавляем его в видео
+              const sourceElement = document.createElement('source');
+              sourceElement.setAttribute('src', `${videoModelUrl}`);
+              sourceElement.setAttribute('type', 'video/mp4');
+
+              videoElement.appendChild(sourceElement);
+
+              // Обработчик для отладки загрузки и воспроизведения
+              // videoElement.addEventListener('loadeddata', () => {
+              //   console.log('Видео загружено.');
+              //   videoElement.play().then(() => {
+              //     console.log('Видео успешно воспроизведено.');
+              //   }).catch(error => {
+              //     console.error('Ошибка при воспроизведении видео:', error);
+              //   });
+              // });
+
+              // videoElement.addEventListener('error', (e) => {
+              //   console.error('Ошибка при загрузке видео:', e);
+              // });
           }
 
           document.getElementById('div_mv').appendChild(m_viewer);

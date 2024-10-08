@@ -41,22 +41,16 @@ const toneMapping = gui.addFolder('Тоновое отображение')
 // const Three = PointFolder.addFolder('Типон 3');
 const ModelFolder = gui.addFolder('Модель');
 const modelPosition = ModelFolder.addFolder('Позиция');
+const modelScale = ModelFolder.addFolder('Масштаб');
+
 const positionFolder = modelPosition.addFolder('position');
 const rotationFolder = modelPosition.addFolder('rotation');
-// const scaleFolder = modelPosition.addFolder('scale');
+const scaleFolder = modelScale.addFolder('scale');
 
 //! Monitor FPS
 const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom)
-
-// Обьект параметров
-let constants = {
-    colorFloor: '#a1a1a1',
-    height: 2.5,
-	radius: 12,
-    resolution: 64
-}
 
 /**
  * Loading Менеджер загрузки
@@ -160,6 +154,21 @@ dracoLoader.setDecoderPath('/draco/')
 let gltfLoader = new GLTFLoader(loadingManager)
 gltfLoader.setDRACOLoader(dracoLoader)
 
+// Обьект параметров
+let constants = {
+    scale: 1.7,
+    height: 2.5,
+	radius: 12,
+    resolution: 64
+}
+
+// let constants = {
+//     scale: 1.7,
+//     height: 8.5,
+// 	radius: 50,
+//     resolution: 64
+// }
+
 // let sceneReady = false
 
 // Автобус
@@ -176,15 +185,19 @@ gltfLoader.load("models/model_vectary/bus/noAnimation/ar_android_fix/bus_no_anim
     current_object.position.y = 0;
     current_object.position.z = -0.08;
     current_object.rotation.y = -1.57;
-    current_object.scale.set(1.7,1.7,1.7);
+    current_object.scale.set(constants.scale, constants.scale, constants.scale);
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
     positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
     positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
+    
     rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
     rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
     rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
-    // scaleFolder.add(current_object.scale, 'set', 0, 9, 0.1).name('scale')
+    
+    scaleFolder.add(constants, 'scale', 0.1, 9, 0.1).name('Scale').onChange((value) => {
+        current_object.scale.set(value, value, value);
+    });
 
     scene.add(current_object);
 
