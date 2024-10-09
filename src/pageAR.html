@@ -207,9 +207,18 @@
           m_viewer.setAttribute('camera-controls', '');
           if (arModelUrl) {
               m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);
+          }
 
+          document.getElementById('div_mv').appendChild(m_viewer);
+          setTimeout(() => {
+              m_viewer.activateAR();
+          }, 100);
+
+          if (pageModelUrl) {
               linkToPage.setAttribute('href', `${pageModelUrl}`);
-
+          };
+          
+          if (videoModelUrl) {
               // Создаем элемент source и добавляем его в видео
               const sourceElement = document.createElement('source');
               sourceElement.setAttribute('src', `${videoModelUrl}`);
@@ -230,12 +239,7 @@
               // videoElement.addEventListener('error', (e) => {
               //   console.error('Ошибка при загрузке видео:', e);
               // });
-          }
-
-          document.getElementById('div_mv').appendChild(m_viewer);
-          setTimeout(() => {
-              m_viewer.activateAR();
-          }, 100);
+          };
       });
      </script>
   </body>

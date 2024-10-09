@@ -130,7 +130,7 @@ controls.enablePan = false
  * Models
  */
 //* Обьект для хранения параметров мешей модели
-const global = {}
+// const global = {}
 //* Update all materials
 const updateAllMaterials = () =>
 {
@@ -138,8 +138,13 @@ const updateAllMaterials = () =>
     {
         if(child.isMesh && child.material.isMeshStandardMaterial)
         {
-            child.material.envMapIntensity = global.envMapIntensity
-            child.material.side = THREE.FrontSide
+            // child.material.envMapIntensity = global.envMapIntensity
+            // child.material.side = THREE.FrontSide
+            // child.material.side = THREE.DoubleSide
+            // child.material.side = THREE.TwoPassDoubleSide
+            // child.material.castShadows = false
+            // child.material.transparent = false
+            // child.material.opacity = 0
         }
     })
 }
@@ -155,14 +160,14 @@ let constants = {
     scale: 2,
     height: 2.5,
 	radius: 12,
-    resolution: 64
+    resolution: 24
 }
 
 // let constants = {
 //     scale: 2,
 //     height: 8.5,
 // 	radius: 50,
-//     resolution: 64
+//     resolution: 24
 // }
 
 // let sceneReady = false
@@ -203,6 +208,8 @@ gltfLoader.load("models/model_vectary/amarok/noAnimation/ar_android_fix/untitled
     // controls.update()
     // updateAllMaterials()
     console.log(renderer.info)
+    // console.log(renderer.info.memory)
+    
 
     // window.setTimeout(() => {
     //     sceneReady = true
@@ -249,7 +256,8 @@ scene.add(axesHelper);
 // });
 
 // controls.addEventListener('end', () => {
-//     raycasterTipons();
+//     // raycasterTipons();
+//     console.log(renderer.info)
 // });
 
 // function raycasterTipons() {
@@ -407,8 +415,8 @@ toneMapping.add(renderer, 'toneMapping', {
 })
 
 // renderer.toneMappingExposure = 1.6;
-renderer.toneMappingExposure = 0.6;
-toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
+renderer.toneMappingExposure = 0.9;
+toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 
 window.addEventListener('resize', () =>
@@ -447,7 +455,7 @@ const tick = () =>
 
 tick()
 //! 1. Информация о рендере
-console.log(renderer.info)
+// console.log(renderer.info)
 
 // Переключение между сценами при клике на кнопку с классом ".tech_spec__interior"
 let activeScene = 1;

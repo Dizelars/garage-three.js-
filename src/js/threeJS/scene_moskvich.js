@@ -158,14 +158,14 @@ let constants = {
     scale: 3,
     height: 2.5,
 	radius: 12,
-    resolution: 64
+    resolution: 24
 }
 
 // let constants = {
 //     scale: 3,
 //     height: 8.5,
 // 	radius: 50,
-//     resolution: 64
+//     resolution: 24
 // }
 
 // let sceneReady = false
@@ -374,8 +374,8 @@ toneMapping.add(renderer, 'toneMapping', {
 })
 
 // renderer.toneMappingExposure = 2;
-renderer.toneMappingExposure = 0.6;
-toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
+renderer.toneMappingExposure = 0.9;
+toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 
 const tick = () =>

@@ -76,109 +76,6 @@ loadingManager.onLoad = function() {
     // positionTipons()
 }
 
-
-/**
- * Models
- */
-//* Обьект для хранения параметров мешей модели
-const global = {}
-//* Update all materials
-const updateAllMaterials = () =>
-{
-    scene.traverse((child) =>
-    {
-        if(child.isMesh && child.material.isMeshStandardMaterial)
-        {
-            child.material.envMapIntensity = global.envMapIntensity
-            child.material.side = THREE.FrontSide
-        }
-    })
-}
-
-
-let dracoLoader = new DRACOLoader(loadingManager)
-dracoLoader.setDecoderPath('/draco/')
-let gltfLoader = new GLTFLoader(loadingManager)
-gltfLoader.setDRACOLoader(dracoLoader)
-
-// Обьект параметров
-let constants = {
-    scale: 0.6,
-    height: 2.5,
-	radius: 12,
-    resolution: 64
-}
-
-// let constants = {
-//     scale: 0.6,
-//     height: 8.5,
-// 	radius: 50,
-//     resolution: 64
-// }
-
-// models/moto_transform/MOTO_16.08.gltf
-// models/moto/MOTO_16.08.gltf
-
-gltfLoader.load("models/moto/moto.gltf", (gltf) => {
-    console.log(gltf);
-    let current_object = gltf.scene;
-
-    current_object.position.x = 0;
-    current_object.position.y = Math.PI * 0.33;
-    current_object.position.z = 0;
-    current_object.rotation.y = -3.08;
-    // current_object.scale.set(0.12, 0.12, 0.12);
-    current_object.scale.set(constants.scale, constants.scale, constants.scale);
-
-    positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
-    positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
-    positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
-    
-    rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
-    rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
-    rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
-    
-    scaleFolder.add(constants, 'scale', 0.1, 9, 0.1).name('Scale').onChange((value) => {
-        current_object.scale.set(value, value, value);
-    });
-
-    scene.add(current_object);
-
-    updateAllMaterials()
-    console.log(renderer.info)
-});
-
-
-/**
- * Pounts on model
- */
-// const points = [
-//     {
-//         position: new THREE.Vector3(0.96, 0.8, - 0.58),
-//         element: document.querySelector('.point-0')
-//     },
-//     {
-//         position: new THREE.Vector3(0.04, 0.76, 2.4),
-//         element: document.querySelector('.point-1')
-//     },
-//     {
-//         position: new THREE.Vector3(0, 0.86, - 2.26),
-//         element: document.querySelector('.point-2')
-//     }
-// ]
-
-// One.add(points[0].position,'x',-9,9,0.01)
-// One.add(points[0].position,'y',-9,9,0.01)
-// One.add(points[0].position,'z',-9,9,0.01)
-
-// Two.add(points[1].position,'x',-9,9,0.01)
-// Two.add(points[1].position,'y',-9,9,0.01)
-// Two.add(points[1].position,'z',-9,9,0.01)
-
-// Three.add(points[2].position,'x',-9,9,0.01)
-// Three.add(points[2].position,'y',-9,9,0.01)
-// Three.add(points[2].position,'z',-9,9,0.01)
-
 /**
  * Raycaster
  */
@@ -188,7 +85,7 @@ gltfLoader.load("models/moto/moto.gltf", (gltf) => {
 const canvas = document.querySelector('canvas#webgl')
 
 // Scene
-const scene = new THREE.Scene()
+const scene = new THREE.Scene(loadingManager)
 
 /**
  * Sizes
@@ -230,6 +127,112 @@ controls.minDistance = 3.5;
 controls.enableDamping = true
 //* Отключение перетаскивания
 controls.enablePan = false
+
+
+/**
+ * Models
+ */
+//* Обьект для хранения параметров мешей модели
+const global = {}
+//* Update all materials
+const updateAllMaterials = () =>
+{
+    scene.traverse((child) =>
+    {
+        if(child.isMesh && child.material.isMeshStandardMaterial)
+        {
+            child.material.envMapIntensity = global.envMapIntensity
+            child.material.side = THREE.FrontSide
+        }
+    })
+}
+
+
+let dracoLoader = new DRACOLoader(loadingManager)
+dracoLoader.setDecoderPath('/draco/')
+let gltfLoader = new GLTFLoader(loadingManager)
+gltfLoader.setDRACOLoader(dracoLoader)
+
+// Обьект параметров
+let constants = {
+    scale: 0.6,
+    height: 2,
+	radius: 14,
+    resolution: 23
+}
+
+// let constants = {
+//     scale: 0.6,
+//     height: 8.5,
+// 	radius: 50,
+//     resolution: 24
+// }
+
+// models/moto_transform/MOTO_16.08.gltf
+// models/moto/MOTO_16.08.gltf
+
+gltfLoader.load("models/moto/moto.gltf", (gltf) => {
+    console.log(gltf);
+    let current_object = gltf.scene;
+
+    current_object.position.x = 0.03;
+    current_object.position.y = Math.PI * 0.33;
+    current_object.position.z = 0;
+    current_object.rotation.y = -3.14;
+    // current_object.scale.set(0.12, 0.12, 0.12);
+    current_object.scale.set(constants.scale, constants.scale, constants.scale);
+
+    positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
+    positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
+    positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
+    
+    rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
+    rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
+    rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
+    
+    scaleFolder.add(constants, 'scale', 0.1, 9, 0.1).name('Scale').onChange((value) => {
+        current_object.scale.set(value, value, value);
+    });
+
+    scene.add(current_object);
+
+    updateAllMaterials()
+    console.log(renderer.info)
+});
+
+const axesHelper = new THREE.AxesHelper(5);
+scene.add(axesHelper);
+
+
+/**
+ * Pounts on model
+ */
+// const points = [
+//     {
+//         position: new THREE.Vector3(0.96, 0.8, - 0.58),
+//         element: document.querySelector('.point-0')
+//     },
+//     {
+//         position: new THREE.Vector3(0.04, 0.76, 2.4),
+//         element: document.querySelector('.point-1')
+//     },
+//     {
+//         position: new THREE.Vector3(0, 0.86, - 2.26),
+//         element: document.querySelector('.point-2')
+//     }
+// ]
+
+// One.add(points[0].position,'x',-9,9,0.01)
+// One.add(points[0].position,'y',-9,9,0.01)
+// One.add(points[0].position,'z',-9,9,0.01)
+
+// Two.add(points[1].position,'x',-9,9,0.01)
+// Two.add(points[1].position,'y',-9,9,0.01)
+// Two.add(points[1].position,'z',-9,9,0.01)
+
+// Three.add(points[2].position,'x',-9,9,0.01)
+// Three.add(points[2].position,'y',-9,9,0.01)
+// Three.add(points[2].position,'z',-9,9,0.01)
 
 // Логика типонов
 // controls.addEventListener('change', () => {
@@ -358,8 +361,8 @@ toneMapping.add(renderer, 'toneMapping', {
 })
 
 // renderer.toneMappingExposure = 2;
-renderer.toneMappingExposure = 0.6;
-toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
+renderer.toneMappingExposure = 0.9;
+toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 
 const tick = () =>

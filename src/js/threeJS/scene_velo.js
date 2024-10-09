@@ -140,7 +140,7 @@ const updateAllMaterials = () =>
     {
         if(child.isMesh && child.material.isMeshStandardMaterial)
         {
-            child.material.envMapIntensity = global.envMapIntensity
+            // child.material.envMapIntensity = global.envMapIntensity
             child.material.side = THREE.FrontSide
         }
     })
@@ -157,14 +157,14 @@ let constants = {
     scale: 3,
     height: 2.5,
 	radius: 12,
-    resolution: 64
+    resolution: 24
 }
 
 // let constants = {
 //     scale: 3,
 //     height: 8.5,
 // 	radius: 50,
-//     resolution: 64
+//     resolution: 24
 // }
 
 // let sceneReady = false
@@ -324,6 +324,10 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 
+// skylit_garage_4k.jpg
+// garage.jpg
+
+
 let hdrJpgEquirectangularMap;
 let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/garage.jpg', () => {
 
@@ -369,8 +373,8 @@ toneMapping.add(renderer, 'toneMapping', {
 })
 
 // renderer.toneMappingExposure = 2;
-renderer.toneMappingExposure = 0.6;
-toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
+renderer.toneMappingExposure = 0.9;
+toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 
 const tick = () =>
@@ -391,4 +395,4 @@ const tick = () =>
 
 tick()
 //! 1. Информация о рендере
-console.log(renderer.info)
+// console.log(renderer.info)

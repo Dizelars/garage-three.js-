@@ -159,16 +159,16 @@ gltfLoader.setDRACOLoader(dracoLoader)
 // Обьект параметров
 let constants = {
     scale: 3,
-    height: 2.5,
-	radius: 12,
-    resolution: 64
+    height: 2,
+	radius: 14,
+    resolution: 23
 }
 
 // let constants = {
 //     scale: 3,
 //     height: 8.5,
 // 	radius: 50,
-//     resolution: 64
+//     resolution: 6
 // }
 
 // let sceneReady = false
@@ -184,7 +184,7 @@ gltfLoader.load("models/model_vectary/kater/ar_android_fix/kater.gltf", (gltf) =
     let current_object = gltf.scene;
 
     current_object.position.x = 0;
-    current_object.position.y = -0.36;
+    current_object.position.y = -0.44;
     current_object.position.z = 0.18;
     current_object.rotation.y = -1.56;
     current_object.scale.set(constants.scale, constants.scale, constants.scale);
@@ -329,35 +329,41 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 
+// /environmentMaps/jpg/garage.jpg
+// /environmentMaps/jpg/dok_kater.jpg
+
 let hdrJpgEquirectangularMap;
-let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/garage.jpg', () => {
+let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/dok_kater.jpg', () => {
 
     hdrJpgEquirectangularMap = hdrJpg.renderTarget.texture;
-
     hdrJpgEquirectangularMap.mapping = THREE.EquirectangularReflectionMapping;
     hdrJpgEquirectangularMap.needsUpdate = true;
 
     scene.environment = hdrJpgEquirectangularMap;
 
-    // let skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution);
-    // skybox.position.y = constants.height  - 0.01;
-    // scene.add(skybox)
+    let skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution);
+    skybox.position.y = constants.height - 0.01;
+    scene.add(skybox);
 
-    // //* Мы можем управлять проекцией скайбокса с помощью радиуса и высоты, но так как результат непредсказуем, лучше добавить эти значения в lil-gui:
-    // hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onFinishChange(() => {
-    //     skybox.radius = constants.radius;
-    //     scene.remove(skybox); // Удаление старого skybox
-    //     skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius); // Создание нового skybox с обновленными параметрами
-    //     skybox.position.y = constants.height - 0.01;
-    //     scene.add(skybox); // Добавление нового skybox на сцену
-    // });
-    // hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onFinishChange(() => {
-    //     skybox.height = constants.height;
-    //     scene.remove(skybox); // Удаление старого skybox
-    //     skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius); // Создание нового skybox с обновленными параметрами
-    //     skybox.position.y = constants.height - 0.01;
-    //     scene.add(skybox); // Добавление нового skybox на сцену
-    // });
+    //* Управление параметрами skybox через GUI:
+    hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
+        updateSkybox();
+    });
+
+    hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onChange(() => {
+        updateSkybox();
+    });
+
+    hdriFolder.add(constants, 'resolution', 1, 64, 1).name('skyboxResolution').onChange(() => {
+        updateSkybox();
+    });
+
+    function updateSkybox() {
+        scene.remove(skybox); // Удаление старого skybox
+        skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution); // Создание нового skybox с обновленными параметрами
+        skybox.position.y = constants.height - 0.01;
+        scene.add(skybox); // Добавление нового skybox на сцену
+    }
 });
 
 //! Tone mapping
@@ -371,8 +377,9 @@ toneMapping.add(renderer, 'toneMapping', {
 })
 
 // renderer.toneMappingExposure = 1.2;
-renderer.toneMappingExposure = 0.6;
-toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
+// renderer.toneMappingExposure = 0.4;
+renderer.toneMappingExposure = 1;
+toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 
 const tick = () =>

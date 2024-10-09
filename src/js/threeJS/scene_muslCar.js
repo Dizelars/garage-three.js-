@@ -129,7 +129,10 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // let sceneReady = false
 
-gltfLoader.load("models/MuslCarLowPoly_mintexture_transform/untitled.gltf", (gltf) => {
+// models/MuslCarLowPoly_mintexture_transform/untitled.gltf
+// models/MuslCarLowPoly/scene.gltf
+
+gltfLoader.load("models/MuslCarLowPoly/scene.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
@@ -359,9 +362,11 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+// skylit_garage_4k.jpg
+// garage.jpg
 
 let hdrJpgEquirectangularMap
-let hdrJpg = new HDRJPGLoader(renderer).load( '/environmentMaps/jpg/skylit_garage_4k.jpg', () => {
+let hdrJpg = new HDRJPGLoader(renderer).load( '/environmentMaps/jpg/garage.jpg', () => {
 
     hdrJpgEquirectangularMap = hdrJpg.renderTarget.texture;
 
@@ -401,7 +406,8 @@ toneMapping.add(renderer, 'toneMapping', {
     ACESFilmic: THREE.ACESFilmicToneMapping
 })
 
-renderer.toneMappingExposure = 2
+// renderer.toneMappingExposure = 2;
+renderer.toneMappingExposure = 0.6;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
 
 
