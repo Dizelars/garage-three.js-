@@ -208,7 +208,7 @@ gltfLoader.load("models/model_vectary/transformed/bus/bus_no_animation.gltf", (g
     let current_object = gltf.scene;
 
     current_object.position.x = 0;
-    current_object.position.y = 0;
+    current_object.position.y = -0.1;
     current_object.position.z = -0.08;
     current_object.rotation.y = -1.57;
     current_object.scale.set(constants.scale, constants.scale, constants.scale);

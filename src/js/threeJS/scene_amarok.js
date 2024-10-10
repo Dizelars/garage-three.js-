@@ -109,12 +109,7 @@ window.addEventListener('resize', () =>
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
-    // fitCameraToCenteredObject(camera, current_object, offset, controls);
 })
-
-//? lower offset, closer to obj
-// const offset = 1;
 
 let current_object;
 let cameraPosX;
@@ -485,50 +480,3 @@ interiorButton.addEventListener('click', () => {
         }, 1500);
     }
 });
-
-
-// const fitCameraToCenteredObject = function (
-//     camera,
-//     current_object,
-//     offset,
-//     orbitControls
-//   ) {
-//     const boundingBox = new THREE.Box3();
-//     boundingBox.setFromObject(current_object);
-  
-//     var size = new THREE.Vector3();
-//     boundingBox.getSize(size);
-  
-//     const fov = camera.fov * (Math.PI / 180);
-//     const fovh = 2 * Math.atan(Math.tan(fov / 2) * camera.aspect);
-//     let dx = size.z / 2 + Math.abs(size.x / 2 / Math.tan(fovh / 2));
-//     let dy = size.z / 2 + Math.abs(size.y / 2 / Math.tan(fov / 2));
-//     let cameraX = Math.max(dx, dy);
-  
-//     // offset the camera, if desired (to avoid filling the whole canvas)
-//     if (offset !== undefined && offset !== 0) cameraX *= offset;
-  
-//     //! change varibale name to cameraX
-//     // camera.position.x = cameraX;
-//     camera.position.set(cameraX, cameraPosY, cameraPosZ);
-  
-//     // set the far plane of the camera so that it easily encompasses the whole current_object
-//     const minZ = boundingBox.min.z;
-//     const cameraToFarEdge = minZ < 0 ? -minZ + cameraX : cameraX - minZ;
-  
-//     camera.far = cameraToFarEdge * 3;
-//     camera.updateProjectionMatrix();
-  
-//     if (orbitControls !== undefined) {
-//       // set camera to rotate around the center
-//       orbitControls.target = new THREE.Vector3(0, 0, 0);
-  
-//       // prevent camera from zooming out far enough to create far plane cutoff
-//       orbitControls.maxDistance = cameraToFarEdge * 2;
-//       orbitControls.minDistance = cameraToFarEdge / 2;
-//       orbitControls.maxPolarAngle = Math.PI * 0.5;
-//     }
-  
-//     // controls.minDistance = 1.65;
-//     // controls.maxDistance = 2;
-//   };

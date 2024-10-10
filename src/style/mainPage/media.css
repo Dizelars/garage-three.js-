@@ -113,8 +113,8 @@
         "slider_button-wrapper . traffic_patrol-text-4 traffic_patrol-text-5 ."
         ". . . . ."
         /* ". traffic_patrol-no-slide-7 traffic_patrol-no-slide-7 traffic_patrol-no-slide-8 traffic_patrol-no-slide-8" */
-        "traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz";
-        /* "traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER"; */
+        /* "traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz"; */
+        "traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER";
     }
 
     /* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-new_NOSLIDER {
@@ -529,23 +529,32 @@
         "traffic_patrol-text-4 traffic_patrol-text-5"
         /* "InGrid InGrid" */
         ". ."
-        "traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz";
+        /* "traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz"; */
+        "traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER";
     }
 
-    section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz {
-        display: block;
-        /* overflow: hidden; */
+    section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-areas:
+          /* "model_1 model_2 model_3"; */
+          "model_1 model_1 model_1 model_2 model_2 model_2"
+          "model_3 model_3 model_3 model_4 model_4 model_4";
     }
+
+    /* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz {
+        display: block; */
+        /* overflow: hidden; */
+    /* } */
 
     /* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slider-buttons.InGrid */
-    section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz .traffic_patrol-slider-buttons {
+    /* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz .traffic_patrol-slider-buttons {
         display: flex;
-    }
+    } */
 
     /* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz .traffic_patrol-slider-buttons, */
-    section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
+    /* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
         display: none;
-    }
+    } */
 
     section.traffic_patrol .traffic_patrol_slider .garage_model_card {
         height: fit-content;
@@ -1742,7 +1751,6 @@
         max-height: 277px;
     }
 
-
     section.traffic_patrol .traffic_patrol_grid-wrapper {
         display: grid;
         grid-template-columns: 1fr;
@@ -1755,6 +1763,14 @@
         "traffic_patrol-text-mobile-1"
         "traffic_patrol-slide-kamaz"
         "traffic_patrol-text-5";
+    }
+
+    section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz {
+        display: block;
+    }
+    
+    section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
+        display: none;
     }
 
     section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-mobile-1 {

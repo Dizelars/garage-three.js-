@@ -697,8 +697,8 @@ section.traffic_patrol .traffic_patrol_grid-wrapper {
         "slider_button-wrapper . traffic_patrol-text-4 traffic_patrol-text-5 ."
         ". . . . ."
         /* ". traffic_patrol-no-slide-7 traffic_patrol-no-slide-7 traffic_patrol-no-slide-8 traffic_patrol-no-slide-8" */
-        /* "traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER"; */
-        "traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz";
+        "traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER";
+        /* "traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz"; */
 }
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 {
@@ -728,23 +728,27 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-5 {
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz {
     grid-area: traffic_patrol-slide-kamaz;
     position: relative;
-    /* display: none; */
-    display: block;
-}
-
-section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
     display: none;
+    /* display: block; */
 }
 
 /* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
+    display: none;
+} */
+
+section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
     grid-area: traffic_patrol-slide-kamaz_NOSLIDER;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
+    /* grid-template-columns: repeat(3, 1fr); */
+    /* grid-template-rows: 1fr; */
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 20px;
     grid-auto-flow: row;
     grid-template-areas:
-      "model_1 model_2 model_3";
+      /* "model_1 model_2 model_3"; */
+      ". model_1 model_1 model_2 model_2"
+      ". model_3 model_3 model_4 model_4";
 }
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER .model_1 {
@@ -757,7 +761,11 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER .model_3 {
     grid-area: model_3;
-} */
+}
+
+section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER .model_4 {
+    grid-area: model_4;
+}
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz .traffic_patrol-slider-buttons {
     position: absolute;

@@ -260,28 +260,29 @@ document.addEventListener("DOMContentLoaded", function() {
     // Swiper slider
     const swiper1 = new Swiper('.swiper1', {
         slidesPerView: 1,
-        spaceBetween: 0,
+        // spaceBetween: 0,
+        spaceBetween: 20,
 
         pagination: {
             el: '.swiper-pagination1',
             clickable: true
         },
 
-        navigation: {
-            nextEl: '.btn_next',
-            prevEl: '.btn_prev'
-        },
+        // navigation: {
+        //     nextEl: '.btn_next',
+        //     prevEl: '.btn_prev'
+        // },
 
-        breakpoints: {
-            440: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            1024: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-            }
-        }
+        // breakpoints: {
+        //     440: {
+        //         slidesPerView: 2,
+        //         spaceBetween: 20,
+        //     },
+        //     1024: {
+        //         slidesPerView: 3,
+        //         spaceBetween: 20,
+        //     }
+        // }
     });
     
     const swiper2 = new Swiper('.swiper2', {
@@ -296,7 +297,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const swiper3 = new Swiper('.swiper3', {
         slidesPerView: 1,
-        spaceBetween: 0,
+        // spaceBetween: 0,
+        spaceBetween: 20,
 
         pagination: {
             el: '.swiper-pagination3',
