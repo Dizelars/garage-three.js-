@@ -110,19 +110,42 @@ window.addEventListener('resize', () =>
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
+
+let cameraPosX;
+let cameraPosY;
+let cameraPosZ;
+let maxDistanceOrbit;
+
+if (window.innerWidth < 480) {
+    cameraPosX = 4.7;
+    cameraPosY = 3.1;
+    cameraPosZ = 8.5;
+    maxDistanceOrbit = 10;
+} else if (window.innerWidth >= 480 && window.innerWidth <= 1200) {
+    cameraPosX = 3.2;
+    cameraPosY = 2.3;
+    cameraPosZ = 5.6;
+    maxDistanceOrbit = 8;
+} else {
+    cameraPosX = 2.5;
+    cameraPosY = 2;
+    cameraPosZ = 4.5;
+    maxDistanceOrbit = 6;
+}
+
 /**
  * Camera
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(2.5, 2, 4.5)
+camera.position.set(cameraPosX, cameraPosY, cameraPosZ)
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.target.set(0, 0.75, 0)
 controls.maxPolarAngle = Math.PI * 0.5;
-controls.maxDistance = 6;
+controls.maxDistance = maxDistanceOrbit;
 // controls.minDistance = 3.5;
 controls.minDistance = 4.5;
 controls.enableDamping = true
@@ -134,7 +157,7 @@ controls.enablePan = false
  * Models
  */
 //* Обьект для хранения параметров мешей модели
-const global = {}
+// const global = {}
 //* Update all materials
 const updateAllMaterials = () =>
 {
@@ -156,14 +179,14 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // Обьект параметров
 let constants = {
-    scale: 1.7,
+    scale: 3,
     height: 2.5,
 	radius: 12,
     resolution: 24
 }
 
 // let constants = {
-//     scale: 1.7,
+//     scale: 3,
 //     height: 8.5,
 // 	radius: 50,
 //     resolution: 24
@@ -177,7 +200,10 @@ let constants = {
 // Без анимаций и с фиксом андроида
 // amarok: 'models/model_vectary/bus/noAnimation/ar_android_fix/bus_no_animation.gltf',
 
-gltfLoader.load("models/model_vectary/bus/noAnimation/ar_android_fix/bus_no_animation.gltf", (gltf) => {
+// Сжатая модель и текстуры
+// models/model_vectary/transformed/bus/bus_no_animation.gltf
+
+gltfLoader.load("models/model_vectary/transformed/bus/bus_no_animation.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
@@ -210,8 +236,8 @@ gltfLoader.load("models/model_vectary/bus/noAnimation/ar_android_fix/bus_no_anim
     // }, 500)
 });
 
-const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
+// const axesHelper = new THREE.AxesHelper(5);
+// scene.add(axesHelper);
 
 
 /**
@@ -372,7 +398,7 @@ toneMapping.add(renderer, 'toneMapping', {
 })
 
 // renderer.toneMappingExposure = 2;
-renderer.toneMappingExposure = 0.9;
+renderer.toneMappingExposure = 1.4;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 

@@ -96,22 +96,54 @@ const sizes = {
     height: window.innerHeight
 }
 
+window.addEventListener('resize', () =>
+{
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+    // fitCameraToCenteredObject(camera, current_object, offset, controls);
+})
+
 //? lower offset, closer to obj
-const offset = 1;
+// const offset = 1;
 
 let current_object;
+let cameraPosX;
+let cameraPosY;
+let cameraPosZ;
+let maxDistanceOrbit;
 
-
+if (window.innerWidth < 480) {
+    cameraPosX = 4.7;
+    cameraPosY = 3.1;
+    cameraPosZ = 8.5;
+    maxDistanceOrbit = 10;
+} else if (window.innerWidth >= 480 && window.innerWidth <= 1200) {
+    cameraPosX = 3.2;
+    cameraPosY = 2.3;
+    cameraPosZ = 5.6;
+    maxDistanceOrbit = 8;
+} else {
+    cameraPosX = 2.5;
+    cameraPosY = 2;
+    cameraPosZ = 4.5;
+    maxDistanceOrbit = 6;
+}
 
 /**
  * Camera
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-let cameraPosX = 2.5;
-let cameraPosY = 2;
-let cameraPosZ = 4.5;
-// camera.position.set(2.5, 2, 4.5)
 camera.position.set(cameraPosX, cameraPosY, cameraPosZ)
 scene.add(camera)
 
@@ -119,8 +151,7 @@ scene.add(camera)
 const controls = new OrbitControls(camera, canvas)
 controls.target.set(0, 0.75, 0)
 controls.maxPolarAngle = Math.PI * 0.5;
-controls.maxDistance = 6;
-controls.minDistance = 4;
+controls.maxDistance = maxDistanceOrbit;
 controls.minDistance = 4;
 controls.enableDamping = true
 //* Отключение перетаскивания
@@ -157,14 +188,14 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // Обьект параметров
 let constants = {
-    scale: 2,
+    scale: 2.2,
     height: 2.5,
 	radius: 12,
     resolution: 24
 }
 
 // let constants = {
-//     scale: 2,
+//     scale: 2.2,
 //     height: 8.5,
 // 	radius: 50,
 //     resolution: 24
@@ -181,7 +212,10 @@ let constants = {
 // Без анимаций и с фиксом андроида 04.10
 // amarok: 'models/model_vectary/amarok/noAnimation/ar_android_fix/untitled.gltf',
 
-gltfLoader.load("models/model_vectary/amarok/noAnimation/ar_android_fix/untitled.gltf", (gltf) => {
+// Сжатая модель и текстуры
+// models/model_vectary/transformed/amarok/untitled.gltf
+
+gltfLoader.load("models/model_vectary/transformed/amarok/untitled.gltf", (gltf) => {
     console.log(gltf);
     current_object = gltf.scene;
 
@@ -216,8 +250,8 @@ gltfLoader.load("models/model_vectary/amarok/noAnimation/ar_android_fix/untitled
     // }, 500)
 });
 
-const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
+// const axesHelper = new THREE.AxesHelper(5);
+// scene.add(axesHelper);
 
 
 /**
@@ -257,7 +291,8 @@ scene.add(axesHelper);
 
 // controls.addEventListener('end', () => {
 //     // raycasterTipons();
-//     console.log(renderer.info)
+//     // console.log(renderer.info)
+//     console.log(camera.position);
 // });
 
 // function raycasterTipons() {
@@ -333,41 +368,8 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 
-// let hdrJpgLoader = new HDRJPGLoader(loadingManager);
-
 // /environmentMaps/jpg/garage.jpg
 // /environmentMaps/jpg/skylit_garage_4k.jpg
-
-// let hdrJpgEquirectangularMap
-// let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/garage.jpg', () => {
-
-//     hdrJpgEquirectangularMap = hdrJpg.renderTarget.texture;
-
-//     hdrJpgEquirectangularMap.mapping = THREE.EquirectangularReflectionMapping;
-//     hdrJpgEquirectangularMap.needsUpdate = true;
-
-//     scene.environment = hdrJpgEquirectangularMap;
-
-//     let skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution);
-//     skybox.position.y = constants.height  - 0.01;
-//     scene.add(skybox)
-
-//     //* Мы можем управлять проекцией скайбокса с помощью радиуса и высоты, но так как результат непредсказуем, лучше добавить эти значения в lil-gui:
-//     hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
-//         skybox.radius = constants.radius;
-//         scene.remove(skybox); // Удаление старого skybox
-//         skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius); // Создание нового skybox с обновленными параметрами
-//         skybox.position.y = constants.height - 0.01;
-//         scene.add(skybox); // Добавление нового skybox на сцену
-//     });
-//     hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onChange(() => {
-//         skybox.height = constants.height;
-//         scene.remove(skybox); // Удаление старого skybox
-//         skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius); // Создание нового skybox с обновленными параметрами
-//         skybox.position.y = constants.height - 0.01;
-//         scene.add(skybox); // Добавление нового skybox на сцену
-//     });
-// });
 
 let hdrJpgEquirectangularMap;
 let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/garage.jpg', () => {
@@ -381,6 +383,8 @@ let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/
     let skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution);
     skybox.position.y = constants.height - 0.01;
     scene.add(skybox);
+
+    console.log(skybox)
 
     //* Управление параметрами skybox через GUI:
     hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
@@ -415,26 +419,8 @@ toneMapping.add(renderer, 'toneMapping', {
 })
 
 // renderer.toneMappingExposure = 1.6;
-renderer.toneMappingExposure = 0.9;
+renderer.toneMappingExposure = 1.4;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
-
-
-window.addEventListener('resize', () =>
-{
-    // Update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
-
-    // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
-
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
-    // fitCameraToCenteredObject(camera, current_object, offset, controls);
-})
 
 
 const tick = () =>
@@ -501,48 +487,48 @@ interiorButton.addEventListener('click', () => {
 });
 
 
-const fitCameraToCenteredObject = function (
-    camera,
-    current_object,
-    offset,
-    orbitControls
-  ) {
-    const boundingBox = new THREE.Box3();
-    boundingBox.setFromObject(current_object);
+// const fitCameraToCenteredObject = function (
+//     camera,
+//     current_object,
+//     offset,
+//     orbitControls
+//   ) {
+//     const boundingBox = new THREE.Box3();
+//     boundingBox.setFromObject(current_object);
   
-    var size = new THREE.Vector3();
-    boundingBox.getSize(size);
+//     var size = new THREE.Vector3();
+//     boundingBox.getSize(size);
   
-    const fov = camera.fov * (Math.PI / 180);
-    const fovh = 2 * Math.atan(Math.tan(fov / 2) * camera.aspect);
-    let dx = size.z / 2 + Math.abs(size.x / 2 / Math.tan(fovh / 2));
-    let dy = size.z / 2 + Math.abs(size.y / 2 / Math.tan(fov / 2));
-    let cameraX = Math.max(dx, dy);
+//     const fov = camera.fov * (Math.PI / 180);
+//     const fovh = 2 * Math.atan(Math.tan(fov / 2) * camera.aspect);
+//     let dx = size.z / 2 + Math.abs(size.x / 2 / Math.tan(fovh / 2));
+//     let dy = size.z / 2 + Math.abs(size.y / 2 / Math.tan(fov / 2));
+//     let cameraX = Math.max(dx, dy);
   
-    // offset the camera, if desired (to avoid filling the whole canvas)
-    if (offset !== undefined && offset !== 0) cameraX *= offset;
+//     // offset the camera, if desired (to avoid filling the whole canvas)
+//     if (offset !== undefined && offset !== 0) cameraX *= offset;
   
-    //! change varibale name to cameraX
-    // camera.position.x = cameraX;
-    camera.position.set(cameraX, cameraPosY, cameraPosZ);
+//     //! change varibale name to cameraX
+//     // camera.position.x = cameraX;
+//     camera.position.set(cameraX, cameraPosY, cameraPosZ);
   
-    // set the far plane of the camera so that it easily encompasses the whole current_object
-    const minZ = boundingBox.min.z;
-    const cameraToFarEdge = minZ < 0 ? -minZ + cameraX : cameraX - minZ;
+//     // set the far plane of the camera so that it easily encompasses the whole current_object
+//     const minZ = boundingBox.min.z;
+//     const cameraToFarEdge = minZ < 0 ? -minZ + cameraX : cameraX - minZ;
   
-    camera.far = cameraToFarEdge * 3;
-    camera.updateProjectionMatrix();
+//     camera.far = cameraToFarEdge * 3;
+//     camera.updateProjectionMatrix();
   
-    if (orbitControls !== undefined) {
-      // set camera to rotate around the center
-      orbitControls.target = new THREE.Vector3(0, 0, 0);
+//     if (orbitControls !== undefined) {
+//       // set camera to rotate around the center
+//       orbitControls.target = new THREE.Vector3(0, 0, 0);
   
-      // prevent camera from zooming out far enough to create far plane cutoff
-      orbitControls.maxDistance = cameraToFarEdge * 2;
-      orbitControls.minDistance = cameraToFarEdge / 2;
-      orbitControls.maxPolarAngle = Math.PI * 0.5;
-    }
+//       // prevent camera from zooming out far enough to create far plane cutoff
+//       orbitControls.maxDistance = cameraToFarEdge * 2;
+//       orbitControls.minDistance = cameraToFarEdge / 2;
+//       orbitControls.maxPolarAngle = Math.PI * 0.5;
+//     }
   
-    // controls.minDistance = 1.65;
-    // controls.maxDistance = 2;
-  };
+//     // controls.minDistance = 1.65;
+//     // controls.maxDistance = 2;
+//   };

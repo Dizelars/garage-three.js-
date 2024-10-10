@@ -110,19 +110,41 @@ window.addEventListener('resize', () =>
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
+let cameraPosX;
+let cameraPosY;
+let cameraPosZ;
+let maxDistanceOrbit;
+
+if (window.innerWidth < 480) {
+    cameraPosX = 4.7;
+    cameraPosY = 3.1;
+    cameraPosZ = 8.5;
+    maxDistanceOrbit = 10;
+} else if (window.innerWidth >= 480 && window.innerWidth <= 1200) {
+    cameraPosX = 3.2;
+    cameraPosY = 2.3;
+    cameraPosZ = 5.6;
+    maxDistanceOrbit = 8;
+} else {
+    cameraPosX = 2.5;
+    cameraPosY = 2;
+    cameraPosZ = 4.5;
+    maxDistanceOrbit = 6;
+}
+
 /**
  * Camera
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(2.5, 2, 4.5)
+camera.position.set(cameraPosX, cameraPosY, cameraPosZ)
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.target.set(0, 0.75, 0)
 controls.maxPolarAngle = Math.PI * 0.5;
-controls.maxDistance = 5.5;
+controls.maxDistance = maxDistanceOrbit;
 controls.minDistance = 3.5;
 controls.enableDamping = true
 //* Отключение перетаскивания
@@ -175,7 +197,10 @@ let constants = {
 // С фиксом андроида
 // models/model_vectary/solaris/ar_android_fix/solaris.gltf
 
-gltfLoader.load("models/model_vectary/solaris/ar_android_fix/solaris.gltf", (gltf) => {
+// Сжатая модель и текстуры
+// models/model_vectary/transformed/solaris/solaris.gltf
+
+gltfLoader.load("models/model_vectary/transformed/solaris/solaris.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
@@ -208,8 +233,8 @@ gltfLoader.load("models/model_vectary/solaris/ar_android_fix/solaris.gltf", (glt
     // }, 500)
 });
 
-const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
+// const axesHelper = new THREE.AxesHelper(5);
+// scene.add(axesHelper);
 
 
 /**
@@ -370,7 +395,7 @@ toneMapping.add(renderer, 'toneMapping', {
 })
 
 // renderer.toneMappingExposure = 2;
-renderer.toneMappingExposure = 0.9;
+renderer.toneMappingExposure = 1.4;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 
@@ -392,7 +417,7 @@ const tick = () =>
 
 tick()
 //! 1. Информация о рендере
-console.log(renderer.info)
+// console.log(renderer.info)
 
 // Переключение между сценами при клике на кнопку с классом ".tech_spec__interior"
 let activeScene = 1;

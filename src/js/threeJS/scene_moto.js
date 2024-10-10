@@ -110,19 +110,41 @@ window.addEventListener('resize', () =>
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
+let cameraPosX;
+let cameraPosY;
+let cameraPosZ;
+let maxDistanceOrbit;
+
+if (window.innerWidth < 480) {
+    cameraPosX = 4.7;
+    cameraPosY = 3.1;
+    cameraPosZ = 8.5;
+    maxDistanceOrbit = 10;
+} else if (window.innerWidth >= 480 && window.innerWidth <= 1200) {
+    cameraPosX = 3.2;
+    cameraPosY = 2.3;
+    cameraPosZ = 5.6;
+    maxDistanceOrbit = 8;
+} else {
+    cameraPosX = 2.5;
+    cameraPosY = 2;
+    cameraPosZ = 4.5;
+    maxDistanceOrbit = 6;
+}
+
 /**
  * Camera
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(2.5, 2, 4.5)
+camera.position.set(cameraPosX, cameraPosY, cameraPosZ)
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.target.set(0, 0.75, 0)
 controls.maxPolarAngle = Math.PI * 0.5;
-controls.maxDistance = 5.5;
+controls.maxDistance = maxDistanceOrbit;
 controls.minDistance = 3.5;
 controls.enableDamping = true
 //* Отключение перетаскивания
@@ -155,28 +177,31 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // Обьект параметров
 let constants = {
-    scale: 0.6,
+    scale: 2.6,
     height: 2,
 	radius: 14,
     resolution: 23
 }
 
 // let constants = {
-//     scale: 0.6,
+//     scale: 2.6,
 //     height: 8.5,
 // 	radius: 50,
 //     resolution: 24
 // }
 
-// models/moto_transform/MOTO_16.08.gltf
-// models/moto/MOTO_16.08.gltf
+// models/moto/moto.gltf
 
-gltfLoader.load("models/moto/moto.gltf", (gltf) => {
+// Сжатая модель и текстуры
+// models/model_vectary/transformed/moto/moto.gltf
+
+gltfLoader.load("models/model_vectary/transformed/moto/moto.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
     current_object.position.x = 0.03;
-    current_object.position.y = Math.PI * 0.33;
+    // current_object.position.y = Math.PI * 0.33;
+    current_object.position.y = 0;
     current_object.position.z = 0;
     current_object.rotation.y = -3.14;
     // current_object.scale.set(0.12, 0.12, 0.12);
@@ -200,8 +225,8 @@ gltfLoader.load("models/moto/moto.gltf", (gltf) => {
     console.log(renderer.info)
 });
 
-const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
+// const axesHelper = new THREE.AxesHelper(5);
+// scene.add(axesHelper);
 
 
 /**
@@ -361,7 +386,7 @@ toneMapping.add(renderer, 'toneMapping', {
 })
 
 // renderer.toneMappingExposure = 2;
-renderer.toneMappingExposure = 0.9;
+renderer.toneMappingExposure = 1.4;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 
@@ -383,4 +408,4 @@ const tick = () =>
 
 tick()
 //! 1. Информация о рендере
-console.log(renderer.info)
+// console.log(renderer.info)
