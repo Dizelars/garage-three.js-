@@ -439,6 +439,35 @@ const tick = () =>
 }
 
 tick()
+
+// let renderCount = 0; // Счетчик рендеров
+// const maxRenders = 150; // Максимальное количество рендеров
+
+// // Добавление обработчика событий на изменения контроллера
+// controls.addEventListener("change", () => {
+//     renderer.render(scene, camera);
+// });
+
+// const tick = () => {
+//     // stats.begin()
+
+//     // Update controls
+//     controls.update();
+
+//     // Render
+//     if (renderCount < maxRenders) {
+//         renderer.render(scene, camera);
+//     }
+//     renderCount++; // Увеличиваем счетчик
+
+//     // Call tick again on the next frame
+//     window.requestAnimationFrame(tick);
+
+//     // stats.end()
+// };
+
+// tick();
+
 //! 1. Информация о рендере
 // console.log(renderer.info)
 

@@ -249,6 +249,8 @@ gltfLoader.load("models/model_vectary/transformed/kater/kater.gltf", (gltf) => {
     updateAllMaterials()
     console.log(renderer.info)
 
+    // sceneReady = true
+
     // window.setTimeout(() => {
     //     sceneReady = true
     // }, 500)
@@ -426,7 +428,6 @@ toneMapping.add(renderer, 'toneMapping', {
 renderer.toneMappingExposure = 1;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
-
 const tick = () =>
 {
     // stats.begin()
@@ -444,6 +445,35 @@ const tick = () =>
 }
 
 tick()
+
+// let renderCount = 0; // Счетчик рендеров
+// const maxRenders = 150; // Максимальное количество рендеров
+
+// // Добавление обработчика событий на изменения контроллера
+// controls.addEventListener("change", () => {
+//     renderer.render(scene, camera);
+// });
+
+// const tick = () => {
+//     // stats.begin()
+
+//     // Update controls
+//     controls.update();
+
+//     // Render
+//     if (renderCount < maxRenders) {
+//         renderer.render(scene, camera);
+//     }
+//     renderCount++; // Увеличиваем счетчик
+
+//     // Call tick again on the next frame
+//     window.requestAnimationFrame(tick);
+
+//     // stats.end()
+// };
+
+// tick();
+
 //! 1. Информация о рендере
 // console.log(renderer.info)
 
