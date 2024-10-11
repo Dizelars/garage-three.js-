@@ -109,8 +109,10 @@
         gap: 20px;
         grid-auto-flow: row;
         grid-template-areas:
-        "traffic_patrol-1 . traffic_patrol-text-2 traffic_patrol-text-2 traffic_patrol-text-2"
-        "slider_button-wrapper . traffic_patrol-text-4 traffic_patrol-text-5 ."
+        /* "traffic_patrol-1 . traffic_patrol-text-2 traffic_patrol-text-2 traffic_patrol-text-2" */
+        /* "slider_button-wrapper . traffic_patrol-text-4 traffic_patrol-text-5 ." */
+        "traffic_patrol-1 traffic_patrol-text-2 traffic_patrol-text-2 traffic_patrol-text-2 traffic_patrol-text-2"
+        "slider_button-wrapper traffic_patrol-text-4 traffic_patrol-text-5 . ."
         ". . . . ."
         /* ". traffic_patrol-no-slide-7 traffic_patrol-no-slide-7 traffic_patrol-no-slide-8 traffic_patrol-no-slide-8" */
         /* "traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz"; */

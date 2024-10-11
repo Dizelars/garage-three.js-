@@ -48,9 +48,9 @@ const rotationFolder = modelPosition.addFolder('rotation');
 const scaleFolder = modelScale.addFolder('scale');
 
 //! Monitor FPS
-const stats = new Stats()
-stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild(stats.dom)
+// const stats = new Stats()
+// stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+// document.body.appendChild(stats.dom)
 
 /**
  * Loading Менеджер загрузки
@@ -164,13 +164,25 @@ const updateAllMaterials = () =>
     {
         if(child.isMesh && child.material.isMeshStandardMaterial)
         {
-            // child.material.envMapIntensity = global.envMapIntensity
-            // child.material.side = THREE.FrontSide
-            // child.material.side = THREE.DoubleSide
-            // child.material.side = THREE.TwoPassDoubleSide
-            // child.material.castShadows = false
-            // child.material.transparent = false
-            // child.material.opacity = 0
+            if (child.castShadow) {
+                child.castShadow = false;
+            }
+            
+            if (child.receiveShadow) {
+                child.receiveShadow = false;
+            }
+
+            if (child.matrixAutoUpdate) {
+                child.matrixAutoUpdate = false;
+            }
+
+            if (child.matrixWorldAutoUpdate) {
+                child.matrixWorldAutoUpdate = false;
+            }
+
+            if (child.matrixWorldNeedsUpdate) {
+                child.matrixWorldNeedsUpdate = false;
+            }
         }
     })
 }
@@ -235,7 +247,7 @@ gltfLoader.load("models/model_vectary/transformed/amarok/untitled.gltf", (gltf) 
     scene.add(current_object);
 
     // controls.update()
-    // updateAllMaterials()
+    updateAllMaterials()
     console.log(renderer.info)
     // console.log(renderer.info.memory)
     
@@ -357,10 +369,13 @@ gltfLoader.load("models/model_vectary/transformed/amarok/untitled.gltf", (gltf) 
  */
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
-    antialias: true
+    antialias: true,
+    powerPreference: 'high-performance',
+    precision: 'lowp'
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.shadowMap.autoUpdate = false;
 
 
 // /environmentMaps/jpg/garage.jpg
@@ -379,7 +394,7 @@ let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/
     skybox.position.y = constants.height - 0.01;
     scene.add(skybox);
 
-    console.log(skybox)
+    // console.log(skybox)
 
     //* Управление параметрами skybox через GUI:
     hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
@@ -420,7 +435,7 @@ toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 const tick = () =>
 {
-    stats.begin()
+    // stats.begin()
 
     // Update controls
     controls.update()
@@ -431,7 +446,7 @@ const tick = () =>
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
 
-    stats.end()
+    // stats.end()
 }
 
 tick()

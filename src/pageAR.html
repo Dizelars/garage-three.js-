@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://garagetest.ru/favicons/favicon-16x16.png">
     <link rel="manifest" href="https://garagetest.ru/favicons/site.webmanifest">
     <link rel="mask-icon" href="https://garagetest.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="stylesheet" href="./style/default/fonts.css">
+    <link rel="stylesheet" href="fonts.css">
      <style>
         * {
             box-sizing: border-box;
@@ -73,6 +73,16 @@
           -o-object-fit: cover;
           object-fit: cover;
         }
+
+        /* .model_picture {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          max-width: max-content;
+          pointer-events: none;
+        } */
      </style>
     <title>AR</title>
   </head>
@@ -82,6 +92,8 @@
     <div class="link_to_page">
       <a>На страницу с моделью</a>
     </div>
+
+    <!-- <img class="model_picture" alt="Транспортное средство ЦОДД"> -->
 
     <div class="video_container">
       <video playsinline preload muted loop autoplay></video>
@@ -155,16 +167,16 @@
       // milk/BHSAD.gltf
 
       const arModelUrls = {
-          moto: 'moto/moto.gltf',
-          amarok: 'model_vectary/amarok/noAnimation/ar_android_fix/untitled.gltf',
-          bus: 'model_vectary/bus/noAnimation/ar_android_fix/bus_no_animation.gltf',
-          ford: 'model_vectary/ford/ar_android_fix/ford.gltf',
-          kamaz: 'model_vectary/kamaz/noAnimation/ar_android_fix/kamaz_no_animation.gltf',
-          kater: 'model_vectary/kater/ar_android_fix/kater.gltf',
+          moto: 'model_vectary/transformed/moto/moto.gltf',
+          amarok: 'model_vectary/transformed/amarok/untitled.gltf',
+          bus: 'model_vectary/transformed/bus/bus_no_animation.gltf',
+          ford: 'model_vectary/transformed/ford/ford.gltf',
+          kamaz: 'model_vectary/transformed/kamaz/kamaz_no_animation.gltf',
+          kater: 'model_vectary/transformed/kater/kater.gltf',
           moskvich: 'model_vectary/moskvich/New_No_fix/untitled.gltf',
-          solaris: 'model_vectary/solaris/ar_android_fix/solaris.gltf',
-          velo: 'model_vectary/velo/ar_android_fix/velo.gltf',
-          test: 'milk/BHSAD.gltf',
+          solaris: 'model_vectary/transformed/solaris/solaris.gltf',
+          velo: 'model_vectary/transformed/velo/velo.gltf',
+          test: 'MuslCarLowPoly_mintexture_transform/untitled.gltf',
       };
       
       const pageModelUrls = {
@@ -191,14 +203,27 @@
           velo: 'media/video/velo.mp4'
       };
 
+      // const photoModelUrls = {
+      //     moto: 'media/images/modelPage/slider/moto.png',
+      //     amarok: 'media/images/modelPage/slider/amarok.png',
+      //     bus: 'media/images/modelPage/slider/bus.png',
+      //     ford: 'media/images/modelPage/slider/ford.png',
+      //     kamaz: 'media/images/modelPage/slider/kamaz.png',
+      //     kater: 'media/images/modelPage/slider/kater.png',
+      //     moskvich: 'media/images/modelPage/slider/moskvich.png',
+      //     solaris: 'media/images/modelPage/slider/solaris.png',
+      //     velo: 'media/images/modelPage/slider/velo.png'
+      // };
+
       let arModelUrl = arModelUrls[newsId];
       let pageModelUrl = pageModelUrls[newsId];
       let videoModelUrl = videoModelUrls[newsId];
+      // let photoModelUrl = photoModelUrls[newsId];
 
       document.addEventListener("DOMContentLoaded", () => {
           const linkToPage = document.querySelector('.link_to_page a');
-
           const videoElement = document.querySelector('video');
+          const modelPicture = document.querySelector('.model_picture');
 
           const m_viewer = document.createElement('model-viewer');
           m_viewer.setAttribute('class', 'google_viewer');
@@ -208,6 +233,13 @@
           if (arModelUrl) {
               m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);
           }
+
+          m_viewer.addEventListener('ar-status', (event) => {
+            console.log(event.detail.status)
+              // if(event.detail.status === 'failed'){
+
+              // }
+          });
 
           document.getElementById('div_mv').appendChild(m_viewer);
           setTimeout(() => {
@@ -223,23 +255,12 @@
               const sourceElement = document.createElement('source');
               sourceElement.setAttribute('src', `${videoModelUrl}`);
               sourceElement.setAttribute('type', 'video/mp4');
-
               videoElement.appendChild(sourceElement);
-
-              // Обработчик для отладки загрузки и воспроизведения
-              // videoElement.addEventListener('loadeddata', () => {
-              //   console.log('Видео загружено.');
-              //   videoElement.play().then(() => {
-              //     console.log('Видео успешно воспроизведено.');
-              //   }).catch(error => {
-              //     console.error('Ошибка при воспроизведении видео:', error);
-              //   });
-              // });
-
-              // videoElement.addEventListener('error', (e) => {
-              //   console.error('Ошибка при загрузке видео:', e);
-              // });
           };
+
+          // if (photoModelUrl) {
+          //   modelPicture.setAttribute('src', `${photoModelUrl}`);
+          // };
       });
      </script>
   </body>

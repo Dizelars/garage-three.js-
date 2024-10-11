@@ -126,9 +126,9 @@
         <div class="image">
             <img class="no_animated" src="media/images/modelPage/loader/logo.gif" alt="цодд">
         </div>
-        <span id="progress-label">0%</span>
+        <span id="progress-label">1%</span>
         <div id="hellopreloader_barWrapper">
-            <progress id="progress-bar" value="0" max="100"></progress>
+            <progress id="progress-bar" value="1" max="100"></progress>
         </div>
         <label for="progress-bar" id="progress_text">Загружаем модель в высоком разрешении.<br>Пожалуйста, дождитесь завершения</label>
     </div>
@@ -136,7 +136,7 @@
 
 <div class="header">
     <a class="header__logo" href="../index.html#help_desk">
-        <img class="header__logo-img" src="media/images/logo/header_logo.svg" alt="logo">
+        <img class="header__logo-img" src="media/images/logo/header_logo.svg" alt="logo" fetchpriority="high">
         <p class="header__logo-text">Гараж ЦОДД</p>
     </a>
 </div>
@@ -395,7 +395,7 @@
 <!-- https://garagetest.ru/models/model_vectary/solaris/No_fix/solaris.gltf -->
 <!-- С фиксом андроида -->
 <!-- https://garagetest.ru/models/model_vectary/solaris/ar_android_fix/solaris.gltf -->
-<model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garagetest.ru/models/model_vectary/solaris/ar_android_fix/solaris.gltf" alt="AR 3D-model"></model-viewer>
+<model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garagetest.ru/models/model_vectary/transformed/solaris/solaris.gltf" alt="AR 3D-model"></model-viewer>
 
 <a-scene loading-screen="enabled: true, dotsColor: #62A744, backgroundColor: #090909" vr-mode-ui="enabled: false" ar-mode-ui="enabled: false" xr-mode-ui="enabled: false"
          device-orientation-permission-ui="

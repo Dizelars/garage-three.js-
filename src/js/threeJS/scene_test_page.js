@@ -33,24 +33,24 @@ window.addEventListener('keypress', (event) => {
 })
 
 // Создаем папки дебагера
-const hdriFolder = gui.addFolder('Карта окружения');
-const toneMapping = gui.addFolder('Тоновое отображение')
+// const hdriFolder = gui.addFolder('Карта окружения');
+// const toneMapping = gui.addFolder('Тоновое отображение')
 // const PointFolder = gui.addFolder('Типоны');
 // const One = PointFolder.addFolder('Типон 1');
 // const Two = PointFolder.addFolder('Типон 2');
 // const Three = PointFolder.addFolder('Типон 3');
-const ModelFolder = gui.addFolder('Модель');
-const modelPosition = ModelFolder.addFolder('Позиция');
-const modelScale = ModelFolder.addFolder('Масштаб');
+// const ModelFolder = gui.addFolder('Модель');
+// const modelPosition = ModelFolder.addFolder('Позиция');
+// const modelScale = ModelFolder.addFolder('Масштаб');
 
-const positionFolder = modelPosition.addFolder('position');
-const rotationFolder = modelPosition.addFolder('rotation');
-const scaleFolder = modelScale.addFolder('scale');
+// const positionFolder = modelPosition.addFolder('position');
+// const rotationFolder = modelPosition.addFolder('rotation');
+// const scaleFolder = modelScale.addFolder('scale');
 
 //! Monitor FPS
-const stats = new Stats()
-stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild(stats.dom)
+// const stats = new Stats()
+// stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+// document.body.appendChild(stats.dom)
 
 /**
  * Loading Менеджер загрузки
@@ -71,204 +71,13 @@ loadingManager.onProgress = function(url, loaded, total) {
 const progressBarContainer = document.querySelector('.progress-bar');
 loadingManager.onLoad = function() {
     progressBarContainer.style.display = 'none';
-    // sceneReady = true;
-    // raycasterTipons()
-    // positionTipons()
 }
-
-/**
- * Change models
- */
-// let current_object = null;
-// let name_model = null;
-// const models = document.querySelectorAll('.sidenav .model');
-// models.forEach((model) => {
-//     model.addEventListener('click', () => {
-//         if (current_object !== null && name_model != model.textContent) {
-//             scene.remove(current_object);
-//         }
-//         if (name_model != model.textContent) {
-//             overlayMaterial.uniforms.uAlpha.value = 1
-//             loadingBarElement.classList.remove('ended')
-//             loadingBarElement.style.transform = 'scaleX(0)';
-//             scene.add(overlay)
-//             loadModel(model.textContent, model.getAttribute("data-folder"), model.getAttribute("data-model"));
-//         }
-//     })
-// })
-
-/**
- * Models
- */
-//* Обьект для хранения параметров мешей модели
-const global = {}
-//* Update all materials
-const updateAllMaterials = () =>
-{
-    scene.traverse((child) =>
-    {
-        if(child.isMesh && child.material.isMeshStandardMaterial)
-        {
-            child.material.envMapIntensity = global.envMapIntensity
-            // child.material.side = THREE.FrontSide
-            child.material.side = THREE.DoubleSide
-        }
-    })
-}
-
-
-let dracoLoader = new DRACOLoader(loadingManager)
-dracoLoader.setDecoderPath('/draco/')
-let gltfLoader = new GLTFLoader(loadingManager)
-gltfLoader.setDRACOLoader(dracoLoader)
-
-// Обьект параметров
-let constants = {
-    scale: 3,
-    height: 2.5,
-	radius: 12,
-    resolution: 64
-}
-
-// let constants = {
-//     scale: 3,
-//     height: 8.5,
-// 	radius: 50,
-//     resolution: 64
-// }
-
-// let sceneReady = false
-
-// Солярис
-// Без фикса андроида
-// models/model_vectary/solaris/No_fix/solaris.gltf
-// С фиксом андроида
-// models/model_vectary/solaris/ar_android_fix/solaris.gltf
-
-// Синичка
-// models/sinichka/S2.gltf
-
-// Молоко
-// models/milk/BHSAD.gltf
-
-gltfLoader.load("models/milk/BHSAD.gltf", (gltf) => {
-    console.log(gltf);
-    let current_object = gltf.scene;
-
-    // current_object.position.x = 0;
-    // current_object.position.y = -0.2;
-    // current_object.position.z = 0;
-    // current_object.rotation.y = -1.55;
-    // current_object.scale.set(3,3,3);
-
-    current_object.position.x = 0;
-    current_object.position.y = 1;
-    current_object.position.z = 0;
-    current_object.rotation.y = -1.55;
-    current_object.scale.set(constants.scale, constants.scale, constants.scale);
-
-    positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
-    positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
-    positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
-
-    rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
-    rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
-    rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
-    
-    scaleFolder.add(constants, 'scale', 0.1, 9, 0.1).name('Scale').onChange((value) => {
-        current_object.scale.set(value, value, value);
-    });
-
-    scene.add(current_object);
-
-    // controls.update()
-    updateAllMaterials()
-    console.log(renderer.info)
-
-    // window.setTimeout(() => {
-    //     sceneReady = true
-    // }, 500)
-});
-
-// function loadModel(name, folder, model) {
-//     gltfLoader.setPath(`models/${folder}/`);
-//     gltfLoader.load(model + ".gltf", function(gltf) {
-//         console.log(gltf);
-//         current_object = gltf.scene;
-//         name_model = name;
-//         if (name == 'Muslcar') {
-//             current_object.position.x = 0
-//             current_object.position.y = Math.PI * 0.42
-//             current_object.position.z = 0
-//         } else if (name == 'Police') {
-//             current_object.position.x = 0
-//             current_object.position.y = Math.PI * 0.48
-//             current_object.position.z = 0
-//             current_object.rotation.y = Math.PI * 0.5
-//         } else if (name == 'Bank_truck') {
-//             current_object.scale.set(0.01, 0.01, 0.01)
-//             current_object.rotation.y = - (Math.PI * 0.5)
-//         } else if (name == 'Japanese_sedan') {
-//             current_object.scale.set(0.03, 0.03, 0.03)
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.48
-//         } else if (name == 'Pickup') {
-//             current_object.scale.set(0.03, 0.03, 0.03)
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.72
-//         } else if (name == 'Wagon') {
-//             current_object.rotation.y = Math.PI * 0.5
-//             current_object.position.y = Math.PI * 0.45
-//         }
-    
-//         scene.add(current_object);
-
-//         // controls.update()
-//         updateAllMaterials()
-//         console.log(renderer.info)
-//     });
-// }
-
-/**
- * Pounts on model
- */
-// const points = [
-//     {
-//         position: new THREE.Vector3(0.96, 0.8, - 0.58),
-//         element: document.querySelector('.point-0')
-//     },
-//     {
-//         position: new THREE.Vector3(0.04, 0.76, 2.4),
-//         element: document.querySelector('.point-1')
-//     },
-//     {
-//         position: new THREE.Vector3(0, 0.86, - 2.26),
-//         element: document.querySelector('.point-2')
-//     }
-// ]
-
-// One.add(points[0].position,'x',-9,9,0.01)
-// One.add(points[0].position,'y',-9,9,0.01)
-// One.add(points[0].position,'z',-9,9,0.01)
-
-// Two.add(points[1].position,'x',-9,9,0.01)
-// Two.add(points[1].position,'y',-9,9,0.01)
-// Two.add(points[1].position,'z',-9,9,0.01)
-
-// Three.add(points[2].position,'x',-9,9,0.01)
-// Three.add(points[2].position,'y',-9,9,0.01)
-// Three.add(points[2].position,'z',-9,9,0.01)
-
-/**
- * Raycaster
- */
-// const raycaster = new THREE.Raycaster()
 
 // Canvas
 const canvas = document.querySelector('canvas#webgl')
 
 // Scene
-const scene = new THREE.Scene()
+const scene = new THREE.Scene(loadingManager)
 
 /**
  * Sizes
@@ -311,75 +120,110 @@ controls.enableDamping = true
 //* Отключение перетаскивания
 controls.enablePan = false
 
-// Логика типонов
-// controls.addEventListener('change', () => {
-//     positionTipons();
-// });
-
-// controls.addEventListener('end', () => {
-//     raycasterTipons();
-// });
-
-// function raycasterTipons() {
-//     if (sceneReady) {
-//         for(const point of points) {
-//             const screenPosition = point.position.clone()
-//             screenPosition.project(camera)
-
-//             raycaster.setFromCamera(screenPosition, camera)
-//             const intersects = raycaster.intersectObjects(scene.children, true)
-
-//             if (intersects.length === 0) {
-//                 point.element.classList.add('visible')
-//             }
-//             else {
-//                 const intersectionDistance = intersects[0].distance
-//                 const pointDistance = point.position.distanceTo(camera.position)
-//                 if (intersectionDistance < pointDistance) {
-//                     point.element.classList.remove('visible')
-//                 }
-//                 else {
-//                     point.element.classList.add('visible')
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// function positionTipons() {
-//     if (sceneReady) {
-//         for(const point of points) {
-//             const screenPosition = point.position.clone()
-//             screenPosition.project(camera)
-
-//             const translateX = screenPosition.x * sizes.width * 0.5
-//             const translateY = - screenPosition.y * sizes.height * 0.5
-//             point.element.style.transform = `translate(${translateX}px, ${translateY}px)`
-//         }
-//     }
-// }
-
-// controls.update();
-
 /**
- * Point click
+ * Models
  */
-// const pointsOnModel = document.querySelectorAll('.point')
+//* Обьект для хранения параметров мешей модели
+// const global = {}
+//* Update all materials
+const updateAllMaterials = () =>
+{
+    scene.traverse((child) =>
+    {
+        if(child.isMesh && child.material.isMeshStandardMaterial)
+        {
+            if (child.castShadow) {
+                child.castShadow = false;
+            }
+            
+            if (child.receiveShadow) {
+                child.receiveShadow = false;
+            }
 
-// pointsOnModel.forEach((point) => {
-//     point.addEventListener('click', () => {
-//         point.classList.toggle('show')
+            if (child.matrixAutoUpdate) {
+                child.matrixAutoUpdate = false;
+            }
+            
+            if (child.matrixWorldAutoUpdate) {
+                child.matrixWorldAutoUpdate = false;
+            }
+            
+            if (child.matrixWorldNeedsUpdate) {
+                child.matrixWorldNeedsUpdate = false;
+            }
+        }
+    })
+}
 
-//         // Проверка наличия класса 'show' у остальных точек
-//         pointsOnModel.forEach((otherPoint) => {
-//             if (otherPoint !== point) {
-//                 if (otherPoint.classList.contains('show')) {
-//                     otherPoint.classList.remove('show')
-//                 }
-//             }
-//         })
-//     })
-// })
+
+let dracoLoader = new DRACOLoader(loadingManager)
+dracoLoader.setDecoderPath('/draco/')
+let gltfLoader = new GLTFLoader(loadingManager)
+gltfLoader.setDRACOLoader(dracoLoader)
+
+// Обьект параметров
+let constants = {
+    scale: 1,
+    height: 2.5,
+	radius: 12,
+    resolution: 24
+}
+
+// let constants = {
+//     scale: 3,
+//     height: 8.5,
+// 	radius: 50,
+//     resolution: 64
+// }
+
+// Солярис
+// Без фикса андроида
+// models/model_vectary/solaris/No_fix/solaris.gltf
+// С фиксом андроида
+// models/model_vectary/solaris/ar_android_fix/solaris.gltf
+
+// Синичка
+// models/sinichka/S2.gltf
+
+// Молоко
+// models/milk/BHSAD.gltf
+
+// models/MuslCarLowPoly_mintexture_transform/untitled.gltf
+
+gltfLoader.load("models/MuslCarLowPoly_mintexture_transform/untitled.gltf", (gltf) => {
+    console.log(gltf);
+    let current_object = gltf.scene;
+
+    // current_object.position.x = 0;
+    // current_object.position.y = -0.2;
+    // current_object.position.z = 0;
+    // current_object.rotation.y = -1.55;
+    // current_object.scale.set(3,3,3);
+
+    current_object.position.x = 0;
+    current_object.position.y = 1.33;
+    current_object.position.z = 0;
+    current_object.rotation.y = 0;
+    current_object.scale.set(constants.scale, constants.scale, constants.scale);
+
+    // positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
+    // positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
+    // positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
+
+    // rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
+    // rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
+    // rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
+    
+    // scaleFolder.add(constants, 'scale', 0.1, 9, 0.1).name('Scale').onChange((value) => {
+    //     current_object.scale.set(value, value, value);
+    // });
+
+    scene.add(current_object);
+
+    // controls.update()
+    updateAllMaterials()
+    console.log(renderer.info)
+});
 
 
 /**
@@ -387,10 +231,13 @@ controls.enablePan = false
  */
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
-    antialias: true
+    antialias: true,
+    powerPreference: 'high-performance',
+    precision: 'lowp'
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.shadowMap.autoUpdate = false;
 
 
 let hdrJpgEquirectangularMap;
@@ -407,45 +254,43 @@ let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/
     scene.add(skybox);
 
     //* Управление параметрами skybox через GUI:
-    hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
-        updateSkybox();
-    });
+    // hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
+    //     updateSkybox();
+    // });
 
-    hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onChange(() => {
-        updateSkybox();
-    });
+    // hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onChange(() => {
+    //     updateSkybox();
+    // });
 
-    hdriFolder.add(constants, 'resolution', 1, 64, 1).name('skyboxResolution').onChange(() => {
-        updateSkybox();
-    });
+    // hdriFolder.add(constants, 'resolution', 1, 64, 1).name('skyboxResolution').onChange(() => {
+    //     updateSkybox();
+    // });
 
-    function updateSkybox() {
-        scene.remove(skybox); // Удаление старого skybox
-        skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution); // Создание нового skybox с обновленными параметрами
-        skybox.position.y = constants.height - 0.01;
-        scene.add(skybox); // Добавление нового skybox на сцену
-    }
+    // function updateSkybox() {
+    //     scene.remove(skybox); // Удаление старого skybox
+    //     skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution); // Создание нового skybox с обновленными параметрами
+    //     skybox.position.y = constants.height - 0.01;
+    //     scene.add(skybox); // Добавление нового skybox на сцену
+    // }
 });
 
 //! Tone mapping
 renderer.toneMapping = THREE.ACESFilmicToneMapping
-toneMapping.add(renderer, 'toneMapping', {
-    No: THREE.NoToneMapping,
-    Linear: THREE.LinearToneMapping,
-    Reinhard: THREE.ReinhardToneMapping,
-    Cineon: THREE.CineonToneMapping,
-    ACESFilmic: THREE.ACESFilmicToneMapping
-})
+// toneMapping.add(renderer, 'toneMapping', {
+//     No: THREE.NoToneMapping,
+//     Linear: THREE.LinearToneMapping,
+//     Reinhard: THREE.ReinhardToneMapping,
+//     Cineon: THREE.CineonToneMapping,
+//     ACESFilmic: THREE.ACESFilmicToneMapping
+// })
 
 // renderer.toneMappingExposure = 2;
-renderer.toneMappingExposure = 0.6;
-toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
+renderer.toneMappingExposure = 1.4;
+// toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
 
 
 const tick = () =>
 {
-    stats.begin()
-
     // Update controls
     controls.update()
 
@@ -454,13 +299,9 @@ const tick = () =>
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
-
-    stats.end()
 }
 
 tick()
-//! 1. Информация о рендере
-console.log(renderer.info)
 
 // Переключение между сценами при клике на кнопку с классом ".tech_spec__interior"
 let activeScene = 1;

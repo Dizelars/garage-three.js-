@@ -62,11 +62,11 @@
 <div class="progress-bar">
     <div class="progress-bar-container">
         <div class="image">
-            <img class="no_animated" src="media/images/modelPage/loader/logo.gif" alt="цодд">
+            <img class="no_animated" src="media/images/modelPage/loader/logo.gif" alt="цодд" fetchpriority="high">
         </div>
-        <span id="progress-label">0%</span>
+        <span id="progress-label">1%</span>
         <div id="hellopreloader_barWrapper">
-            <progress id="progress-bar" value="0" max="100"></progress>
+            <progress id="progress-bar" value="1" max="100"></progress>
         </div>
         <label for="progress-bar" id="progress_text">Загружаем модель в высоком разрешении.<br>Пожалуйста, дождитесь завершения</label>
     </div>
@@ -291,8 +291,7 @@
 <!-- https://garagetest.ru/models/model_vectary/velo/No_fix/velo.gltf -->
 <!-- С фиксом андроида -->
 <!-- https://garagetest.ru/models/model_vectary/velo/ar_android_fix/velo.gltf -->
-<model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garagetest.ru/models/model_vectary/velo/ar_android_fix/velo.gltf" alt="AR 3D-model"></model-viewer>
-</model-viewer>
+<model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garagetest.ru/models/model_vectary/transformed/velo/velo.gltf" alt="AR 3D-model"></model-viewer>
 
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 <script type="module" src="./js/fullModelScripts/velo.js"></script>
