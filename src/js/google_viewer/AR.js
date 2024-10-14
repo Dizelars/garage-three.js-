@@ -1,10 +1,21 @@
-document.querySelector('.pulse_wrapper').addEventListener('click', () => {
-	const modelViewer = document.querySelector('#pageWithModel');
+const modelViewer = document.querySelector('#pageWithModel');
+const pulseBlock = document.querySelector('.pulse_media');
 
-	// console.log("Доступность AR: " + modelViewer.canActivateAR)
-	
+document.querySelector('.pulse_wrapper').addEventListener('click', () => {
 	if (modelViewer.canActivateAR) {
+		pulseBlock.classList.add('loading');
 		modelViewer.activateAR();
+		modelViewer.addEventListener('ar-status', (event) => {
+			if (event.detail.status === 'session-started') {
+				console.log('AR session started');
+				// AR загружен
+				pulseBlock.classList.remove('loading'); 
+			} else if (event.detail.status === 'failed') {
+				console.log('Failed to start AR session');
+				// AR не загрузился
+				pulseBlock.classList.remove('loading'); 
+			}
+		});
 	} else {
 		if (window.innerWidth < 1200) {
 			console.log('No AR on this device');
@@ -14,13 +25,6 @@ document.querySelector('.pulse_wrapper').addEventListener('click', () => {
 			openPopupQR()
 		}
 	}
-	// if (window.innerWidth < 1200) {
-	// 	console.log('No AR on this device');
-	// 	openPopupARSupport()
-	// } else {
-	// 	console.log('Открываем QR с ссылкой на AR');
-	// 	openPopupQR()
-	// }
 });
 
 // Popap с QR-кодом
