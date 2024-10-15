@@ -74,6 +74,77 @@
           object-fit: cover;
         }
 
+        /* .AR_loading {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: rgba(255,255,255,0.10);
+          -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+        } */
+
+        /* .AR_loading .AR_loading_wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+        } */
+
+        .AR_loading {
+          position: absolute;
+          z-index: 2;
+          box-sizing: border-box;
+          top: 100px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100%;
+          padding: 0 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .AR_loading.AR_opened {
+          display: none;
+        }
+
+        .AR_loading .AR_loading_wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+          gap: 20px;
+          border-radius: 10px;
+          background: white;
+        }
+
+        .AR_loading .text {
+          font-family: 'MoscowSans', sans-serif;
+          font-weight: 500;
+          font-size: 16px;
+          text-align: center;
+          margin: 0;
+          color: #313131;
+        }
+
+        @media (max-width: 480px) {
+          .video_container {
+            transform: translateX(-50%);
+          }
+
+          .video_container.AR_opened {
+            transform: translate(-50%, -50%);
+          }
+        }
+
         /* .model_picture {
           position: absolute;
           top: 50%;
@@ -87,10 +158,20 @@
     <title>AR</title>
   </head>
   <body>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
     <div id="div_mv"></div>
 
     <div class="link_to_page">
       <a>На страницу с моделью</a>
+    </div>
+
+    <div class="AR_loading">
+      <div class="AR_loading_wrapper">
+        <p class="text">Подготавливаем показ модели в дополненной реальности</p>
+        <!-- <img class="gif_loading" src="./images/AR_loading.gif" alt="AR 3D"> -->
+        <dotlottie-player src="https://lottie.host/c8b1e0ce-7b93-410e-932a-65464aaf9c88/ARVftr2Y47.json" background="transparent" speed="1" style="width: 150px; height: 150px;" loop autoplay></dotlottie-player>
+      </div>
     </div>
 
     <!-- <img class="model_picture" alt="Транспортное средство ЦОДД"> -->
@@ -224,6 +305,8 @@
           const linkToPage = document.querySelector('.link_to_page a');
           const videoElement = document.querySelector('video');
           const modelPicture = document.querySelector('.model_picture');
+          const ARLoading = document.querySelector('.AR_loading');
+          const videoPrew = document.querySelector('.video_container');
 
           const m_viewer = document.createElement('model-viewer');
           m_viewer.setAttribute('class', 'google_viewer');
@@ -234,20 +317,17 @@
               m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);
           }
 
-          m_viewer.addEventListener('ar-status', (event) => {
-            console.log(event.detail.status)
-              // if(event.detail.status === 'failed'){
-
-              // }
-          });
-
           document.getElementById('div_mv').appendChild(m_viewer);
           setTimeout(() => {
               m_viewer.activateAR();
+              setTimeout(() => {
+                ARLoading.classList.add('AR_opened');
+                videoPrew.classList.add('AR_opened');
+              }, 10000);
           }, 100);
 
           if (pageModelUrl) {
-              linkToPage.setAttribute('href', `${pageModelUrl}`);
+            linkToPage.setAttribute('href', `${pageModelUrl}`);
           };
           
           if (videoModelUrl) {

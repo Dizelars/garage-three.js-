@@ -2,27 +2,21 @@ const modelViewer = document.querySelector('#pageWithModel');
 const pulseBlock = document.querySelector('.pulse_media');
 
 document.querySelector('.pulse_wrapper').addEventListener('click', () => {
+	pulseBlock.classList.add('loading');
 	if (modelViewer.canActivateAR) {
-		pulseBlock.classList.add('loading');
 		modelViewer.activateAR();
-		modelViewer.addEventListener('ar-status', (event) => {
-			if (event.detail.status === 'session-started') {
-				console.log('AR session started');
-				// AR загружен
-				pulseBlock.classList.remove('loading'); 
-			} else if (event.detail.status === 'failed') {
-				console.log('Failed to start AR session');
-				// AR не загрузился
-				pulseBlock.classList.remove('loading'); 
-			}
-		});
+		setTimeout(() => {
+			pulseBlock.classList.remove('loading');
+		}, 5000);
 	} else {
 		if (window.innerWidth < 1200) {
 			console.log('No AR on this device');
 			openPopupARSupport()
+			pulseBlock.classList.remove('loading');
 		} else {
 			console.log('Открываем QR с ссылкой на AR');
 			openPopupQR()
+			pulseBlock.classList.remove('loading');
 		}
 	}
 });
