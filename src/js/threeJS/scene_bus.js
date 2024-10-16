@@ -159,34 +159,17 @@ controls.enablePan = false
 //* Обьект для хранения параметров мешей модели
 // const global = {}
 //* Update all materials
-const updateAllMaterials = () =>
-{
-    scene.traverse((child) =>
-    {
-        if(child.isMesh && child.material.isMeshStandardMaterial)
-        {
-            if (child.castShadow) {
-                child.castShadow = false;
-            }
-            
-            if (child.receiveShadow) {
-                child.receiveShadow = false;
-            }
-
-            if (child.matrixAutoUpdate) {
-                child.matrixAutoUpdate = false;
-            }
-            
-            if (child.matrixWorldAutoUpdate) {
-                child.matrixWorldAutoUpdate = false;
-            }
-            
-            if (child.matrixWorldNeedsUpdate) {
-                child.matrixWorldNeedsUpdate = false;
-            }
+const updateAllMaterials = () => {
+    scene.traverse((child) => {
+        if (child.isMesh && child.material.isMeshStandardMaterial) {
+            child.castShadow = false;
+            child.receiveShadow = false;
+            child.matrixAutoUpdate = false;
+            child.matrixWorldAutoUpdate = false;
+            child.matrixWorldNeedsUpdate = false;
         }
-    })
-}
+    });
+};
 
 
 let dracoLoader = new DRACOLoader(loadingManager)

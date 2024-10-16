@@ -13,10 +13,66 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://garagetest.ru/favicons/favicon-16x16.png">
     <link rel="manifest" href="https://garagetest.ru/favicons/site.webmanifest">
     <link rel="mask-icon" href="https://garagetest.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="stylesheet" href="fonts.css">
+    <!-- <link rel="stylesheet" href="fonts.css"> -->
      <style>
+        @font-face {
+          font-family: "MoscowSans";
+          src: url("fonts/MoscowSans-Light.woff2") format("woff2"), 
+              url("fonts/MoscowSans-Light.woff") format("woff"), 
+              url("fonts/MoscowSans-Light.otf") format("otf"), 
+              url("fonts/MoscowSans-Light.ttf") format("ttf");
+          font-weight: 300;
+          font-style: normal;
+          font-display: swap;
+        }
+        
+        @font-face {
+          font-family: "MoscowSans";
+          src: url("fonts/MoscowSans-Regular.woff2") format("woff2"), 
+              url("fonts/MoscowSans-Regular.woff") format("woff"), 
+              url("fonts/MoscowSansRegular.otf") format("otf"), 
+              url("fonts/MoscowSansRegular.ttf") format("ttf");
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
+        
+        @font-face {
+          font-family: "MoscowSans";
+          src: url("fonts/MoscowSans-Medium.woff2") format("woff2"), 
+              url("fonts/MoscowSans-Medium.woff") format("woff"), 
+              url("fonts/MoscowSansMedium.otf") format("otf"), 
+              url("fonts/MoscowSansMedium.ttf") format("ttf");
+          font-weight: 500;
+          font-style: normal;
+          font-display: swap;
+        }
+        
+        @font-face {
+          font-family: "MoscowSans";
+          src: url("fonts/MoscowSans-Bold.woff2") format("woff2"), 
+              url("fonts/MoscowSans-Bold.woff") format("woff"), 
+              url("fonts/MoscowSansBold.otf") format("otf"), 
+              url("fonts/MoscowSansBold.ttf") format("ttf");
+          font-weight: 700;
+          font-style: normal;
+          font-display: swap;
+        }
+        
+        @font-face {
+          font-family: 'MoscowSans';
+          src: url("fonts/MoscowSansExtraBold.woff2") format("woff2"), 
+              url("fonts/MoscowSansExtraBold.woff") format("woff"), 
+              url("fonts/MoscowSansExtraBold.otf") format("otf"), 
+              url("fonts/MoscowSansExtraBold.ttf") format("ttf");
+          font-weight: 800;
+          font-style: normal;
+          font-display: swap;
+        }
+
         * {
-            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
         }
 
         body {
@@ -31,15 +87,22 @@
         }
 
         .link_to_page {
+          width: -webkit-fit-content;
+          width: -moz-fit-content;
           width: fit-content;
           position: absolute;
           left: 50%;
           top: 20px;
-          transform: translateX(-50%);
+          -webkit-transform: translateX(-50%);
+              -ms-transform: translateX(-50%);
+                  transform: translateX(-50%);
+          z-index: 2;
         }
 
         .link_to_page a {
           padding: 14px 12px;
+          width: -webkit-max-content;
+          width: -moz-max-content;
           width: max-content;
           border: 1px solid #FFFFFF;
           color: #FFFFFF;
@@ -47,9 +110,15 @@
           font-family: 'MoscowSans', sans-serif;
           font-weight: 300;
           font-size: 16px;
+          display: -webkit-box;
+          display: -ms-flexbox;
           display: flex;
-          justify-content: space-between;
-          align-items: center;
+          -webkit-box-pack: justify;
+              -ms-flex-pack: justify;
+                  justify-content: space-between;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
           cursor: pointer;
           text-decoration: none;
         }
@@ -58,7 +127,7 @@
             background-color: #313131;
         }
 
-        .video_container {
+        /* .video_container {
           position: absolute;
           top: 50%;
           left: 50%;
@@ -72,7 +141,7 @@
           height: 100%;
           -o-object-fit: cover;
           object-fit: cover;
-        }
+        } */
 
         /* .AR_loading {
           position: absolute;
@@ -100,15 +169,24 @@
         .AR_loading {
           position: absolute;
           z-index: 2;
-          box-sizing: border-box;
-          top: 100px;
+          -webkit-box-sizing: border-box;
+                  box-sizing: border-box;
+          top: 88px;
           left: 50%;
-          transform: translateX(-50%);
+          -webkit-transform: translateX(-50%);
+              -ms-transform: translateX(-50%);
+                  transform: translateX(-50%);
           width: 100%;
           padding: 0 10px;
+          display: -webkit-box;
+          display: -ms-flexbox;
           display: flex;
-          justify-content: center;
-          align-items: center;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
         }
 
         .AR_loading.AR_opened {
@@ -116,12 +194,19 @@
         }
 
         .AR_loading .AR_loading_wrapper {
+          display: -webkit-box;
+          display: -ms-flexbox;
           display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          /* flex-direction: column; */
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
           padding: 20px;
-          gap: 20px;
+          gap: 10px;
+          max-width: 400px;
           border-radius: 10px;
           background: white;
         }
@@ -135,7 +220,55 @@
           color: #313131;
         }
 
-        @media (max-width: 480px) {
+        .model_picture {
+          position: absolute;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          bottom: 0;
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+              -ms-transform: translateX(-50%);
+                  transform: translateX(-50%);
+          width: 100%;
+          max-width: 600px;
+          max-height: 600px;
+          pointer-events: none;
+          overflow: hidden;
+        }
+
+        .model_picture img {
+          width: 100%;
+          height: 100%;
+          -o-object-fit: cover;
+             object-fit: cover;
+        }
+
+        .model_picture .gradient {
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(70%, rgba(0, 0, 0, 0.00)), to(#000)), transparent 50% / cover no-repeat;
+          background: -o-linear-gradient(top, rgba(0, 0, 0, 0.00) 70%, #000 100%), transparent 50% / cover no-repeat;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 70%, #000 100%), transparent 50% / cover no-repeat;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        .model_picture .gradient_left {
+          left: 0;
+          -webkit-transform: rotate(90deg);
+              -ms-transform: rotate(90deg);
+                  transform: rotate(90deg);
+        }
+
+        .model_picture .gradient_right {
+          right: 0;
+          -webkit-transform: rotate(270deg);
+              -ms-transform: rotate(270deg);
+                  transform: rotate(270deg);
+        }
+
+        /* @media (max-width: 480px) {
           .video_container {
             transform: translateX(-50%);
           }
@@ -143,17 +276,31 @@
           .video_container.AR_opened {
             transform: translate(-50%, -50%);
           }
-        }
 
-        /* .model_picture {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 100%;
-          max-width: max-content;
-          pointer-events: none;
+          .model_picture {
+            transform: translateX(-50%);
+          }
+
+          .model_picture.AR_opened {
+            transform: translate(-50%, -50%);
+          }
         } */
+
+        @media (max-width: 375px) {
+          .AR_loading .AR_loading_wrapper {
+            padding: 5px;
+            gap: 5px;
+          }
+
+          .AR_loading .AR_loading_wrapper .lottie {
+            width: 100px !important;
+            height: 100px !important;
+          }
+
+          .AR_loading .text {
+            font-size: 14px;
+          }
+        }
      </style>
     <title>AR</title>
   </head>
@@ -170,15 +317,19 @@
       <div class="AR_loading_wrapper">
         <p class="text">Подготавливаем показ модели в дополненной реальности</p>
         <!-- <img class="gif_loading" src="./images/AR_loading.gif" alt="AR 3D"> -->
-        <dotlottie-player src="https://lottie.host/c8b1e0ce-7b93-410e-932a-65464aaf9c88/ARVftr2Y47.json" background="transparent" speed="1" style="width: 150px; height: 150px;" loop autoplay></dotlottie-player>
+        <dotlottie-player class="lottie" src="https://lottie.host/c8b1e0ce-7b93-410e-932a-65464aaf9c88/ARVftr2Y47.json" background="transparent" speed="1" style="width: 150px;" loop autoplay></dotlottie-player>
       </div>
     </div>
 
-    <!-- <img class="model_picture" alt="Транспортное средство ЦОДД"> -->
-
-    <div class="video_container">
-      <video playsinline preload muted loop autoplay></video>
+    <div class="model_picture">
+      <img alt="Транспортное средство ЦОДД" fetchpriority="high">
+      <div class="gradient gradient_left"></div>
+      <div class="gradient gradient_right"></div>
     </div>
+
+    <!-- <div class="video_container">
+      <video playsinline preload muted loop autoplay></video>
+    </div> -->
 
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
      <script type="module">
@@ -272,39 +423,39 @@
           velo: 'velo.html'
       };
 
-      const videoModelUrls = {
-          moto: 'media/video/moto.mp4',
-          amarok: 'media/video/amarok.mp4',
-          bus: 'media/video/bus.mp4',
-          ford: 'media/video/ford.mp4',
-          kamaz: 'media/video/kamaz.mp4',
-          kater: 'media/video/kater.mp4',
-          moskvich: 'media/video/moskvich.mp4',
-          solaris: 'media/video/salaris_gray.mp4',
-          velo: 'media/video/velo.mp4'
-      };
-
-      // const photoModelUrls = {
-      //     moto: 'media/images/modelPage/slider/moto.png',
-      //     amarok: 'media/images/modelPage/slider/amarok.png',
-      //     bus: 'media/images/modelPage/slider/bus.png',
-      //     ford: 'media/images/modelPage/slider/ford.png',
-      //     kamaz: 'media/images/modelPage/slider/kamaz.png',
-      //     kater: 'media/images/modelPage/slider/kater.png',
-      //     moskvich: 'media/images/modelPage/slider/moskvich.png',
-      //     solaris: 'media/images/modelPage/slider/solaris.png',
-      //     velo: 'media/images/modelPage/slider/velo.png'
+      // const videoModelUrls = {
+      //     moto: 'media/video/moto.mp4',
+      //     amarok: 'media/video/amarok.mp4',
+      //     bus: 'media/video/bus.mp4',
+      //     ford: 'media/video/ford.mp4',
+      //     kamaz: 'media/video/kamaz.mp4',
+      //     kater: 'media/video/kater.mp4',
+      //     moskvich: 'media/video/moskvich.mp4',
+      //     solaris: 'media/video/salaris_gray.mp4',
+      //     velo: 'media/video/velo.mp4'
       // };
+
+      const photoModelUrls = {
+          moto: 'media/images/modelPage/slider/moto.png',
+          amarok: 'media/images/modelPage/slider/amarok.png',
+          bus: 'media/images/modelPage/slider/bus.png',
+          ford: 'media/images/modelPage/slider/ford.png',
+          kamaz: 'media/images/modelPage/slider/kamaz.png',
+          kater: 'media/images/modelPage/slider/kater.png',
+          moskvich: 'media/images/modelPage/slider/moskvich.png',
+          solaris: 'media/images/modelPage/slider/solaris_gray.png',
+          velo: 'media/images/modelPage/slider/velo.png'
+      };
 
       let arModelUrl = arModelUrls[newsId];
       let pageModelUrl = pageModelUrls[newsId];
-      let videoModelUrl = videoModelUrls[newsId];
-      // let photoModelUrl = photoModelUrls[newsId];
+      // let videoModelUrl = videoModelUrls[newsId];
+      let photoModelUrl = photoModelUrls[newsId];
 
       document.addEventListener("DOMContentLoaded", () => {
           const linkToPage = document.querySelector('.link_to_page a');
-          const videoElement = document.querySelector('video');
-          const modelPicture = document.querySelector('.model_picture');
+          // const videoElement = document.querySelector('video');
+          const modelPicture = document.querySelector('.model_picture img');
           const ARLoading = document.querySelector('.AR_loading');
           const videoPrew = document.querySelector('.video_container');
 
@@ -322,25 +473,25 @@
               m_viewer.activateAR();
               setTimeout(() => {
                 ARLoading.classList.add('AR_opened');
-                videoPrew.classList.add('AR_opened');
-              }, 10000);
+                // videoPrew.classList.add('AR_opened');
+              }, 15000);
           }, 100);
 
           if (pageModelUrl) {
             linkToPage.setAttribute('href', `${pageModelUrl}`);
           };
           
-          if (videoModelUrl) {
-              // Создаем элемент source и добавляем его в видео
-              const sourceElement = document.createElement('source');
-              sourceElement.setAttribute('src', `${videoModelUrl}`);
-              sourceElement.setAttribute('type', 'video/mp4');
-              videoElement.appendChild(sourceElement);
-          };
-
-          // if (photoModelUrl) {
-          //   modelPicture.setAttribute('src', `${photoModelUrl}`);
+          // if (videoModelUrl) {
+          //     // Создаем элемент source и добавляем его в видео
+          //     const sourceElement = document.createElement('source');
+          //     sourceElement.setAttribute('src', `${videoModelUrl}`);
+          //     sourceElement.setAttribute('type', 'video/mp4');
+          //     videoElement.appendChild(sourceElement);
           // };
+
+          if (photoModelUrl) {
+            modelPicture.setAttribute('src', `${photoModelUrl}`);
+          };
       });
      </script>
   </body>

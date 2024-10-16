@@ -33,8 +33,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'src/index.html',
-        police: 'src/police.html',
-        muslCar: 'src/muslCar.html',
+        // police: 'src/police.html',
+        // muslCar: 'src/muslCar.html',
         moto: 'src/moto.html',
         amarok: 'src/amarok.html',
         bus: 'src/bus.html',

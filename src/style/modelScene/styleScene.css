@@ -51,16 +51,8 @@
     gap: 4px;
 }
 
-.pulse_media.loading .pulse_img:first-child {
-    display: none;
-}
-
 .pulse_media svg {
     display: none;
-}
-
-.pulse_media.loading svg {
-    display: block;
 }
 
 /* .pulse_media .pulse_img:first-child {
@@ -68,6 +60,7 @@
 } */
 
 .pulse {
+    display: block;
     position: absolute;
     text-align: center;
     border-radius: 8px;
@@ -75,6 +68,15 @@
     width: 88px;
     height: 42px;
     animation: move 1.5s linear infinite;
+}
+
+.pulse_wrapper.loading .pulse_img:first-child,
+.pulse_wrapper.loading .pulse {
+    display: none;
+}
+
+.pulse_wrapper.loading svg {
+    display: block;
 }
 
 /*Типон*/

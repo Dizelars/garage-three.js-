@@ -1,5 +1,5 @@
 const modelViewer = document.querySelector('#pageWithModel');
-const pulseBlock = document.querySelector('.pulse_media');
+const pulseBlock = document.querySelector('.pulse_wrapper');
 
 document.querySelector('.pulse_wrapper').addEventListener('click', () => {
 	pulseBlock.classList.add('loading');
