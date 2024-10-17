@@ -142,6 +142,17 @@
     </a>
 </div>
 
+<!-- <div class="vectary_forbidden">
+    <div class="forbidden_icons">
+        <img class="forbidden-warning" src="media/images/modelPage/vectary_403/forbidden_warning.svg" alt="warning">
+        <img class="forbidden-arrow" src="media/images/modelPage/vectary_403/forbidden_arrow.svg" alt="arrow">
+    </div>
+    <div class="forbidden_descr">
+        <div class="forbidden_descr-title">В&nbsp;данный момент&nbsp;AR и&nbsp;3D&nbsp;недоступны</div>
+        <div class="forbidden_descr-text">Мы&nbsp;проводим работы с&nbsp;элементами интерактивности сайта, чтобы повысить качество пользовательского опыта. Спасибо за&nbsp;понимание</div>
+    </div>
+</div> -->
+
 <div class="tech_spec active">
     <div class="tech_spec__wrapper hidden">
         <div class="tech_spec__description hidden">
@@ -357,6 +368,10 @@
 </div>
 
 <canvas class="threeJSScene" id="webgl"></canvas>
+<!-- <div class="plug_wrapper threeJSScene">
+    <img class="plug_img" src="media/images/modelPage/vectary_403/amarok_plug.png" alt="Дорожный патруль. Пикап">
+    <img class="plug_background" src="media/images/modelPage/vectary_403/background_plug.png" alt="Дорожный патруль">
+</div> -->
 <div id="overlay"></div>
 
 <div class="pulse_wrapper">
@@ -379,6 +394,8 @@
     <div class="pulse"></div>
 </div>
 
+<!-- media/images\modelPage\AR\qr-solaris.svg -->
+<!-- media/images\modelPage\AR\garage_codd\qr-solaris.svg -->
 <div class="qrCode-popup popup_design">
     <div class="qrCode-popup_wrapper popup_wrapper">
         <p class="title">Дополненная реальность</p>
@@ -404,10 +421,8 @@
     </div>
 </div>
 
-<!-- Без фикса андроида -->
-<!-- https://garagetest.ru/models/model_vectary/solaris/No_fix/solaris.gltf -->
-<!-- С фиксом андроида -->
-<!-- https://garagetest.ru/models/model_vectary/solaris/ar_android_fix/solaris.gltf -->
+<!-- https://garage-codd.ru/models/model_vectary/transformed/solaris/solaris.gltf -->
+<!-- https://garagetest.ru/models/model_vectary/transformed/solaris/solaris.gltf -->
 <model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garagetest.ru/models/model_vectary/transformed/solaris/solaris.gltf" alt="AR 3D-model"></model-viewer>
 
 <a-scene loading-screen="enabled: true, dotsColor: #62A744, backgroundColor: #090909" vr-mode-ui="enabled: false" ar-mode-ui="enabled: false" xr-mode-ui="enabled: false"
@@ -452,5 +467,6 @@
 
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 <script type="module" src="./js/fullModelScripts/solaris.js"></script>
+<!-- <script type="module" src="./js/fake_loading\loading.js"></script> -->
 </body>
 </html>

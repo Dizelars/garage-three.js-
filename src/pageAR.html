@@ -127,45 +127,6 @@
             background-color: #313131;
         }
 
-        /* .video_container {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 100%;
-          max-width: max-content;
-        }
-
-        video {
-          width: 100%;
-          height: 100%;
-          -o-object-fit: cover;
-          object-fit: cover;
-        } */
-
-        /* .AR_loading {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background: rgba(255,255,255,0.10);
-          -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-        } */
-
-        /* .AR_loading .AR_loading_wrapper {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          gap: 20px;
-        } */
-
         .AR_loading {
           position: absolute;
           z-index: 2;
@@ -197,7 +158,6 @@
           display: -webkit-box;
           display: -ms-flexbox;
           display: flex;
-          /* flex-direction: column; */
           -webkit-box-pack: center;
               -ms-flex-pack: center;
                   justify-content: center;
@@ -268,24 +228,6 @@
                   transform: rotate(270deg);
         }
 
-        /* @media (max-width: 480px) {
-          .video_container {
-            transform: translateX(-50%);
-          }
-
-          .video_container.AR_opened {
-            transform: translate(-50%, -50%);
-          }
-
-          .model_picture {
-            transform: translateX(-50%);
-          }
-
-          .model_picture.AR_opened {
-            transform: translate(-50%, -50%);
-          }
-        } */
-
         @media (max-width: 375px) {
           .AR_loading .AR_loading_wrapper {
             padding: 5px;
@@ -335,9 +277,6 @@
      <script type="module">
       const urlParams = new URLSearchParams(window.location.search);
       const newsId = urlParams.get("armodel");
-
-      // muslcar: 'MuslCarLowPoly_mintexture_transform/untitled.gltf',
-      // police: 'Police_car_transform/scene.gltf',
 
       // Амарок
       // Без фикса андроида с анимацией
@@ -391,12 +330,6 @@
       // model_vectary/velo/No_fix/velo.gltf
       // С фиксом андроида
       // model_vectary/velo/ar_android_fix/velo.gltf
-
-      // Синичка
-      // sinichka_ar/S2.gltf
-
-      // Молоко
-      // milk/BHSAD.gltf
 
       const arModelUrls = {
           moto: 'model_vectary/transformed/moto/moto.gltf',
@@ -465,7 +398,8 @@
           m_viewer.setAttribute('ar-modes', 'scene-viewer webxr quick-look');
           m_viewer.setAttribute('camera-controls', '');
           if (arModelUrl) {
-              m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);
+            // m_viewer.setAttribute('src', `https://garage-codd.ru/models/${arModelUrl}`);
+            m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);
           }
 
           document.getElementById('div_mv').appendChild(m_viewer);

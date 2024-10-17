@@ -1,0 +1,116 @@
+.vectary_forbidden {
+    max-width: 510px;
+    position: absolute;
+    top: 0;
+    right: -470px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #FCE72B;
+    border-radius: 0px 0px 0px 12px;
+    transition: all .8s ease;
+    z-index: 5;
+}
+
+.vectary_forbidden.open {
+    right: 0;
+}
+
+.vectary_forbidden .forbidden_icons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.vectary_forbidden .forbidden_icons .forbidden-arrow {
+    cursor: pointer;
+    transform: rotate(180deg);
+    transition: all .8s ease;
+}
+
+.vectary_forbidden.open .forbidden_icons .forbidden-arrow {
+    transform: rotate(0);
+}
+
+.vectary_forbidden .forbidden_descr {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: space-between;
+}
+
+.vectary_forbidden .forbidden_descr .forbidden_descr-title,
+.vectary_forbidden .forbidden_descr .forbidden_descr-text {
+    font-family: 'MoscowSans', sans-serif;
+    color: #303030;
+}
+
+.vectary_forbidden .forbidden_descr .forbidden_descr-title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+.vectary_forbidden .forbidden_descr .forbidden_descr-text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.plug_wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.plug_wrapper img.plug_img {
+    position: relative;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.plug_wrapper img.plug_background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+}
+
+@media (max-width: 480px) {
+    .vectary_forbidden {
+        right: -330px;
+    }
+
+    .vectary_forbidden.open {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .vectary_forbidden .forbidden_icons {
+        gap: 40px;
+    }
+
+    .vectary_forbidden .forbidden_descr .forbidden_descr-title {
+        font-size: 16px;
+    }
+
+    .vectary_forbidden .forbidden_descr .forbidden_descr-text {
+        max-width: 320px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 350px) {
+    .vectary_forbidden .forbidden_descr .forbidden_descr-title {
+        font-size: 14px;
+    }
+}
