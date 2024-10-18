@@ -8,11 +8,11 @@
     <meta name="yandex" content="noindex,nofollow,noarchive">
     <meta name="googlebot" content="noindex,nofollow,noarchive">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="https://garagetest.ru/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://garagetest.ru/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://garagetest.ru/favicons/favicon-16x16.png">
-    <link rel="manifest" href="https://garagetest.ru/favicons/site.webmanifest">
-    <link rel="mask-icon" href="https://garagetest.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://garage-codd.ru/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://garage-codd.ru/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://garage-codd.ru/favicons/favicon-16x16.png">
+    <link rel="manifest" href="https://garage-codd.ru/favicons/site.webmanifest">
+    <link rel="mask-icon" href="https://garage-codd.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
      <style>
         @font-face {
           font-family: "MoscowSans";
@@ -259,7 +259,7 @@
       <div class="AR_loading_wrapper">
         <p class="text">Подготавливаем показ модели в дополненной реальности</p>
         <!-- <img class="gif_loading" src="./images/AR_loading.gif" alt="AR 3D"> -->
-        <dotlottie-player class="lottie" src="./js/lottie.json" background="transparent" speed="1" style="width: 150px;" loop autoplay preload></dotlottie-player>
+        <dotlottie-player class="lottie" src="./assets/js/lottie.json" background="transparent" speed="1" style="width: 150px;" loop autoplay preload></dotlottie-player>
       </div>
     </div>
 
@@ -398,8 +398,8 @@
           m_viewer.setAttribute('ar-modes', 'scene-viewer webxr quick-look');
           m_viewer.setAttribute('camera-controls', '');
           if (arModelUrl) {
-            // m_viewer.setAttribute('src', `https://garage-codd.ru/models/${arModelUrl}`);
-            m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);
+            m_viewer.setAttribute('src', `https://garage-codd.ru/models/${arModelUrl}`);
+            // m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);
           }
 
           document.getElementById('div_mv').appendChild(m_viewer);
