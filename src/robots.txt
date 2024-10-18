@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+Disallow: /assets
+Disallow: /draco
+Disallow: /models
+Disallow: /pageAR.html
+Allow: /index.html
+Allow: /*?
+Allow: /?s=
+Allow: *.png
+Allow: *.jpg
+Allow: *.gif
+
+User-agent: Yandex
+Allow: /
+Disallow: /assets
+Disallow: /draco
+Disallow: /models
+Disallow: /pageAR.html
+Allow: /index.html
+Allow: /*?
+Allow: /?s=
+Allow: *.png
+Allow: *.jpg
+Allow: *.gif
+Sitemap: https://garage-codd.ru/sitemap.xml
