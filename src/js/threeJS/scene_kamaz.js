@@ -178,7 +178,8 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // Обьект параметров
 let constants = {
-    scale: 4.2,
+    scale: 4,
+    // scale: 1.8,
     height: 2.5,
 	radius: 12,
     resolution: 24
@@ -193,23 +194,28 @@ let constants = {
 
 // let sceneReady = false
 
-// Автобус
+// Камаз
 // Без фикса андроида с анимацией
-// amarok: 'models/model_vectary/kamaz/full_animation/kamaz.gltf',
+// 'models/model_vectary/kamaz/full_animation/kamaz.gltf',
 // Без анимаций и с фиксом андроида
-// amarok: 'models/model_vectary/kamaz/noAnimation/ar_android_fix/kamaz_no_animation.gltf',
+// 'models/model_vectary/kamaz/noAnimation/ar_android_fix/kamaz_no_animation.gltf',
 
 // Сжатая модель и текстуры
 // models/model_vectary/transformed/kamaz/kamaz_no_animation.gltf
 
-gltfLoader.load("models/model_vectary/transformed/kamaz/kamaz_no_animation.gltf", (gltf) => {
+gltfLoader.load("models/model_vectary/transformed/kamaz/kamaz.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
+    // current_object.position.x = 0.05;
+    // current_object.position.y = -0.36;
+    // current_object.position.z = 0;
+    // current_object.rotation.y = -1.58;
+
     current_object.position.x = 0.05;
-    current_object.position.y = -0.36;
-    current_object.position.z = 0;
-    current_object.rotation.y = -1.58;
+    current_object.position.y = 0;
+    current_object.position.z = 0.3;
+    current_object.rotation.y = -0.02;
     current_object.scale.set(constants.scale, constants.scale, constants.scale);
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
@@ -398,8 +404,9 @@ toneMapping.add(renderer, 'toneMapping', {
     ACESFilmic: THREE.ACESFilmicToneMapping
 })
 
-// renderer.toneMappingExposure = 2;
-renderer.toneMappingExposure = 1.4;
+renderer.toneMappingExposure = 2;
+// renderer.toneMappingExposure = 1.4;
+// renderer.toneMappingExposure = 2.2;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 
