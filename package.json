@@ -16,6 +16,7 @@
     "@gltf-transform/extensions": "^4.0.8",
     "@gltf-transform/functions": "^4.0.8",
     "@monogrid/gainmap-js": "^3.0.5",
+    "aframe": "^1.6.0",
     "lil-gui": "^0.19.0",
     "reset-css": "^5.0.2",
     "stats.js": "^0.17.0",

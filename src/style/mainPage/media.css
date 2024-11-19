@@ -14,11 +14,11 @@
         font-size: 2.8rem;
     }
 
-    section.help_desk .help_desk_grid-wrapper .slide-5,
+    /* section.help_desk .help_desk_grid-wrapper .slide-5,
     section.help_desk .help_desk_grid-wrapper .slide-moskvich {
         max-width: unset;
         height: unset;
-    }
+    } */
 
     .parentCardForLargeMonitor {
         height: fit-content !important;
@@ -764,8 +764,8 @@
         grid-template-areas:
         "help_desk-1 parkon-2 parkon-2 driver-3"
         ". parkon-2 parkon-2 driver-3"
-        "slide-moskvich slide-moskvich slide-5 slide-5"
-        ;
+        /* "slide-moskvich slide-moskvich slide-5 slide-5"; */
+        ". . slide-moskvich slide-moskvich";
     }
 
     section.help_desk .help_desk_grid-wrapper .slide-6 {
@@ -792,7 +792,7 @@
         margin-bottom: 10px;
     }
 
-    section.help_desk .help_desk_grid-wrapper .slide-5,
+    /* section.help_desk .help_desk_grid-wrapper .slide-5, */
     section.help_desk .help_desk_grid-wrapper .slide-moskvich {
         height: 100%;
     }
@@ -1251,7 +1251,8 @@
         "help_desk-1 ."
         "parkon-2 driver-3"
         "parkon-2 ."
-        "slide-moskvich slide-5";
+        /* "slide-moskvich slide-5"; */
+        ". slide-moskvich";
     }
 
     section.help_desk .garage_model_card .slid_info {
@@ -1431,7 +1432,7 @@
         max-width: 136px;
     }
 
-    section.help_desk .help_desk_grid-wrapper .slide-5 .garage_model_card,
+    /* section.help_desk .help_desk_grid-wrapper .slide-5 .garage_model_card, */
     section.help_desk .help_desk_grid-wrapper .slide-moskvich .garage_model_card {
         height: 100%;
     }
@@ -1971,25 +1972,25 @@
         margin-bottom: 20px;
     }
 
-    section.help_desk .help_desk_grid-wrapper .driver-3,
-    section.help_desk .help_desk_grid-wrapper .slide-5,
-    section.help_desk .help_desk_grid-wrapper .slide-moskvich {
+    /* section.help_desk .help_desk_grid-wrapper .slide-5,
+    section.help_desk .help_desk_grid-wrapper .slide-moskvich, */
+    section.help_desk .help_desk_grid-wrapper .driver-3 {
         display: none;
     }
 
-    section.help_desk .help_desk_grid-wrapper .mobile_text_combo,
-    section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide {
+    /* section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide, */
+    section.help_desk .help_desk_grid-wrapper .mobile_text_combo {
         display: block;
     }
 
-    section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide {
+    /* section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide {
         overflow: hidden;
     }
 
     section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide .swiper-pagination3 {
         margin-top: 20px;
         text-align: center;
-    }
+    } */
 
     section.help_desk .help_desk_grid-wrapper .parkon-2 {
         padding: 20px;
@@ -2029,7 +2030,8 @@
         "help_desk-1"
         "parkon-2"
         "mobile_text_combo"
-        "equipment_mobile-slide";
+        /* "equipment_mobile-slide"; */
+        "slide-moskvich";
     }
 
     footer.footer_main .footer_main_grid-wrapper .footer-contacts-3 {

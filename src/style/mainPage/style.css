@@ -683,8 +683,6 @@ section.traffic_patrol:before {
     transition: top 4s ease, right 4s ease, bottom 4s ease, left 4s ease; /* Добавляем анимацию перемещения через свойства top и right */
 }
 
-
-
 section.traffic_patrol .traffic_patrol_grid-wrapper {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -1491,7 +1489,8 @@ section.help_desk .help_desk_grid-wrapper {
     grid-auto-flow: row;
     grid-template-areas:
         "help_desk-1 parkon-2 parkon-2 parkon-2 driver-3"
-        ". slide-moskvich slide-moskvich slide-5 slide-5";
+        /* ". slide-moskvich slide-moskvich slide-5 slide-5"; */
+        ". . . slide-moskvich slide-moskvich";
 }
 
 section.help_desk .help_desk_grid-wrapper .help_desk-1 {
@@ -1554,13 +1553,13 @@ section.help_desk .help_desk_grid-wrapper .driver-3 .driver_text {
     line-height: 24px;
 }
 
-section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide {
+/* section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide {
     grid-area: equipment_mobile-slide;
 }
 
 section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide {
     display: none;
-}
+} */
 
 footer.footer_main .footer_main_grid-wrapper .footer-contacts-3 a[class^="contacts-"],
 footer.footer_main .footer_main_grid-wrapper .footer-media-4 a[class^="media-"],
@@ -1611,10 +1610,10 @@ footer.footer_main .footer_main_grid-wrapper .footer-media-4 a[class^="media-"] 
     transform: rotate(180deg);
 }
 
-section.help_desk .help_desk_grid-wrapper .slide-5 {
+/* section.help_desk .help_desk_grid-wrapper .slide-5 {
     grid-area: slide-5;
     height: 444px;
-}
+} */
 
 section.help_desk .help_desk_grid-wrapper .slide-moskvich {
     grid-area: slide-moskvich;

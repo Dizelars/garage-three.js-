@@ -6,11 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- <meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="robots" content="noindex,nofollow,noarchive">
     <meta name="yandex" content="noindex,nofollow,noarchive">
-    <meta name="googlebot" content="noindex,nofollow,noarchive"> -->
+    <meta name="googlebot" content="noindex,nofollow,noarchive">
 
-    <meta name="yandex-verification" content="c74167eb0fd8f8fe" />
+    <!-- <meta name="yandex-verification" content="c74167eb0fd8f8fe" />
     <meta name="google-site-verification" content="0dZw6jM4sYdeu4GqW-DoUbESkEAaX7OuIC6deq1n5OQ" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="https://garage-codd.ru/favicons/apple-touch-icon.png">
@@ -48,11 +48,12 @@
             accurateTrackBounce:true,
             webvisor:true
         });
-    </script>
+    </script> -->
 
     <title>Мотопатруль</title>
     <link rel="stylesheet" href="./style/styleForModels/moto.css">
-    <script defer src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script>
+    <!-- <script defer src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script> -->
+    <script defer src="./libraries/swiper/5.3.8/swiper.js"></script> 
 </head>
 <body>
     <noscript><div><img src="https://mc.yandex.ru/watch/95985378" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
@@ -255,13 +256,13 @@
                                 </picture>
                             </a>
                         </div>
-                        <div class="gallery_item swiper-slide">
+                        <!-- <div class="gallery_item swiper-slide">
                             <a class="gallery_item_link" href="solaris.html">
                                 <picture>
                                     <img class="gallery_item-img" src="media/images/modelPage/slider/solaris_gray.png" alt="solaris" fetchpriority="high">
                                 </picture>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="auto_park_slider-button">
@@ -335,7 +336,8 @@
 <!-- https://garagetest.ru/models/model_vectary/transformed/moto/moto.gltf -->
 <model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garage-codd.ru/models/model_vectary/transformed/moto/moto.gltf" alt="AR 3D-model"></model-viewer>
 
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+<!-- <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script> -->
+<script type="module" src="./libraries/model-viewer.js"></script>
 <script type="module" src="./js/fullModelScripts/moto.js"></script>
 <!-- <script type="module" src="./js/fake_loading\loading.js"></script> -->
 </body>
