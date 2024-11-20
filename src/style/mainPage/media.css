@@ -765,7 +765,8 @@
         "help_desk-1 parkon-2 parkon-2 driver-3"
         ". parkon-2 parkon-2 driver-3"
         /* "slide-moskvich slide-moskvich slide-5 slide-5"; */
-        ". . slide-moskvich slide-moskvich";
+        /* ". . slide-moskvich slide-moskvich"; */
+        "slide-moskvich slide-moskvich . .";
     }
 
     section.help_desk .help_desk_grid-wrapper .slide-6 {
@@ -1253,6 +1254,7 @@
         "parkon-2 ."
         /* "slide-moskvich slide-5"; */
         ". slide-moskvich";
+        /* "slide-moskvich ."; */
     }
 
     section.help_desk .garage_model_card .slid_info {

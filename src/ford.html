@@ -52,8 +52,8 @@
 
     <title>Дорожный патруль. Фургон</title>
     <link rel="stylesheet" href="./style/styleForModels/ford.css">
-    <!-- <script defer src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script> -->
+    <!-- <script defer src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script> -->
+    <!-- <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script> -->
     <script defer src="./libraries/swiper/5.3.8/swiper.js"></script> 
     <script src="./libraries/aframe.js"></script>
     <script>
@@ -391,7 +391,7 @@
 <div class="qrCode-popup popup_design">
     <div class="qrCode-popup_wrapper popup_wrapper">
         <p class="title">Дополненная реальность</p>
-        <img class="qr_code" src="media/images\modelPage\AR\garage_codd\qr-ford.svg" alt="QR-код">
+        <img class="qr_code" src="media/images\modelPage\AR\qr-ford.svg" alt="QR-код">
         <p class="description">
             Наведите камеру на&nbsp;QR-код.
         </p>
@@ -433,12 +433,14 @@
             crossorigin="anonymous"
             importance="high"
         />
+        <!-- src="media/images/modelPage/aframe_360/ford/ford_1.jpg" -->
         <img
             id="room2"
             src="media/images/modelPage/aframe_360/ford/ford_2.jpg"
             crossorigin="anonymous"
             importance="low"
         />
+        <!-- src="media/images/modelPage/aframe_360/ford/ford_bagage.jpg" -->
         <img
             id="hotspot"
             src="media/images/modelPage/aframe_360/hotspot.svg"
@@ -450,24 +452,22 @@
     <a-entity id="spots" hotspots="">
         <a-entity id="group-room1">
             <a-image
-                    src="#hotspot"
-                    spot="linkto:#room2;spotgroup:group-room2;phiStart:176"
-                    position="0.5 2 10"
-                    look-at
+                src="#hotspot"
+                spot="linkto:#room2;spotgroup:group-room2;phiStart:176"
+                position="0.5 2 10"
+                look-at
             ></a-image>
         </a-entity>
 
         <a-entity id="group-room2" scale="0 0 0">
             <!-- возврат в первую комнату -->
             <a-image
-                    spot="linkto:#room1;spotgroup:group-room1;phiStart:88"
-                    src="#hotspot"
-                    position="0 0 -8"
-                    look-at
+                src="#hotspot"
+                spot="linkto:#room1;spotgroup:group-room1;phiStart:88"
+                position="0 0 -8"
+                look-at
             ></a-image>
-            <!-- переход в третью комнату -->
         </a-entity>
-        <!-- возврат во вторую комнату -->
       </a-entity>
     </a-entity>
 
@@ -498,6 +498,6 @@
 <!-- <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script> -->
 <script type="module" src="./libraries/model-viewer.js"></script>
 <script type="module" src="./js/fullModelScripts/ford.js"></script>
-<script type="module" src="./js/fake_loading\loading.js"></script>
+<!-- <script type="module" src="./js/fake_loading\loading.js"></script> -->
 </body>
 </html>

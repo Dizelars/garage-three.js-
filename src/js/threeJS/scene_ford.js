@@ -168,7 +168,6 @@ const updateAllMaterials = () => {
     });
 };
 
-
 let dracoLoader = new DRACOLoader(loadingManager)
 dracoLoader.setDecoderPath('/draco/')
 let gltfLoader = new GLTFLoader(loadingManager)
@@ -176,7 +175,7 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 // Обьект параметров
 let constants = {
-    scale: 3.2,
+    scale: 3.5,
     // scale: 1,
     height: 2.5,
 	radius: 12,
