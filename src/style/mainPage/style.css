@@ -1543,11 +1543,16 @@ section.help_desk .help_desk_grid-wrapper .driver-3 {
     gap: 20px;
 }
 
+section.help_desk .help_desk_grid-wrapper .driver-tablet-1,
+section.help_desk .help_desk_grid-wrapper .driver-tablet-2 {
+	display: none;
+}
+
 section.help_desk .help_desk_grid-wrapper .сrew {
     grid-area: сrew;
 }
 
-section.help_desk .help_desk_grid-wrapper .driver-3 .driver_text {
+section.help_desk .help_desk_grid-wrapper .driver_text {
     font-family: 'MoscowSans', sans-serif;
     font-size: 1.6rem;
     font-weight: 400;
