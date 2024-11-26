@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta http-equiv="encoding" content="utf-8" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Model Viewer Example">
+
+    <meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="yandex" content="noindex,nofollow,noarchive">
+    <meta name="googlebot" content="noindex,nofollow,noarchive">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://garagetest.ru/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://garagetest.ru/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://garagetest.ru/favicons/favicon-16x16.png">
+    <link rel="manifest" href="https://garagetest.ru/favicons/site.webmanifest">
+    <link rel="mask-icon" href="https://garagetest.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <style>
+      @font-face {
+        font-family: "MoscowSans";
+        src: url("fonts/MoscowSans-Light.woff2") format("woff2"),
+            url("fonts/MoscowSans-Light.woff") format("woff"), 
+            url("fonts/MoscowSans-Light.otf") format("otf"), 
+            url("fonts/MoscowSans-Light.ttf") format("ttf");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+      
+      @font-face {
+        font-family: "MoscowSans";
+        src: url("fonts/MoscowSans-Regular.woff2") format("woff2"), 
+            url("fonts/MoscowSans-Regular.woff") format("woff"), 
+            url("fonts/MoscowSansRegular.otf") format("otf"), 
+            url("fonts/MoscowSansRegular.ttf") format("ttf");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      
+      @font-face {
+        font-family: "MoscowSans";
+        src: url("fonts/MoscowSans-Medium.woff2") format("woff2"), 
+            url("fonts/MoscowSans-Medium.woff") format("woff"), 
+            url("fonts/MoscowSansMedium.otf") format("otf"), 
+            url("fonts/MoscowSansMedium.ttf") format("ttf");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+      
+      @font-face {
+        font-family: "MoscowSans";
+        src: url("fonts/MoscowSans-Bold.woff2") format("woff2"), 
+            url("fonts/MoscowSans-Bold.woff") format("woff"), 
+            url("fonts/MoscowSansBold.otf") format("otf"), 
+            url("fonts/MoscowSansBold.ttf") format("ttf");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      
+      @font-face {
+        font-family: 'MoscowSans';
+        src: url("fonts/MoscowSansExtraBold.woff2") format("woff2"), 
+            url("fonts/MoscowSansExtraBold.woff") format("woff"), 
+            url("fonts/MoscowSansExtraBold.otf") format("otf"), 
+            url("fonts/MoscowSansExtraBold.ttf") format("ttf");
+        font-weight: 800;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      * {
+          -webkit-box-sizing: border-box;
+                  box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        overflow: hidden;
+        color: white;
+        background-color: black;
+      }
+
+      .google_viewer {
+          display: none;
+      }
+
+      .link_to_page {
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+        position: absolute;
+        left: 50%;
+        top: 20px;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+        z-index: 2;
+      }
+
+      .link_to_page a {
+        padding: 14px 12px;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+        border: 1px solid #FFFFFF;
+        color: #FFFFFF;
+        border-radius: 10px;
+        font-family: 'MoscowSans', sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .link_to_page a:hover {
+          background-color: #313131;
+      }
+
+      .AR_loading {
+        position: absolute;
+        z-index: 2;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        top: 88px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+        width: 100%;
+        padding: 0 10px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+      }
+
+      .AR_loading.AR_opened {
+        display: none;
+      }
+
+      .AR_loading .AR_loading_wrapper {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        min-height: 130px;
+        padding: 20px;
+        gap: 10px;
+        max-width: 400px;
+        border-radius: 12px;
+        background: #1C1C1C;
+      }
+
+      .AR_loading .text {
+        font-family: 'MoscowSans', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        text-align: center;
+        margin: 0;
+        color: #ffffff;
+      }
+
+      .model_picture {
+        position: absolute;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        bottom: 0;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+        width: 100%;
+        max-width: 600px;
+        max-height: 600px;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .model_picture img {
+        width: 100%;
+        height: 100%;
+        -o-object-fit: cover;
+            object-fit: cover;
+      }
+
+      .model_picture .gradient {
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(70%, rgba(0, 0, 0, 0.00)), to(#000)), transparent 50% / cover no-repeat;
+        background: -o-linear-gradient(top, rgba(0, 0, 0, 0.00) 70%, #000 100%), transparent 50% / cover no-repeat;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 70%, #000 100%), transparent 50% / cover no-repeat;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .model_picture .gradient_left {
+        left: 0;
+        -webkit-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+                transform: rotate(90deg);
+      }
+
+      .model_picture .gradient_right {
+        right: 0;
+        -webkit-transform: rotate(270deg);
+            -ms-transform: rotate(270deg);
+                transform: rotate(270deg);
+      }
+
+      @media (max-width: 375px) {
+        .AR_loading .AR_loading_wrapper {
+          padding: 5px;
+          gap: 5px;
+        }
+
+        .AR_loading .AR_loading_wrapper .lottie {
+          width: 100px !important;
+          height: 100px !important;
+        }
+
+        .AR_loading .text {
+          font-size: 14px;
+        }
+      }
+    </style>
+    <title>AR</title>
+  </head>
+  <body>
+    <!-- <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> -->
+    <script src="./libraries/lottie/lottie.js" type="module"></script>
+
+    <div id="div_mv"></div>
+
+    <div class="link_to_page">
+      <a>На страницу с моделью</a>
+    </div>
+
+    <div class="AR_loading">
+      <div class="AR_loading_wrapper">
+        <p class="text">Подготавливаем показ модели в дополненной реальности</p>
+        <dotlottie-player class="lottie" src="./assets/js/lottie.json" background="transparent" speed="1" style="width: 150px;" loop autoplay preload></dotlottie-player>
+      </div>
+    </div>
+
+    <div class="model_picture">
+      <img alt="Транспортное средство ЦОДД" fetchpriority="high">
+      <div class="gradient gradient_left"></div>
+      <div class="gradient gradient_right"></div>
+    </div>
+
+    <!-- <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script> -->
+    <script type="module" src="./libraries/model-viewer.js"></script>
+    <script type="module">
+      const urlParams = new URLSearchParams(window.location.search);
+      const newsId = urlParams.get("armodel");
+
+      const arModelUrls = {
+          moto: 'model_vectary/transformed/moto/moto.gltf',
+          amarok: 'model_vectary/transformed/amarok/untitled.gltf',
+          bus: 'model_vectary/transformed/bus/bus.gltf',
+          ford: 'model_vectary/transformed/ford/ford.gltf',
+          kamaz: 'model_vectary/transformed/kamaz/kamaz.gltf',
+          kater: 'model_vectary/transformed/kater/kater.gltf',
+          moskvich: 'model_vectary/transformed/moskvich/moskvich.gltf',
+          velo: 'model_vectary/transformed/velo/bicycle.gltf',
+          test: 'MuslCarLowPoly_mintexture_transform/untitled.gltf',
+      };
+      
+      const pageModelUrls = {
+          moto: 'moto.html',
+          amarok: 'amarok.html',
+          bus: 'bus.html',
+          ford: 'ford.html',
+          kamaz: 'kamaz.html',
+          kater: 'kater.html',
+          moskvich: 'moskvich.html',
+          velo: 'velo.html'
+      };
+
+      const photoModelUrls = {
+          moto: 'media/images/modelPage/slider/moto.png',
+          amarok: 'media/images/modelPage/slider/amarok.png',
+          bus: 'media/images/modelPage/slider/bus.png',
+          ford: 'media/images/modelPage/slider/ford.png',
+          kamaz: 'media/images/modelPage/slider/kamaz.png',
+          kater: 'media/images/modelPage/slider/kater.png',
+          moskvich: 'media/images/modelPage/slider/moskvich.png',
+          velo: 'media/images/modelPage/slider/velo.png'
+      };
+
+      let arModelUrl = arModelUrls[newsId];
+      let pageModelUrl = pageModelUrls[newsId];
+      let photoModelUrl = photoModelUrls[newsId];
+
+      document.addEventListener("DOMContentLoaded", () => {
+          const linkToPage = document.querySelector('.link_to_page a');
+          const modelPicture = document.querySelector('.model_picture img');
+          const ARLoading = document.querySelector('.AR_loading');
+          const videoPrew = document.querySelector('.video_container');
+
+          const m_viewer = document.createElement('model-viewer');
+          m_viewer.setAttribute('class', 'google_viewer');
+          m_viewer.setAttribute('ar', 'true');
+          m_viewer.setAttribute('ar-modes', 'scene-viewer webxr quick-look');
+          m_viewer.setAttribute('camera-controls', '');
+          if (arModelUrl) {
+            // m_viewer.setAttribute('src', `https://garage-codd.ru/models/${arModelUrl}`);
+            m_viewer.setAttribute('src', `https://garagetest.ru/models/${arModelUrl}`);
+          }
+
+          document.getElementById('div_mv').appendChild(m_viewer);
+          setTimeout(() => {
+              m_viewer.activateAR();
+              setTimeout(() => {
+                ARLoading.classList.add('AR_opened');
+              }, 15000);
+          }, 100);
+
+          if (pageModelUrl) {
+            linkToPage.setAttribute('href', `${pageModelUrl}`);
+          };
+
+          if (photoModelUrl) {
+            modelPicture.setAttribute('src', `${photoModelUrl}`);
+          };
+      });
+     </script>
+  </body>
+</html>
