@@ -177,6 +177,7 @@ gltfLoader.setDRACOLoader(dracoLoader)
 // Обьект параметров
 let constants = {
     scale: 3,
+    // scale: 1,
     height: 2.5,
 	radius: 12,
     resolution: 24
@@ -200,14 +201,14 @@ let constants = {
 // Сжатая модель и текстуры
 // models/model_vectary/transformed/velo/velo.gltf
 
-gltfLoader.load("models/model_vectary/transformed/velo/velo.gltf", (gltf) => {
+gltfLoader.load("models/model_vectary/transformed/velo/bicycle.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
-    current_object.position.x = -0.01;
-    current_object.position.y = 0;
-    current_object.position.z = 0;
-    current_object.rotation.y = -1.57;
+    // current_object.position.x = -0.01;
+    // current_object.position.y = 0;
+    // current_object.position.z = 0;
+    // current_object.rotation.y = -1.57;
     current_object.scale.set(constants.scale, constants.scale, constants.scale);
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')

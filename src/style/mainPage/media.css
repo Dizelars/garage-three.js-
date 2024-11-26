@@ -774,8 +774,8 @@
         gap: 20px;
         grid-auto-flow: row;
         grid-template-areas:
-        "help_desk-1 . parkon-2 parkon-2"
-        ". . parkon-2 parkon-2"
+        "help_desk-1 parkon-2 parkon-2 parkon-2"
+        ". parkon-2 parkon-2 parkon-2"
         "slide-moskvich slide-moskvich driver-3 driver-3";
     }
 
@@ -791,7 +791,7 @@
         font-size: 1.8rem;
         line-height: 24px;
         margin-bottom: 30px;
-        max-width: 336px;
+        /* max-width: 336px; */
     }
 
     section.help_desk .help_desk_grid-wrapper .parkon-2 .parkon_descr {
@@ -985,6 +985,7 @@
 
     section.help_desk .help_desk_grid-wrapper .parkon-2 {
         padding: 20px;
+        height: fit-content;
     }
 
     section.help_desk .help_desk_grid-wrapper .parkon-2 .parkon_title {
@@ -1286,15 +1287,16 @@
     section.help_desk .help_desk_grid-wrapper {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(4, min-content);
+        grid-template-rows: repeat(3, min-content);
         gap: 40px 20px;
         grid-auto-flow: row;
         grid-template-areas:
         "help_desk-1 ."
         "parkon-2 slide-moskvich"
-        "parkon-2 ."
         "driver-tablet-1 driver-tablet-2";
     }
+
+    /* "parkon-2 ." */
 
     section.help_desk .garage_model_card .slid_info {
         padding: 10px 20px;
@@ -1302,6 +1304,14 @@
 
     section.help_desk .garage_model_card .slid_info .slid_info-desc .slid_info-title {
         font-size: 1.6rem;
+    }
+
+    section.help_desk .help_desk_grid-wrapper .slide-moskvich {
+        height: 336px;
+    }
+
+    section.help_desk .garage_model_card .slid_img {
+        max-height: 274px;
     }
 
     footer.footer_main {
