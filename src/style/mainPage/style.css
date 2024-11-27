@@ -531,7 +531,8 @@ section.main .main_title span.large_letter {
     display: inline-block;
     padding: 19px;
     border: 10px solid white;
-    max-width: 350px;
+    /* max-width: 350px; */
+    max-width: 346px;
     width: 3%;
     border-radius: 50px;
     animation: LargeLetter 1s linear 2s forwards;
@@ -608,7 +609,7 @@ section.main .main_grid-wrapper .main_text-2 .main_info-text,
 section.main .main_grid-wrapper .main_button-3 .main_info-link,
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_patrol-animation-1,
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_patrol-animation-2,
-section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_patrol-animation-3,
+/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_patrol-animation-3, */
 section.water_patrol .water_patrol_grid-wrapper .water_patrol_title .water_patrol-animation-1,
 section.water_patrol .water_patrol_grid-wrapper .water_patrol_title .water_patrol-animation-2,
 section.situation_centre .situation_centre_grid-wrapper .situation-1  .situation_centre-animation-1,
@@ -692,7 +693,8 @@ section.traffic_patrol .traffic_patrol_grid-wrapper {
     grid-auto-flow: row;
     grid-template-areas:
         "traffic_patrol-1 traffic_patrol-1 traffic_patrol-text-2 traffic_patrol-text-2 traffic_patrol-text-2"
-        "slider_button-wrapper . traffic_patrol-text-4 traffic_patrol-text-5 ."
+        /* "slider_button-wrapper . traffic_patrol-text-4 traffic_patrol-text-5 ." */
+        "slider_button-wrapper . traffic_patrol-text-combo traffic_patrol-text-combo traffic_patrol-text-combo"
         ". . . . ."
         /* ". traffic_patrol-no-slide-7 traffic_patrol-no-slide-7 traffic_patrol-no-slide-8 traffic_patrol-no-slide-8" */
         "traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER";
@@ -709,10 +711,16 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-2 {
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-4 {
     grid-area: traffic_patrol-text-4;
+    display: none;
 }
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-5 {
     grid-area: traffic_patrol-text-5;
+    display: none;
+}
+
+section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-combo {
+    grid-area: traffic_patrol-text-combo;
 }
 
 /* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slider-buttons.InGrid {
@@ -907,6 +915,7 @@ section.traffic_patrol .traffic_patrol-text {
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-2 .traffic_patrol-text {
     font-family: 'MoscowSans', sans-serif;
     font-size: 2rem;
+    /* font-size: 2.6rem; */
     font-weight: 700;
     line-height: 26px;
 }
@@ -932,9 +941,9 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_p
     animation: BottomToTop 0.2s linear 0.5s forwards;
 }
 
-section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_patrol-animation-3 {
+/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_patrol-animation-3 {
     animation: BottomToTop 0.2s linear 0.8s forwards;
-}
+} */
 
 
 /*cards start*/
@@ -1488,10 +1497,10 @@ section.help_desk .help_desk_grid-wrapper {
     gap: 20px;
     grid-auto-flow: row;
     grid-template-areas:
-        "help_desk-1 parkon-2 parkon-2 parkon-2 driver-3"
+        "help_desk-1 . parkon-2 parkon-2 parkon-2"
         /* ". slide-moskvich slide-moskvich slide-5 slide-5"; */
         /* ". . . slide-moskvich slide-moskvich"; */
-        ". slide-moskvich slide-moskvich . .";
+        ". . slide-moskvich slide-moskvich driver-3";
 }
 
 section.help_desk .help_desk_grid-wrapper .help_desk-1 {

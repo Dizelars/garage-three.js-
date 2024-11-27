@@ -180,7 +180,8 @@ let constants = {
     scale: 2.6,
     height: 2,
 	radius: 14,
-    resolution: 23
+    // resolution: 24
+    resolution: 17
 }
 
 // let constants = {

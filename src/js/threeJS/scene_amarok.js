@@ -185,7 +185,8 @@ let constants = {
     // scale: 0.7,
     height: 2.5,
 	radius: 12,
-    resolution: 24
+    // resolution: 24
+    resolution: 17
 }
 
 // let constants = {

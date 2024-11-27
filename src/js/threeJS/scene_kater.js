@@ -188,7 +188,8 @@ let constants = {
     scale: 3,
     height: 2,
 	radius: 14,
-    resolution: 23
+    // resolution: 24
+    resolution: 17
 }
 
 // let constants = {
@@ -208,6 +209,12 @@ let constants = {
 
 // Сжатая модель и текстуры
 // models/model_vectary/transformed/kater/kater.gltf
+
+// Define current_object globally so it can be accessed in the tick function
+// const yOffset = 0.0005; // Adjust this value to control how high the current_object sits above the waves
+// let current_object = null;
+// let previouscurrent_objectY = 0; // Variable to store the previous current_object y position
+// let currentTilt = 0; // Variable to store the current tilt angle
 
 gltfLoader.load("models/model_vectary/transformed/kater/kater.gltf", (gltf) => {
     console.log(gltf);
@@ -243,6 +250,37 @@ gltfLoader.load("models/model_vectary/transformed/kater/kater.gltf", (gltf) => {
     //     sceneReady = true
     // }, 500)
 });
+
+// Function to calculate the current_object's vertical position based on the water surface using 2D noise
+// function calculatecurrent_objectPosition(time) {
+//     const x = current_object.position.x;
+//     const z = current_object.position.z;
+
+//     // Calculate the elevation using 2D Perlin noise (big and small waves)
+//     const bigWavesElevation = Math.sin(x * 4 + time * 0.75) * Math.sin(z * 1.5 + time * 0.75) * 0.2;
+//     let smallWavesElevation = 0;
+//     for (let i = 1; i <= 4; i++) {
+//         smallWavesElevation -= Math.abs(cnoise(x * 3 * i, z * 3 * i + time * 0.15) * 0.08 / i);
+//     }
+
+//     return bigWavesElevation + smallWavesElevation;
+// }
+
+// // 2D Perlin noise function (simplified for 2D space)
+// function cnoise(x, z) {
+//     return (Math.sin(x * 0.5) + Math.sin(z * 0.5)) * 0.5; // Simple sine-based noise
+// }
+
+// // Function to calculate tilt based on vertical movement
+// function calculatecurrent_objectTilt(currentY, previousY) {
+//     const deltaY = currentY - previousY; // Difference between the current and previous y position
+//     const targetTilt = deltaY * 5; // Adjust the multiplier to control tilt sensitivity
+
+//     // Use lerp to smoothly transition between current tilt and target tilt
+//     currentTilt = THREE.MathUtils.lerp(currentTilt, targetTilt, 0.1); // 0.1 is the interpolation factor (controls how smooth it is)
+
+//     return currentTilt;
+// }
 
 // const axesHelper = new THREE.AxesHelper(5);
 // scene.add(axesHelper);
@@ -440,6 +478,7 @@ toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 let clock = new THREE.Clock();
 const tick = () =>
 {
+    // const elapsedTime = clock.getElapsedTime()
     // stats.begin()
 
     // Update controls
@@ -454,6 +493,21 @@ const tick = () =>
         //water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         water.material.uniforms[ 'time' ].value += delta / 3.0;
     }
+
+    // Update current_object position and tilt only if the current_object has been loaded
+    // if (current_object) {
+    //     const newY = calculatecurrent_objectPosition(elapsedTime) + yOffset; // Add the offset to prevent clipping
+
+    //     // Apply current_object tilt based on y movement
+    //     const tilt = calculatecurrent_objectTilt(newY, previouscurrent_objectY);
+
+    //     // Update current_object position and tilt
+    //     current_object.position.y = newY;
+    //     current_object.rotation.z = tilt * 10; // Smooth tilt along the x-axis
+
+    //     // Store the current y position for the next frame
+    //     previouscurrent_objectY = newY;
+    // }
 
     // Render
     renderer.render(scene, camera)

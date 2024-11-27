@@ -179,7 +179,8 @@ let constants = {
     // scale: 1,
     height: 2.5,
 	radius: 12,
-    resolution: 24
+    // resolution: 24
+    resolution: 17
 }
 
 // let constants = {
@@ -200,7 +201,13 @@ let constants = {
 // Сжатая модель и текстуры
 // models/model_vectary/transformed/ford/ford.gltf
 
-gltfLoader.load("models/model_vectary/transformed/ford/ford.gltf", (gltf) => {
+
+// models/model_vectary/transformed/ford/ford.gltf
+// models/model_vectary/transformed/ford_fbx/scene.gltf
+
+// models/model_vectary/transformed/offRoader/scene.gltf
+
+gltfLoader.load("models/model_vectary/transformed/offRoader/scene.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
 
@@ -208,7 +215,9 @@ gltfLoader.load("models/model_vectary/transformed/ford/ford.gltf", (gltf) => {
     // current_object.position.y = 0.04;
     // current_object.position.z = -0.15;
     // current_object.rotation.y = -1.58;
-    current_object.scale.set(constants.scale, constants.scale, constants.scale);
+    // current_object.scale.set(constants.scale, constants.scale, constants.scale);
+
+    current_object.rotation.y = Math.PI * 0.5;
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
     positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
