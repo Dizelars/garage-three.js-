@@ -416,7 +416,7 @@ let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/
 
     let skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution);
     skybox.position.y = constants.height - 0.01;
-    // scene.add(skybox);
+    scene.add(skybox);
 
     //* Управление параметрами skybox через GUI:
     hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
@@ -440,25 +440,25 @@ let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/
 });
 
 // Water
-const waterGeometry = new THREE.PlaneGeometry( 1800, 1800 );
-let water = new Water(
-	waterGeometry,
-	{
-		textureWidth: 256,
-		textureHeight: 256,
-		waterNormals: new THREE.TextureLoader().load( 'water/waternormals.jpg', function ( texture ) {
-			texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-		} ),
-		sunDirection: new THREE.Vector3(),
-		sunColor: 0xffffff,
-		waterColor: 0x001e0f,
-		distortionScale: 3.7,
-		fog: scene.fog !== undefined
-	}
-);
-water.rotation.x = - Math.PI / 2;
-water.position.y = 0;
-scene.add( water );
+// const waterGeometry = new THREE.PlaneGeometry( 1800, 1800 );
+// let water = new Water(
+// 	waterGeometry,
+// 	{
+// 		textureWidth: 256,
+// 		textureHeight: 256,
+// 		waterNormals: new THREE.TextureLoader().load( 'water/waternormals.jpg', function ( texture ) {
+// 			texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+// 		} ),
+// 		sunDirection: new THREE.Vector3(),
+// 		sunColor: 0xffffff,
+// 		waterColor: 0x001e0f,
+// 		distortionScale: 3.7,
+// 		fog: scene.fog !== undefined
+// 	}
+// );
+// water.rotation.x = - Math.PI / 2;
+// water.position.y = 0;
+// scene.add( water );
 
 //! Tone mapping
 renderer.toneMapping = THREE.ACESFilmicToneMapping
@@ -475,7 +475,7 @@ toneMapping.add(renderer, 'toneMapping', {
 renderer.toneMappingExposure = 1.4;
 toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
-let clock = new THREE.Clock();
+// let clock = new THREE.Clock();
 const tick = () =>
 {
     // const elapsedTime = clock.getElapsedTime()
@@ -485,14 +485,14 @@ const tick = () =>
     controls.update()
 
     //animate water
-    const time = Date.now() * 0.0001;
+    // const time = Date.now() * 0.0001;
 
-    let delta = clock.getDelta();
+    // let delta = clock.getDelta();
 
-    if(typeof water !== 'undefined') {
-        //water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
-        water.material.uniforms[ 'time' ].value += delta / 3.0;
-    }
+    // if(typeof water !== 'undefined') {
+    //     //water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
+    //     water.material.uniforms[ 'time' ].value += delta / 3.0;
+    // }
 
     // Update current_object position and tilt only if the current_object has been loaded
     // if (current_object) {
