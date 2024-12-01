@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 // import {THREE} from '@google/model-viewer/dist/model-viewer';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import GUI from 'lil-gui'
+// import GUI from 'lil-gui'
 // import Stats from 'stats.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
@@ -18,36 +18,38 @@ import {InteriorTransitionHelper} from "../helpers/interiorTransitionHelper.js";
  * Base
  */
 // Debug
-const gui = new GUI({
-    title: 'Контроллер',
-    width: 350,
-    closeFolders: true
-})
-gui.close()
-gui.hide();
+// const gui = new GUI({
+//     title: 'Контроллер',
+//     width: 350,
+//     closeFolders: true
+// })
+// gui.close()
+// gui.hide();
 
-window.addEventListener('keypress', (event) => {
-    if(event.key == 'h') {
-        gui.show(gui._hidden)
-    }
-})
+// window.addEventListener('keypress', (event) => {
+//     if(event.key == 'h') {
+//         gui.show(gui._hidden)
+//     }
+// })
 
 // Создаем папки дебагера
-const hdriFolder = gui.addFolder('Карта окружения');
-const toneMapping = gui.addFolder('Тоновое отображение')
+// const hdriFolder = gui.addFolder('Карта окружения');
+// const toneMapping = gui.addFolder('Тоновое отображение')
+
 // const PointFolder = gui.addFolder('Типоны');
 // const One = PointFolder.addFolder('Типон 1');
 // const Two = PointFolder.addFolder('Типон 2');
 // const Three = PointFolder.addFolder('Типон 3');
-const ModelFolder = gui.addFolder('Модель');
-const modelPosition = ModelFolder.addFolder('Позиция');
-const modelScale = ModelFolder.addFolder('Масштаб');
 
-const positionFolder = modelPosition.addFolder('position');
-const rotationFolder = modelPosition.addFolder('rotation');
-const scaleFolder = modelScale.addFolder('scale');
+// const ModelFolder = gui.addFolder('Модель');
+// const modelPosition = ModelFolder.addFolder('Позиция');
+// const modelScale = ModelFolder.addFolder('Масштаб');
 
-//! Monitor FPS
+// const positionFolder = modelPosition.addFolder('position');
+// const rotationFolder = modelPosition.addFolder('rotation');
+// const scaleFolder = modelScale.addFolder('scale');
+
+// Monitor FPS
 // const stats = new Stats()
 // stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
 // document.body.appendChild(stats.dom)
@@ -219,17 +221,17 @@ gltfLoader.load("models/model_vectary/transformed/kamaz/kamaz.gltf", (gltf) => {
     current_object.rotation.y = -0.02;
     current_object.scale.set(constants.scale, constants.scale, constants.scale);
 
-    positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
-    positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
-    positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
+    // positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
+    // positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
+    // positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
     
-    rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
-    rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
-    rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
+    // rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
+    // rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
+    // rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
     
-    scaleFolder.add(constants, 'scale', 0.1, 9, 0.1).name('Scale').onChange((value) => {
-        current_object.scale.set(value, value, value);
-    });
+    // scaleFolder.add(constants, 'scale', 0.1, 9, 0.1).name('Scale').onChange((value) => {
+    //     current_object.scale.set(value, value, value);
+    // });
 
     scene.add(current_object);
 
@@ -375,40 +377,40 @@ let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/
     scene.add(skybox);
 
     //* Управление параметрами skybox через GUI:
-    hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
-        updateSkybox();
-    });
+    // hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
+    //     updateSkybox();
+    // });
 
-    hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onChange(() => {
-        updateSkybox();
-    });
+    // hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onChange(() => {
+    //     updateSkybox();
+    // });
 
-    hdriFolder.add(constants, 'resolution', 1, 64, 1).name('skyboxResolution').onChange(() => {
-        updateSkybox();
-    });
+    // hdriFolder.add(constants, 'resolution', 1, 64, 1).name('skyboxResolution').onChange(() => {
+    //     updateSkybox();
+    // });
 
-    function updateSkybox() {
-        scene.remove(skybox); // Удаление старого skybox
-        skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution); // Создание нового skybox с обновленными параметрами
-        skybox.position.y = constants.height - 0.01;
-        scene.add(skybox); // Добавление нового skybox на сцену
-    }
+    // function updateSkybox() {
+    //     scene.remove(skybox); // Удаление старого skybox
+    //     skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution); // Создание нового skybox с обновленными параметрами
+    //     skybox.position.y = constants.height - 0.01;
+    //     scene.add(skybox); // Добавление нового skybox на сцену
+    // }
 });
 
-//! Tone mapping
+// Tone mapping
 renderer.toneMapping = THREE.ACESFilmicToneMapping
-toneMapping.add(renderer, 'toneMapping', {
-    No: THREE.NoToneMapping,
-    Linear: THREE.LinearToneMapping,
-    Reinhard: THREE.ReinhardToneMapping,
-    Cineon: THREE.CineonToneMapping,
-    ACESFilmic: THREE.ACESFilmicToneMapping
-})
+// toneMapping.add(renderer, 'toneMapping', {
+//     No: THREE.NoToneMapping,
+//     Linear: THREE.LinearToneMapping,
+//     Reinhard: THREE.ReinhardToneMapping,
+//     Cineon: THREE.CineonToneMapping,
+//     ACESFilmic: THREE.ACESFilmicToneMapping
+// })
 
 renderer.toneMappingExposure = 2;
 // renderer.toneMappingExposure = 1.4;
 // renderer.toneMappingExposure = 2.2;
-toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
+// toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
 
 
 const tick = () =>
@@ -457,7 +459,7 @@ tick()
 
 // tick();
 
-//! 1. Информация о рендере
+// Информация о рендере
 // console.log(renderer.info)
 // console.log(renderer.shadowMap.autoUpdate)
 // console.log(renderer.shadowMap.needsUpdate)

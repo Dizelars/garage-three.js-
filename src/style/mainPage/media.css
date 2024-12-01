@@ -295,7 +295,8 @@
 
     section.main .main_title span.large_letter {
         padding: 12px;
-        max-width: 194px;
+        /* max-width: 194px; */
+        max-width: 184px;
     }
 
     section.main .main_title span:nth-child(2) {
@@ -456,8 +457,10 @@
     section.main .main_title span.large_letter {
         padding: 10px;
         border: 8px solid white;
-        max-width: 174px;
+        /* max-width: 174px; */
+        max-width: 166px;
     }
+
     section.main .main_grid-wrapper {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -1016,7 +1019,8 @@
     section.main .main_title span.large_letter {
         padding: 8px;
         border: 5px solid white;
-        max-width: 142px;
+        /* max-width: 142px; */
+        max-width: 136px;
     }
 }
 

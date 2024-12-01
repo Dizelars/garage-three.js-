@@ -5,21 +5,19 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <meta name="robots" content="noindex,nofollow,noarchive">
+    <!-- <meta name="robots" content="noindex,nofollow,noarchive">
     <meta name="yandex" content="noindex,nofollow,noarchive">
-    <meta name="googlebot" content="noindex,nofollow,noarchive">
+    <meta name="googlebot" content="noindex,nofollow,noarchive"> -->
 
-    <!-- <meta name="yandex-verification" content="c74167eb0fd8f8fe" />
+    <meta name="yandex-verification" content="c74167eb0fd8f8fe" />
     <meta name="google-site-verification" content="0dZw6jM4sYdeu4GqW-DoUbESkEAaX7OuIC6deq1n5OQ" />
-    -->
+   
+    <link rel="apple-touch-icon" sizes="180x180" href="https://garage-codd.ru/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://garage-codd.ru/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://garage-codd.ru/favicons/favicon-16x16.png">
+    <link rel="manifest" href="https://garage-codd.ru/favicons/site.webmanifest">
+    <link rel="mask-icon" href="https://garage-codd.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="https://garagetest.ru/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://garagetest.ru/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://garagetest.ru/favicons/favicon-16x16.png">
-    <link rel="manifest" href="https://garagetest.ru/favicons/site.webmanifest">
-    <link rel="mask-icon" href="https://garagetest.ru/favicons/safari-pinned-tab.svg" color="#5bbad5">
-
-    <!--
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#090909"/>
     <meta name="title" content="Гараж ЦОДД"/>
@@ -49,7 +47,7 @@
             accurateTrackBounce:true,
             webvisor:true
         });
-    </script> -->
+    </script>
 
     <title>Гараж ЦОДД</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/> -->
@@ -61,6 +59,18 @@
 </head>
 <body class="main">
     <noscript> <div> <img src="https://mc.yandex.ru/watch/95985378" style="position: absolute; left: -9999px;" alt=""/> </div> </noscript>
+
+    <div class="progress-bar">
+        <div class="progress-bar-container">
+            <div class="image">
+                <img class="no_animated" src="media/images/modelPage/loader/logo.gif" alt="цодд" fetchpriority="high">
+            </div>
+            <span id="progress-label">1%</span>
+            <div id="hellopreloader_barWrapper">
+                <progress id="progress-bar" value="1" max="100"></progress>
+            </div>
+        </div>
+    </div>
 
     <header class="header_main">
         <div class="container_main">
@@ -95,8 +105,10 @@
                         <a class="menu_navigation-link" href="#traffic_patrol">дорожный патруль ЦОДД</a>
                         <div class="menu_preview-block">
                             <div class="block-wrapper-video">
-                                <video class="menu_preview-video" src="media/video/traffik_menu.mp4" muted loop playsinline>
-                                </video>
+                                <video class="menu_preview-video" src="media/video/traffik_menu.mp4" muted loop playsinline></video>
+                                <!-- <video class="menu_preview-video" muted loop playsinline>
+                                    <source src="media/video/traffik_menu.mp4" type="video/mp4" />
+                                </video> -->
                             </div>
                         </div>
                     </li>
@@ -108,6 +120,9 @@
                         <div class="menu_preview-block">
                             <div class="block-wrapper-video">
                                 <video class="menu_preview-video" src="media/video/bus.mp4" muted loop playsinline></video>
+                                <!-- <video class="menu_preview-video" muted loop playsinline>
+                                    <source src="media/video/bus.mp4" type="video/mp4" />
+                                </video> -->
                             </div>
                         </div>
                     </li>
@@ -119,6 +134,9 @@
                         <div class="menu_preview-block">
                             <div class="block-wrapper-video">
                                 <video class="menu_preview-video" src="media/video/kater.mp4" muted loop playsinline></video>
+                                <!-- <video class="menu_preview-video" muted loop playsinline>
+                                    <source src="media/video/kater.mp4" type="video/mp4" />
+                                </video> -->
                             </div>
                         </div>
                     </li>
@@ -130,6 +148,9 @@
                         <div class="menu_preview-block">
                             <div class="block-wrapper-video">
                                 <video class="menu_preview-video" src="media/video/velo.mp4" muted loop playsinline></video>
+                                <!-- <video class="menu_preview-video" muted loop playsinline>
+                                    <source src="media/video/velo.mp4" type="video/mp4" />
+                                </video> -->
                             </div>
                         </div>
                     </li>
@@ -142,6 +163,9 @@
                             <div class="block-wrapper-video">
                                 <!-- <video class="menu_preview-video" src="media/video/help_menu.mp4" muted loop playsinline></video> -->
                                 <video class="menu_preview-video" src="media/video/moskvich.mp4" muted loop playsinline></video>
+                                <!-- <video class="menu_preview-video" muted loop playsinline>
+                                    <source src="media/video/moskvich.mp4" type="video/mp4" />
+                                </video> -->
                             </div>
                         </div>
                     </li>
@@ -187,6 +211,9 @@
         <section class="main">
             <div class="main_intro_media">
                 <video class="preview_video" preload playsinline muted loop></video>
+                <!-- <video class="preview_video" preload muted loop playsinline>
+                    <source type="video/mp4" />
+                </video> -->
             </div>
             <div class="main_intro_content">
                 <div class="container_main">
@@ -214,7 +241,7 @@
                                 </p>
                             </div>
                             <div class="main_button-3">
-                                <a class="main_info-link" href="amarok.html">в&nbsp;виртуальный гараж</a>
+                                <a class="main_info-link" href="moto.html">в&nbsp;виртуальный гараж</a>
                             </div>
                         </div>
                     </div>
@@ -356,6 +383,9 @@
                                             <img class="menu_preview-img" src="media/images/modelPage/slider/moto.png" alt="Мотопатруль" fetchpriority="high">
                                         </picture>
                                         <video class="menu_preview-video" src="media/video/moto.mp4" muted loop playsinline></video>
+                                        <!-- <video class="menu_preview-video" muted loop playsinline>
+                                            <source src="media/video/moto.mp4" type="video/mp4" />
+                                        </video> -->
                                     </div>
                                     <div class="slid_info">
                                         <div class="slid_info-desc">
@@ -380,6 +410,9 @@
                                             <img class="menu_preview-img" src="media/images/modelPage/slider/kamaz.png" alt="Грузовик" fetchpriority="high">
                                         </picture>
                                         <video class="menu_preview-video" src="media/video/kamaz.mp4" muted loop playsinline></video>
+                                        <!-- <video class="menu_preview-video" muted loop playsinline>
+                                            <source src="media/video/kamaz.mp4" type="video/mp4" />
+                                        </video> -->
                                     </div>
                                     <div class="slid_info">
                                         <div class="slid_info-desc">
@@ -404,6 +437,9 @@
                                             <img class="menu_preview-img" src="media/images/modelPage/slider/amarok.png" alt="Патрульный пикап" fetchpriority="high">
                                         </picture>
                                         <video class="menu_preview-video" src="media/video/amarok.mp4" muted loop playsinline></video>
+                                        <!-- <video class="menu_preview-video" muted loop playsinline>
+                                            <source src="media/video/amarok.mp4" type="video/mp4" />
+                                        </video> -->
                                     </div>
                                     <div class="slid_info">
                                         <div class="slid_info-desc">
@@ -428,6 +464,9 @@
                                             <img class="menu_preview-img" src="media/images/modelPage/slider/ford.png" alt="Патрульный фургон" fetchpriority="high">
                                         </picture>
                                         <video class="menu_preview-video" src="media/video/ford.mp4" muted loop playsinline></video>
+                                        <!-- <video class="menu_preview-video" muted loop playsinline>
+                                            <source src="media/video/ford.mp4" type="video/mp4" />
+                                        </video> -->
                                     </div>
                                     <div class="slid_info">
                                         <div class="slid_info-desc">
@@ -496,6 +535,9 @@
                                     <img class="menu_preview-img" src="media/images/modelPage/slider/bus.png" alt="Ситуационный центр" fetchpriority="high">
                                 </picture>
                                 <video class="menu_preview-video" src="media/video/bus.mp4" muted loop playsinline></video>
+                                <!-- <video class="menu_preview-video" muted loop playsinline>
+                                    <source src="media/video/bus.mp4" type="video/mp4" />
+                                </video> -->
                             </div>
                             <div class="slid_info">
                                 <div class="slid_info-desc">
@@ -603,6 +645,9 @@
                                     <img class="menu_preview-img" src="media/images/modelPage/slider/kater.png" alt="Катер" fetchpriority="high">
                                 </picture>
                                 <video class="menu_preview-video" src="media/video/kater.mp4" muted loop playsinline></video>
+                                <!-- <video class="menu_preview-video" muted loop playsinline>
+                                    <source src="media/video/kater.mp4" type="video/mp4" />
+                                </video> -->
                             </div>
                             <div class="slid_info">
                                 <div class="slid_info-desc">
@@ -673,6 +718,9 @@
                                     <img class="menu_preview-img" src="media/images/modelPage/slider/velo.png" alt="Патрульный пикап" fetchpriority="high">
                                 </picture>
                                 <video class="menu_preview-video" src="media/video/velo.mp4" muted loop playsinline></video>
+                                <!-- <video class="menu_preview-video" muted loop playsinline>
+                                    <source src="media/video/velo.mp4" type="video/mp4" />
+                                </video> -->
                             </div>
                             <div class="slid_info">
                                 <div class="slid_info-desc">
@@ -756,6 +804,9 @@
                                     <img class="menu_preview-img" src="media/images/modelPage/slider/moskvich.png" alt="Служба помощи ЦОДД" fetchpriority="high">
                                 </picture>
                                 <video class="menu_preview-video" src="media/video/moskvich.mp4" muted loop playsinline></video>
+                                <!-- <video class="menu_preview-video" muted loop playsinline>
+                                    <source src="media/video/moskvich.mp4" type="video/mp4" />
+                                </video> -->
                             </div>
                             <div class="slid_info">
                                 <div class="slid_info-desc">
@@ -912,5 +963,6 @@
     </footer>
 
     <script type="module" src="./js/mainPage/index.js"></script>
+    <script type="module" src="./js/fake_loading\loading.js"></script>
 </body>
 </html>

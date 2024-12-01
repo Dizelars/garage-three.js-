@@ -532,7 +532,7 @@ section.main .main_title span.large_letter {
     padding: 19px;
     border: 10px solid white;
     /* max-width: 350px; */
-    max-width: 346px;
+    max-width: 338px;
     width: 3%;
     border-radius: 50px;
     animation: LargeLetter 1s linear 2s forwards;
