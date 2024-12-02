@@ -226,12 +226,19 @@ document.addEventListener('DOMContentLoaded', function () {
             prevEl: '.prev_button',
         },
         breakpoints: {
-            370: { slidesPerView: 2 },
-            770: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 },
-            1200: { slidesPerView: 4,
-                    freeMode: true,
-                },
+            370: { 
+                slidesPerView: 2 
+            },
+            770: { 
+                slidesPerView: 3 
+            },
+            1024: { 
+                slidesPerView: 4 
+            },
+            // 1200: { 
+            //     slidesPerView: 4,
+            //     freeMode: true,
+            // },
         },
     });
 

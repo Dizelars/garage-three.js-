@@ -1,3 +1,6 @@
+// Получаем якорь из URL
+const anchor = window.location.hash;
+
 let isModelLoaded = false;
 
 const LOADING_TIME = 50000;
@@ -87,8 +90,15 @@ function countLoad() {
     }, COUNT_LOAD_TIME);
 }
 
-countLoad();
-loaderON();
+if (!anchor && window.innerWidth <= 1370) {
+    // console.log(`В URL нет якоря`);
+    preloader.style.display = "block";
+    countLoad();
+    loaderON();
+}
+
+// countLoad();
+// loaderON();
 
 function myLoading() {
     console.log('myLoading go!');

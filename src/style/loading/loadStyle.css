@@ -1,7 +1,7 @@
 .progress-bar {
     font-family: 'MoscowSans', sans-serif;
-    /* position: absolute; */
     position: fixed;
+    display: block;
 
     top: 50%;
     left: 50%;
@@ -13,8 +13,10 @@
     height: 101%;
     /* height: 100vh; */
     background-color: rgba(0, 0, 0);
+}
 
-    /* display: none; */
+.progress-bar.main {
+    display: none;
 }
 
 /*ЗАРЕШАЛО ПО АНИМАЦИИ*/
