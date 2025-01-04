@@ -43,7 +43,7 @@ export default defineConfig({
         velo: 'src/velo.html',
         // police: 'src/police.html',
         // muslCar: 'src/muslCar.html',
-        // solaris: 'src/solaris.html',
+        solaris: 'src/solaris.html',
         // test_page: 'src/test_page.html',
         // pageAR: 'src/pageAR.html'
       },

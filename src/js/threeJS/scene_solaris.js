@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 // import {THREE} from '@google/model-viewer/dist/model-viewer';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import GUI from 'lil-gui'
+import GUI from 'lil-gui';
 // import Stats from 'stats.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
@@ -33,12 +33,14 @@ window.addEventListener('keypress', (event) => {
 })
 
 // Создаем папки дебагера
-const hdriFolder = gui.addFolder('Карта окружения');
-const toneMapping = gui.addFolder('Тоновое отображение')
+// const hdriFolder = gui.addFolder('Карта окружения');
+// const toneMapping = gui.addFolder('Тоновое отображение');
+
 // const PointFolder = gui.addFolder('Типоны');
 // const One = PointFolder.addFolder('Типон 1');
 // const Two = PointFolder.addFolder('Типон 2');
 // const Three = PointFolder.addFolder('Типон 3');
+
 const ModelFolder = gui.addFolder('Модель');
 const modelPosition = ModelFolder.addFolder('Позиция');
 const modelScale = ModelFolder.addFolder('Масштаб');
@@ -182,13 +184,6 @@ let constants = {
     resolution: 24
 }
 
-// let constants = {
-//     scale: 3,
-//     height: 8.5,
-// 	radius: 50,
-//     resolution: 24
-// }
-
 // let sceneReady = false
 
 // Солярис
@@ -204,10 +199,10 @@ gltfLoader.load("models/model_vectary/transformed/solaris/solaris.gltf", (gltf) 
     console.log(gltf);
     let current_object = gltf.scene;
 
-    current_object.position.x = 0;
-    current_object.position.y = -0.2;
-    current_object.position.z = 0;
-    current_object.rotation.y = -1.58;
+    // current_object.position.x = 0;
+    // current_object.position.y = -0.2;
+    // current_object.position.z = 0;
+    // current_object.rotation.y = -1.58;
     current_object.scale.set(constants.scale, constants.scale, constants.scale);
 
     positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
@@ -225,16 +220,16 @@ gltfLoader.load("models/model_vectary/transformed/solaris/solaris.gltf", (gltf) 
     scene.add(current_object);
 
     // controls.update()
-    updateAllMaterials()
-    console.log(renderer.info)
+    updateAllMaterials();
+    console.log(renderer.info);
 
     // window.setTimeout(() => {
     //     sceneReady = true
     // }, 500)
 });
 
-// const axesHelper = new THREE.AxesHelper(5);
-// scene.add(axesHelper);
+const axesHelper = new THREE.AxesHelper(5);
+scene.add(axesHelper);
 
 
 /**
@@ -367,39 +362,39 @@ let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/
     scene.add(skybox);
 
     //* Управление параметрами skybox через GUI:
-    hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
-        updateSkybox();
-    });
+    // hdriFolder.add(constants, 'radius', 1, 200, 0.1).name('skyboxRadius').onChange(() => {
+    //     updateSkybox();
+    // });
 
-    hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onChange(() => {
-        updateSkybox();
-    });
+    // hdriFolder.add(constants, 'height', 1, 100, 0.1).name('skyboxHeight').onChange(() => {
+    //     updateSkybox();
+    // });
 
-    hdriFolder.add(constants, 'resolution', 1, 64, 1).name('skyboxResolution').onChange(() => {
-        updateSkybox();
-    });
+    // hdriFolder.add(constants, 'resolution', 1, 64, 1).name('skyboxResolution').onChange(() => {
+    //     updateSkybox();
+    // });
 
-    function updateSkybox() {
-        scene.remove(skybox); // Удаление старого skybox
-        skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution); // Создание нового skybox с обновленными параметрами
-        skybox.position.y = constants.height - 0.01;
-        scene.add(skybox); // Добавление нового skybox на сцену
-    }
+    // function updateSkybox() {
+    //     scene.remove(skybox); // Удаление старого skybox
+    //     skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution); // Создание нового skybox с обновленными параметрами
+    //     skybox.position.y = constants.height - 0.01;
+    //     scene.add(skybox); // Добавление нового skybox на сцену
+    // }
 });
 
 //! Tone mapping
-renderer.toneMapping = THREE.ACESFilmicToneMapping
-toneMapping.add(renderer, 'toneMapping', {
-    No: THREE.NoToneMapping,
-    Linear: THREE.LinearToneMapping,
-    Reinhard: THREE.ReinhardToneMapping,
-    Cineon: THREE.CineonToneMapping,
-    ACESFilmic: THREE.ACESFilmicToneMapping
-})
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+// toneMapping.add(renderer, 'toneMapping', {
+//     No: THREE.NoToneMapping,
+//     Linear: THREE.LinearToneMapping,
+//     Reinhard: THREE.ReinhardToneMapping,
+//     Cineon: THREE.CineonToneMapping,
+//     ACESFilmic: THREE.ACESFilmicToneMapping
+// });
 
 // renderer.toneMappingExposure = 2;
 renderer.toneMappingExposure = 1.4;
-toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1)
+// toneMapping.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.1);
 
 
 const tick = () =>
@@ -418,7 +413,7 @@ const tick = () =>
     // stats.end()
 }
 
-tick()
+tick();
 
 // let renderCount = 0; // Счетчик рендеров
 // const maxRenders = 150; // Максимальное количество рендеров

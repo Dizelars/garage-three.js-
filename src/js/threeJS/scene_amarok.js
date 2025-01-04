@@ -181,20 +181,10 @@ gltfLoader.setDRACOLoader(dracoLoader)
 // Обьект параметров
 let constants = {
     scale: 2.2,
-    // scale: 1,
-    // scale: 0.7,
     height: 2.5,
 	radius: 12,
-    // resolution: 24
     resolution: 17
 }
-
-// let constants = {
-//     scale: 2.2,
-//     height: 8.5,
-// 	radius: 50,
-//     resolution: 24
-// }
 
 // let sceneReady = false
 
