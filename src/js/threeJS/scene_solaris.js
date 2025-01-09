@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 // import {THREE} from '@google/model-viewer/dist/model-viewer';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import GUI from 'lil-gui';
+// import GUI from 'lil-gui';
 // import Stats from 'stats.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
@@ -18,19 +18,19 @@ import {InteriorTransitionHelper} from "../helpers/interiorTransitionHelper.js";
  * Base
  */
 // Debug
-const gui = new GUI({
-    title: 'Контроллер',
-    width: 350,
-    closeFolders: true
-})
-gui.close()
-gui.hide();
+// const gui = new GUI({
+//     title: 'Контроллер',
+//     width: 350,
+//     closeFolders: true
+// })
+// gui.close()
+// gui.hide();
 
-window.addEventListener('keypress', (event) => {
-    if(event.key == 'h') {
-        gui.show(gui._hidden)
-    }
-})
+// window.addEventListener('keypress', (event) => {
+//     if(event.key == 'h') {
+//         gui.show(gui._hidden)
+//     }
+// })
 
 // Создаем папки дебагера
 // const hdriFolder = gui.addFolder('Карта окружения');
@@ -41,13 +41,13 @@ window.addEventListener('keypress', (event) => {
 // const Two = PointFolder.addFolder('Типон 2');
 // const Three = PointFolder.addFolder('Типон 3');
 
-const ModelFolder = gui.addFolder('Модель');
-const modelPosition = ModelFolder.addFolder('Позиция');
-const modelScale = ModelFolder.addFolder('Масштаб');
+// const ModelFolder = gui.addFolder('Модель');
+// const modelPosition = ModelFolder.addFolder('Позиция');
+// const modelScale = ModelFolder.addFolder('Масштаб');
 
-const positionFolder = modelPosition.addFolder('position');
-const rotationFolder = modelPosition.addFolder('rotation');
-const scaleFolder = modelScale.addFolder('scale');
+// const positionFolder = modelPosition.addFolder('position');
+// const rotationFolder = modelPosition.addFolder('rotation');
+// const scaleFolder = modelScale.addFolder('scale');
 
 //! Monitor FPS
 // const stats = new Stats()
@@ -205,17 +205,17 @@ gltfLoader.load("models/model_vectary/transformed/solaris/solaris.gltf", (gltf) 
     // current_object.rotation.y = -1.58;
     current_object.scale.set(constants.scale, constants.scale, constants.scale);
 
-    positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
-    positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
-    positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
+    // positionFolder.add(current_object.position, 'x', -9, 9, 0.01).name('position X')
+    // positionFolder.add(current_object.position, 'y', -9, 9, 0.01).name('position Y')
+    // positionFolder.add(current_object.position, 'z', -9, 9, 0.01).name('position Z')
 
-    rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
-    rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
-    rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
+    // rotationFolder.add(current_object.rotation, 'x', -9, 9, 0.01).name('rotation X')
+    // rotationFolder.add(current_object.rotation, 'y', -9, 9, 0.01).name('rotation Y')
+    // rotationFolder.add(current_object.rotation, 'z', -9, 9, 0.01).name('rotation Z')
     
-    scaleFolder.add(constants, 'scale', 0.1, 9, 0.1).name('Scale').onChange((value) => {
-        current_object.scale.set(value, value, value);
-    });
+    // scaleFolder.add(constants, 'scale', 0.1, 9, 0.1).name('Scale').onChange((value) => {
+    //     current_object.scale.set(value, value, value);
+    // });
 
     scene.add(current_object);
 
@@ -228,8 +228,8 @@ gltfLoader.load("models/model_vectary/transformed/solaris/solaris.gltf", (gltf) 
     // }, 500)
 });
 
-const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
+// const axesHelper = new THREE.AxesHelper(5);
+// scene.add(axesHelper);
 
 
 /**
