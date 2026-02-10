@@ -18,7 +18,6 @@ scrollPosition = window.scrollY;
 function loaderON() {
     scrollPosition = window.scrollY;
     bodyOverflow.style.overflow = "hidden";
-    // bodyOverflow.style.position = "fixed";
     bodyOverflow.style.position = "relative";
     bodyOverflow.style.top = `-${scrollPosition}px`;
     bodyOverflow.style.width = "100%";
@@ -26,7 +25,6 @@ function loaderON() {
 
 function loaderOFF() {
     scrollPosition = window.scrollY;
-    // console.log(scrollPosition);
     bodyOverflow.style.removeProperty("overflow");
     bodyOverflow.style.removeProperty("position");
     bodyOverflow.style.removeProperty("top");
@@ -91,20 +89,12 @@ function countLoad() {
 }
 
 if (!anchor && window.innerWidth <= 1370) {
-    // console.log(`В URL нет якоря`);
     preloader.style.display = "block";
     countLoad();
     loaderON();
 }
 
-// countLoad();
-// loaderON();
-
 function myLoading() {
-    console.log('myLoading go!');
-    // setTimeout(() => {
-    //     isModelLoaded = true;
-    // }, 1500);
     window.addEventListener('load', () => {
         setTimeout(() => {
             isModelLoaded = true;

@@ -1,5 +1,4 @@
 export const isAutoplayVideoScreenSize = () => {
-    // return window.innerWidth <= 835;
     return window.innerWidth <= 1199;
   };
   
@@ -26,8 +25,6 @@ export const isAutoplayVideoScreenSize = () => {
           document.documentElement.clientWidth) /* or $(window).width() */
     );
   };
-  
-  
   
   export const observeElementVisibility = (el, onVisible, onHidden) => {
     const options = {

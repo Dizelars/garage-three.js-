@@ -1,5 +1,4 @@
 @media (hover: hover) {
-    /* Ваши стили для hover */
     .tech_spec__btn:hover {
         background-color: #313131;
     }
@@ -312,7 +311,6 @@
 
     .auto_park .auto_park_wrapper {
         height: auto;
-        /* padding: 20px 20px 40px 20px; */
         padding-bottom: 40px;
     }
 
@@ -449,7 +447,6 @@
     }
 
     .auto_park .auto_park_wrapper {
-        /* padding: 14px 20px 34px 20px; */
         padding-bottom: 34px;
     }
 
@@ -674,7 +671,6 @@
 
     .auto_park .auto_park_wrapper {
         height: auto;
-        /* padding: 20px 20px 30px 20px; */
         padding-bottom: 30px;
     }
 
@@ -787,7 +783,6 @@
     }
 
     .auto_park .auto_park_wrapper {
-        /* padding: 10px 20px 30px 20px; */
         padding-bottom: 30px;
     }
     .auto_park__control {
@@ -797,10 +792,6 @@
     .auto_park_slider {
         padding: 0 20px 0 20px;
     }
-
-    /* .auto_park .auto_park__control {
-        margin-bottom: 10px;
-    } */
 }
 
 @media screen and (max-height: 320px) and (orientation:landscape) {

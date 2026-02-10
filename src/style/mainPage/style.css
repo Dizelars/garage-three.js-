@@ -654,10 +654,7 @@ section.main .main_grid-wrapper .main_button-3 .main_info-link  {
     border-radius: 20px;
 }
 
-
-
 /*traffic_patrol*/
-
 section.traffic_patrol {
     padding: 60px 20px 0 20px;
     position: relative;
@@ -1050,7 +1047,6 @@ section.traffic_patrol .traffic_patrol_slider .garage_model_card
 /*cards end*/
 
 /*situation_centre*/
-
 section.situation_centre {
     padding: 60px 20px 0 20px;
     position: relative;
@@ -1261,7 +1257,6 @@ section.situation_centre .situation_centre_grid-wrapper .situation-1  .situation
 
 
 /*water_patrol*/
-
 section.water_patrol {
     padding: 60px 20px 0 20px;
     position: relative;
@@ -1352,7 +1347,6 @@ section.water_patrol .water_patrol_grid-wrapper .water_patrol_title .water_patro
 
 
 /*velo_patrol*/
-
 section.velo_patrol {
     padding: 60px 20px 0 20px;
     position: relative;
@@ -1459,7 +1453,6 @@ section.velo_patrol .velo_patrol_grid-wrapper .velo_patrol_title .velo_patrol-an
 
 
 /*help_desk*/
-
 section.help_desk {
     padding: 60px 20px 0 20px;
     position: relative;
@@ -1472,14 +1465,14 @@ section.help_desk:before {
     height: 600px;
     z-index: -1;
     pointer-events: none;
-    top: var(--before-top, 0); /* Используем CSS переменную для изменения свойства top */
-    right: var(--before-right, 0); /* Используем CSS переменную для изменения свойства right */
-    bottom: var(--before-bottom, 0); /* Используем CSS переменную для изменения свойства bottom */
-    left: var(--before-left, 0); /* Используем CSS переменную для изменения свойства left */
+    top: var(--before-top, 0);
+    right: var(--before-right, 0);
+    bottom: var(--before-bottom, 0);
+    left: var(--before-left, 0);
     border-radius: 100%;
     opacity: 0.3;
     background: radial-gradient(50% 50.00% at 50% 50.00%, #FC762B 0%, rgba(9, 9, 9, 0.00) 100%);
-    transition: top 4s ease, right 4s ease, bottom 4s ease, left 4s ease; /* Добавляем анимацию перемещения через свойства top и right */
+    transition: top 4s ease, right 4s ease, bottom 4s ease, left 4s ease;
 }
 
 section.help_desk .container_main {
@@ -1638,7 +1631,6 @@ section.help_desk .help_desk_grid-wrapper .slide-moskvich {
 
 
 /*footer*/
-
 footer.footer_main {
     padding: 50px 0 0 0;
     position: relative;

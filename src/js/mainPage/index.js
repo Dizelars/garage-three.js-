@@ -1,6 +1,4 @@
 import { isAutoplayVideoScreenSize, isElementInViewport, observeElementVisibility } from "./utils.js";
-// import '../js/URLCheck.js';
-// import { isInnovation } from './URLCheck';
 
 // Примечания по видео на стартовой странице:
 // Webpack импортирует пути до видео Абсолютными, что мешает открытию ролика в современных версиях iOS
@@ -72,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-
     // Появление и скрытие меню сайта
     let bodyOverflow = document.querySelector('body.main');
     let menuBtn = document.querySelector('.header__menu');
@@ -87,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
             e.classList.toggle('animation');
         });
     })
-
 
     // Замена цвета у других ссылок при наведении на одну из ниих
     const navigationLinks = document.querySelectorAll(".menu_navigation-link");
@@ -152,9 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
         link.addEventListener("click", handleLinkCloseMenu);
     });
 
-    // console.log(isInnovation);
     // ПОЯВЛЕНИЕ видео превью при наведении на список меню. (на десктопе)
-    // && !isInnovation
     if(window.innerWidth > 1200) {
         // Получаем все элементы списка
         const menuItems = document.querySelectorAll('.menu_navigation-item');
@@ -194,8 +188,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // ВИДЕО при ховере на карточку .garage_model_card
     const modelCards = document.querySelectorAll('.garage_model_card');
-    // isAutoplayVideoScreenSize()
-    //|| isInnovation
     if (isAutoplayVideoScreenSize()) {
         setInterval(() => {
             modelCards.forEach(card => {
@@ -409,12 +401,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Вызываем обработчик события прокрутки в начале для проверки видимости элементов при загрузке страницы
     handleScroll();
-
-    // ссылка в футере отключена при URL-параметре
-    // const urlLinksKill = document.querySelectorAll('.menu-media .media-wrapper, .footer-contacts-3 .contacts-2, .footer-contacts-3 .contacts-3, .footer-media-4 .media-wrapper, .secure_transportation');
-    // if (isInnovation) {
-    //     urlLinksKill.forEach((link) => {
-    //         link.style.pointerEvents = 'none';
-    //     });
-    // }
 });

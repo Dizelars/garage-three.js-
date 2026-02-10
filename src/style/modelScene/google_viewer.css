@@ -2,7 +2,6 @@
     display: none;
 }
 
-/* .qrCode-popup, */
 .popup_design {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -26,24 +25,17 @@
             align-items: center;
     overflow: auto;
     padding: 0 20px;
-
-    /* background: transparent; */
     background: rgba(255,255,255,0.10);
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
 }
 
-/* .qrCode-popup.active, */
 .popup_design.active {
     pointer-events: all;
     z-index: 99999;
 }
 
-/* .qrCode-popup.active .qrCode-popup_wrapper, */
 .popup_design.active .popup_wrapper {
-    /* -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-            transform: translateY(0); */
     position: relative;
     padding: 20px;
     max-width: 240px;
@@ -71,16 +63,6 @@
     max-width: 350px;
 }
 
-/* .qrCode-popup .closeIcon, */
-/* .qrCode-popup .closeIcon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 16px;
-    cursor: pointer;
-} */
-
-/* .qrCode-popup .title, */
 .popup_design .title {
     font-family: 'MoscowSans', sans-serif;
     font-size: 20px;
@@ -99,7 +81,6 @@
     width: 100%;
 }
 
-/* .qrCode-popup .description, */
 .popup_design .description {
     font-family: 'MoscowSans', sans-serif;
     font-size: 13px;
@@ -116,7 +97,6 @@
     text-align: unset;
 }
 
-/* .qrCode-popup .closeButton, */
 .popup_design .closeButton {
     text-align: center;
     width: 100%;
@@ -131,7 +111,6 @@
     transition: all .5s;
 }
 
-/* .qrCode-popup .closeButton:hover, */
 .popup_design .closeButton:hover {
     background-color: #fcfcfc;
 }

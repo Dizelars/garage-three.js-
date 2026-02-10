@@ -1,0 +1,8 @@
+<div class="BackToInnovation">
+	<img class="innovation_img" src="https://coddmac.store/innovation/innovation.svg" alt="Инновационная столица">
+	<p class="innovation_text">На главную</p>
+</div>
+
+<script type="text/javascript">
+function checkUrlParameterAndCreateButton(){console.log("URLCheck");const t=window.location.href,e=document.querySelector(".BackToInnovation");t.includes("innovation")&&(e.style.display="flex",e.addEventListener("click",(function(){window.location.href="https://i.transport.mos.ru/screen"})),document.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll("a").forEach((t=>{const e=t.getAttribute("href");if(!e||e.startsWith("#")||e.startsWith("mailto")||e.startsWith("tel")||e.includes("innovation"))return;const[n,o]=e.split("#"),i=n.includes("?")?"&":"?",r=o?`${n}${i}innovation#${o}`:`${n}${i}innovation`;t.setAttribute("href",r)}))})))}checkUrlParameterAndCreateButton();
+</script>

@@ -6,11 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- <meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="robots" content="noindex,nofollow,noarchive">
     <meta name="yandex" content="noindex,nofollow,noarchive">
-    <meta name="googlebot" content="noindex,nofollow,noarchive"> -->
+    <meta name="googlebot" content="noindex,nofollow,noarchive">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="https://garage-codd.ru/favicons/apple-touch-icon.png">
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="https://garage-codd.ru/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://garage-codd.ru/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://garage-codd.ru/favicons/favicon-16x16.png">
     <link rel="manifest" href="https://garage-codd.ru/favicons/site.webmanifest">
@@ -49,12 +49,10 @@
             accurateTrackBounce:true,
             webvisor:true
         });
-    </script>
+    </script> -->
 
     <title>Мобильный ситуационный центр. Автобус</title>
     <link rel="stylesheet" href="./style/styleForModels/bus.css">
-    <!-- <script defer src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script> -->
     <script defer src="./libraries/swiper/5.3.8/swiper.js"></script> 
     <script src="./libraries/aframe.js"></script>
     <script>
@@ -122,369 +120,353 @@
 </head>
 <body>
     <noscript><div><img src="https://mc.yandex.ru/watch/95985378" style="position: absolute; left: -9999px;" alt=""/></div></noscript>
-<div class="progress-bar">
-    <div class="progress-bar-container">
-        <div class="image">
-            <img class="no_animated" src="media/images/modelPage/loader/logo.gif" alt="цодд" fetchpriority="high">
-        </div>
-        <span id="progress-label">1%</span>
-        <div id="hellopreloader_barWrapper">
-            <progress id="progress-bar" value="1" max="100"></progress>
-        </div>
-        <label for="progress-bar" id="progress_text">Загружаем модель в высоком разрешении.<br>Пожалуйста, дождитесь завершения</label>
-    </div>
-</div>
 
-<div class="header">
-    <a class="header__logo" href="../index.html#situation_centre">
-        <img class="header__logo-img" src="media/images/logo/header_logo.svg" alt="logo">
-        <p class="header__logo-text">Гараж ЦОДД</p>
-    </a>
-</div>
-
-<!-- <div class="vectary_forbidden">
-    <div class="forbidden_icons">
-        <img class="forbidden-warning" src="media/images/modelPage/vectary_403/forbidden_warning.svg" alt="warning">
-        <img class="forbidden-arrow" src="media/images/modelPage/vectary_403/forbidden_arrow.svg" alt="arrow">
-    </div>
-    <div class="forbidden_descr">
-        <div class="forbidden_descr-title">В&nbsp;данный момент&nbsp;AR и&nbsp;3D&nbsp;недоступны</div>
-        <div class="forbidden_descr-text">Мы&nbsp;проводим работы с&nbsp;элементами интерактивности сайта, чтобы повысить качество пользовательского опыта. Спасибо за&nbsp;понимание</div>
-    </div>
-</div> -->
-
-<div class="tech_spec active">
-    <div class="tech_spec__wrapper hidden">
-        <div class="tech_spec__description hidden">
-            <div class="tech_spec__description-grid_wrapper hidden">
-                <div class="tech_spec__titles hidden">
-                    <div class="text_spec__texts">
-                        <p class="tech_spec__title">Мобильный ситуационный центр</p>
-                    </div>
-                </div>
-                <div class="tech_spec__mission-panel hidden">
-                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
-                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
-                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
-                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
-                    <p class="tech_spec__text">Задача</p>
-                </div>
-                <div class="tech_spec__mission hidden">
-                    <p class="tech_spec__text-descr">Сбор оперативной дорожно-транспортной информации и&nbsp;управление транспортной обстановкой из&nbsp;любой локации</p>
-                </div>
-                <div class="tech_spec__outfit-panel hidden">
-                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
-                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
-                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
-                    <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
-                    <p class="tech_spec__text">Экипировка</p>
-                </div>
-                <div class="tech_spec__outfit hidden">
-                    <ul class="tech_spec__outfit-list">
-                        <li class="tech_spec__outfit-item">
-                            <div class="tech_spec__outfit-img">
-                                <img src="media/images/modelPage/outfit/bus/outfit_bus_1.svg" alt="Телескопическая камера" fetchpriority="high">
-                            </div>
-                            <span class="tech_spec__outfit-text">Цифровая камера</span>
-                        </li>
-                        <li class="tech_spec__outfit-item">
-                            <div class="tech_spec__outfit-img">
-                                <img src="media/images/modelPage/outfit/bus/outfit_bus_2.svg" alt="Тепловизор" fetchpriority="high">
-                            </div>
-                            <span class="tech_spec__outfit-text">Тепловизор</span>
-                        </li>
-                        <li class="tech_spec__outfit-item">
-                            <div class="tech_spec__outfit-img">
-                                <img src="media/images/modelPage/outfit/bus/outfit_bus_3.svg" alt="Камеры телеобзора" fetchpriority="high">
-                            </div>
-                            <span class="tech_spec__outfit-text">Камеры телеобзора</span>
-                        </li>
-                        <li class="tech_spec__outfit-item">
-                            <div class="tech_spec__outfit-img">
-                                <img src="media/images/modelPage/outfit/bus/outfit_bus_4.svg" alt="Конференц-зона" fetchpriority="high">
-                            </div>
-                            <span class="tech_spec__outfit-text">Конференц-зона</span>
-                        </li>
-                        <li class="tech_spec__outfit-item">
-                            <div class="tech_spec__outfit-img">
-                                <img src="media/images/modelPage/outfit/bus/outfit_bus_5.svg" alt="Телекоммуникационное оборудование" fetchpriority="high">
-                            </div>
-                            <span class="tech_spec__outfit-text">Сетевое оборудование</span>
-                        </li>
-                        <li class="tech_spec__outfit-item">
-                            <div class="tech_spec__outfit-img">
-                                <img src="media/images/modelPage/outfit/bus/outfit_bus_6.svg" alt="Рабочие места" fetchpriority="high">
-                            </div>
-                            <span class="tech_spec__outfit-text">Рабочие места сотрудников</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="tech_spec__button">
-                    <a class="tech_spec__btn">
-                        <span>Подробнее</span>
-                        <img src="media/images/modelPage/arrows/icon-arrow.svg" alt="icon-arrow" fetchpriority="high">
-                    </a>
-                </div>
+    <div class="progress-bar">
+        <div class="progress-bar-container">
+            <div class="image">
+                <img class="no_animated" src="media/images/modelPage/loader/logo.gif" alt="цодд" fetchpriority="high">
             </div>
+            <span id="progress-label">1%</span>
+            <div id="hellopreloader_barWrapper">
+                <progress id="progress-bar" value="1" max="100"></progress>
+            </div>
+            <label for="progress-bar" id="progress_text">Загружаем модель в высоком разрешении.<br>Пожалуйста, дождитесь завершения</label>
         </div>
     </div>
-</div>
 
-<div class="tech_spec__interior" id="bus">
-    <p class="tech_spec__interior-title">Man</p>
-    <div class="tech_spec__interior-wrapper">
-        <div class="tech_spec__interior-btn">
-            <span class="tech_spec__interior-text">В салон</span>
-            <div class="arrow-wrapper">
-                <img src="media/images/modelPage/arrows/interior_arrow.svg" alt="interior_arrow">
-            </div>
-        </div>
+    <div class="header">
+        <a class="header__logo" href="../index.html#situation_centre">
+            <img class="header__logo-img" src="media/images/logo/header_logo.svg" alt="logo">
+            <p class="header__logo-text">Гараж ЦОДД</p>
+        </a>
     </div>
-</div>
 
-<div class="auto_park">
-    <div class="container">
-        <div class="auto_park_wrapper">
-            <div class="auto_park__control">
-                <p class="auto_park__title">Транспорт ЦОДД</p>
-                <img class="rotate" src="media/images/modelPage/arrows/auto_park_arrow.svg" alt="auto_park_btn">
-            </div>
-            <div class="auto_park_slider">
-                <div class="auto_park_slider-overflow swiper_model">
-                    <div class="auto_park_slider-wrapper swiper-wrapper">
-                        <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="moto.html">
-                                <picture>
-                                    <img class="gallery_item-img" src="media/images/modelPage/slider/compress/moto.png" alt="moto" fetchpriority="high">
-                                </picture>
-                            </a>
-                        </div>
-                        <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="kamaz.html">
-                                <picture>
-                                    <img class="gallery_item-img" src="media/images/modelPage/slider/compress/kamaz.png" alt="kamaz" fetchpriority="high">
-                                </picture>
-                            </a>
-                        </div>
-                        <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="amarok.html">
-                                <picture>
-                                    <img class="gallery_item-img" src="media/images/modelPage/slider/compress/amarok.png" alt="amarok" fetchpriority="high">
-                                </picture>
-                            </a>
-                        </div>
-                        <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="ford.html">
-                                <picture>
-                                    <img class="gallery_item-img" src="media/images/modelPage/slider/compress/ford.png" alt="ford" fetchpriority="high">
-                                </picture>
-                            </a>
-                        </div>
-                        <div class="gallery_item swiper-slide active">
-                            <a class="gallery_item_link" href="#">
-                                <picture>
-                                    <img class="gallery_item-img" src="media/images/modelPage/slider/compress/bus.png" alt="bus" fetchpriority="high">
-                                </picture>
-                            </a>
-                        </div>
-                        <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="kater.html">
-                                <picture>
-                                    <img class="gallery_item-img" src="media/images/modelPage/slider/compress/kater.png" alt="kater" fetchpriority="high">
-                                </picture>
-                            </a>
-                        </div>
-                        <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="velo.html">
-                                <picture>
-                                    <img class="gallery_item-img" src="media/images/modelPage/slider/compress/velo.png" alt="moskvich" fetchpriority="high">
-                                </picture>
-                            </a>
-                        </div>
-                        <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="moskvich.html">
-                                <picture>
-                                    <img class="gallery_item-img" src="media/images/modelPage/slider/compress/moskvich.png" alt="moskvich" fetchpriority="high">
-                                </picture>
-                            </a>
-                        </div>
-                        <div class="gallery_item swiper-slide">
-                            <a class="gallery_item_link" href="solaris.html">
-                                <picture>
-                                    <img class="gallery_item-img" src="media/images/modelPage/slider/compress/solaris_gray.png" alt="solaris" fetchpriority="high">
-                                </picture>
-                            </a>
+    <div class="tech_spec active">
+        <div class="tech_spec__wrapper hidden">
+            <div class="tech_spec__description hidden">
+                <div class="tech_spec__description-grid_wrapper hidden">
+                    <div class="tech_spec__titles hidden">
+                        <div class="text_spec__texts">
+                            <p class="tech_spec__title">Мобильный ситуационный центр</p>
                         </div>
                     </div>
-                </div>
-                <div class="auto_park_slider-button">
-                    <button class="prev_button">
-                        <img src="media/images/modelPage/arrows/icon-arrow.png" alt="arrow_prev" fetchpriority="high">
-                    </button>
-                    <button class="next_button">
-                        <img src="media/images/modelPage/arrows/icon-arrow.png" alt="arrow_next" fetchpriority="high">
-                    </button>
+                    <div class="tech_spec__mission-panel hidden">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                        <p class="tech_spec__text">Задача</p>
+                    </div>
+                    <div class="tech_spec__mission hidden">
+                        <p class="tech_spec__text-descr">Сбор оперативной дорожно-транспортной информации и&nbsp;управление транспортной обстановкой из&nbsp;любой локации</p>
+                    </div>
+                    <div class="tech_spec__outfit-panel hidden">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-2">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-3">
+                        <img src="media/images/modelPage/arrows/corner.svg" alt="стрелки" class="corner-4">
+                        <p class="tech_spec__text">Экипировка</p>
+                    </div>
+                    <div class="tech_spec__outfit hidden">
+                        <ul class="tech_spec__outfit-list">
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="media/images/modelPage/outfit/bus/outfit_bus_1.svg" alt="Телескопическая камера" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Цифровая камера</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="media/images/modelPage/outfit/bus/outfit_bus_2.svg" alt="Тепловизор" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Тепловизор</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="media/images/modelPage/outfit/bus/outfit_bus_3.svg" alt="Камеры телеобзора" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Камеры телеобзора</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="media/images/modelPage/outfit/bus/outfit_bus_4.svg" alt="Конференц-зона" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Конференц-зона</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="media/images/modelPage/outfit/bus/outfit_bus_5.svg" alt="Телекоммуникационное оборудование" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Сетевое оборудование</span>
+                            </li>
+                            <li class="tech_spec__outfit-item">
+                                <div class="tech_spec__outfit-img">
+                                    <img src="media/images/modelPage/outfit/bus/outfit_bus_6.svg" alt="Рабочие места" fetchpriority="high">
+                                </div>
+                                <span class="tech_spec__outfit-text">Рабочие места сотрудников</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tech_spec__button">
+                        <a class="tech_spec__btn">
+                            <span>Подробнее</span>
+                            <img src="media/images/modelPage/arrows/icon-arrow.svg" alt="icon-arrow" fetchpriority="high">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<canvas class="threeJSScene" id="webgl"></canvas>
-<!-- <div class="plug_wrapper threeJSScene">
-    <img class="plug_img" src="media/images/modelPage/vectary_403/bus_plug.png" alt="Мобильный ситуационный центр. Автобус">
-    <img class="plug_background" src="media/images/modelPage/vectary_403/background_plug.png" alt="Мобильный ситуационный центр">
-</div> -->
-<div id="overlay"></div>
-
-<div class="pulse_wrapper">
-    <div class="pulse_media">
-        <img class="pulse_img" src="media/images/modelPage/AR/AR-cube.svg" alt="AR">
-        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        width="24px" height="24px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-            <path fill="#fff" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
-                <animateTransform attributeType="xml"
-                attributeName="transform"
-                type="rotate"
-                from="0 25 25"
-                to="360 25 25"
-                dur="0.6s"
-                repeatCount="indefinite"/>
-            </path>
-        </svg>
-        <img class="pulse_img" src="media/images/modelPage/AR/AR.svg" alt="AR">
-    </div>
-    <div class="pulse"></div>
-</div>
-
-<!-- media/images\modelPage\AR\qr-bus.svg -->
-<!-- media/images\modelPage\AR\garage_codd\qr-bus.svg -->
-<div class="qrCode-popup popup_design">
-    <div class="qrCode-popup_wrapper popup_wrapper">
-        <p class="title">Дополненная реальность</p>
-        <img class="qr_code" src="media/images\modelPage\AR\garage_codd\qr-bus.svg" alt="QR-код">
-        <p class="description">
-            Наведите камеру на&nbsp;QR-код.
-        </p>
-        <div class="closeButton">
-            Закрыть
+    <div class="tech_spec__interior" id="bus">
+        <p class="tech_spec__interior-title">Man</p>
+        <div class="tech_spec__interior-wrapper">
+            <div class="tech_spec__interior-btn">
+                <span class="tech_spec__interior-text">В салон</span>
+                <div class="arrow-wrapper">
+                    <img src="media/images/modelPage/arrows/interior_arrow.svg" alt="interior_arrow">
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="arSupport-popup popup_design">
-    <div class="arSupport-popup_wrapper popup_wrapper">
-        <p class="title">Откройте страницу в&nbsp;браузере</p>
-        <p class="description">
-            В&nbsp;данный момент Telegram не&nbsp;поддерживает дополненную реальность. Откройте сайт в&nbsp;вашем браузере по&nbsp;умолчанию, чтобы перейти к&nbsp;просмотру модели в&nbsp;AR
-        </p>
-        <div class="closeButton">
-            Закрыть
+    <div class="auto_park">
+        <div class="container">
+            <div class="auto_park_wrapper">
+                <div class="auto_park__control">
+                    <p class="auto_park__title">Транспорт ЦОДД</p>
+                    <img class="rotate" src="media/images/modelPage/arrows/auto_park_arrow.svg" alt="auto_park_btn">
+                </div>
+                <div class="auto_park_slider">
+                    <div class="auto_park_slider-overflow swiper_model">
+                        <div class="auto_park_slider-wrapper swiper-wrapper">
+                            <div class="gallery_item swiper-slide">
+                                <a class="gallery_item_link" href="moto.html">
+                                    <picture>
+                                        <img class="gallery_item-img" src="media/images/modelPage/slider/compress/moto.png" alt="moto" fetchpriority="high">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                                <a class="gallery_item_link" href="kamaz.html">
+                                    <picture>
+                                        <img class="gallery_item-img" src="media/images/modelPage/slider/compress/kamaz.png" alt="kamaz" fetchpriority="high">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                                <a class="gallery_item_link" href="amarok.html">
+                                    <picture>
+                                        <img class="gallery_item-img" src="media/images/modelPage/slider/compress/amarok.png" alt="amarok" fetchpriority="high">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                                <a class="gallery_item_link" href="ford.html">
+                                    <picture>
+                                        <img class="gallery_item-img" src="media/images/modelPage/slider/compress/ford.png" alt="ford" fetchpriority="high">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="gallery_item swiper-slide active">
+                                <a class="gallery_item_link" href="#">
+                                    <picture>
+                                        <img class="gallery_item-img" src="media/images/modelPage/slider/compress/bus.png" alt="bus" fetchpriority="high">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                                <a class="gallery_item_link" href="kater.html">
+                                    <picture>
+                                        <img class="gallery_item-img" src="media/images/modelPage/slider/compress/kater.png" alt="kater" fetchpriority="high">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                                <a class="gallery_item_link" href="velo.html">
+                                    <picture>
+                                        <img class="gallery_item-img" src="media/images/modelPage/slider/compress/velo.png" alt="moskvich" fetchpriority="high">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                                <a class="gallery_item_link" href="moskvich.html">
+                                    <picture>
+                                        <img class="gallery_item-img" src="media/images/modelPage/slider/compress/moskvich.png" alt="moskvich" fetchpriority="high">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="gallery_item swiper-slide">
+                                <a class="gallery_item_link" href="solaris.html">
+                                    <picture>
+                                        <img class="gallery_item-img" src="media/images/modelPage/slider/compress/solaris_gray.png" alt="solaris" fetchpriority="high">
+                                    </picture>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="auto_park_slider-button">
+                        <button class="prev_button">
+                            <img src="media/images/modelPage/arrows/icon-arrow.png" alt="arrow_prev" fetchpriority="high">
+                        </button>
+                        <button class="next_button">
+                            <img src="media/images/modelPage/arrows/icon-arrow.png" alt="arrow_next" fetchpriority="high">
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garage-codd.ru/models/model_vectary/transformed/bus/bus.gltf" alt="AR 3D-model"></model-viewer>
+    <canvas class="threeJSScene" id="webgl"></canvas>
+    <div id="overlay"></div>
 
-<a-scene loading-screen="enabled: true, dotsColor: #62A744, backgroundColor: #090909" vr-mode-ui="enabled: false" ar-mode-ui="enabled: false" xr-mode-ui="enabled: false" device-orientation-permission-ui="
- denyButtonText: Отказаться;
- allowButtonText: Разрешить;
- cancelButtonText: Закрыть;
- deviceMotionMessage: Разрешите этому сайту использовать гироскопы вашего устройства для ориентации в&nbsp;пространстве. Так экскурсия станет гораздо интерактивней и&nbsp;увлекательней.;
- mobileDesktopMessage: Разрешите этому сайту использовать гироскопы вашего устройства для ориентации в&nbsp;пространстве. Так экскурсия станет гораздо интерактивней и&nbsp;увлекательней.;
- httpsMessage: Зайдите на&nbsp;этот сайт по&nbsp;протоколу HTTPS, чтобы войти в&nbsp;режим&nbsp;VR и&nbsp;предоставить доступ к&nbsp;датчикам устройства.;">
-    <a-assets>
-        <img
-            id="room1"
-            src="media/images/modelPage/aframe_360/bus/bus_1.jpg"
-            crossorigin="anonymous"
-            importance="high"
-        />
-        <img
-            id="room2"
-            src="media/images/modelPage/aframe_360/bus/bus_2.jpg"
-            crossorigin="anonymous"
-            importance="low"
-        />
-        <img
-            id="room3"
-            src="media/images/modelPage/aframe_360/bus/bus_3.jpg"
-            crossorigin="anonymous"
-            importance="low"
-        />
-        <img
-            id="hotspot"
-            src="media/images/modelPage/aframe_360/hotspot.svg"
-            crossorigin="anonymous"
-        />
-    </a-assets>
-    <!-- room teleport hotspots -->
+    <div class="pulse_wrapper">
+        <div class="pulse_media">
+            <img class="pulse_img" src="media/images/modelPage/AR/AR-cube.svg" alt="AR">
+            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            width="24px" height="24px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                <path fill="#fff" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                    <animateTransform attributeType="xml"
+                    attributeName="transform"
+                    type="rotate"
+                    from="0 25 25"
+                    to="360 25 25"
+                    dur="0.6s"
+                    repeatCount="indefinite"/>
+                </path>
+            </svg>
+            <img class="pulse_img" src="media/images/modelPage/AR/AR.svg" alt="AR">
+        </div>
+        <div class="pulse"></div>
+    </div>
 
-    <a-entity id="spots" hotspots="">
-        <a-entity id="group-room1">
-            <a-image
-                    src="#hotspot"
-                    spot="linkto:#room2;spotgroup:group-room2;phiStart:280"
-                    position="0 0 -10"
-                    look-at
-            ></a-image>
+    <!-- media/images\modelPage\AR\qr-bus.svg -->
+    <!-- media/images\modelPage\AR\garage_codd\qr-bus.svg -->
+    <div class="qrCode-popup popup_design">
+        <div class="qrCode-popup_wrapper popup_wrapper">
+            <p class="title">Дополненная реальность</p>
+            <img class="qr_code" src="media/images\modelPage\AR\garage_codd\qr-bus.svg" alt="QR-код">
+            <p class="description">
+                Наведите камеру на&nbsp;QR-код.
+            </p>
+            <div class="closeButton">
+                Закрыть
+            </div>
+        </div>
+    </div>
+
+    <div class="arSupport-popup popup_design">
+        <div class="arSupport-popup_wrapper popup_wrapper">
+            <p class="title">Откройте страницу в&nbsp;браузере</p>
+            <p class="description">
+                В&nbsp;данный момент Telegram не&nbsp;поддерживает дополненную реальность. Откройте сайт в&nbsp;вашем браузере по&nbsp;умолчанию, чтобы перейти к&nbsp;просмотру модели в&nbsp;AR
+            </p>
+            <div class="closeButton">
+                Закрыть
+            </div>
+        </div>
+    </div>
+
+    <model-viewer id="pageWithModel" class="google_viewer" camera-controls ar ar-modes="scene-viewer webxr quick-look" src="https://garage-codd.ru/models/model_vectary/transformed/bus/bus.gltf" alt="AR 3D-model"></model-viewer>
+
+    <a-scene loading-screen="enabled: true, dotsColor: #62A744, backgroundColor: #090909" vr-mode-ui="enabled: false" ar-mode-ui="enabled: false" xr-mode-ui="enabled: false" device-orientation-permission-ui="
+    denyButtonText: Отказаться;
+    allowButtonText: Разрешить;
+    cancelButtonText: Закрыть;
+    deviceMotionMessage: Разрешите этому сайту использовать гироскопы вашего устройства для ориентации в&nbsp;пространстве. Так экскурсия станет гораздо интерактивней и&nbsp;увлекательней.;
+    mobileDesktopMessage: Разрешите этому сайту использовать гироскопы вашего устройства для ориентации в&nbsp;пространстве. Так экскурсия станет гораздо интерактивней и&nbsp;увлекательней.;
+    httpsMessage: Зайдите на&nbsp;этот сайт по&nbsp;протоколу HTTPS, чтобы войти в&nbsp;режим&nbsp;VR и&nbsp;предоставить доступ к&nbsp;датчикам устройства.;">
+        <a-assets>
+            <img
+                id="room1"
+                src="media/images/modelPage/aframe_360/bus/bus_1.jpg"
+                crossorigin="anonymous"
+                importance="high"
+            />
+            <img
+                id="room2"
+                src="media/images/modelPage/aframe_360/bus/bus_2.jpg"
+                crossorigin="anonymous"
+                importance="low"
+            />
+            <img
+                id="room3"
+                src="media/images/modelPage/aframe_360/bus/bus_3.jpg"
+                crossorigin="anonymous"
+                importance="low"
+            />
+            <img
+                id="hotspot"
+                src="media/images/modelPage/aframe_360/hotspot.svg"
+                crossorigin="anonymous"
+            />
+        </a-assets>
+        <!-- room teleport hotspots -->
+
+        <a-entity id="spots" hotspots="">
+            <a-entity id="group-room1">
+                <a-image
+                        src="#hotspot"
+                        spot="linkto:#room2;spotgroup:group-room2;phiStart:280"
+                        position="0 0 -10"
+                        look-at
+                ></a-image>
+            </a-entity>
+
+            <a-entity id="group-room2" scale="0 0 0">
+                <!-- возврат в первую комнату -->
+                <a-image
+                        spot="linkto:#room1;spotgroup:group-room1;phiStart:271"
+                        src="#hotspot"
+                        position="-0.25 0 10"
+                        look-at
+                ></a-image>
+                <!-- переход в третью комнату -->
+                <a-image
+                        spot="linkto:#room3;spotgroup:group-room3;phiStart:275"
+                        src="#hotspot"
+                        position="0 0 -10"
+                        look-at
+                ></a-image>
+            </a-entity>
+
+            <a-entity id="group-room3" scale="0 0 0">
+                <!-- возврат во вторую комнату -->
+                <a-image
+                        spot="linkto:#room2;spotgroup:group-room2;phiStart:280"
+                        src="#hotspot"
+                        position="0 1 10"
+                        look-at
+                ></a-image>
+            </a-entity>
         </a-entity>
 
-        <a-entity id="group-room2" scale="0 0 0">
-            <!-- возврат в первую комнату -->
-            <a-image
-                    spot="linkto:#room1;spotgroup:group-room1;phiStart:271"
-                    src="#hotspot"
-                    position="-0.25 0 10"
-                    look-at
-            ></a-image>
-            <!-- переход в третью комнату -->
-            <a-image
-                    spot="linkto:#room3;spotgroup:group-room3;phiStart:275"
-                    src="#hotspot"
-                    position="0 0 -10"
-                    look-at
-            ></a-image>
+        <a-entity
+                id="cam"
+                camera="fov:80"
+                position="0 1.6 0"
+                look-controls
+                cursor="rayOrigin: mouse"
+                animation__zoomin="property:camera.fov;dur:2000;to:50;startEvents:zoomin;"
+                animation__zoomout="property:camera.fov;dur:1000;to:80;startEvents:zoomout;"
+        >
+            <a-plane
+                    id="camfadeplane"
+                    rotation="10 0.5 0"
+                    position="0 0 -0.5"
+                    material="color:#000000;transparent:true;opacity:0"
+                    width="0"
+                    height="0"
+                    animation__fadein="property:material.opacity;to:1;dur:2000;startEvents:camFadeIn"
+                    animation__fadeout="property:material.opacity;to:0;dur:1000;startEvents:camFadeOut"
+            ></a-plane>
         </a-entity>
 
-        <a-entity id="group-room3" scale="0 0 0">
-            <!-- возврат во вторую комнату -->
-            <a-image
-                    spot="linkto:#room2;spotgroup:group-room2;phiStart:280"
-                    src="#hotspot"
-                    position="0 1 10"
-                    look-at
-            ></a-image>
-        </a-entity>
-    </a-entity>
+        <a-sky id="skybox" src="#room1" rotation="0 0 0" phi-start="271"></a-sky>
+    </a-scene>
 
-    <a-entity
-            id="cam"
-            camera="fov:80"
-            position="0 1.6 0"
-            look-controls
-            cursor="rayOrigin: mouse"
-            animation__zoomin="property:camera.fov;dur:2000;to:50;startEvents:zoomin;"
-            animation__zoomout="property:camera.fov;dur:1000;to:80;startEvents:zoomout;"
-    >
-        <a-plane
-                id="camfadeplane"
-                rotation="10 0.5 0"
-                position="0 0 -0.5"
-                material="color:#000000;transparent:true;opacity:0"
-                width="0"
-                height="0"
-                animation__fadein="property:material.opacity;to:1;dur:2000;startEvents:camFadeIn"
-                animation__fadeout="property:material.opacity;to:0;dur:1000;startEvents:camFadeOut"
-        ></a-plane>
-    </a-entity>
-
-    <a-sky id="skybox" src="#room1" rotation="0 0 0" phi-start="271"></a-sky>
-</a-scene>
-
-<!-- <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script> -->
-<script type="module" src="./libraries/model-viewer.js"></script>
-<script type="module" src="./js/fullModelScripts/bus.js"></script>
-<!-- <script type="module" src="./js/fake_loading\loading.js"></script> -->
+    <script type="module" src="./libraries/model-viewer.js"></script>
+    <script type="module" src="./js/fullModelScripts/bus.js"></script>
 </body>
 </html>

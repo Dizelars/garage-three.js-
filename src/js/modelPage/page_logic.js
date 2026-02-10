@@ -138,11 +138,9 @@ function toggleAutoParkSection() {
     if (isAutoParkVisible) {
         // Если секция .auto_park видима, скрываем ее
         if (screenWidth <= 576 || (screenWidth <= 900 && window.matchMedia("(orientation: landscape)").matches)) {
-            // autoParkSection.style.transform = 'translateY(20px)';
             autoParkSection.style.transform = 'translateY(15px)';
         } else {
             autoParkSection.style.transform = 'translateY(0)';
-            // autoParkSection.style.transform = 'translateY(-5)';
         }
         buttonIcon2.classList.remove('rotate');
     } else {

@@ -1,0 +1,84 @@
+@property --gradient-angle {
+	syntax: "<angle>";
+	initial-value: 0deg;
+	inherits: false;
+}
+
+.BackToInnovation {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
+	position: fixed;
+	top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+	padding: 14px 18px;
+	color: white;
+	border-radius: 48px;
+	background: linear-gradient(92deg, #270067 26.7%, #5619BA 100.48%) padding-box;
+	box-shadow:
+		0 0 14px rgba(86, 25, 186, 0.2),
+		0 0 31px rgba(86, 25, 186, 0.5),
+		0 0 12px rgba(177, 134, 247, 0.6);
+	backdrop-filter: blur(15px);
+	cursor: pointer;
+	z-index: 100000;
+}
+
+.BackToInnovation::before,
+.BackToInnovation::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(from var(--gradient-angle) at 50.07% 49.91%, #411B61 48.461540937423706deg, #7631B0 74.42307651042938deg, #E2C3F9 107.30769395828247deg, #7631B0 135deg, #411B61 162.69230604171753deg, #411B61 230.19230604171753deg, #7631B0 259.61538791656494deg, #E2C3F9 290.7692241668701deg, #7631B0 316.7307758331299deg, #411B61 346.1538362503052deg);
+    box-sizing: border-box;
+    pointer-events: none;
+    backdrop-filter: blur(2.75px);
+    -webkit-mask-composite: destination-out;
+    mask:
+    linear-gradient(#fff, #fff) content-box,
+    linear-gradient(#fff, #fff);
+    mask-composite: exclude;
+    animation: rotation 4500ms cubic-bezier(0.42, 0, 0.58, 1) infinite;
+    -webkit-animation: rotation 4500ms cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+.BackToInnovation::after {
+	-webkit-filter: blur(1rem);
+			filter: blur(1rem);
+}
+
+.BackToInnovation .innovation_text {
+	text-transform: uppercase;
+	font-family: 'MoscowSans', sans-serif;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 700;
+}
+
+@-webkit-keyframes rotation {
+	0% {
+		--gradient-angle: 0deg;
+	}
+
+	100% {
+		--gradient-angle: 360deg;
+	}
+}
+
+@keyframes rotation {
+	0% {
+		--gradient-angle: 0deg;
+	}
+
+	100% {
+		--gradient-angle: 360deg;
+	}
+}

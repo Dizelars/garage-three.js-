@@ -80,18 +80,6 @@ function closePopupARSupport() {
 	closePopup();
 }
 
-// function clickOutOfPopup(popup, closeFunc) {
-// 	popup.addEventListener('mousedown', (event) => {
-// 		const target = event.target;
-// 		const isInsidePopup = target.closest('.qrCode-popup_wrapper');
-// 		if (!isInsidePopup) {
-// 			closeFunc();
-// 		}
-// 	});
-// }
-
-// clickOutOfPopup(qrCodePopup, closePopupQR);
-
 function clickButtonClose(clickedElem, closeFunc) {
 	clickedElem.addEventListener('click', () => {
 		closeFunc();

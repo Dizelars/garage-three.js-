@@ -2,16 +2,12 @@
     font-family: 'MoscowSans', sans-serif;
     position: fixed;
     display: block;
-
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    /* z-index: 10; */
     z-index: 12;
     width: 100%;
     height: 101%;
-    /* height: 100vh; */
     background-color: rgba(0, 0, 0);
 }
 
@@ -21,7 +17,6 @@
 
 /*ЗАРЕШАЛО ПО АНИМАЦИИ*/
 /*Для плавной анимации на загрузочном экране, нужно вешать анимируемые элементы на псевдоэлементы соответствующего блока*/
-
 .progress-bar-container {
     position: absolute;
     z-index: 5;
@@ -34,7 +29,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* padding: 5px 20px; */
     padding: 0 20px;
     overflow: hidden;
     background-origin: border-box;
