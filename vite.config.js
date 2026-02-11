@@ -28,12 +28,12 @@ export default defineConfig({
         moto: 'src/moto.html',
         amarok: 'src/amarok.html',
         bus: 'src/bus.html',
-        ford: 'src/ford.html',
         kamaz: 'src/kamaz.html',
         kater: 'src/kater.html',
         moskvich: 'src/moskvich.html',
         velo: 'src/velo.html',
-        solaris: 'src/solaris.html',
+        // ford: 'src/ford.html',
+        // solaris: 'src/solaris.html',
       },
       output: {
         assetFileNames: (assetInfo) => {

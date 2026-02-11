@@ -639,8 +639,8 @@ section.traffic_patrol .traffic_patrol_grid-wrapper {
     grid-auto-flow: row;
     grid-template-areas:
         "traffic_patrol-1 traffic_patrol-1 traffic_patrol-text-2 traffic_patrol-text-2 traffic_patrol-text-2"
-        "slider_button-wrapper . traffic_patrol-text-combo traffic_patrol-text-combo traffic_patrol-text-combo"
-        ". . . . ."
+        /* "slider_button-wrapper . traffic_patrol-text-combo traffic_patrol-text-combo traffic_patrol-text-combo" */
+        /* ". . . . ." */
         "traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER";
 }
 
@@ -662,9 +662,10 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-5 {
     display: none;
 }
 
-section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-combo {
+/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-combo {
     grid-area: traffic_patrol-text-combo;
-}
+    display: none;
+} */
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz {
     grid-area: traffic_patrol-slide-kamaz;
@@ -692,8 +693,33 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_
     grid-area: model_2;
 }
 
+/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER .model_3 {
+    grid-area: model_3;
+} */
+
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER .model_3 {
     grid-area: model_3;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "model_3_text_1 model_3_text_2"
+      ". .";
+}
+
+section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER .model_3 .model_3_text_1 {
+    grid-area: model_3_text_1;
+}
+
+section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER .model_3 .model_3_text_2 {
+    grid-area: model_3_text_2;
+}
+
+section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER .model_3 .model_3_text_combo {
+    grid-area: model_3_text_combo;
+    display: none;
 }
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER .model_4 {
@@ -1359,6 +1385,7 @@ section.help_desk .container_main {
 }
 
 section.help_desk .help_desk_grid-wrapper .mobile_text_combo {
+    grid-area: mobile_text_combo;
     display: none;
 }
 
@@ -1368,9 +1395,12 @@ section.help_desk .help_desk_grid-wrapper {
     grid-template-rows: repeat(2, min-content);
     gap: 20px;
     grid-auto-flow: row;
-    grid-template-areas:
+    /* grid-template-areas:
         "help_desk-1 parkon-2 parkon-2 parkon-2 driver-3"
-        ". slide-moskvich slide-moskvich slide-5 slide-5";
+        ". slide-moskvich slide-moskvich slide-5 slide-5"; */
+    grid-template-areas:
+        "help_desk-1 slide-moskvich slide-moskvich parkon-2 parkon-2"
+        ". slide-moskvich slide-moskvich driver-3 driver-tablet-2";
 }
 
 section.help_desk .help_desk_grid-wrapper .help_desk-1 {
@@ -1387,31 +1417,35 @@ section.help_desk .help_desk_grid-wrapper .help_desk-1 .help_desk-animation-2 {
 
 section.help_desk .help_desk_grid-wrapper .parkon-2 {
     grid-area: parkon-2;
+}
+
+section.help_desk .help_desk_grid-wrapper .parkon_border {
     padding: 20px 35px 20px 20px;
     border: 1px solid white;
     border-radius: 10px;
 }
 
-section.help_desk .help_desk_grid-wrapper .parkon-2 .parkon_title {
+section.help_desk .help_desk_grid-wrapper .parkon_border .parkon_title {
     font-family: 'MoscowSans', sans-serif;
     font-size: 2rem;
     font-weight: 700;
     line-height: 26px;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
+    margin-bottom: 22px;
 }
 
-section.help_desk .help_desk_grid-wrapper .parkon-2 .parkon_text {
+section.help_desk .help_desk_grid-wrapper .parkon_border .parkon_text {
     font-family: 'MoscowSans', sans-serif;
     font-size: 1.6rem;
     font-weight: 400;
     line-height: 24px;
 }
 
-section.help_desk .help_desk_grid-wrapper .parkon-2 .parkon_descr {
+section.help_desk .help_desk_grid-wrapper .parkon_border .parkon_descr {
     display: flex;
 }
 
-section.help_desk .help_desk_grid-wrapper .parkon-2 .parkon_descr .parkon_text:first-child {
+section.help_desk .help_desk_grid-wrapper .parkon_border .parkon_descr .parkon_text:first-child {
     margin-right: 35px;
 }
 
@@ -1419,12 +1453,32 @@ section.help_desk .help_desk_grid-wrapper .driver-3 {
     grid-area: driver-3;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    /* gap: 20px; */
+    gap: 10px;
 }
 
+section.help_desk .help_desk_grid-wrapper .parkon-2_tablet {
+    grid-area: parkon-2_tablet;
+}
+
+section.help_desk .help_desk_grid-wrapper .parkon-2_mobile {
+    grid-area: parkon-2_mobile;
+}
+
+/* section.help_desk .help_desk_grid-wrapper .driver-tablet-2, */
 section.help_desk .help_desk_grid-wrapper .driver-tablet-1,
-section.help_desk .help_desk_grid-wrapper .driver-tablet-2 {
+section.help_desk .help_desk_grid-wrapper .parkon-2_tablet,
+section.help_desk .help_desk_grid-wrapper .parkon-2_mobile
+{
 	display: none;
+}
+
+section.help_desk .help_desk_grid-wrapper .driver-tablet-1 {
+    grid-area: driver-tablet-1;
+}
+
+section.help_desk .help_desk_grid-wrapper .driver-tablet-2 {
+    grid-area: driver-tablet-2;
 }
 
 section.help_desk .help_desk_grid-wrapper .сrew {
@@ -1438,10 +1492,10 @@ section.help_desk .help_desk_grid-wrapper .driver_text {
     line-height: 24px;
 }
 
-section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide {
+/* section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide {
     grid-area: equipment_mobile-slide;
     display: none;
-}
+} */
 
 footer.footer_main .footer_main_grid-wrapper .footer-contacts-3 a[class^="contacts-"],
 footer.footer_main .footer_main_grid-wrapper .footer-media-4 a[class^="media-"],
