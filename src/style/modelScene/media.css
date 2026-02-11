@@ -321,14 +321,6 @@
     .auto_park_slider {
         padding: 0 20px 0 20px;
     }
-
-    /* .auto_park_slider-button button.prev_button {
-        left: -16px;
-    }
-
-    .auto_park_slider-button button.next_button {
-        right: -16px;
-    } */
 }
 
 @media (max-width: 440px) {

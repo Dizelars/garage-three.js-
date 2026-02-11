@@ -64,72 +64,6 @@
     display: block;
 }
 
-/*Типон*/
-/* [class^="Myhotspot"] {
-    pointer-events: all;
-}
-
-.hotspot_wrapper {
-    background: rgba(9, 9, 9, 0.50);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border-radius: 100%;
-    width: 20px;
-    height: 20px;
-    padding: 2px;
-    cursor: pointer;
-}
-
-.hotspot_wrapper [class^="hotspot"] {
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    border: 1px solid white;
-    box-shadow: 0 0 0 rgba(255,255,255, 0.5);
-    animation: pulse 2s infinite;
-}
-
-.hotspot_wrapper [class^="hotspot"].clicked,
-.hotspot_wrapper [class^="hotspot"]:hover {
-    animation: none;
-} */
-
-/*Текст описания маркера*/
-/* .Mytext {
-    display: none;
-    max-width: 280px;
-    height: auto;
-}
-
-.tooltip_wrapper {
-    display: flex;
-    background: rgba(9, 9, 9, 0.50);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border-radius: 16px;
-    padding: 20px;
-    gap: 16px;
-}
-
-.tooltip {
-    font-family: 'MoscowSans', sans-serif;
-    font-size: 18px;
-    font-weight: 300;
-    color: white;
-}
-
-.tooltip_wrapper svg {
-    min-width: min-content;
-}
-
-.Mytext.show {
-    display: block;
-}
-
-.Mytext.hide {
-    display: none;
-} */
-
 html.a-fullscreen {
     bottom: 0;
     left: 0;
@@ -752,7 +686,6 @@ a-scene {
     border-radius: 12px;
     height: 224px;
     width: 100%;
-    /* padding: 19px 47px; */
     padding-bottom: 19px;
     max-width: 902px;
     pointer-events: all;

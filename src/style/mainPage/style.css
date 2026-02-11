@@ -12,7 +12,6 @@
 /*help_desk*/
 /*footer*/
 
-
 * {
     box-sizing: border-box;
 }
@@ -34,40 +33,13 @@ body.main.overflow {
 
 body::-webkit-scrollbar {
     background-color: #090909;
-    width: 0.4em; /* Ширина полосы прокрутки (по желанию) */
+    width: 0.4em;
 }
 
 body::-webkit-scrollbar-thumb {
     background-color: #62a744;
     border-radius: 10px;
 }
-
-/* .BackToInnovation {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 16px 8px 8px;
-    color: white;
-    border-radius: 32px;
-    border: 2px solid #5F35FF;
-    background: linear-gradient(98deg, #070021 6.79%, #0F0144 85.82%);
-    cursor: pointer;
-    z-index: 1000;
-}
-
-.BackToInnovation .innovation_img {
-    margin-right: 8px;
-}
-
-.BackToInnovation .innovation_text {
-    font-family: 'MoscowSans', sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-} */
 
 main.gradient_move {
     margin-top: -80px;
@@ -113,7 +85,6 @@ footer.footer_main .footer_main_grid-wrapper .footer-media-4 a[class^="media-"]:
 
 
 /*header*/
-
 .header_main {
     height: 80px;
     padding: 0 20px;
@@ -239,7 +210,6 @@ footer.footer_main .footer_main_grid-wrapper .footer-title-1 .header__logo-text 
 
 
 /*Меню сайта*/
-
 /* Меню, которое будет появляться */
 .menu {
     display: flex;
@@ -439,23 +409,8 @@ footer.footer_main .footer_main_grid-wrapper .footer-title-1 .header__logo-text 
     object-fit: cover;
 }
 
-/*.menu .menu_navigation .menu_navigation-list .menu_navigation-item:nth-child(1) .menu_preview-block .menu_preview-video {*/
-/*    object-position: center 22%;*/
-/*}*/
-
-/*.menu .menu_navigation .menu_navigation-list .menu_navigation-item:nth-child(2) .menu_preview-block .menu_preview-video,*/
-/*.menu .menu_navigation .menu_navigation-list .menu_navigation-item:nth-child(3) .menu_preview-block .menu_preview-video,*/
-/*.menu .menu_navigation .menu_navigation-list .menu_navigation-item:nth-child(4) .menu_preview-block .menu_preview-video {*/
-/*    object-position: center 46%;*/
-/*}*/
-
-/*.menu .menu_navigation .menu_navigation-list .menu_navigation-item:nth-child(5) .menu_preview-block .menu_preview-video {*/
-/*    object-position: center 42%;*/
-/*}*/
-
 
 /* main */
-
 section.main {
     padding: calc(60px + 80px) 20px 0 20px;
     height: 100vh;
@@ -487,7 +442,6 @@ section.main .main_intro_media .preview_video {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /*transform: translate(-50%,-50%) scale(0.596);*/
     min-height: 100%;
     min-width: 100%;
     object-fit: cover;
@@ -531,7 +485,6 @@ section.main .main_title span.large_letter {
     display: inline-block;
     padding: 19px;
     border: 10px solid white;
-    /* max-width: 350px; */
     max-width: 338px;
     width: 3%;
     border-radius: 50px;
@@ -600,7 +553,6 @@ section.main .main_grid-wrapper .main_button-3 .main_info-link:hover {
     color: #090909;
 }
 
-
 section.main .main_title span.main_title-animation-1,
 section.main .main_title span.main_title-animation-2,
 section.main .main_title span.main_title-animation-3,
@@ -609,7 +561,6 @@ section.main .main_grid-wrapper .main_text-2 .main_info-text,
 section.main .main_grid-wrapper .main_button-3 .main_info-link,
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_patrol-animation-1,
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_patrol-animation-2,
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_patrol-animation-3, */
 section.water_patrol .water_patrol_grid-wrapper .water_patrol_title .water_patrol-animation-1,
 section.water_patrol .water_patrol_grid-wrapper .water_patrol_title .water_patrol-animation-2,
 section.situation_centre .situation_centre_grid-wrapper .situation-1  .situation_centre-animation-1,
@@ -647,14 +598,12 @@ section.main .main_grid-wrapper .main_button-3 .main_info-link  {
 }
 
 
-/*swiper style*/
 .swiper-pagination-bullet {
     width: 50px;
     height: 10px;
     border-radius: 20px;
 }
 
-/*traffic_patrol*/
 section.traffic_patrol {
     padding: 60px 20px 0 20px;
     position: relative;
@@ -671,14 +620,14 @@ section.traffic_patrol:before {
     height: 600px;
     z-index: -1;
     pointer-events: none;
-    top: var(--before-top, 0); /* Используем CSS переменную для изменения свойства top */
-    right: var(--before-right, 0); /* Используем CSS переменную для изменения свойства right */
-    bottom: var(--before-bottom, 0); /* Используем CSS переменную для изменения свойства bottom */
-    left: var(--before-left, 0); /* Используем CSS переменную для изменения свойства left */
+    top: var(--before-top, 0);
+    right: var(--before-right, 0);
+    bottom: var(--before-bottom, 0);
+    left: var(--before-left, 0);
     border-radius: 100%;
     opacity: 0.3;
     background: radial-gradient(50% 50.00% at 50% 50.00%, #2BFC7F 0%, rgba(9, 9, 9, 0.00) 100%);
-    transition: top 4s ease, right 4s ease, bottom 4s ease, left 4s ease; /* Добавляем анимацию перемещения через свойства top и right */
+    transition: top 4s ease, right 4s ease, bottom 4s ease, left 4s ease;
 }
 
 section.traffic_patrol .traffic_patrol_grid-wrapper {
@@ -690,12 +639,9 @@ section.traffic_patrol .traffic_patrol_grid-wrapper {
     grid-auto-flow: row;
     grid-template-areas:
         "traffic_patrol-1 traffic_patrol-1 traffic_patrol-text-2 traffic_patrol-text-2 traffic_patrol-text-2"
-        /* "slider_button-wrapper . traffic_patrol-text-4 traffic_patrol-text-5 ." */
         "slider_button-wrapper . traffic_patrol-text-combo traffic_patrol-text-combo traffic_patrol-text-combo"
         ". . . . ."
-        /* ". traffic_patrol-no-slide-7 traffic_patrol-no-slide-7 traffic_patrol-no-slide-8 traffic_patrol-no-slide-8" */
         "traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER traffic_patrol-slide-kamaz_NOSLIDER";
-        /* "traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz traffic_patrol-slide-kamaz"; */
 }
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 {
@@ -720,36 +666,20 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-combo {
     grid-area: traffic_patrol-text-combo;
 }
 
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slider-buttons.InGrid {
-    grid-area: InGrid;
-    display: none;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-} */
-
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz {
     grid-area: traffic_patrol-slide-kamaz;
     position: relative;
     display: none;
-    /* display: block; */
 }
-
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
-    display: none;
-} */
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz_NOSLIDER {
     grid-area: traffic_patrol-slide-kamaz_NOSLIDER;
     display: grid;
-    /* grid-template-columns: repeat(3, 1fr); */
-    /* grid-template-rows: 1fr; */
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 20px;
     grid-auto-flow: row;
     grid-template-areas:
-      /* "model_1 model_2 model_3"; */
       ". model_1 model_1 model_2 model_2"
       ". model_3 model_3 model_4 model_4";
 }
@@ -774,7 +704,6 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz 
     position: absolute;
     top: -60px;
     right: 0;
-    /* display: none; */
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -783,8 +712,6 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz 
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz .traffic_patrol-slider-buttons .btn_prev,
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz .traffic_patrol-slider-buttons .btn_next
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slider-buttons.InGrid .btn_prev,
-section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slider-buttons.InGrid .btn_next  */
 {
     cursor: pointer;
     display: flex;
@@ -793,7 +720,6 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slider-butto
 }
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamaz .traffic_patrol-slider-buttons .btn_next
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slider-buttons.InGrid .btn_next  */
 {
     transform: rotate(180deg);
 }
@@ -807,49 +733,10 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-slide-kamazt
     grid-area: traffic_patrol-slide-kamaztest;
 }
 
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-new_NOSLIDER {
-    display: none;
-} */
-
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-new_NOSLIDER {
-    grid-area: traffic_patrol-new_NOSLIDER;
-    display: none;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(1, min-content);
-    grid-auto-columns: 1fr;
-    gap: 20px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        ". NOSLIDE_1 NOSLIDE_2";
-} */
-
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-new_NOSLIDER .NOSLIDE_1 {
-    grid-area: NOSLIDE_1;
-}
-
-section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-new_NOSLIDER .NOSLIDE_2 {
-    grid-area: NOSLIDE_2;
-} */
-
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-no-slide-7 {
-    grid-area: traffic_patrol-no-slide-7;
-    display: none;
-}
-
-section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-no-slide-8 {
-    grid-area: traffic_patrol-no-slide-8;
-    display: none;
-} */
-
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-mobile-1 {
     grid-area: traffic_patrol-text-mobile-1;
     display: none;
 }
-
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-mobile-2 {
-    grid-area: traffic_patrol-text-mobile-2;
-    display: none;
-} */
 
 section.traffic_patrol .traffic_patrol_grid-wrapper .slider_button-wrapper {
     display: none;
@@ -912,7 +799,6 @@ section.traffic_patrol .traffic_patrol-text {
 section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-text-2 .traffic_patrol-text {
     font-family: 'MoscowSans', sans-serif;
     font-size: 2rem;
-    /* font-size: 2.6rem; */
     font-weight: 700;
     line-height: 26px;
 }
@@ -938,15 +824,9 @@ section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_p
     animation: BottomToTop 0.2s linear 0.5s forwards;
 }
 
-/* section.traffic_patrol .traffic_patrol_grid-wrapper .traffic_patrol-1 .traffic_patrol-animation-3 {
-    animation: BottomToTop 0.2s linear 0.8s forwards;
-} */
-
 
 /*cards start*/
-
 section.traffic_patrol .traffic_patrol_slider .garage_model_card
-/* section.traffic_patrol .traffic_patrol-new_NOSLIDER .garage_model_card  */
 {
     max-width: 540px;
     height: 444px;
@@ -998,7 +878,6 @@ section.traffic_patrol .traffic_patrol_slider .garage_model_card
     display: block;
     object-fit: cover;
     border-radius: 10px 10px 0 0;
-    /*background-color: black;*/
 }
 
 .garage_model_card .slid_img .menu_preview-video {
@@ -1059,14 +938,14 @@ section.situation_centre:before {
     height: 600px;
     z-index: -1;
     pointer-events: none;
-    top: var(--before-top, 0); /* Используем CSS переменную для изменения свойства top */
-    right: var(--before-right, 0); /* Используем CSS переменную для изменения свойства right */
-    bottom: var(--before-bottom, 0); /* Используем CSS переменную для изменения свойства bottom */
-    left: var(--before-left, 0); /* Используем CSS переменную для изменения свойства left */
+    top: var(--before-top, 0);
+    right: var(--before-right, 0);
+    bottom: var(--before-bottom, 0);
+    left: var(--before-left, 0);
     border-radius: 100%;
     opacity: 0.3;
     background: radial-gradient(50% 50.00% at 50% 50.00%, #FC762B 0%, rgba(9, 9, 9, 0.00) 100%);
-    transition: top 4s ease, right 4s ease, bottom 4s ease, left 4s ease; /* Добавляем анимацию перемещения через свойства top и right */
+    transition: top 4s ease, right 4s ease, bottom 4s ease, left 4s ease;
 }
 
 section.situation_centre .container_main {
@@ -1359,14 +1238,14 @@ section.velo_patrol:before {
     height: 600px;
     z-index: -1;
     pointer-events: none;
-    top: var(--before-top, 0); /* Используем CSS переменную для изменения свойства top */
-    right: var(--before-right, 0); /* Используем CSS переменную для изменения свойства right */
-    bottom: var(--before-bottom, 0); /* Используем CSS переменную для изменения свойства bottom */
-    left: var(--before-left, 0); /* Используем CSS переменную для изменения свойства left */
+    top: var(--before-top, 0);
+    right: var(--before-right, 0);
+    bottom: var(--before-bottom, 0);
+    left: var(--before-left, 0);
     border-radius: 100%;
     opacity: 0.3;
     background: radial-gradient(50% 50.00% at 50% 50.00%, #2BFC7F 0%, rgba(9, 9, 9, 0.00) 100%);
-    transition: top 4s ease, right 4s ease, bottom 4s ease, left 4s ease; /* Добавляем анимацию перемещения через свойства top и right */
+    transition: top 4s ease, right 4s ease, bottom 4s ease, left 4s ease;
 }
 
 section.velo_patrol .container_main {
@@ -1492,8 +1371,6 @@ section.help_desk .help_desk_grid-wrapper {
     grid-template-areas:
         "help_desk-1 parkon-2 parkon-2 parkon-2 driver-3"
         ". slide-moskvich slide-moskvich slide-5 slide-5";
-        /* ". . . slide-moskvich slide-moskvich"; */
-        /* ". . slide-moskvich slide-moskvich driver-3"; */
 }
 
 section.help_desk .help_desk_grid-wrapper .help_desk-1 {
@@ -1565,10 +1442,6 @@ section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide {
     grid-area: equipment_mobile-slide;
     display: none;
 }
-
-/* section.help_desk .help_desk_grid-wrapper .equipment_mobile-slide {
-    display: none;
-} */
 
 footer.footer_main .footer_main_grid-wrapper .footer-contacts-3 a[class^="contacts-"],
 footer.footer_main .footer_main_grid-wrapper .footer-media-4 a[class^="media-"],
