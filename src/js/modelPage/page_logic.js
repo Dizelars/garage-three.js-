@@ -154,7 +154,7 @@ function toggleAutoParkSection() {
 
 const transitionHelper = new InteriorTransitionHelper(interior);
 const idToClassMap = {
-    'amarok': 'garage_amarok',
+    'pickup': 'garage_pickup',
     'ford': 'garage_ford',
     'solaris_gray': 'garage_solaris_gray',
     'bus': 'garage_bus',

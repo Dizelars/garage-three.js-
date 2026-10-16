@@ -1,235 +1,474 @@
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { HDRJPGLoader } from '@monogrid/gainmap-js'
-import { GroundedSkybox } from 'three/addons/objects/GroundedSkybox.js'
-import {InteriorTransitionHelper} from "../helpers/interiorTransitionHelper.js";
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { GroundedSkybox } from "three/addons/objects/GroundedSkybox.js";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+import { HDRJPGLoader } from "@monogrid/gainmap-js";
+import { InteriorTransitionHelper } from "../helpers/interiorTransitionHelper.js";
 
-// Менеджер загрузки
-// Переключение между сценами
-
-/**
- * Loading Менеджер загрузки
- */
-const loadingManager = new THREE.LoadingManager();
-
-const progressBar = document.getElementById('progress-bar');
-const progressLabel = document.getElementById('progress-label');
-loadingManager.onProgress = function(url, loaded, total) {
-    const progressPercent = Math.round((loaded / total) * 100);
-    progressBar.style.width = `${progressPercent}%`;
-    progressLabel.textContent = `${progressPercent}%`;
-}
-
-// 3) onLoad - Запись по завершению загрузки.
-const progressBarContainer = document.querySelector('.progress-bar');
-loadingManager.onLoad = function() {
-    progressBarContainer.style.display = 'none';
-}
-
-// Canvas
-const canvas = document.querySelector('canvas#webgl')
-
-// Scene
-const scene = new THREE.Scene(loadingManager)
-
-/**
- * Sizes
- */
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
-}
-
-window.addEventListener('resize', () =>
-{
-    // Update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
-
-    // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
-
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
-
-let cameraPosX;
-let cameraPosY;
-let cameraPosZ;
-let maxDistanceOrbit;
-
-if (window.innerWidth < 480) {
-    cameraPosX = 4.7;
-    cameraPosY = 3.1;
-    cameraPosZ = 8.5;
-    maxDistanceOrbit = 10;
-} else if (window.innerWidth >= 480 && window.innerWidth <= 1200) {
-    cameraPosX = 3.2;
-    cameraPosY = 2.3;
-    cameraPosZ = 5.6;
-    maxDistanceOrbit = 8;
-} else {
-    cameraPosX = 2.5;
-    cameraPosY = 2;
-    cameraPosZ = 4.5;
-    maxDistanceOrbit = 6;
-}
-
-/**
- * Camera
- */
-// Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(cameraPosX, cameraPosY, cameraPosZ)
-scene.add(camera)
-
-// Controls
-const controls = new OrbitControls(camera, canvas)
-controls.target.set(0, 0.75, 0)
-controls.maxPolarAngle = Math.PI * 0.5;
-controls.maxDistance = maxDistanceOrbit;
-controls.minDistance = 3.5;
-controls.enableDamping = true
-//* Отключение перетаскивания
-controls.enablePan = false
-
-/**
- * Models
- */
-//* Update all materials
-const updateAllMaterials = () => {
-    scene.traverse((child) => {
-        if (child.isMesh && child.material.isMeshStandardMaterial) {
-            child.castShadow = false;
-            child.receiveShadow = false;
-            child.matrixAutoUpdate = false;
-            child.matrixWorldAutoUpdate = false;
-            child.matrixWorldNeedsUpdate = false;
-        }
-    });
+const CONFIG = {
+  model: "models/kamaz/kamaz.gltf",
+  draco: "/draco/",
+  environment: "/environmentMaps/jpg/garage.jpg",
+  modelScale: 4,
+  modelPosition: [0.05, 0, 0.3],
+  modelRotationY: -0.02,
+  skyHeight: 2.5,
+  skyRadius: 12,
+  skyResolution: 17,
+  environmentIntensity: 1,
+  toneMappingExposure: 2,
+  floorEnabled: true,
+  floorRadius: 14,
+  floorTextureSize: 1024,
+  floorTileMeters: 6,
+  floorSlabs: 14,
+  floorY: 0.003,
+  bloomEnabled: true,
+  glow: 0.1,
 };
 
+// ============================================================
+// ГЕНЕРАЦИЯ БЕТОННЫХ ТЕКСТУР
+// ============================================================
+function makeConcrete(N, tileMeters, slabs, aniso) {
+  const rnd = (seed) => {
+    let t = seed >>> 0;
+    return () => (t = (t * 1664525 + 1013904223) >>> 0) / 4294967296;
+  };
 
-let dracoLoader = new DRACOLoader(loadingManager)
-dracoLoader.setDecoderPath('/draco/')
-let gltfLoader = new GLTFLoader(loadingManager)
-gltfLoader.setDRACOLoader(dracoLoader)
+  const noise = (cells, seed) => {
+    const r = rnd(seed);
+    const g = new Float32Array(cells * cells);
+    for (let i = 0; i < g.length; i++) g[i] = r();
 
-// Обьект параметров
-let constants = {
-    scale: 4,
-    height: 2.5,
-	radius: 12,
-    resolution: 17
-}
+    const o = new Float32Array(N * N);
+    const sm = (t) => t * t * (3 - 2 * t);
 
-gltfLoader.load("models/model_vectary/transformed/kamaz/kamaz.gltf", (gltf) => {
-    console.log(gltf);
-    let current_object = gltf.scene;
-    current_object.position.x = 0.05;
-    current_object.position.y = 0;
-    current_object.position.z = 0.3;
-    current_object.rotation.y = -0.02;
-    current_object.scale.set(constants.scale, constants.scale, constants.scale);
+    for (let y = 0; y < N; y++) {
+      const fy = (y / N) * cells;
+      const y0 = Math.floor(fy);
+      const ty = sm(fy - y0);
+      const ya = y0 % cells;
+      const yb = (y0 + 1) % cells;
 
-    scene.add(current_object);
-
-    updateAllMaterials()
-    console.log(renderer.info)
-});
-
-/**
- * Renderer
- */
-const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: true,
-    powerPreference: 'high-performance',
-    precision: 'lowp'
-})
-renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.shadowMap.autoUpdate = false;
-
-
-let hdrJpgEquirectangularMap;
-let hdrJpg = new HDRJPGLoader(renderer, loadingManager).load( '/environmentMaps/jpg/garage.jpg', () => {
-
-    hdrJpgEquirectangularMap = hdrJpg.renderTarget.texture;
-    hdrJpgEquirectangularMap.mapping = THREE.EquirectangularReflectionMapping;
-    hdrJpgEquirectangularMap.needsUpdate = true;
-
-    scene.environment = hdrJpgEquirectangularMap;
-
-    let skybox = new GroundedSkybox(hdrJpgEquirectangularMap, constants.height, constants.radius, constants.resolution);
-    skybox.position.y = constants.height - 0.01;
-    scene.add(skybox);
-});
-
-// Tone mapping
-renderer.toneMapping = THREE.ACESFilmicToneMapping
-renderer.toneMappingExposure = 2;
-
-const tick = () =>
-{
-    // Update controls
-    controls.update()
-
-    // Render
-    renderer.render(scene, camera)
-
-    // Call tick again on the next frame
-    window.requestAnimationFrame(tick)
-}
-
-tick();
-
-// Информация о рендере
-// console.log(renderer.info);
-
-// Переключение между сценами при клике на кнопку с классом ".tech_spec__interior"
-let activeScene = 1;
-const interiorButton = document.querySelector('.tech_spec__interior');
-const aFrameScene = document.querySelector('a-scene');
-const tiponsOnModel = document.querySelectorAll('.point');
-
-const transitionHelper = new InteriorTransitionHelper(interiorButton);
-interiorButton.addEventListener('click', () => {
-    if (transitionHelper.isTransition()) {
-        return;
+      for (let x = 0; x < N; x++) {
+        const fx = (x / N) * cells;
+        const x0 = Math.floor(fx);
+        const tx = sm(fx - x0);
+        const xa = x0 % cells;
+        const xb = (x0 + 1) % cells;
+        const top = g[ya * cells + xa] * (1 - tx) + g[ya * cells + xb] * tx;
+        const bot = g[yb * cells + xa] * (1 - tx) + g[yb * cells + xb] * tx;
+        o[y * N + x] = top * (1 - ty) + bot * ty;
+      }
     }
+    return o;
+  };
 
+  const oct = [
+    [4, 0.3, 11],
+    [12, 0.22, 12],
+    [30, 0.18, 13],
+    [72, 0.14, 14],
+    [165, 0.1, 15],
+    [384, 0.06, 16],
+  ].map(([c, w, seed]) => [noise(c, seed), w]);
+
+  const blotch = noise(8, 99);
+  const pores = noise(270, 77);
+  const fine = noise(768, 55);
+  const h = new Float32Array(N * N);
+  const pore = new Float32Array(N * N);
+
+  for (let i = 0; i < N * N; i++) {
+    let v = 0;
+    for (const [n, w] of oct) v += n[i] * w;
+    pore[i] = Math.min(1, Math.max(0, (pores[i] - 0.84) * 4));
+    h[i] = v - pore[i] * 0.45 + (fine[i] - 0.5) * 0.05;
+  }
+
+  const slabM = tileMeters / slabs;
+  const jw = 0.007;
+  const rs = rnd(2024);
+  const slabTone = [];
+  const slabRough = [];
+  const slabStep = [];
+
+  for (let i = 0; i < slabs * slabs; i++) {
+    slabTone.push((rs() - 0.5) * 16);
+    slabRough.push((rs() - 0.5) * 0.14);
+    slabStep.push((rs() - 0.5) * 0.1);
+  }
+
+  const joint = new Float32Array(N * N);
+  const tone = new Float32Array(N * N);
+  const rough = new Float32Array(N * N);
+
+  for (let y = 0; y < N; y++) {
+    const vy = (y / N) * slabs;
+    const sy = Math.floor(vy);
+    const fy = vy - sy;
+    const dv = Math.min(fy, 1 - fy) * slabM;
+
+    for (let x = 0; x < N; x++) {
+      const ux = (x / N) * slabs;
+      const sx = Math.floor(ux);
+      const fx = ux - sx;
+      const du = Math.min(fx, 1 - fx) * slabM;
+      const i = y * N + x;
+      const id = sy * slabs + sx;
+      const d = Math.min(du, dv);
+
+      tone[i] = slabTone[id];
+      rough[i] = slabRough[id];
+      h[i] += slabStep[id];
+
+      if (d < jw) {
+        const t = 1 - d / jw;
+        const e = t * t * (3 - 2 * t);
+        joint[i] = e;
+        h[i] -= e * 0.5;
+      } else if (d < jw * 2.2) {
+        h[i] -= (1 - (d - jw) / (jw * 1.2)) * 0.06;
+      }
+    }
+  }
+
+  const mk = () => {
+    const c = document.createElement("canvas");
+    c.width = c.height = N;
+    return c;
+  };
+
+  const cA = mk();
+  const cN = mk();
+  const cR = mk();
+  const iA = cA.getContext("2d").createImageData(N, N);
+  const iN = cN.getContext("2d").createImageData(N, N);
+  const iR = cR.getContext("2d").createImageData(N, N);
+  const S = 9;
+  const at = (x, y) => h[((y + N) % N) * N + ((x + N) % N)];
+
+  for (let y = 0; y < N; y++) {
+    for (let x = 0; x < N; x++) {
+      const i = y * N + x;
+      const k = i * 4;
+      const nx = -(at(x + 1, y) - at(x - 1, y)) * S;
+      const ny = (at(x, y + 1) - at(x, y - 1)) * S;
+      const l = Math.hypot(nx, ny, 1);
+
+      iN.data[k] = ((nx / l) * 0.5 + 0.5) * 255;
+      iN.data[k + 1] = ((ny / l) * 0.5 + 0.5) * 255;
+      iN.data[k + 2] = ((1 / l) * 0.5 + 0.5) * 255;
+      iN.data[k + 3] = 255;
+
+      const t = 70 + tone[i] + (blotch[i] - 0.5) * 26 +
+        (h[i] - 0.5) * 36 - pore[i] * 22 - joint[i] * 34;
+
+      iA.data[k] = t;
+      iA.data[k + 1] = t * 0.99;
+      iA.data[k + 2] = t * 0.96;
+      iA.data[k + 3] = 255;
+
+      const rg = Math.max(0, Math.min(1,
+        0.6 + rough[i] + (blotch[i] - 0.5) * 0.3 +
+        (0.5 - h[i]) * 0.45 + pore[i] * 0.2 + joint[i] * 0.3
+      ));
+
+      iR.data[k] = 255;
+      iR.data[k + 1] = rg * 255;
+      iR.data[k + 2] = 0;
+      iR.data[k + 3] = 255;
+    }
+  }
+
+  cA.getContext("2d").putImageData(iA, 0, 0);
+  cN.getContext("2d").putImageData(iN, 0, 0);
+  cR.getContext("2d").putImageData(iR, 0, 0);
+
+  const T = (canvas, srgb) => {
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.anisotropy = aniso;
+    if (srgb) texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+  };
+
+  return {
+    map: T(cA, true),
+    normalMap: T(cN, false),
+    roughnessMap: T(cR, false),
+  };
+}
+
+// ============================================================
+// МЕНЕДЖЕР ЗАГРУЗКИ
+// ============================================================
+const loadingManager = new THREE.LoadingManager();
+const progressBar = document.getElementById("progress-bar");
+const progressLabel = document.getElementById("progress-label");
+const progressBarContainer = document.querySelector(".progress-bar");
+
+loadingManager.onProgress = (_, loaded, total) => {
+  if (!total) return;
+  const progress = `${Math.round((loaded / total) * 100)}%`;
+  if (progressBar) progressBar.style.width = progress;
+  if (progressLabel) progressLabel.textContent = progress;
+};
+
+loadingManager.onLoad = () => {
+  if (progressBarContainer) progressBarContainer.style.display = "none";
+};
+
+loadingManager.onError = (url) => console.error("Ошибка загрузки:", url);
+
+// ============================================================
+// SCENE, CAMERA, ORBITCONTROLS
+// ============================================================
+const canvas = document.querySelector("canvas#webgl");
+if (!canvas) throw new Error("Не найден canvas#webgl");
+
+const scene = new THREE.Scene();
+scene.environmentIntensity = CONFIG.environmentIntensity;
+
+const sizes = { width: window.innerWidth, height: window.innerHeight };
+
+function cameraSettings(width) {
+  if (width < 480) return { position: [4.7, 3.1, 8.5], maxDistance: 10 };
+  if (width <= 1200) return { position: [3.2, 2.3, 5.6], maxDistance: 8 };
+  return { position: [2.5, 2, 4.5], maxDistance: 6 };
+}
+
+const initialCamera = cameraSettings(sizes.width);
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+camera.position.set(...initialCamera.position);
+scene.add(camera);
+
+const controls = new OrbitControls(camera, canvas);
+controls.target.set(0, 0.75, 0);
+controls.maxPolarAngle = Math.PI * 0.5;
+controls.maxDistance = initialCamera.maxDistance;
+controls.minDistance = 3.5;
+controls.enableDamping = true;
+controls.enablePan = false;
+
+// ============================================================
+// RENDERER
+// ============================================================
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  powerPreference: "high-performance",
+  precision: "lowp",
+});
+
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(sizes.width, sizes.height);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = CONFIG.toneMappingExposure;
+renderer.shadowMap.enabled = false;
+
+// ============================================================
+// БЕТОННЫЙ ПОЛ
+// ============================================================
+function createRadialTexture(size, stops) {
+  const c = document.createElement("canvas");
+  c.width = c.height = size;
+  const ctx = c.getContext("2d");
+  const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+  stops.forEach(([offset, color]) => gradient.addColorStop(offset, color));
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, size, size);
+  return new THREE.CanvasTexture(c);
+}
+
+let floor = null;
+
+if (CONFIG.floorEnabled) {
+  const concrete = makeConcrete(
+    CONFIG.floorTextureSize,
+    CONFIG.floorTileMeters,
+    CONFIG.floorSlabs,
+    renderer.capabilities.getMaxAnisotropy()
+  );
+
+  const repeat = (CONFIG.floorRadius * 2) / CONFIG.floorTileMeters;
+  Object.values(concrete).forEach((texture) => texture.repeat.set(repeat, repeat));
+
+  const floorFade = createRadialTexture(256, [
+    [0, "#ffffff"],
+    [0.55, "#ffffff"],
+    [1, "#000000"],
+  ]);
+
+  floor = new THREE.Mesh(
+    new THREE.CircleGeometry(CONFIG.floorRadius, 96),
+    new THREE.MeshStandardMaterial({
+      map: concrete.map,
+      normalMap: concrete.normalMap,
+      roughnessMap: concrete.roughnessMap,
+      roughness: 1,
+      metalness: 0,
+      normalScale: new THREE.Vector2(1.1, 1.1),
+      alphaMap: floorFade,
+      transparent: true,
+      depthWrite: false,
+    })
+  );
+
+  floor.name = "ConcreteFloor";
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = CONFIG.floorY;
+  floor.receiveShadow = false;
+  scene.add(floor);
+}
+
+// ============================================================
+// BLOOM
+// ============================================================
+let composer = null;
+
+if (CONFIG.bloomEnabled && CONFIG.glow > 0) {
+  composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+
+  const bloom = new UnrealBloomPass(
+    new THREE.Vector2(sizes.width, sizes.height),
+    0.6 * CONFIG.glow,
+    0.5,
+    1
+  );
+
+  composer.addPass(bloom);
+  composer.addPass(new OutputPass());
+}
+
+// ============================================================
+// ЗАГРУЗКА КАМАЗА
+// ============================================================
+const dracoLoader = new DRACOLoader(loadingManager);
+dracoLoader.setDecoderPath(CONFIG.draco);
+
+const gltfLoader = new GLTFLoader(loadingManager);
+gltfLoader.setDRACOLoader(dracoLoader);
+
+gltfLoader.load(
+  CONFIG.model,
+  (gltf) => {
+    const model = gltf.scene;
+    model.position.set(...CONFIG.modelPosition);
+    model.rotation.y = CONFIG.modelRotationY;
+    model.scale.setScalar(CONFIG.modelScale);
+
+    model.traverse((child) => {
+      if (!child.isMesh) return;
+      child.castShadow = false;
+      child.receiveShadow = false;
+    });
+
+    scene.add(model);
+    console.info("КамАЗ загружен:", model);
+  },
+  undefined,
+  (error) => console.error("Ошибка загрузки модели:", error)
+);
+
+// ============================================================
+// HDRI ОКРУЖЕНИЕ
+// ============================================================
+const hdrJpg = new HDRJPGLoader(renderer, loadingManager).load(
+  CONFIG.environment,
+  () => {
+    const texture = hdrJpg.renderTarget.texture;
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    texture.needsUpdate = true;
+    scene.environment = texture;
+    scene.environmentIntensity = CONFIG.environmentIntensity;
+
+    const skybox = new GroundedSkybox(
+      texture,
+      CONFIG.skyHeight,
+      CONFIG.skyRadius,
+      CONFIG.skyResolution
+    );
+
+    skybox.position.y = CONFIG.skyHeight - 0.01;
+    scene.add(skybox);
+  }
+);
+
+// ============================================================
+// RESIZE
+// ============================================================
+function resize() {
+  sizes.width = window.innerWidth;
+  sizes.height = window.innerHeight;
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(sizes.width, sizes.height);
+  composer?.setSize(sizes.width, sizes.height);
+  controls.maxDistance = cameraSettings(sizes.width).maxDistance;
+}
+
+window.addEventListener("resize", resize);
+resize();
+
+// ============================================================
+// ПЕРЕКЛЮЧЕНИЕ THREE.JS / A-FRAME
+// ============================================================
+let activeScene = 1;
+const interiorButton = document.querySelector(".tech_spec__interior");
+const aFrameScene = document.querySelector("a-scene");
+const tiponsOnModel = document.querySelectorAll(".point");
+
+if (interiorButton && aFrameScene) {
+  const transitionHelper = new InteriorTransitionHelper(interiorButton);
+
+  interiorButton.addEventListener("click", () => {
+    if (transitionHelper.isTransition()) return;
     transitionHelper.startTransition();
 
     if (activeScene === 1) {
-        setTimeout(() => {
-            activeScene = 2;
-            aFrameScene.style.opacity = '1';
-            aFrameScene.style.height = 'auto';
-            aFrameScene.style.pointerEvents = 'auto';
-            aFrameScene.play();
-            controls.enabled = false;
-            transitionHelper.endTransition();
-            tiponsOnModel.forEach((e) => {
-                e.style.zIndex = "0";
-            })
-        }, 1500);
+      setTimeout(() => {
+        activeScene = 2;
+        aFrameScene.style.opacity = "1";
+        aFrameScene.style.height = "auto";
+        aFrameScene.style.pointerEvents = "auto";
+        aFrameScene.play();
+        controls.enabled = false;
+        transitionHelper.endTransition();
+        tiponsOnModel.forEach((element) => element.style.zIndex = "0");
+      }, 1500);
     } else {
-        setTimeout(() => {
-            activeScene = 1;
-            aFrameScene.style.opacity = '0';
-            aFrameScene.style.height = '0';
-            aFrameScene.style.pointerEvents = 'none';
-            aFrameScene.pause();
-            controls.enabled = true;
-            transitionHelper.endTransition();
-            tiponsOnModel.forEach((e) => {
-                e.style.zIndex = "1";
-            })
-        }, 1500);
+      setTimeout(() => {
+        activeScene = 1;
+        aFrameScene.style.opacity = "0";
+        aFrameScene.style.height = "0";
+        aFrameScene.style.pointerEvents = "none";
+        aFrameScene.pause();
+        controls.enabled = true;
+        transitionHelper.endTransition();
+        tiponsOnModel.forEach((element) => element.style.zIndex = "1");
+      }, 1500);
     }
-});
+  });
+}
+
+// ============================================================
+// RENDER LOOP
+// ============================================================
+function tick() {
+  window.requestAnimationFrame(tick);
+  controls.update();
+  if (composer) composer.render();
+  else renderer.render(scene, camera);
+}
+
+tick();

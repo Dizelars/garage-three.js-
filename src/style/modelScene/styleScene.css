@@ -546,12 +546,12 @@ a-scene {
     border-radius: 20px;
 }
 
-.tech_spec__interior#amarok .tech_spec__interior-wrapper {
-    background: url("../../../static/media/images/modelPage/interior_prew/amarok_prew.png") no-repeat center/cover;
+.tech_spec__interior#pickup .tech_spec__interior-wrapper {
+    background: url("../../../static/media/images/modelPage/interior_prew/pickup_prew.png") no-repeat center/cover;
 }
 
-.tech_spec__interior#amarok.garage_amarok .tech_spec__interior-wrapper {
-    background-image: url("../../../static/media/images/modelPage/slider/amarok.png");
+.tech_spec__interior#pickup.garage_pickup .tech_spec__interior-wrapper {
+    background-image: url("../../../static/media/images/modelPage/slider/pickup.png");
 }
 
 .tech_spec__interior#ford .tech_spec__interior-wrapper {

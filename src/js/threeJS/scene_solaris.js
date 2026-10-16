@@ -126,7 +126,7 @@ let constants = {
     resolution: 24
 }
 
-gltfLoader.load("models/model_vectary/transformed/solaris/solaris.gltf", (gltf) => {
+gltfLoader.load("models/solaris/solaris.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
     current_object.scale.set(constants.scale, constants.scale, constants.scale);

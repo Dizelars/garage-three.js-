@@ -126,7 +126,7 @@ let constants = {
     resolution: 17
 }
 
-gltfLoader.load("models/model_vectary/transformed/ford/ford.gltf", (gltf) => {
+gltfLoader.load("models/ford/ford.gltf", (gltf) => {
     console.log(gltf);
     let current_object = gltf.scene;
     current_object.scale.set(constants.scale, constants.scale, constants.scale);
